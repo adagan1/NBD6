@@ -1,8 +1,9 @@
-﻿Add-Migration -Context MedicalOfficeContext -o Data\MOMigrations Initial
-Update-Database -Context MedicalOfficeContext
+﻿Add-Migration -Context NBDContext -o Data\NBDMigrations Initial
+Update-Database -Context NBDContext
 
 Add-Migration -Context ApplicationDbContext -OutputDir Data\Migrations Initial
 Update-Database -Context ApplicationDbContext
+
 
 Don't forget to add this to a Migration!
 ----------------------------------------

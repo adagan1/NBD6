@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240125041716_Initial")]
+    [Migration("20240125200817_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,6 +19,37 @@ namespace NBD6.Data.NBDMigrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.15");
+
+            modelBuilder.Entity("NBD6.Models.Address", b =>
+                {
+                    b.Property<int>("AddressID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AreaCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProvinceState")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AddressID");
+
+                    b.ToTable("Addresses");
+                });
 
             modelBuilder.Entity("NBD6.Models.Client", b =>
                 {
@@ -54,6 +85,8 @@ namespace NBD6.Data.NBDMigrations
 
                     b.HasKey("ClientID");
 
+                    b.HasIndex("AddressID");
+
                     b.ToTable("Clients");
                 });
 
@@ -61,6 +94,9 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AddressID")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("BidAmount")
@@ -86,18 +122,39 @@ namespace NBD6.Data.NBDMigrations
 
                     b.HasKey("ProjectID");
 
+                    b.HasIndex("AddressID");
+
                     b.HasIndex("ClientID");
 
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("NBD6.Models.Client", b =>
+                {
+                    b.HasOne("NBD6.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("NBD6.Models.Project", b =>
                 {
+                    b.HasOne("NBD6.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NBD6.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Client");
                 });

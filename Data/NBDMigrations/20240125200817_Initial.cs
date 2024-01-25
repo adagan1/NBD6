@@ -12,6 +12,22 @@ namespace NBD6.Data.NBDMigrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Country = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ProvinceState = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    AreaCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.AddressID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Clients",
                 columns: table => new
                 {
@@ -27,6 +43,12 @@ namespace NBD6.Data.NBDMigrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.ClientID);
+                    table.ForeignKey(
+                        name: "FK_Clients_Addresses_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,11 +62,18 @@ namespace NBD6.Data.NBDMigrations
                     ProjectEndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectSite = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     BidAmount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: false)
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.ProjectID);
+                    table.ForeignKey(
+                        name: "FK_Projects_Addresses_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Projects_Clients_ClientID",
                         column: x => x.ClientID,
@@ -52,6 +81,16 @@ namespace NBD6.Data.NBDMigrations
                         principalColumn: "ClientID",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_AddressID",
+                table: "Clients",
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_AddressID",
+                table: "Projects",
+                column: "AddressID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_ClientID",
@@ -67,6 +106,9 @@ namespace NBD6.Data.NBDMigrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

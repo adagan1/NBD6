@@ -40,5 +40,12 @@ namespace NBD6.Models
         [Required(ErrorMessage = "You must select a client.")]
         public int ClientID { get; set; }
         public Client Client { get; set; } // Navigation property to the Client class
+
+        [Display(Name = "Address ID")]
+        [ForeignKey("Address")]
+        [Required(ErrorMessage = "You must select an address.")]
+        public int AddressID { get; set; }
+        public Address Address { get; set; } // Navigation property to the Address class
     }
 }
+

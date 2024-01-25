@@ -1,4 +1,4 @@
-﻿ using NBD6.Models;
+﻿using NBD6.Models;
 using System.Diagnostics;
 
 namespace NBD6.Data
@@ -11,6 +11,26 @@ namespace NBD6.Data
                 .ServiceProvider.GetRequiredService<NBDContext>();
             try
             {
+                if (!context.Addresses.Any())
+                {
+                    context.Addresses.AddRange(
+                        new Address
+                        {
+                            Country = "Canada",
+                            ProvinceState = "St.Catharines",
+                            AreaCode = "L2S 3A1",
+                            Street = "Glenridge Avenue"
+                        },
+                        new Address
+                        {
+                            Country = "America",
+                            ProvinceState = "Chicago",
+                            AreaCode = "341678",
+                            Street = "4200 Jawndel Lane"
+                        }
+                        );
+                }
+
                 if (!context.Clients.Any())
                 {
                     context.Clients.AddRange(
@@ -18,9 +38,9 @@ namespace NBD6.Data
                         {
                             ClientFirstName = "Lamar",
                             ClientLastName = "Jackson",
-                            ClientAddress = "101 Freak St St Catharines, ON LB1 2A3",
+                            ClientAddress = "101 Freak St St.Catharines, ON LB1 2A3",
                             ClientContact = "lamarjackson@gmail.com",
-                            ClientPhone = "2222223212"
+                            ClientPhone = "2222223212",
                         },
                         new Client
                         {
@@ -66,16 +86,20 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Brock University",
                             BidAmount = 21,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Jackson").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Jackson").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
+
                         },
                         new Project
                         {
                             ProjectName = "Tech Hub Renovation",
                             ProjectStartDate = new DateTime(2023, 02, 22),
                             ProjectEndDate = new DateTime(2023, 03, 12),
-                            ProjectSite = "City Tech Center",
+                            ProjectSite = "Brock University",
                             BidAmount = 35,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Lamar").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Lamar").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
                         },
                         new Project
                         {
@@ -84,7 +108,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 09, 02),
                             ProjectSite = "Green Valley",
                             BidAmount = 50,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Williams").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Williams").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -93,7 +119,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 07, 29),
                             ProjectSite = "Downtown District",
                             BidAmount = 42,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Serena").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Serena").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -102,7 +130,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 05, 17),
                             ProjectSite = "SmartCity Center",
                             BidAmount = 60,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -111,7 +141,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 12, 15),
                             ProjectSite = "Riverside Park",
                             BidAmount = 25,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -120,7 +152,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2024, 01, 10),
                             ProjectSite = "Tech Center Campus",
                             BidAmount = 28,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -129,7 +163,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 10, 25),
                             ProjectSite = "City Park",
                             BidAmount = 40,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
                         new Project
                         {
@@ -138,9 +174,11 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 11, 30),
                             ProjectSite = "Downtown Plaza",
                             BidAmount = 38,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         },
-                        
+
                         new Project
                         {
                             ProjectName = "LeBron's Green Initiative",
@@ -148,7 +186,9 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 10, 10),
                             ProjectSite = "Environmental Hub",
                             BidAmount = 48,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID,
+                            AddressID = context.Addresses.FirstOrDefault(a => a.Street == "Glenridge Avenue" && a.Country == "Canada").AddressID
+
                         });
                     context.SaveChanges();
                 }
