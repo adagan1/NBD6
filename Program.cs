@@ -47,6 +47,6 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 //To seed data. Can comment this out most of the time.
-//NBDInitializer.Seed(app);
+NBDInitializer.Seed(app);
 
 app.Run();

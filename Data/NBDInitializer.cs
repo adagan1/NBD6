@@ -11,6 +11,10 @@ namespace NBD6.Data
                 .ServiceProvider.GetRequiredService<NBDContext>();
             try
             {
+                //Delete and recreate3 the Database with every restart
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
                 if (!context.Addresses.Any())
                 {
                     context.Addresses.AddRange(

@@ -1,0 +1,59 @@
+﻿@model NBD6.Models.Client
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Client</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClientID" />
+            <div class="form-group">
+                <label asp-for="ClientFirstName" class="control-label"></label>
+                <input asp-for="ClientFirstName" class="form-control" />
+                <span asp-validation-for="ClientFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientLastName" class="control-label"></label>
+                <input asp-for="ClientLastName" class="form-control" />
+                <span asp-validation-for="ClientLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientAddress" class="control-label"></label>
+                <input asp-for="ClientAddress" class="form-control" />
+                <span asp-validation-for="ClientAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientContact" class="control-label"></label>
+                <input asp-for="ClientContact" class="form-control" />
+                <span asp-validation-for="ClientContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientPhone" class="control-label"></label>
+                <input asp-for="ClientPhone" class="form-control" />
+                <span asp-validation-for="ClientPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressID" class="control-label"></label>
+                <select asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
+                <span asp-validation-for="AddressID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
