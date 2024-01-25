@@ -40,7 +40,7 @@ namespace NBD6.Models
         [ForeignKey("Address")]
         [Required(ErrorMessage = "Address ID is required.")]
         public int AddressID { get; set; }
-        //public Address Address { get; set; } // Navigation property to future address class
+        public Address Address { get; set; } // Navigation property to future address class
 
         public virtual ICollection<Project> Projects { get; set; }
     }

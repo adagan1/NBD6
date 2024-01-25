@@ -65,7 +65,8 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Brock University",
-                            BidAmount = 21
+                            BidAmount = 21,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Jackson").ClientID
                         },
                         new Project
                         {
@@ -73,7 +74,8 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 02, 22),
                             ProjectEndDate = new DateTime(2023, 03, 12),
                             ProjectSite = "City Tech Center",
-                            BidAmount = 35
+                            BidAmount = 35,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
                         },
                         new Project
                         {
@@ -81,7 +83,8 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 06, 18),
                             ProjectEndDate = new DateTime(2023, 09, 02),
                             ProjectSite = "Green Valley",
-                            BidAmount = 50
+                            BidAmount = 50,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
                         },
                         new Project
                         {
@@ -89,7 +92,8 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 04, 15),
                             ProjectEndDate = new DateTime(2023, 07, 29),
                             ProjectSite = "Downtown District",
-                            BidAmount = 42
+                            BidAmount = 42,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Williams").ClientID
                         },
                         new Project
                         {
@@ -97,7 +101,8 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 02, 30),
                             ProjectEndDate = new DateTime(2023, 05, 17),
                             ProjectSite = "SmartCity Center",
-                            BidAmount = 60
+                            BidAmount = 60,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID
                         });
                     context.SaveChanges();
                 }
