@@ -1,4 +1,4 @@
-﻿using NBD6.Models;
+﻿ using NBD6.Models;
 using System.Diagnostics;
 
 namespace NBD6.Data
@@ -75,7 +75,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 03, 12),
                             ProjectSite = "City Tech Center",
                             BidAmount = 35,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Lamar" && c.ClientLastName == "Lamar").ClientID
                         },
                         new Project
                         {
@@ -84,7 +84,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 09, 02),
                             ProjectSite = "Green Valley",
                             BidAmount = 50,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Williams").ClientID
                         },
                         new Project
                         {
@@ -93,7 +93,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 07, 29),
                             ProjectSite = "Downtown District",
                             BidAmount = 42,
-                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Williams").ClientID
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Serena" && c.ClientLastName == "Serena").ClientID
                         },
                         new Project
                         {
@@ -103,9 +103,56 @@ namespace NBD6.Data
                             ProjectSite = "SmartCity Center",
                             BidAmount = 60,
                             ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID
+                        },
+                        new Project
+                        {
+                            ProjectName = "Riverside Park Development",
+                            ProjectStartDate = new DateTime(2023, 10, 01),
+                            ProjectEndDate = new DateTime(2023, 12, 15),
+                            ProjectSite = "Riverside Park",
+                            BidAmount = 25,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Tom" && c.ClientLastName == "Brady").ClientID
+                        },
+                        new Project
+                        {
+                            ProjectName = "Tech Center Expansion",
+                            ProjectStartDate = new DateTime(2023, 11, 20),
+                            ProjectEndDate = new DateTime(2024, 01, 10),
+                            ProjectSite = "Tech Center Campus",
+                            BidAmount = 28,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
+                        },
+                        new Project
+                        {
+                            ProjectName = "City Park Revitalization",
+                            ProjectStartDate = new DateTime(2023, 08, 05),
+                            ProjectEndDate = new DateTime(2023, 10, 25),
+                            ProjectSite = "City Park",
+                            BidAmount = 40,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "Michael" && c.ClientLastName == "Jordan").ClientID
+                        },
+                        new Project
+                        {
+                            ProjectName = "Downtown Plaza Renovation",
+                            ProjectStartDate = new DateTime(2023, 09, 15),
+                            ProjectEndDate = new DateTime(2023, 11, 30),
+                            ProjectSite = "Downtown Plaza",
+                            BidAmount = 38,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
+                        },
+                        
+                        new Project
+                        {
+                            ProjectName = "LeBron's Green Initiative",
+                            ProjectStartDate = new DateTime(2023, 08, 20),
+                            ProjectEndDate = new DateTime(2023, 10, 10),
+                            ProjectSite = "Environmental Hub",
+                            BidAmount = 48,
+                            ClientID = context.Clients.FirstOrDefault(c => c.ClientFirstName == "LeBron" && c.ClientLastName == "James").ClientID
                         });
                     context.SaveChanges();
                 }
+
             }
             catch (Exception ex)
             {
