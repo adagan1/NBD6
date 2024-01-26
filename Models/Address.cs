@@ -11,6 +11,7 @@ namespace NBD6.Models
         [MaxLength(100)] // Assuming a max length of 100 for string fields
         public string Country { get; set; }
 
+        [Display(Name = "Province/State")]
         [Required]
         [MaxLength(100)]
         public string ProvinceState { get; set; }

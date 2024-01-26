@@ -20,11 +20,6 @@ namespace NBD6.Models
         [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters long.")]
         public string ClientLastName { get; set; }
 
-        [Display(Name = "Address")]
-        [Required(ErrorMessage = "You cannot leave the address blank.")]
-        [StringLength(200, ErrorMessage = "Address cannot be more than 200 characters long.")]
-        public string ClientAddress { get; set; }
-
         [Display(Name = "Contact")]
         [StringLength(100, ErrorMessage = "Contact information cannot be more than 100 characters long.")]
         public string ClientContact { get; set; }
@@ -33,7 +28,6 @@ namespace NBD6.Models
         [Phone(ErrorMessage = "The phone number is not in a valid format.")]
         [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
         public string ClientPhone { get; set; }
-
 
         // Foreign Keys
         [Display(Name = "Address ID")]

@@ -20,20 +20,23 @@ namespace NBD6.Data
                     context.Addresses.AddRange(
                         new Address
                         {
+                            AddressID = 1,
                             Country = "Canada",
-                            ProvinceState = "St.Catharines",
+                            ProvinceState = "Ontario",
                             AreaCode = "L2S 3A1",
                             Street = "Glenridge Avenue"
                         },
                         new Address
                         {
+                            AddressID = 2,
                             Country = "America",
                             ProvinceState = "Chicago",
                             AreaCode = "67823",
                             Street = "Green Valley Avenue"
                         },
                         new Address
-                        {
+                        {   
+                            AddressID = 3,
                             Country = "America",
                             ProvinceState = "New York",
                             AreaCode = "33542",
@@ -41,13 +44,15 @@ namespace NBD6.Data
                         },
                         new Address
                         {
+                            AddressID = 4,
                             Country = "America",
                             ProvinceState = "Florida",
                             AreaCode = "21986",
                             Street = "Tech City Way"
                         },
                         new Address
-                        {
+                        {   
+                            AddressID = 5,
                             Country = "America",
                             ProvinceState = "Ohio",
                             AreaCode = "22389",
@@ -64,7 +69,6 @@ namespace NBD6.Data
                         {
                             ClientFirstName = "Lamar",
                             ClientLastName = "Jackson",
-                            ClientAddress = "101 Freak St St.Catharines, ON LB1 2A3",
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1
@@ -83,7 +87,7 @@ namespace NBD6.Data
                             ProjectSite = "Brock University",
                             BidAmount = 21,
                             ClientID = 1,
-                            AddressID = 1
+                            AddressID = 5
 
                         });
                     context.SaveChanges();

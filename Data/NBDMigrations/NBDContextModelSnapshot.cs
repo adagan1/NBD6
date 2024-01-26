@@ -57,11 +57,6 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("AddressID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ClientAddress")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ClientContact")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");

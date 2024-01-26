@@ -35,7 +35,6 @@ namespace NBD6.Data.NBDMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ClientFirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     ClientLastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ClientAddress = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
                     ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)

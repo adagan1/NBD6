@@ -50,7 +50,7 @@ namespace NBD6.Controllers
         public IActionResult Create()
         {
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientAddress");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientAddress", project.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
             return View(project);
         }
 
@@ -86,7 +86,7 @@ namespace NBD6.Controllers
                 return NotFound();
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientAddress", project.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
             return View(project);
         }
 
@@ -123,7 +123,7 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientAddress", project.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
             return View(project);
         }
 

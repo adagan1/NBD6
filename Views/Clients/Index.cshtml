@@ -19,16 +19,13 @@
                 @Html.DisplayNameFor(model => model.ClientLastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientAddress)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.ClientContact)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ClientPhone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Address.Country)
             </th>
             <th></th>
         </tr>
@@ -43,21 +40,17 @@
                 @Html.DisplayFor(modelItem => item.ClientLastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClientAddress)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ClientContact)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClientPhone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Address.AreaCode)
+                @Html.DisplayFor(modelItem => item.Address.Country)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClientID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClientID">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
             </td>
         </tr>
 }
