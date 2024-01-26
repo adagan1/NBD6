@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240126215804_Initial")]
+    [Migration("20240126221452_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -31,6 +31,9 @@ namespace NBD6.Data.NBDMigrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ClientID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -47,6 +50,8 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("AddressID");
+
+                    b.HasIndex("ClientID");
 
                     b.ToTable("Addresses");
                 });
@@ -124,6 +129,13 @@ namespace NBD6.Data.NBDMigrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("NBD6.Models.Address", b =>
+                {
+                    b.HasOne("NBD6.Models.Client", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("ClientID");
+                });
+
             modelBuilder.Entity("NBD6.Models.Client", b =>
                 {
                     b.HasOne("NBD6.Models.Address", "Address")
@@ -156,6 +168,8 @@ namespace NBD6.Data.NBDMigrations
 
             modelBuilder.Entity("NBD6.Models.Client", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618

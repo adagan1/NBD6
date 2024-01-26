@@ -35,7 +35,7 @@ namespace NBD6.Models
         [Required(ErrorMessage = "Address ID is required.")]
         public int AddressID { get; set; }
         public Address Address { get; set; } // Navigation property to future address class
-
+        public virtual ICollection<Address> Addresses { get; set; } = new HashSet<Address>();
         public virtual ICollection<Project> Projects { get; set; }
     }
 }

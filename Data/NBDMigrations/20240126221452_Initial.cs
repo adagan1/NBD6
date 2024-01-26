@@ -20,7 +20,8 @@ namespace NBD6.Data.NBDMigrations
                     Country = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     ProvinceState = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     AreaCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false)
+                    Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,6 +83,11 @@ namespace NBD6.Data.NBDMigrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_ClientID",
+                table: "Addresses",
+                column: "ClientID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_AddressID",
                 table: "Clients",
                 column: "AddressID");
@@ -95,11 +101,22 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_Projects_ClientID",
                 table: "Projects",
                 column: "ClientID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Addresses_Clients_ClientID",
+                table: "Addresses",
+                column: "ClientID",
+                principalTable: "Clients",
+                principalColumn: "ClientID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Addresses_Clients_ClientID",
+                table: "Addresses");
+
             migrationBuilder.DropTable(
                 name: "Projects");
 
