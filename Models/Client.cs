@@ -10,12 +10,12 @@ namespace NBD6.Models
         [Display(Name = "Client ID")]
         public int ClientID { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "Client First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
         public string ClientFirstName { get; set; }
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "Client Last Name")]
         [Required(ErrorMessage = "You cannot leave the last name blank.")]
         [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters long.")]
         public string ClientLastName { get; set; }
