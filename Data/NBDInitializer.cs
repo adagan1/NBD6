@@ -11,7 +11,7 @@ namespace NBD6.Data
                 .ServiceProvider.GetRequiredService<NBDContext>();
             try
             {
-                //Delete and recreate3 the Database with every restart
+                //Delete and recreate the Database with every restart
                 //context.Database.EnsureDeleted();
                 //context.Database.EnsureCreated();
 
@@ -121,87 +121,15 @@ namespace NBD6.Data
                             ClientID = 1,
                             AddressID = 1
                         },
-                        
                         new Project
                         {
-                            ProjectName = "Green Energy Park",
-                            ProjectStartDate = new DateTime(2023, 06, 18),
-                            ProjectEndDate = new DateTime(2023, 09, 02),
-                            ProjectSite = "Green Valley",
-                            BidAmount = 50,
-                            ClientID = 2,
+                            ProjectName = "Tech Hub Renovation",
+                            ProjectStartDate = new DateTime(2023, 02, 22),
+                            ProjectEndDate = new DateTime(2023, 03, 12),
+                            ProjectSite = "Brock University",
+                            BidAmount = 35,
+                            ClientID = 1,
                             AddressID = 2
-                        },
-                        new Project
-                        {
-                            ProjectName = "Urban Redevelopment",
-                            ProjectStartDate = new DateTime(2023, 04, 15),
-                            ProjectEndDate = new DateTime(2023, 07, 29),
-                            ProjectSite = "Green Valley",
-                            BidAmount = 42,
-                            ClientID = 2,
-                            AddressID = 2
-                        },
-                        new Project
-                        {
-                            ProjectName = "Smart City Infrastructure",
-                            ProjectStartDate = new DateTime(2023, 02, 30),
-                            ProjectEndDate = new DateTime(2023, 05, 17),
-                            ProjectSite = "Riverside Park",
-                            BidAmount = 60,
-                            ClientID = 3,
-                            AddressID = 3
-                        },
-                        new Project
-                        {
-                            ProjectName = "Riverside Park Development",
-                            ProjectStartDate = new DateTime(2023, 10, 01),
-                            ProjectEndDate = new DateTime(2023, 12, 15),
-                            ProjectSite = "Riverside Park",
-                            BidAmount = 25,
-                            ClientID = 3,
-                            AddressID = 3
-                        },
-                        new Project
-                        {
-                            ProjectName = "Tech Center Expansion",
-                            ProjectStartDate = new DateTime(2023, 11, 20),
-                            ProjectEndDate = new DateTime(2024, 01, 10),
-                            ProjectSite = "Tech City Park",
-                            BidAmount = 28,
-                            ClientID = 4,
-                            AddressID = 4
-                        },
-                        new Project
-                        {
-                            ProjectName = "City Park Revitalization",
-                            ProjectStartDate = new DateTime(2023, 08, 05),
-                            ProjectEndDate = new DateTime(2023, 10, 25),
-                            ProjectSite = "Tech City Park",
-                            BidAmount = 40,
-                            ClientID = 4,
-                            AddressID = 4
-                        },
-                        new Project
-                        {
-                            ProjectName = "Downtown Plaza Renovation",
-                            ProjectStartDate = new DateTime(2023, 09, 15),
-                            ProjectEndDate = new DateTime(2023, 11, 30),
-                            ProjectSite = "Environmental Hub",
-                            BidAmount = 38,
-                            ClientID = 5,
-                            AddressID = 5
-                        },
-                        new Project
-                        {
-                            ProjectName = "LeBron's Green Initiative",
-                            ProjectStartDate = new DateTime(2023, 08, 20),
-                            ProjectEndDate = new DateTime(2023, 10, 10),
-                            ProjectSite = "Environmental Hub",
-                            BidAmount = 48,
-                            ClientID = 5,
-                            AddressID = 5
-
                         });
                     context.SaveChanges();
                 }

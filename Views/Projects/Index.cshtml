@@ -22,16 +22,19 @@
                 @Html.DisplayNameFor(model => model.ProjectEndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectSite)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.BidAmount)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Client)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.ProjectSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.AreaCode)
             </th>
             <th></th>
         </tr>
@@ -49,13 +52,16 @@
                 @Html.DisplayFor(modelItem => item.ProjectEndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectSite)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.BidAmount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client.ClientFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.Street)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address.AreaCode)
