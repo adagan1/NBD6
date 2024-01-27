@@ -80,14 +80,17 @@ namespace NBD6.Controllers
                 return NotFound();
             }
 
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects
+                .Include(p => p.Address)
+                .Include(p => p.Client)
+                .FirstOrDefaultAsync(m => m.ProjectID == id);
+
             if (project == null)
             {
                 return NotFound();
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
-            return View(project);
+
+            return View(project); // Pass the project to the view
         }
 
         // POST: Projects/Edit/5

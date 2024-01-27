@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Project</h1>
 
 <h4>Project</h4>
 <hr />
@@ -38,15 +38,54 @@
                 <input asp-for="BidAmount" class="form-control" />
                 <span asp-validation-for="BidAmount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ClientID" class="control-label"></label>
-                <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                <span asp-validation-for="ClientID" class="text-danger"></span>
-            </div>
+
+            @* Address Fields *@
             <div class="form-group">
                 <label asp-for="AddressID" class="control-label"></label>
-                <select asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
+                <input asp-for="AddressID" class="form-control" />
                 <span asp-validation-for="AddressID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Country" class="control-label"></label>
+                <input asp-for="Address.Country" class="form-control" />
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.ProvinceState" class="control-label"></label>
+                <input asp-for="Address.ProvinceState" class="form-control" />
+                <span asp-validation-for="Address.ProvinceState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.AreaCode" class="control-label"></label>
+                <input asp-for="Address.AreaCode" class="form-control" />
+                <span asp-validation-for="Address.AreaCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Street" class="control-label"></label>
+                <input asp-for="Address.Street" class="form-control" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
+            </div>
+            <h4>Client</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    @* Client Fields *@
+                    <div class="form-group">
+                        <label asp-for="Client.ClientID" class="control-label"></label>
+                        <input asp-for="Client.ClientID" class="form-control" />
+                        <span asp-validation-for="Client.ClientID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Client.ClientFirstName" class="control-label"></label>
+                        <input asp-for="Client.ClientFirstName" class="form-control" />
+                        <span asp-validation-for="Client.ClientFirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Client.ClientLastName" class="control-label"></label>
+                        <input asp-for="Client.ClientLastName" class="form-control" />
+                        <span asp-validation-for="Client.ClientLastName" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

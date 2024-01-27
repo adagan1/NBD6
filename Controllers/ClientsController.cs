@@ -77,12 +77,15 @@ namespace NBD6.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients.FindAsync(id);
+            var client = await _context.Clients
+                .Include(c => c.Address) // Include the related Address data
+                .FirstOrDefaultAsync(m => m.ClientID == id);
+
             if (client == null)
             {
                 return NotFound();
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", client.AddressID);
+
             return View(client);
         }
 
