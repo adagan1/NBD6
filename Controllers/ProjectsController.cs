@@ -20,11 +20,28 @@ namespace NBD6.Controllers
         }
 
         // GET: Projects
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var nBDContext = _context.Projects.Include(p => p.Address).Include(p => p.Client);
-            return View(await nBDContext.ToListAsync());
+            var projectsQuery = _context.Projects.Include(p => p.Client).Include(p => p.Address).AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                var lowerCaseSearchTerm = searchTerm.ToLower();
+
+                projectsQuery = projectsQuery.Where(p => p.ProjectName.ToLower().Contains(lowerCaseSearchTerm)
+                    || p.ProjectStartDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
+                    || p.ProjectEndDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
+                    || p.BidAmount.ToString().ToLower().Contains(lowerCaseSearchTerm)
+                    || p.Client.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm) 
+                    || p.ProjectSite.ToLower().Contains(lowerCaseSearchTerm)
+                    || p.Address.Street.ToLower().Contains(lowerCaseSearchTerm)
+                    || p.Address.AreaCode.ToLower().Contains(lowerCaseSearchTerm));
+            }
+
+            return View(await projectsQuery.ToListAsync());
         }
+
+
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
