@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Project Details</h1>
 
 <div>
     <h4>Project</h4>
@@ -41,26 +41,6 @@
             @Html.DisplayFor(model => model.BidAmount)
         </dd>
 
-        @* Client Fields *@
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClientID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientFirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.ClientLastName)
-        </dd>
-
         @* Address Fields *@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Address.Country)
@@ -85,6 +65,29 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Address.AreaCode)
+        </dd>
+    </dl>
+    <h4>Client</h4>
+    <hr />
+    <dl class="row">
+        @* Client Fields *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.ClientID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.ClientFirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Client.ClientLastName)
         </dd>
     </dl>
 </div>
