@@ -19,12 +19,26 @@ namespace NBD6.Controllers
             _context = context;
         }
 
+
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var nBDContext = _context.Clients.Include(c => c.Address);
-            return View(await nBDContext.ToListAsync());
+            var clientsQuery = _context.Clients.Include(c => c.Address).AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchTerm))
+            {
+                var lowerCaseSearchTerm = searchTerm.ToLower();
+
+                clientsQuery = clientsQuery.Where(c => c.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm)
+                                                   || c.ClientLastName.ToLower().Contains(lowerCaseSearchTerm)
+                                                   || c.ClientContact.ToLower().Contains(lowerCaseSearchTerm)
+                                                   || c.ClientPhone.ToLower().Contains(lowerCaseSearchTerm)
+                                                   || c.Address.Country.ToLower().Contains(lowerCaseSearchTerm));
+            }
+
+            return View(await clientsQuery.ToListAsync());
         }
+
 
         // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
