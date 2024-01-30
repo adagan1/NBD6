@@ -32,9 +32,13 @@
                 <input asp-for="ClientPhone" class="form-control" />
                 <span asp-validation-for="ClientPhone" class="text-danger"></span>
             </div>
-
-            @* Address Fields *@           
             <div class="form-group">
+                <label asp-for="AddressID" class="control-label"></label>
+                <input asp-for="AddressID" class="form-control" />
+                <span asp-validation-for="AddressID" class="text-danger"></span>
+            </div>
+            @* Address Fields *@      
+            @* <div class="form-group">
                 <label asp-for="Address.Country" class="control-label"></label>
                 <input asp-for="Address.Country" class="form-control" />
                 <span asp-validation-for="Address.Country" class="text-danger"></span>
@@ -53,7 +57,7 @@
                 <label asp-for="Address.Street" class="control-label"></label>
                 <input asp-for="Address.Street" class="form-control" />
                 <span asp-validation-for="Address.Street" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
