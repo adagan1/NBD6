@@ -11,7 +11,7 @@ namespace NBD6.Data
                 .ServiceProvider.GetRequiredService<NBDContext>();
             try
             {
-                //Delete and recreate3 the Database with every restart
+                //Delete and recreate the Database with every restart
                 //context.Database.EnsureDeleted();
                 //context.Database.EnsureCreated();
 
@@ -72,6 +72,38 @@ namespace NBD6.Data
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1
+                        },
+                        new Client
+                        {
+                            ClientFirstName = "Serena",
+                            ClientLastName = "Williams",
+                            ClientContact = "serenawilliams@gmail.com",
+                            ClientPhone = "5555556543",
+                            AddressID = 2
+                        },
+                        new Client
+                        {
+                            ClientFirstName = "Tom",
+                            ClientLastName = "Brady",
+                            ClientContact = "tombrady@gmail.com",
+                            ClientPhone = "6666667654",
+                            AddressID = 3
+                        },
+                        new Client
+                        {
+                            ClientFirstName = "Michael",
+                            ClientLastName = "Jordan",
+                            ClientContact = "mjordan@gmail.com",
+                            ClientPhone = "3333334321",
+                            AddressID = 4
+                        },
+                        new Client
+                        {
+                            ClientFirstName = "LeBron",
+                            ClientLastName = "James",
+                            ClientContact = "lebronjames@gmail.com",
+                            ClientPhone = "4444445432",
+                            AddressID = 5
                         }
                         );
                     context.SaveChanges();
@@ -87,8 +119,17 @@ namespace NBD6.Data
                             ProjectSite = "Brock University",
                             BidAmount = 21,
                             ClientID = 1,
-                            AddressID = 5
-
+                            AddressID = 1
+                        },
+                        new Project
+                        {
+                            ProjectName = "Tech Hub Renovation",
+                            ProjectStartDate = new DateTime(2023, 02, 22),
+                            ProjectEndDate = new DateTime(2023, 03, 12),
+                            ProjectSite = "Brock University",
+                            BidAmount = 35,
+                            ClientID = 1,
+                            AddressID = 2
                         });
                     context.SaveChanges();
                 }
