@@ -20,28 +20,98 @@ namespace NBD6.Controllers
         }
 
         // GET: Projects
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string sortOrder, string searchTerm)
         {
-            var projectsQuery = _context.Projects.Include(p => p.Client).Include(p => p.Address).AsQueryable();
+            // Set up sorting parameters
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder != "name_desc" ? "name_desc" : "name_asc";
+            ViewBag.StartDateSortParm = sortOrder == "start_date_asc" ? "start_date_desc" : "start_date_asc";
+            ViewBag.EndDateSortParm = sortOrder == "end_date_asc" ? "end_date_desc" : "end_date_asc";
+            ViewBag.BidAmountSortParm = sortOrder == "bid_amount_asc" ? "bid_amount_desc" : "bid_amount_asc"; // Corrected this line
+            ViewBag.ClientSortParm = sortOrder == "client_asc" ? "client_desc" : "client_asc";
+            ViewBag.SiteSortParm = sortOrder == "site_asc" ? "site_desc" : "site_asc";
+            ViewBag.StreetSortParm = sortOrder == "street_asc" ? "street_desc" : "street_asc";
+            ViewBag.AreaCodeSortParm = sortOrder == "areacode_asc" ? "areacode_desc" : "areacode_asc";
 
+            // Retrieve projects with their associated client and address
+            var projectsQuery = _context.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Address)
+                .AsQueryable();
+
+            // Apply search filter if searchTerm is provided
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
 
-                projectsQuery = projectsQuery.Where(p => p.ProjectName.ToLower().Contains(lowerCaseSearchTerm)
+                projectsQuery = projectsQuery.Where(p =>
+                    p.ProjectName.ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectStartDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectEndDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
-                    || p.BidAmount.ToString().ToLower().Contains(lowerCaseSearchTerm)
-                    || p.Client.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm) 
+                    || p.Client.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectSite.ToLower().Contains(lowerCaseSearchTerm)
                     || p.Address.Street.ToLower().Contains(lowerCaseSearchTerm)
                     || p.Address.AreaCode.ToLower().Contains(lowerCaseSearchTerm));
             }
 
-            return View(await projectsQuery.ToListAsync());
+            // Execute the query and materialize the data
+            var projects = await projectsQuery.ToListAsync();
+
+            // Apply sorting in memory for bid amount
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    projects = projects.OrderByDescending(p => p.ProjectName).ToList();
+                    break;
+                case "start_date_asc":
+                    projects = projects.OrderBy(p => p.ProjectStartDate).ToList();
+                    break;
+                case "start_date_desc":
+                    projects = projects.OrderByDescending(p => p.ProjectStartDate).ToList();
+                    break;
+                case "end_date_asc":
+                    projects = projects.OrderBy(p => p.ProjectEndDate).ToList();
+                    break;
+                case "end_date_desc":
+                    projects = projects.OrderByDescending(p => p.ProjectEndDate).ToList();
+                    break;
+                case "bid_amount_asc":
+                    projects = projects.OrderBy(p => p.BidAmount).ToList(); // Corrected this line
+                    break;
+                case "bid_amount_desc":
+                    projects = projects.OrderByDescending(p => p.BidAmount).ToList(); // Corrected this line
+                    break;
+                case "client_asc":
+                    projects = projects.OrderBy(p => p.Client.ClientFirstName).ToList();
+                    break;
+                case "client_desc":
+                    projects = projects.OrderByDescending(p => p.Client.ClientFirstName).ToList();
+                    break;
+                case "site_asc":
+                    projects = projects.OrderBy(p => p.ProjectSite).ToList();
+                    break;
+                case "site_desc":
+                    projects = projects.OrderByDescending(p => p.ProjectSite).ToList();
+                    break;
+                case "street_asc":
+                    projects = projects.OrderBy(p => p.Address.Street).ToList();
+                    break;
+                case "street_desc":
+                    projects = projects.OrderByDescending(p => p.Address.Street).ToList();
+                    break;
+                case "areacode_asc":
+                    projects = projects.OrderBy(p => p.Address.AreaCode).ToList();
+                    break;
+                case "areacode_desc":
+                    projects = projects.OrderByDescending(p => p.Address.AreaCode).ToList();
+                    break;
+                default:
+                    projects = projects.OrderBy(p => p.ProjectName).ToList();
+                    break;
+            }
+
+            // Return the view with the sorted and filtered projects
+            return View(projects);
         }
-
-
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
