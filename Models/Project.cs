@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NBD6.Models
 {
-    public class Project
+    public class Project : IValidatableObject
     {
         [Key]
         [Display(Name = "Project ID")]
@@ -53,10 +53,10 @@ namespace NBD6.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            //Function cannot end before it starts
+            // Check if the end date is before the start date
             if (ProjectEndDate < ProjectStartDate)
             {
-                yield return new ValidationResult("Appointment cannot end before it starts.", new[] { "EndTime" });
+                yield return new ValidationResult("Project cannot end before it starts.", new[] { "ProjectEndDate" });
             }
         }
     }

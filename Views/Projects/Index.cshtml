@@ -21,28 +21,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectName)
+                @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.NameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectStartDate)
+                @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.StartDateSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectEndDate)
+                @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BidAmount)
+                @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client)
+                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.ClientSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectSite)
+                @Html.ActionLink("Project Site", "Index", new { sortOrder = ViewBag.SiteSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address.Street)
+                @Html.ActionLink("Street", "Index", new { sortOrder = ViewBag.StreetSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address.AreaCode)
+                @Html.ActionLink("AreaCode", "Index", new { sortOrder = ViewBag.AreaCodeSortParm })
             </th>
             <th></th>
         </tr>
