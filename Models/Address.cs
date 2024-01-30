@@ -23,5 +23,13 @@ namespace NBD6.Models
         [Required]
         [MaxLength(200)]
         public string Street { get; set; }
+
+        public string AddressSummary
+        {
+            get
+            {
+                return $"{Country}, {ProvinceState}, {Street}, {AreaCode}";
+            }
+        }
     }
 }
