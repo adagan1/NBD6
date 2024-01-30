@@ -112,7 +112,7 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "Street");
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
         }
 
@@ -129,7 +129,7 @@ namespace NBD6.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "Street", client.AddressID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
@@ -185,7 +185,7 @@ namespace NBD6.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "Street", client.AddressID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
