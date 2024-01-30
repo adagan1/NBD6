@@ -23,6 +23,9 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AddressSummary")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("AreaCode")
                         .IsRequired()
                         .HasMaxLength(20)

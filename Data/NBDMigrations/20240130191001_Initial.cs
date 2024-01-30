@@ -21,6 +21,7 @@ namespace NBD6.Data.NBDMigrations
                     ProvinceState = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     AreaCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    AddressSummary = table.Column<string>(type: "TEXT", nullable: true),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>

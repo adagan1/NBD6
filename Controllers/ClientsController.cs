@@ -62,7 +62,15 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode");
+            // Retrieve distinct address summaries from the database
+            var addressSummaries = _context.Addresses
+                .Select(a => a.AddressSummary)
+                .Distinct()
+                .ToList();
+
+            // Pass the list of address summaries to the view
+            ViewBag.AddressSummary = new SelectList(addressSummaries);
+
             return View();
         }
 

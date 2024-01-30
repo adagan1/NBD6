@@ -24,7 +24,8 @@ namespace NBD6.Data
                             Country = "Canada",
                             ProvinceState = "Ontario",
                             AreaCode = "L2S 3A1",
-                            Street = "Glenridge Avenue"
+                            Street = "Glenridge Avenue",
+                            AddressSummary = "Canada, Ontario, Glenridge Avenue, L2S 3A1"
                         },
                         new Address
                         {
