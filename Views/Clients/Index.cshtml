@@ -6,6 +6,14 @@
 
 <h1>Index</h1>
 
+@using (Html.BeginForm("Index", "Clients", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("searchTerm")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -31,28 +39,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientContact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address.Country)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientContact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.Country)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
