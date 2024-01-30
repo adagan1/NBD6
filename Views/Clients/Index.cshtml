@@ -21,19 +21,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ClientFirstName)
+                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientLastName)
+                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientContact)
+                @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClientPhone)
+                @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.PhoneSortParm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address.Country)
+                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
             </th>
             <th></th>
         </tr>
