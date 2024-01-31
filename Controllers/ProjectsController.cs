@@ -136,8 +136,8 @@ namespace NBD6.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName");
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
             return View();
         }
 
@@ -154,8 +154,8 @@ namespace NBD6.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             return View(project);
         }
 
@@ -176,7 +176,8 @@ namespace NBD6.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             return View(project); // Pass the project to the view
         }
 
@@ -212,8 +213,8 @@ namespace NBD6.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", project.AddressID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientFirstName", project.ClientID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             return View(project);
         }
 

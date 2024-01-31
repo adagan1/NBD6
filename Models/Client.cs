@@ -32,6 +32,14 @@ namespace NBD6.Models
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits long.")]
         public string ClientPhone { get; set; }
 
+        public string ClientSummary
+        {
+            get
+            {
+                return $"{ClientFirstName} {ClientLastName}, {ClientContact}, {ClientPhone}";
+            }
+        }
+
         // Foreign Keys
         [Display(Name = "Address ID")]
         [ForeignKey("Address")]
