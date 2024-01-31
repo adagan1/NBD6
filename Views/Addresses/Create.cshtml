@@ -43,6 +43,42 @@
     <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Go Back</a>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to load saved data from sessionStorage
+            function loadData() {
+                document.querySelectorAll("input[type='text']").forEach(function (input) {
+                    const savedValue = sessionStorage.getItem(input.name);
+                    if (savedValue) {
+                        input.value = savedValue;
+                    }
+                });
+            }
+
+            // Attach event listeners to save data to sessionStorage
+            document.querySelectorAll("input[type='text']").forEach(function (input) {
+                input.addEventListener("input", function () {
+                    sessionStorage.setItem(this.name, this.value);
+                });
+            });
+
+            // Populate the form with any data found in sessionStorage
+            loadData();
+
+            // Clear sessionStorage when the form is submitted successfully
+            document.querySelector("form").addEventListener("submit", function () {
+                ["Country", "ProvinceState", "AreaCode", "Street"].forEach(function (fieldName) {
+                    sessionStorage.removeItem(fieldName);
+                });
+            });
+        });
+    </script>
 }
+
+
