@@ -49,5 +49,36 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to load saved data from sessionStorage
+            function loadData() {
+                document.querySelectorAll("#ClientFirstName, #ClientLastName, #ClientContact, #ClientPhone").forEach(function (input) {
+                    const savedValue = sessionStorage.getItem(input.id);
+                    if (savedValue) {
+                        input.value = savedValue;
+                    }
+                });
+            }
+
+            
+            document.querySelectorAll("#ClientFirstName, #ClientLastName, #ClientContact, #ClientPhone").forEach(function (input) {
+                input.addEventListener("input", function () {
+                    sessionStorage.setItem(this.id, this.value); 
+                });
+            });
+
+            loadData();
+
+            document.querySelector("form").addEventListener("submit", function () {
+                ["ClientFirstName", "ClientLastName", "ClientContact", "ClientPhone"].forEach(function (fieldId) {
+                    sessionStorage.removeItem(fieldId);
+                });
+            });
+        });
+    </script>
 }
