@@ -149,7 +149,7 @@ namespace NBD6.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
