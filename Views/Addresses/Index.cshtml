@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
+<h1>Addresses</h1>
 
 <h1>Addresses</h1>
 
@@ -14,31 +15,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.CountrySortParm">Country</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProvinceState)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.ProvinceSortParm">Province</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AreaCode)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.PostalSortParm">Postal</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.StreetSortParm">Street</a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProvinceState)
+                    @Html.DisplayFor(modelItem => item.Province)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AreaCode)
+                    @Html.DisplayFor(modelItem => item.Postal)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Street)
