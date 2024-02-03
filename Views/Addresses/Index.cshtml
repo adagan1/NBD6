@@ -4,9 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Addresses</h1>
 
 <h1>Addresses</h1>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -32,24 +39,24 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Province)
-            </td>
-            <td>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Postal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AddressID">Details</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AddressID">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

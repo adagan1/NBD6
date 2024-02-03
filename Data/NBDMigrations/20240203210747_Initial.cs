@@ -18,8 +18,8 @@ namespace NBD6.Data.NBDMigrations
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Country = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ProvinceState = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AreaCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Province = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Postal = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: true)
                 },

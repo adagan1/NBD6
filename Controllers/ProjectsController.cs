@@ -30,7 +30,7 @@ namespace NBD6.Controllers
             ViewBag.CompanySortParm = sortOrder == "company_asc" ? "company_desc" : "company_asc";
             ViewBag.SiteSortParm = sortOrder == "site_asc" ? "site_desc" : "site_asc";
             ViewBag.StreetSortParm = sortOrder == "street_asc" ? "street_desc" : "street_asc";
-            ViewBag.AreaCodeSortParm = sortOrder == "areacode_asc" ? "areacode_desc" : "areacode_asc";
+            ViewBag.PostalSortParm = sortOrder == "Postal_asc" ? "Postal_desc" : "Postal_asc";
 
             // Retrieve projects with their associated client and address
             var projectsQuery = _context.Projects
@@ -50,7 +50,7 @@ namespace NBD6.Controllers
                     || p.Client.ClientName.ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectSite.ToLower().Contains(lowerCaseSearchTerm)
                     || p.Address.Street.ToLower().Contains(lowerCaseSearchTerm)
-                    || p.Address.AreaCode.ToLower().Contains(lowerCaseSearchTerm));
+                    || p.Address.Postal.ToLower().Contains(lowerCaseSearchTerm));
             }
 
             // Execute the query and materialize the data
@@ -98,11 +98,11 @@ namespace NBD6.Controllers
                 case "street_desc":
                     projects = projects.OrderByDescending(p => p.Address.Street).ToList();
                     break;
-                case "areacode_asc":
-                    projects = projects.OrderBy(p => p.Address.AreaCode).ToList();
+                case "Postal_asc":
+                    projects = projects.OrderBy(p => p.Address.Postal).ToList();
                     break;
-                case "areacode_desc":
-                    projects = projects.OrderByDescending(p => p.Address.AreaCode).ToList();
+                case "Postal_desc":
+                    projects = projects.OrderByDescending(p => p.Address.Postal).ToList();
                     break;
                 default:
                     projects = projects.OrderBy(p => p.ProjectName).ToList();
