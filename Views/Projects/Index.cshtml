@@ -33,7 +33,7 @@
                 @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
             </th>
             <th>
-                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.ClientSortParm })
+                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.CompanySortParm })
             </th>
             <th>
                 @Html.ActionLink("Project Site", "Index", new { sortOrder = ViewBag.SiteSortParm })
@@ -64,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.BidAmount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Client.ClientFirstName) 
+                    @Html.DisplayFor(modelItem => item.Client.CompanyName) 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProjectSite)

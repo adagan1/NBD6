@@ -148,40 +148,40 @@ namespace NBD6.Data
                     context.Clients.AddRange(
                         new Client
                         {
-                            ClientFirstName = "Lamar",
-                            ClientLastName = "Jackson",
+                            CompanyName = "Ravens HQ",
+                            ClientName = "Lamar Jackson",
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1
                         },
                         new Client
                         {
-                            ClientFirstName = "Serena",
-                            ClientLastName = "Williams",
+                            CompanyName = "Adidas",
+                            ClientName = "Serena Williams",
                             ClientContact = "serenawilliams@gmail.com",
                             ClientPhone = "5555556543",
                             AddressID = 2
                         },
                         new Client
                         {
-                            ClientFirstName = "Tom",
-                            ClientLastName = "Brady",
+                            CompanyName = "Tampa Bucks",
+                            ClientName = "Tom Brady",
                             ClientContact = "tombrady@gmail.com",
                             ClientPhone = "6666667654",
                             AddressID = 3
                         },
                         new Client
                         {
-                            ClientFirstName = "Michael",
-                            ClientLastName = "Jordan",
+                            CompanyName = "Jordans",
+                            ClientName = "Michael Jordan",
                             ClientContact = "mjordan@gmail.com",
                             ClientPhone = "3333334321",
                             AddressID = 4
                         },
                         new Client
                         {
-                            ClientFirstName = "LeBron",
-                            ClientLastName = "James",
+                            CompanyName = "LA Lakers",
+                            ClientName = "LeBron James",
                             ClientContact = "lebronjames@gmail.com",
                             ClientPhone = "4444445432",
                             AddressID = 5
