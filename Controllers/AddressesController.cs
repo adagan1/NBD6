@@ -33,10 +33,10 @@ namespace NBD6.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                addresses = addresses.Where(a => a.Country.Contains(searchString)
-                                           || a.Province.Contains(searchString)
-                                           || a.Postal.Contains(searchString)
-                                           || a.Street.Contains(searchString));
+                addresses = addresses.Where(a => a.Country.ToLower().Contains(searchString)
+                                           || a.Province.ToLower().Contains(searchString)
+                                           || a.Postal.ToLower().Contains(searchString)
+                                           || a.Street.ToLower().Contains(searchString));
             }
 
             switch (sortOrder)
