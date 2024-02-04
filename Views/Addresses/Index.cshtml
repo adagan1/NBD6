@@ -4,16 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-
 <h1>Addresses</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Addresses", FormMethod.Get, new { @class = "form-inline" }))
 {
-    <p>
-        Search: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" name="searchString" class="form-control w-100" placeholder="Search Addresses..." />
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Search" class="btn btn-primary w-15" />
+        </div>
+    </div>
 }
+
 
 <p>
     <a asp-action="Create">Create New</a>
