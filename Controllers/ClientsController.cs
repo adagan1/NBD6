@@ -24,8 +24,8 @@ namespace NBD6.Controllers
         public async Task<IActionResult> Index(string sortOrder, string searchTerm)
         {
             // Set up sorting parameters for all fields
-            ViewBag.FirstNameSortParm = sortOrder == "firstname_asc" ? "firstname_desc" : "firstname_asc";
-            ViewBag.LastNameSortParm = sortOrder == "lastname_asc" ? "lastname_desc" : "lastname_asc";
+            ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
+            ViewBag.ClientNameSortParm = sortOrder == "clientname_asc" ? "clientname_desc" : "clientname_asc";
             ViewBag.ContactSortParm = sortOrder == "contact_asc" ? "contact_desc" : "contact_asc";
             ViewBag.PhoneSortParm = sortOrder == "phone_asc" ? "phone_desc" : "phone_asc";
             ViewBag.CountrySortParm = sortOrder == "country_asc" ? "country_desc" : "country_asc";
@@ -39,8 +39,8 @@ namespace NBD6.Controllers
                 var lowerCaseSearchTerm = searchTerm.ToLower();
 
                 clientsQuery = clientsQuery.Where(c =>
-                    c.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm)
-                    || c.ClientLastName.ToLower().Contains(lowerCaseSearchTerm)
+                    c.CompanyName.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.ClientName.ToLower().Contains(lowerCaseSearchTerm)
                     || c.ClientContact.ToLower().Contains(lowerCaseSearchTerm)
                     || c.ClientPhone.ToLower().Contains(lowerCaseSearchTerm)
                     || c.Address.Country.ToLower().Contains(lowerCaseSearchTerm)
@@ -50,17 +50,17 @@ namespace NBD6.Controllers
             // Apply sorting based on sortOrder
             switch (sortOrder)
             {
-                case "firstname_asc":
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientFirstName);
+                case "companyname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.CompanyName);
                     break;
-                case "firstname_desc":
-                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientFirstName);
+                case "companyname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.CompanyName);
                     break;
-                case "lastname_asc":
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientLastName);
+                case "clientname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
                     break;
-                case "lastname_desc":
-                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientLastName);
+                case "clientname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientName);
                     break;
                 case "contact_asc":
                     clientsQuery = clientsQuery.OrderBy(c => c.ClientContact);
@@ -81,7 +81,7 @@ namespace NBD6.Controllers
                     clientsQuery = clientsQuery.OrderByDescending(c => c.Address.Country);
                     break;
                 default:
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientLastName);
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
                     break;
             }
 

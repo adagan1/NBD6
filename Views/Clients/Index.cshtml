@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Clients</h1>
 
 @using (Html.BeginForm("Index", "Clients", FormMethod.Get))
 {
@@ -21,10 +21,10 @@
     <thead>
         <tr>
             <th>
-                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
             </th>
             <th>
-                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                @Html.ActionLink("Client name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
             </th>
             <th>
                 @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
@@ -43,10 +43,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClientFirstName)
+                    @Html.DisplayFor(modelItem => item.CompanyName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ClientLastName)
+                    @Html.DisplayFor(modelItem => item.ClientName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ClientContact)

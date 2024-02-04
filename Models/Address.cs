@@ -16,6 +16,7 @@ namespace NBD6.Models
         [MaxLength(100)]
         public string ProvinceState { get; set; }
 
+        [Display(Name = "Area Code")]
         [Required]
         [MaxLength(20)] // Assuming AreaCode is a shorter string
         public string AreaCode { get; set; }
