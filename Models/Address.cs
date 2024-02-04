@@ -11,15 +11,15 @@ namespace NBD6.Models
         [MaxLength(100)] // Assuming a max length of 100 for string fields
         public string Country { get; set; }
 
-        [Display(Name = "Province/State")]
+        [Display(Name = "Province")]
         [Required]
         [MaxLength(100)]
-        public string ProvinceState { get; set; }
+        public string Province { get; set; }
 
-        [Display(Name = "Area Code")]
+        [Display(Name = "Postal Code")]
         [Required]
-        [MaxLength(20)] // Assuming AreaCode is a shorter string
-        public string AreaCode { get; set; }
+        [MaxLength(20)] // Assuming Postal is a shorter string
+        public string Postal { get; set; }
 
         [Required]
         [MaxLength(200)]
@@ -29,7 +29,7 @@ namespace NBD6.Models
         {
             get
             {
-                return $"{Country}, {ProvinceState}, {Street}, {AreaCode}";
+                return $"{Country}, {Province}, {Street}, {Postal}";
             }
         }
     }
