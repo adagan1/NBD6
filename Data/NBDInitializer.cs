@@ -22,121 +22,121 @@ namespace NBD6.Data
                         new Address
                         {
                             AddressID = 1,
-                            Country = "America",
-                            ProvinceState = "Michigan",
-                            AreaCode = "48201",
+                            Country = "Canada",
+                            Province = "Ontario",
+                            Postal = "K1A 0B1",
                             Street = "Highland Park"
                         },
                         new Address
                         {
                             AddressID = 2,
-                            Country = "America",
-                            ProvinceState = "Georgia",
-                            AreaCode = "30301",
+                            Country = "Canada",
+                            Province = "Ontario",
+                            Postal = "M5H 2N2",
                             Street = "Peachtree Street"
                         },
                         new Address
                         {
                             AddressID = 3,
-                            Country = "America",
-                            ProvinceState = "California",
-                            AreaCode = "90210",
+                            Country = "Canada",
+                            Province = "Manitoba",
+                            Postal = "R3C 1V1",
                             Street = "Beverly Drive"
                         },
                         new Address
                         {
                             AddressID = 4,
-                            Country = "America",
-                            ProvinceState = "Texas",
-                            AreaCode = "73301",
+                            Country = "Canada",
+                            Province = "British Columbia",
+                            Postal = "V6C 2J8",
                             Street = "Congress Avenue"
                         },
                         new Address
                         {
                             AddressID = 5,
-                            Country = "America",
-                            ProvinceState = "Pennsylvania",
-                            AreaCode = "19019",
+                            Country = "Canada",
+                            Province = "Quebec",
+                            Postal = "H2Y 2E7",
                             Street = "Liberty Bell Road"
                         },
                         new Address
                         {
                             AddressID = 6,
-                            Country = "America",
-                            ProvinceState = "Texas",
-                            AreaCode = "L2S 3A1",
+                            Country = "Canada",
+                            Province = "Alberta",
+                            Postal = "T5K 2J6",
                             Street = "Glenridge Avenue"
                         },
                         new Address
                         {
                             AddressID = 7,
-                            Country = "America",
-                            ProvinceState = "Illinois",
-                            AreaCode = "67823",
+                            Country = "Canada",
+                            Province = "Nova Scotia",
+                            Postal = "B3J 1R2",
                             Street = "Green Valley Avenue"
                         },
                         new Address
                         {
                             AddressID = 8,
-                            Country = "America",
-                            ProvinceState = "New York",
-                            AreaCode = "33542",
+                            Country = "Canada",
+                            Province = "Newfoundland and Labrador",
+                            Postal = "A1A 1A1",
                             Street = "Chocolate Street"
                         },
                         new Address
                         {
                             AddressID = 9,
-                            Country = "America",
-                            ProvinceState = "Florida",
-                            AreaCode = "21986",
+                            Country = "Canada",
+                            Province = "Saskatchewan",
+                            Postal = "S4P 3Y2",
                             Street = "Tech City Way"
                         },
                         new Address
                         {
                             AddressID = 10,
-                            Country = "America",
-                            ProvinceState = "Ohio",
-                            AreaCode = "22389",
+                            Country = "Canada",
+                            Province = "Prince Edward Island",
+                            Postal = "C1A 4P3",
                             Street = "Environmental Street"
                         },
                         new Address
                         {
                             AddressID = 11,
-                            Country = "America",
-                            ProvinceState = "California",
-                            AreaCode = "90001",
+                            Country = "Canada",
+                            Province = "Quebec",
+                            Postal = "G1K 8M8",
                             Street = "Sunny Road"
                         },
                         new Address
                         {
                             AddressID = 12,
-                            Country = "America",
-                            ProvinceState = "Texas",
-                            AreaCode = "75001",
+                            Country = "Canada",
+                            Province = "British Columbia",
+                            Postal = "V6Z 1A1",
                             Street = "Dusty Way"
                         },
                         new Address
                         {
                             AddressID = 13,
-                            Country = "America",
-                            ProvinceState = "Nevada",
-                            AreaCode = "89001",
+                            Country = "Canada",
+                            Province = "Manitoba",
+                            Postal = "R2C 0A1",
                             Street = "Casino Boulevard"
                         },
                         new Address
                         {
                             AddressID = 14,
-                            Country = "America",
-                            ProvinceState = "Washington",
-                            AreaCode = "98001",
+                            Country = "Canada",
+                            Province = "Alberta",
+                            Postal = "T1X 0L3",
                             Street = "Rainy Street"
                         },
                         new Address
                         {
                             AddressID = 15,
-                            Country = "America",
-                            ProvinceState = "Oregon",
-                            AreaCode = "97001",
+                            Country = "Canada",
+                            Province = "Ontario",
+                            Postal = "K0J 1B0",
                             Street = "Forest Drive"
                         }
                     );

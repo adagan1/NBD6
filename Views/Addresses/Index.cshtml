@@ -4,8 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-
 <h1>Addresses</h1>
+
+@using (Html.BeginForm("Index", "Addresses", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" name="searchString" class="form-control w-100" placeholder="Search Addresses..." />
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Search" class="btn btn-primary w-15" />
+        </div>
+    </div>
+}
+
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,40 +26,41 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.CountrySortParm">Country</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProvinceState)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.ProvinceSortParm">Province</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AreaCode)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.PostalSortParm">Postal</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.StreetSortParm">Street</a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProvinceState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AreaCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AddressID">Details</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Province)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Postal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AddressID">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
