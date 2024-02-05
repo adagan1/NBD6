@@ -87,4 +87,32 @@
             $("#ClientSummary").select2();
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to load saved data from sessionStorage
+            function loadData() {
+                document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #BidAmount, #AddressSummary, #ClientSummary").forEach(function (input) {
+                    const savedValue = sessionStorage.getItem(input.id);
+                    if (savedValue) {
+                        input.value = savedValue;
+                    }
+                });
+            }
+
+            document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #BidAmount, #AddressSummary, #ClientSummary").forEach(function (input) {
+                input.addEventListener("input", function () {
+                    sessionStorage.setItem(this.id, this.value);
+                });
+            });
+
+            loadData();
+
+            document.querySelector("form").addEventListener("submit", function () {
+                ["ProjectName", "ProjectStartDate", "ProjectEndDate", "ProjectSite", "BidAmount", "AddressSummary", "ClientSummary"].forEach(function (fieldId) {
+                    sessionStorage.removeItem(fieldId);
+                });
+            });
+        });
+    </script>
 }
