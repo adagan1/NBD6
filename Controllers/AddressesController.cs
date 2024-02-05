@@ -106,6 +106,7 @@ namespace NBD6.Controllers
         // GET: Addresses/Create
         public IActionResult Create()
         {
+            TempData["ReferrerUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -120,7 +121,19 @@ namespace NBD6.Controllers
             {
                 _context.Add(address);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                TempData["NewAddressID"] = address.AddressID; // Add address ID to TempData
+
+                // Check if TempData contains the ReferrerUrl
+                if (TempData.ContainsKey("ReferrerUrl"))
+                {
+                    // Redirect back to the ReferrerUrl
+                    return Redirect(TempData["ReferrerUrl"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(address);
         }

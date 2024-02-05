@@ -33,12 +33,17 @@
                 <span asp-validation-for="ClientPhone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>               
+                <label asp-for="Address" class="control-label"></label>
                 <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID">
                     <option value="">Select a Address</option>
+                    @if (TempData["NewAddressID"] != null)
+                    {
+                        <option value="@TempData["NewAddressID"]" selected>New Address</option>
+                    }
                 </select>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Create">Create a new Address</a>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -70,16 +75,15 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Function to load saved data from sessionStorage
             function loadData() {
-                document.querySelectorAll("#ClientFirstName, #ClientLastName, #ClientContact, #ClientPhone").forEach(function (input) {
+                document.querySelectorAll("#CompanyName, #ClientName, #ClientContact, #ClientPhone").forEach(function (input) {
                     const savedValue = sessionStorage.getItem(input.id);
                     if (savedValue) {
                         input.value = savedValue;
                     }
                 });
             }
-
             
-            document.querySelectorAll("#ClientFirstName, #ClientLastName, #ClientContact, #ClientPhone").forEach(function (input) {
+            document.querySelectorAll("#CompanyName, #ClientName, #ClientContact, #ClientPhone").forEach(function (input) {
                 input.addEventListener("input", function () {
                     sessionStorage.setItem(this.id, this.value); 
                 });
@@ -88,7 +92,7 @@
             loadData();
 
             document.querySelector("form").addEventListener("submit", function () {
-                ["ClientFirstName", "ClientLastName", "ClientContact", "ClientPhone"].forEach(function (fieldId) {
+                ["CompanyName", "ClientName", "ClientContact", "ClientPhone"].forEach(function (fieldId) {
                     sessionStorage.removeItem(fieldId);
                 });
             });
