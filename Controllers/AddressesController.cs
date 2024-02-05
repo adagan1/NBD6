@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
+using PagedList;
 
 namespace NBD6.Controllers
 {
@@ -20,10 +21,55 @@ namespace NBD6.Controllers
         }
 
         // GET: Addresses
-        public async Task<IActionResult> Index()
+        public ViewResult Index(string sortOrder, string searchString)
         {
-              return View(await _context.Addresses.ToListAsync());
+            ViewBag.CountrySortParm = String.IsNullOrEmpty(sortOrder) ? "country_desc" : "";
+            ViewBag.ProvinceSortParm = sortOrder == "Province" ? "province_desc" : "Province";
+            ViewBag.PostalSortParm = sortOrder == "Postal" ? "postal_desc" : "Postal";
+            ViewBag.StreetSortParm = sortOrder == "Street" ? "street_desc" : "Street";
+
+            var addresses = from a in _context.Addresses
+                            select a;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                addresses = addresses.Where(a => a.Country.ToLower().Contains(searchString)
+                                           || a.Province.ToLower().Contains(searchString)
+                                           || a.Postal.ToLower().Contains(searchString)
+                                           || a.Street.ToLower().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "country_desc":
+                    addresses = addresses.OrderByDescending(a => a.Country);
+                    break;
+                case "Province":
+                    addresses = addresses.OrderBy(a => a.Province);
+                    break;
+                case "province_desc":
+                    addresses = addresses.OrderByDescending(a => a.Province);
+                    break;
+                case "Postal":
+                    addresses = addresses.OrderBy(a => a.Postal);
+                    break;
+                case "postal_desc":
+                    addresses = addresses.OrderByDescending(a => a.Postal);
+                    break;
+                case "Street":
+                    addresses = addresses.OrderBy(a => a.Street);
+                    break;
+                case "street_desc":
+                    addresses = addresses.OrderByDescending(a => a.Street);
+                    break;
+                default:
+                    addresses = addresses.OrderBy(a => a.Country);
+                    break;
+            }
+
+            return View(addresses.ToList());
         }
+
 
         // GET: Addresses/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,7 +100,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AddressID,Country,ProvinceState,AreaCode,Street")] Address address)
+        public async Task<IActionResult> Create([Bind("AddressID,Country,Province,Postal,Street")] Address address)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +132,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AddressID,Country,ProvinceState,AreaCode,Street")] Address address)
+        public async Task<IActionResult> Edit(int id, [Bind("AddressID,Country,Province,Postal,Street")] Address address)
         {
             if (id != address.AddressID)
             {
