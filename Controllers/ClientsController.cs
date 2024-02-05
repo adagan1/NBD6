@@ -121,7 +121,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -158,7 +158,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (id != client.ClientID)
             {
