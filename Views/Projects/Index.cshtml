@@ -4,15 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Projects</h1>
 
-@using (Html.BeginForm("Index", "Projects", FormMethod.Get))
+@using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { @class = "form-inline" }))
 {
-    <p>
-        Search: @Html.TextBox("searchTerm")
-        <input type="submit" value="Filter" />
-    </p>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input type="text" name="searchTerm" class="form-control w-100" placeholder="Search Projects..." />
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Search" class="btn btn-primary w-15" />
+        </div>
+    </div>
 }
+
+
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -33,7 +39,7 @@
                 @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
             </th>
             <th>
-                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.ClientSortParm })
+                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.CompanySortParm })
             </th>
             <th>
                 @Html.ActionLink("Project Site", "Index", new { sortOrder = ViewBag.SiteSortParm })
@@ -42,7 +48,7 @@
                 @Html.ActionLink("Street", "Index", new { sortOrder = ViewBag.StreetSortParm })
             </th>
             <th>
-                @Html.ActionLink("AreaCode", "Index", new { sortOrder = ViewBag.AreaCodeSortParm })
+                @Html.ActionLink("Postal", "Index", new { sortOrder = ViewBag.PostalSortParm })
             </th>
             <th></th>
         </tr>
@@ -64,7 +70,7 @@
                     @Html.DisplayFor(modelItem => item.BidAmount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Client.ClientFirstName) 
+                    @Html.DisplayFor(modelItem => item.Client.CompanyName) 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProjectSite)
@@ -73,11 +79,11 @@
                     @Html.DisplayFor(modelItem => item.Address.Street)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address.AreaCode)
+                    @Html.DisplayFor(modelItem => item.Address.Postal)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ProjectID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProjectID">Details</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProjectID">Details</a>
                 </td>
             </tr>
         }

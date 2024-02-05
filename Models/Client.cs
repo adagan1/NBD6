@@ -10,27 +10,36 @@ namespace NBD6.Models
         [Display(Name = "Client ID")]
         public int ClientID { get; set; }
 
-        [Display(Name = "Client First Name")]
-        [Required(ErrorMessage = "You cannot leave the first name blank.")]
-        [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
-        [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "First name can only contain letters.")]
-        public string ClientFirstName { get; set; }
+        [Display(Name = "Company")]
+        [Required(ErrorMessage = "You cannot leave the Company's name blank.")]
+        [StringLength(50, ErrorMessage = "The Company's name cannot be more than 50 characters long.")]
+        [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "The Company's name can only contain letters.")]
+        public string CompanyName { get; set; }
 
-        [Display(Name = "Client Last Name")]
-        [Required(ErrorMessage = "You cannot leave the last name blank.")]
-        [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters long.")]
-        [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Last name can only contain letters.")]
-        public string ClientLastName { get; set; }
+        [Display(Name = "Client Name")]
+        [Required(ErrorMessage = "You cannot leave the Client name blank.")]
+        [StringLength(50, ErrorMessage = "Client name cannot be more than 50 characters long.")]
+        [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "Client name can only contain letters.")]
+        public string ClientName { get; set; }
 
         [Display(Name = "Contact")]
         [StringLength(100, ErrorMessage = "Contact information cannot be more than 100 characters long.")]
+        [RegularExpression(@"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b$", ErrorMessage = "Please enter a valid email address.")]
         public string ClientContact { get; set; }
 
         [Display(Name = "Phone")]
         [Phone(ErrorMessage = "The phone number is not in a valid format.")]
         [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits long.")]
+        [RegularExpression(@"^\d{3}-?\d{3}-?\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
         public string ClientPhone { get; set; }
+
+        public string ClientSummary
+        {
+            get
+            {
+                return $"{CompanyName} {ClientName}, {ClientContact}, {ClientPhone}";
+            }
+        }
 
         // Foreign Keys
         [Display(Name = "Address ID")]

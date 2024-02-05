@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ProjectName" class="control-label"></label>
-                <input asp-for="ProjectName" class="form-control" />
+                <input asp-for="ProjectName" class="form-control" placeholder="project name" />
                 <span asp-validation-for="ProjectName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,21 +29,31 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProjectSite" class="control-label"></label>
-                <input asp-for="ProjectSite" class="form-control" />
+                <input asp-for="ProjectSite" class="form-control" placeholder="project site" />
                 <span asp-validation-for="ProjectSite" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BidAmount" class="control-label"></label>
-                <input asp-for="BidAmount" class="form-control" />
+                <input asp-for="BidAmount" class="form-control" placeholder="000.00" />
                 <span asp-validation-for="BidAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientID" class="control-label"></label>
-                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+                <label asp-for="Address" class="control-label"></label>
+                <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID">
+                    <option value="">Select a Address</option>
+                </select>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Create">Create a new Address</a>
             </div>
-            <div class="form-group">
-                <label asp-for="AddressID" class="control-label"></label>
-                <select asp-for="AddressID" class ="form-control" asp-items="ViewBag.AddressID"></select>
+            <h4>Client</h4>
+            <hr />
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="Client" class="control-label"></label>                   
+                    <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID">
+                        <option value="">Select a Client</option>
+                    </select>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Create a new Client</a>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -53,9 +63,20 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="nav-link text-dark" href="javascript:history.back()">Go Back</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js">
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#AddressSummary").select2();
+            $("#ClientSummary").select2();
+        });
+    </script>
 }
