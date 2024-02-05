@@ -92,6 +92,7 @@ namespace NBD6.Controllers
         // GET: Addresses/Create
         public IActionResult Create()
         {
+            TempData["ReferrerUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             return View();
         }
 
@@ -102,11 +103,22 @@ namespace NBD6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AddressID,Country,Province,Postal,Street")] Address address)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(address);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Check if TempData contains the ReferrerUrl
+                if (TempData.ContainsKey("ReferrerUrl"))
+                {
+                    // Redirect back to the ReferrerUrl
+                    return Redirect(TempData["ReferrerUrl"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(address);
         }
