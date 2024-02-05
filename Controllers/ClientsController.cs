@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -124,6 +125,7 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
+            TempData["ReferrerUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
 
@@ -140,7 +142,19 @@ namespace NBD6.Controllers
             {
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                TempData["NewClientID"] = client.ClientID;// Add client ID to TempData
+
+                // Check if TempData contains the ReferrerUrl
+                if (TempData.ContainsKey("ReferrerUrl"))
+                {
+                    // Redirect back to the ReferrerUrl
+                    return Redirect(TempData["ReferrerUrl"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }                
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
