@@ -82,10 +82,10 @@
                     }
                 });
             }
-            
+
             document.querySelectorAll("#CompanyName, #ClientName, #ClientContact, #ClientPhone").forEach(function (input) {
                 input.addEventListener("input", function () {
-                    sessionStorage.setItem(this.id, this.value); 
+                    sessionStorage.setItem(this.id, this.value);
                 });
             });
 
