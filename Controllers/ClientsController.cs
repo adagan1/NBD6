@@ -114,6 +114,7 @@ namespace NBD6.Controllers
         {
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
+
         }
 
         // POST: Clients/Create
