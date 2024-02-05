@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NBD6.Models.Client>
+﻿@model NBD6.Utilities.PaginatedList<NBD6.Models.Client>
 
 @{
     ViewData["Title"] = "Clients";
@@ -10,62 +10,63 @@
 {
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" name="searchTerm" class="form-control w-100" placeholder="Search Clients..." />
+            <input type="text" name="searchTerm" class="form-control w-100" placeholder="Search Clients..." value="@ViewBag.CurrentFilter" />
         </div>
         <div class="col-md-6">
-            <button type="submit" class="btn btn-primary w-15">Search</button>
+            <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </div>
-}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Client name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.PhoneSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientContact)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address.Country)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
-                </td>
+                <th>
+                    @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Client name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.PhoneSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
+                </th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientContact)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.Country)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" model="Model" />
+}

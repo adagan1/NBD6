@@ -1,5 +1,4 @@
-﻿@model IEnumerable<NBD6.Models.Address>
-
+﻿@model NBD6.Utilities.PaginatedList<NBD6.Models.Address> 
 @{
     ViewData["Title"] = "Index";
 }
@@ -18,10 +17,11 @@
     </div>
 }
 
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
 <table class="table">
     <thead>
         <tr>
@@ -64,3 +64,7 @@
         }
     </tbody>
 </table>
+    
+
+<partial name="_PagingNavBar" model="Model" />
+</form>

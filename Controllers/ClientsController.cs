@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
+using NBD6.Utilities;
 
 namespace NBD6.Controllers
 {
@@ -21,19 +22,28 @@ namespace NBD6.Controllers
 
 
         // GET: Clients
-        public async Task<IActionResult> Index(string sortOrder, string searchTerm)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
-            // Set up sorting parameters for all fields
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
             ViewBag.ClientNameSortParm = sortOrder == "clientname_asc" ? "clientname_desc" : "clientname_asc";
             ViewBag.ContactSortParm = sortOrder == "contact_asc" ? "contact_desc" : "contact_asc";
             ViewBag.PhoneSortParm = sortOrder == "phone_asc" ? "phone_desc" : "phone_asc";
             ViewBag.CountrySortParm = sortOrder == "country_asc" ? "country_desc" : "country_asc";
 
-            // Retrieve clients with their associated addresses
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
             var clientsQuery = _context.Clients.Include(c => c.Address).AsQueryable();
 
-            // Apply search filter if searchTerm is provided
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
@@ -85,8 +95,10 @@ namespace NBD6.Controllers
                     break;
             }
 
-            // Execute the query and return the view with the sorted and filtered clients
-            return View(await clientsQuery.ToListAsync());
+            int pageSize = 10; 
+            var pagedData = await PaginatedList<Client>.CreateAsync(clientsQuery.AsNoTracking(), page ?? 1, pageSize);
+
+            return View(pagedData);
         }
 
 

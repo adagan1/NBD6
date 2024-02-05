@@ -1,5 +1,4 @@
-﻿@model IEnumerable<NBD6.Models.Project>
-
+﻿@model NBD6.Utilities.PaginatedList<NBD6.Models.Project>
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,7 +9,7 @@
 {
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" name="searchTerm" class="form-control w-100" placeholder="Search Projects..." />
+            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control w-100" placeholder="Search Projects..." />
         </div>
         <div class="col-md-6">
             <input type="submit" value="Search" class="btn btn-primary w-15" />
@@ -18,74 +17,77 @@
     </div>
 }
 
-
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.NameSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.StartDateSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.CompanySortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Project Site", "Index", new { sortOrder = ViewBag.SiteSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Street", "Index", new { sortOrder = ViewBag.StreetSortParm })
-            </th>
-            <th>
-                @Html.ActionLink("Postal", "Index", new { sortOrder = ViewBag.PostalSortParm })
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<form asp-action="Index" method="get">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectStartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectEndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BidAmount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Client.CompanyName) 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectSite)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address.Street)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address.Postal)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ProjectID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ProjectID">Details</a>
-                </td>
+                <th>
+                    @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.StartDateSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.CompanySortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Project Site", "Index", new { sortOrder = ViewBag.SiteSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Street", "Index", new { sortOrder = ViewBag.StreetSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Postal", "Index", new { sortOrder = ViewBag.PostalSortParm })
+                </th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectStartDate, "{0:d}")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectEndDate, "{0:d}")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BidAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Client.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectSite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address.Postal)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProjectID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ProjectID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <partial name="_PagingNavBar" model="Model" />
+</form>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
+using NBD6.Utilities;
 using PagedList;
 
 namespace NBD6.Controllers
@@ -21,22 +22,34 @@ namespace NBD6.Controllers
         }
 
         // GET: Addresses
-        public ViewResult Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.CountrySortParm = String.IsNullOrEmpty(sortOrder) ? "country_desc" : "";
             ViewBag.ProvinceSortParm = sortOrder == "Province" ? "province_desc" : "Province";
             ViewBag.PostalSortParm = sortOrder == "Postal" ? "postal_desc" : "Postal";
             ViewBag.StreetSortParm = sortOrder == "Street" ? "street_desc" : "Street";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             var addresses = from a in _context.Addresses
                             select a;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                addresses = addresses.Where(a => a.Country.ToLower().Contains(searchString)
-                                           || a.Province.ToLower().Contains(searchString)
-                                           || a.Postal.ToLower().Contains(searchString)
-                                           || a.Street.ToLower().Contains(searchString));
+                addresses = addresses.Where(a => a.Country.ToLower().Contains(searchString.ToLower())
+                                           || a.Province.ToLower().Contains(searchString.ToLower())
+                                           || a.Postal.ToLower().Contains(searchString.ToLower())
+                                           || a.Street.ToLower().Contains(searchString.ToLower()));
             }
 
             switch (sortOrder)
@@ -67,7 +80,8 @@ namespace NBD6.Controllers
                     break;
             }
 
-            return View(addresses.ToList());
+            int pageSize = 10;
+            return View(await PaginatedList<Address>.CreateAsync(addresses.AsNoTracking(), page ?? 1, pageSize));
         }
 
 
