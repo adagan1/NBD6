@@ -87,6 +87,7 @@ namespace NBD6.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
+            TempData.Clear();
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
             return View();
