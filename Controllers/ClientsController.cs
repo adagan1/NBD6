@@ -125,7 +125,7 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
-            TempData["ReferrerUrl"] = HttpContext.Request.Headers["Referer"].ToString();
+            TempData["ClientUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
 
@@ -143,18 +143,21 @@ namespace NBD6.Controllers
                 _context.Add(client);
                 await _context.SaveChangesAsync();
 
-                TempData["NewClientID"] = client.ClientID;// Add client ID to TempData
+                TempData["NewClientID"] = client.ClientID;
+                TempData["NewClientSummary"] = client.ClientSummary;
 
-                // Check if TempData contains the ReferrerUrl
-                if (TempData.ContainsKey("ReferrerUrl"))
+                if (TempData.ContainsKey("AddressUrl"))
                 {
                     // Redirect back to the ReferrerUrl
-                    return Redirect(TempData["ReferrerUrl"].ToString());
+                    return RedirectToAction(nameof(Index));
                 }
+                // Check if TempData contains the ClientUrl
                 else
                 {
-                    return RedirectToAction(nameof(Index));
-                }                
+                    // Redirect back to the ClientUrl
+                    return Redirect(TempData["ClientUrl"].ToString());
+                }
+                
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);

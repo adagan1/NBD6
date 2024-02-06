@@ -43,7 +43,7 @@
                     <option value="">Select a Address</option>
                     @if (TempData["NewAddressID"] != null)
                     {
-                        <option value="@TempData["NewAddressID"]" selected>New Address</option>
+                        <option value="@TempData["NewAddressID"]" selected>@TempData["NewAddressSummary"]</option>
                     }
                 </select>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Create">Create a new Address</a>
@@ -52,12 +52,12 @@
             <hr />
             <div class="row">
                 <div class="form-group">
-                    <label asp-for="Client" class="control-label"></label>                   
+                    <label asp-for="Client" class="control-label"></label>
                     <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID">
                         <option value="">Select a Client</option>
                         @if (TempData["NewClientID"] != null)
                         {
-                            <option value="@TempData["NewClientID"]" selected>New Client</option>
+                            <option value="@TempData["NewClientID"]" selected>@TempData["NewClientSummary"]</option>
                         }
                     </select>
                     <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Create a new Client</a>
