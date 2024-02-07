@@ -27,7 +27,7 @@ namespace NBD6.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder != "name_desc" ? "name_desc" : "name_asc";
             ViewBag.StartDateSortParm = sortOrder == "start_date_asc" ? "start_date_desc" : "start_date_asc";
             ViewBag.EndDateSortParm = sortOrder == "end_date_asc" ? "end_date_desc" : "end_date_asc";
-            //ViewBag.BidAmountSortParm = sortOrder == "bid_amount_asc" ? "bid_amount_desc" : "bid_amount_asc";
+            ViewBag.BidAmountSortParm = sortOrder == "bid_amount_asc" ? "bid_amount_desc" : "bid_amount_asc";
             ViewBag.CompanySortParm = sortOrder == "company_asc" ? "company_desc" : "company_asc";
             ViewBag.SiteSortParm = sortOrder == "site_asc" ? "site_desc" : "site_asc";
             ViewBag.StreetSortParm = sortOrder == "street_asc" ? "street_desc" : "street_asc";
@@ -86,11 +86,11 @@ namespace NBD6.Controllers
                 case "end_date_desc":
                     projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectEndDate);
                     break;
-                //case "bid_amount_asc":
-                //    projects = projects.OrderBy(p => p.BidAmount).ToList();
-                //    break;
-                //case "bid_amount_desc":
-                //    projects = projects.OrderByDescending(p => p.BidAmount).ToList();
+                case "bid_amount_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.BidAmount.ToString());
+                    break;
+                case "bid_amount_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.BidAmount.ToString());
                     break;
                 case "company_asc":
                     projectsQuery = projectsQuery.OrderBy(p => p.Client.ClientName);
