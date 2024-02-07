@@ -83,6 +83,25 @@ namespace NBD6.Controllers
             return View(pagedData);
         }
 
+        // GET: Project/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Projects == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _context.Projects
+                .Include(a => a.Address)
+                .Include(c => c.Client)
+                .FirstOrDefaultAsync(m => m.ProjectID == id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return View(project);
+        }
 
         // GET: Projects/Create
         public IActionResult Create()
