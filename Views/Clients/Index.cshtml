@@ -55,7 +55,7 @@
                         @Html.DisplayFor(modelItem => item.ClientContact)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ClientPhone)
+                        @Html.DisplayFor(modelItem => item.FormattedPhone) <!-- Here's the change -->
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Address.Country)
