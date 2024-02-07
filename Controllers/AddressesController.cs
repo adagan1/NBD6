@@ -133,7 +133,6 @@ namespace NBD6.Controllers
                 }
                 else
                 {
-                    TempData.Clear();
                     return RedirectToAction(nameof(Index));
                 }
             }

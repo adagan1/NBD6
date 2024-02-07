@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
@@ -96,7 +91,7 @@ namespace NBD6.Controllers
                     break;
             }
 
-            int pageSize = 10; 
+            int pageSize = 10;
             var pagedData = await PaginatedList<Client>.CreateAsync(clientsQuery.AsNoTracking(), page ?? 1, pageSize);
 
             return View(pagedData);
@@ -148,16 +143,22 @@ namespace NBD6.Controllers
 
                 if (TempData.ContainsKey("AddressUrl"))
                 {
-                    // Redirect back to the ReferrerUrl
-                    return RedirectToAction(nameof(Index));
+                    if (TempData.ContainsKey("ProjectKey"))
+                    {
+                        TempData.Remove("ProjectKey");
+                        return RedirectToAction("Create", "Projects");
+                    }
+                    else
+                    {
+                        // Redirect back to the ClientUrl
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
-                // Check if TempData contains the ClientUrl
                 else
                 {
                     // Redirect back to the ClientUrl
-                    return Redirect(TempData["ClientUrl"].ToString());
+                    return RedirectToAction(nameof(Index));
                 }
-                
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
@@ -252,14 +253,14 @@ namespace NBD6.Controllers
             {
                 _context.Clients.Remove(client);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(int id)
         {
-          return _context.Clients.Any(e => e.ClientID == id);
+            return _context.Clients.Any(e => e.ClientID == id);
         }
     }
 }
