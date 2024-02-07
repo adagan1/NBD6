@@ -145,21 +145,20 @@ namespace NBD6.Controllers
                 {
                     if (TempData.ContainsKey("ProjectKey"))
                     {
-                        return Redirect(TempData["ClientUrl"].ToString());
+                        TempData.Remove("ProjectKey");
+                        return RedirectToAction("Create", "Projects");
                     }
                     else
                     {
+                        // Redirect back to the ClientUrl
                         return RedirectToAction(nameof(Index));
                     }
-
                 }
-                // Check if TempData contains the ClientUrl
                 else
                 {
                     // Redirect back to the ClientUrl
-                    return Redirect(TempData["ClientUrl"].ToString());
+                    return RedirectToAction(nameof(Index));
                 }
-
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
