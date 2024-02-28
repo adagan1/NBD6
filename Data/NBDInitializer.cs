@@ -44,7 +44,9 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "Ravens HQ",
-                            ClientName = "Lamar Jackson",
+                            FirstName = "Lamar",
+                            MiddleName = "S",
+                            LastName = "Jackson",
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1, // Assuming AddressID associated with this Client
