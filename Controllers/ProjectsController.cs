@@ -86,12 +86,12 @@ namespace NBD6.Controllers
                 case "end_date_desc":
                     projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectEndDate);
                     break;
-                //case "bid_amount_asc":
-                //    projects = projects.OrderBy(p => p.BidAmount).ToList();
-                //    break;
-                //case "bid_amount_desc":
-                //    projects = projects.OrderByDescending(p => p.BidAmount).ToList();
-                //    break;
+                case "bid_amount_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.BidAmount.ToString());
+                    break;
+                case "bid_amount_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.BidAmount.ToString());
+                    break;
                 case "company_asc":
                     projectsQuery = projectsQuery.OrderBy(p => p.Client.ClientName);
                     break;

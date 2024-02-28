@@ -6,11 +6,11 @@
 
 <h1>Edit Project</h1>
 
-<h4>Project</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<form asp-action="Edit" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Project</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProjectID" />
             <div class="form-group">
@@ -42,20 +42,21 @@
                 <label asp-for="Address" class="control-label"></label>
                 <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
             </div>
+        </div>
+        <div class="col-md-6">
             <h4>Client</h4>
             <hr />
-            <div class="row">
-                <div class="form-group">
-                    <label asp-for="Client" class="control-label"></label>
-                    <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                </div>
-            </div>            
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Client" class="control-label"></label>
+                <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
 
 <div>
     <a class="nav-link text-dark" href="javascript:history.back()">Go Back</a>
