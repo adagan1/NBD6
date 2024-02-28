@@ -18,7 +18,7 @@
 }
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="ProjectCreate">Create New</a>
 </p>
 
 <form asp-action="Index" method="get">
@@ -91,3 +91,9 @@
 
     <partial name="_PagingNavBar" model="Model" />
 </form>
+
+@section Scripts {
+    <script>
+        sessionStorage.clear();
+    </script>
+}

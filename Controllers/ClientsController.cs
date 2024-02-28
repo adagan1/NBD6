@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
@@ -95,7 +91,7 @@ namespace NBD6.Controllers
                     break;
             }
 
-            int pageSize = 10; 
+            int pageSize = 10;
             var pagedData = await PaginatedList<Client>.CreateAsync(clientsQuery.AsNoTracking(), page ?? 1, pageSize);
 
             return View(pagedData);
@@ -124,8 +120,10 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
+            TempData["ClientUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
+
         }
 
         // POST: Clients/Create
@@ -133,13 +131,34 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                TempData["NewClientID"] = client.ClientID;
+                TempData["NewClientSummary"] = client.ClientSummary;
+
+                if (TempData.ContainsKey("AddressUrl"))
+                {
+                    if (TempData.ContainsKey("ProjectKey"))
+                    {
+                        TempData.Remove("ProjectKey");
+                        return RedirectToAction("Create", "Projects");
+                    }
+                    else
+                    {
+                        // Redirect back to the ClientUrl
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                else
+                {
+                    // Redirect back to the ClientUrl
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
@@ -170,7 +189,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (id != client.ClientID)
             {
@@ -234,14 +253,14 @@ namespace NBD6.Controllers
             {
                 _context.Clients.Remove(client);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(int id)
         {
-          return _context.Clients.Any(e => e.ClientID == id);
+            return _context.Clients.Any(e => e.ClientID == id);
         }
     }
 }

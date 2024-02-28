@@ -32,12 +32,27 @@ namespace NBD6.Models
         [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
         [RegularExpression(@"^\d{3}-?\d{3}-?\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
         public string ClientPhone { get; set; }
+        // Read-only property to get formatted phone number
+        public string FormattedPhone
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ClientPhone))
+                    return "";
 
+                // Remove any non-numeric characters before formatting
+                string digits = new String(ClientPhone.Where(char.IsDigit).ToArray());
+                if (digits.Length == 10)
+                    return $"{digits.Substring(0, 3)}-{digits.Substring(3, 3)}-{digits.Substring(6)}";
+                else
+                    return ClientPhone; // Return as is if not exactly 10 digits
+            }
+        }
         public string ClientSummary
         {
             get
             {
-                return $"{CompanyName} {ClientName}, {ClientContact}, {ClientPhone}";
+                return $"{CompanyName} {ClientName}, {ClientContact}, {FormattedPhone}";
             }
         }
 

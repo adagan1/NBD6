@@ -68,10 +68,54 @@ namespace NBD6.Controllers
 
             switch (sortOrder)
             {
+                case "name_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.ProjectName);
+                    break;
                 case "name_desc":
                     projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectName);
                     break;
-                // Add other cases here
+                case "start_date_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.ProjectStartDate);
+                    break;
+                case "start_date_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectStartDate);
+                    break;
+                case "end_date_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.ProjectEndDate);
+                    break;
+                case "end_date_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectEndDate);
+                    break;
+                case "bid_amount_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.BidAmount.ToString());
+                    break;
+                case "bid_amount_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.BidAmount.ToString());
+                    break;
+                case "company_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.Client.ClientName);
+                    break;
+                case "company_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.Client.ClientName);
+                    break;
+                case "site_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.ProjectSite);
+                    break;
+                case "site_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectSite);
+                    break;
+                case "street_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.Address.Street);
+                    break;
+                case "street_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.Address.Street);
+                    break;
+                case "Postal_asc":
+                    projectsQuery = projectsQuery.OrderBy(p => p.Address.Postal);
+                    break;
+                case "Postal_desc":
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.Address.Postal);
+                    break;
                 default:
                     projectsQuery = projectsQuery.OrderBy(p => p.ProjectName);
                     break;
@@ -83,6 +127,25 @@ namespace NBD6.Controllers
             return View(pagedData);
         }
 
+        // GET: Project/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Projects == null)
+            {
+                return NotFound();
+            }
+
+            var project = await _context.Projects
+                .Include(a => a.Address)
+                .Include(c => c.Client)
+                .FirstOrDefaultAsync(m => m.ProjectID == id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return View(project);
+        }
 
         // GET: Projects/Create
         public IActionResult Create()
@@ -90,6 +153,14 @@ namespace NBD6.Controllers
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
             return View();
+        }
+
+        // GET: Projects/ProjectCreate
+        public IActionResult ProjectCreate()
+        {
+            // Set "ProjectKey" only when accessing the project create action
+            TempData["ProjectKey"] = "Access";
+            return RedirectToAction("Create");
         }
 
         // POST: Projects/Create
