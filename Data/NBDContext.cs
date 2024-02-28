@@ -24,8 +24,17 @@ namespace NBD6.Data
                 .HasMany(c => c.Projects) 
                 .WithOne(p => p.Client)  
                 .HasForeignKey(p => p.ClientID) 
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Address>()
+                .HasOne(a => a.Client)
+                .WithMany(c => c.Addresses)
+                .HasForeignKey(a => a.ClientID);
+
+            modelBuilder.Entity<Address>()
+                .HasOne(p => p.Project)
+                .WithMany(c => c.Addresses)
+                .HasForeignKey(a => a.ProjectID);
         }
     }
 }

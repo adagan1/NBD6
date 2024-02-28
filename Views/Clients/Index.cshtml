@@ -16,60 +16,69 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </div>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
-                </th>
-                <th>
-                    @Html.ActionLink("Client name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
-                </th>
-                <th>
-                    @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
-                </th>
-                <th>
-                    @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.PhoneSortParm })
-                </th>
-                <th>
-                    @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
-                </th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CompanyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientContact)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FormattedPhone) <!-- Here's the change -->
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address.Country)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <partial name="_PagingNavBar" model="Model" />
 }
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Client name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Phone", "Index", new { sortOrder = ViewBag.PhoneSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientContact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormattedPhone)
+                </td>
+                <td>
+                    @if (item.Address != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Address.Country)
+                    }
+                    else
+                    {
+                        <span>No Address</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_PagingNavBar" model="Model" />
 
 @section Scripts {
     <script>

@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240206013304_Initial")]
+    [Migration("20240228195621_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ClientID")
+                    b.Property<int>("ClientID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Country")
@@ -38,6 +38,9 @@ namespace NBD6.Data.NBDMigrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ProjectID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Province")
                         .IsRequired()
@@ -52,6 +55,8 @@ namespace NBD6.Data.NBDMigrations
                     b.HasKey("AddressID");
 
                     b.HasIndex("ClientID");
+
+                    b.HasIndex("ProjectID");
 
                     b.ToTable("Addresses");
                 });
@@ -131,9 +136,21 @@ namespace NBD6.Data.NBDMigrations
 
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
-                    b.HasOne("NBD6.Models.Client", null)
+                    b.HasOne("NBD6.Models.Client", "Client")
                         .WithMany("Addresses")
-                        .HasForeignKey("ClientID");
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NBD6.Models.Project", "Project")
+                        .WithMany("Addresses")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("NBD6.Models.Client", b =>
@@ -171,6 +188,11 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("NBD6.Models.Project", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }

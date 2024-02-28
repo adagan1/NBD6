@@ -21,7 +21,8 @@ namespace NBD6.Data.NBDMigrations
                     Province = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Postal = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: true)
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,6 +89,11 @@ namespace NBD6.Data.NBDMigrations
                 column: "ClientID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_ProjectID",
+                table: "Addresses",
+                column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_AddressID",
                 table: "Clients",
                 column: "AddressID");
@@ -107,7 +113,16 @@ namespace NBD6.Data.NBDMigrations
                 table: "Addresses",
                 column: "ClientID",
                 principalTable: "Clients",
-                principalColumn: "ClientID");
+                principalColumn: "ClientID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Addresses_Projects_ProjectID",
+                table: "Addresses",
+                column: "ProjectID",
+                principalTable: "Projects",
+                principalColumn: "ProjectID",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
@@ -117,11 +132,19 @@ namespace NBD6.Data.NBDMigrations
                 name: "FK_Addresses_Clients_ClientID",
                 table: "Addresses");
 
-            migrationBuilder.DropTable(
-                name: "Projects");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Projects_Clients_ClientID",
+                table: "Projects");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Addresses_Projects_ProjectID",
+                table: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

@@ -51,6 +51,8 @@ namespace NBD6.Models
         public int AddressID { get; set; }
         public Address Address { get; set; } // Navigation property to the Address class
 
+        public virtual ICollection<Address> Addresses { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             // Check if the end date is before the start date
