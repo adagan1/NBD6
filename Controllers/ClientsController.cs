@@ -133,20 +133,32 @@ namespace NBD6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client, Address address)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(client);
-                await _context.SaveChangesAsync();
-
-                TempData["NewClientID"] = client.ClientID;
-                TempData["NewClientSummary"] = client.ClientSummary;
-
-                if (TempData.ContainsKey("AddressUrl"))
+                if (ModelState.IsValid)
                 {
-                    if (TempData.ContainsKey("ProjectKey"))
+                    // Ensure AddressID is set in the client object
+                    client.AddressID = address.AddressID;
+
+                    // Add the client and save changes
+                    _context.Add(client);
+                    await _context.SaveChangesAsync();
+
+                    TempData["NewClientID"] = client.ClientID;
+                    TempData["NewClientSummary"] = client.ClientSummary;
+
+                    if (TempData.ContainsKey("AddressUrl"))
                     {
-                        TempData.Remove("ProjectKey");
-                        return RedirectToAction("Create", "Projects");
+                        if (TempData.ContainsKey("ProjectKey"))
+                        {
+                            TempData.Remove("ProjectKey");
+                            return RedirectToAction("Create", "Projects");
+                        }
+                        else
+                        {
+                            // Redirect back to the ClientUrl
+                            return RedirectToAction(nameof(Index));
+                        }
                     }
                     else
                     {
@@ -154,12 +166,15 @@ namespace NBD6.Controllers
                         return RedirectToAction(nameof(Index));
                     }
                 }
-                else
-                {
-                    // Redirect back to the ClientUrl
-                    return RedirectToAction(nameof(Index));
-                }
             }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                ModelState.AddModelError("", "Error occurred while creating the client.");
+                return View(client);
+            }
+
+            // If ModelState is not valid, return the view with validation errors
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
