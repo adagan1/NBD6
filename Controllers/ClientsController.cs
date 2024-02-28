@@ -138,7 +138,7 @@ namespace NBD6.Controllers
                 if (ModelState.IsValid)
                 {
                     // Ensure AddressID is set in the client object
-                    client.AddressID = address.AddressID;
+                    client.AddressID = client.AddressID;
 
                     // Add the client and save changes
                     _context.Add(client);
