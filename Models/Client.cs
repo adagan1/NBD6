@@ -16,11 +16,22 @@ namespace NBD6.Models
         [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "The Company's name can only contain letters.")]
         public string CompanyName { get; set; }
 
-        [Display(Name = "Client Name")]
-        [Required(ErrorMessage = "You cannot leave the Client name blank.")]
-        [StringLength(50, ErrorMessage = "Client name cannot be more than 50 characters long.")]
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "You cannot leave the first name blank.")]
+        [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
         [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "Client name can only contain letters.")]
-        public string ClientName { get; set; }
+        public string FirstName { get; set; }
+
+        [Display(Name = "Middle Name")]
+        [StringLength(50, ErrorMessage = "Middle name cannot be more than 50 characters long.")]
+        [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "Client name can only contain letters.")]
+        public string MiddleName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "You cannot leave the last name blank.")]
+        [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters long.")]
+        [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage = "Client name can only contain letters.")]
+        public string LastName { get; set; }
 
         [Display(Name = "Contact")]
         [StringLength(100, ErrorMessage = "Contact information cannot be more than 100 characters long.")]
@@ -32,6 +43,11 @@ namespace NBD6.Models
         [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
         [RegularExpression(@"^\d{3}-?\d{3}-?\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
         public string ClientPhone { get; set; }
+
+        // Read-only property to get concatenated client name
+        [Display(Name = "Client Name")]
+        public string ClientName => $"{FirstName} {MiddleName} {LastName}";
+
         // Read-only property to get formatted phone number
         public string FormattedPhone
         {

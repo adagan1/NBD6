@@ -149,7 +149,9 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "Ravens HQ",
-                            ClientName = "Lamar Jackson",
+                            FirstName = "Lamar",
+                            MiddleName = "S",
+                            LastName = "Jackson",
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1
@@ -157,7 +159,9 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "Adidas",
-                            ClientName = "Serena Williams",
+                            FirstName = "Serena",
+                            MiddleName = "G",
+                            LastName = "Williams",
                             ClientContact = "serenawilliams@gmail.com",
                             ClientPhone = "5555556543",
                             AddressID = 2
@@ -165,7 +169,9 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "Tampa Bucks",
-                            ClientName = "Tom Brady",
+                            FirstName = "Tom",
+                            MiddleName = "W",
+                            LastName = "Brady",
                             ClientContact = "tombrady@gmail.com",
                             ClientPhone = "6666667654",
                             AddressID = 3
@@ -173,7 +179,9 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "Jordans",
-                            ClientName = "Michael Jordan",
+                            FirstName = "Michael",
+                            MiddleName = "H",
+                            LastName = "Jordan",
                             ClientContact = "mjordan@gmail.com",
                             ClientPhone = "3333334321",
                             AddressID = 4
@@ -181,12 +189,14 @@ namespace NBD6.Data
                         new Client
                         {
                             CompanyName = "LA Lakers",
-                            ClientName = "LeBron James",
+                            FirstName = "LeBron",
+                            MiddleName = "N",
+                            LastName = "James",
                             ClientContact = "lebronjames@gmail.com",
                             ClientPhone = "4444445432",
                             AddressID = 5
                         }
-                        );
+                    );
                     context.SaveChanges();
                 }
                 if (!context.Projects.Any())

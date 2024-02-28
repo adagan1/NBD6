@@ -22,7 +22,7 @@ namespace NBD6.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
-            ViewBag.ClientNameSortParm = sortOrder == "clientname_asc" ? "clientname_desc" : "clientname_asc";
+            ViewBag.FirstNameSortParm = sortOrder == "firstname_asc" ? "firstname_desc" : "firstname_asc";
             ViewBag.ContactSortParm = sortOrder == "contact_asc" ? "contact_desc" : "contact_asc";
             ViewBag.PhoneSortParm = sortOrder == "phone_asc" ? "phone_desc" : "phone_asc";
             ViewBag.CountrySortParm = sortOrder == "country_asc" ? "country_desc" : "country_asc";
@@ -62,11 +62,11 @@ namespace NBD6.Controllers
                 case "companyname_desc":
                     clientsQuery = clientsQuery.OrderByDescending(c => c.CompanyName);
                     break;
-                case "clientname_asc":
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                case "firstname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.FirstName);
                     break;
-                case "clientname_desc":
-                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientName);
+                case "firstname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.FirstName);
                     break;
                 case "contact_asc":
                     clientsQuery = clientsQuery.OrderBy(c => c.ClientContact);
@@ -87,7 +87,7 @@ namespace NBD6.Controllers
                     clientsQuery = clientsQuery.OrderByDescending(c => c.Address.Country);
                     break;
                 default:
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                    clientsQuery = clientsQuery.OrderBy(c => c.FirstName);
                     break;
             }
 
@@ -131,7 +131,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (ModelState.IsValid)
             {
