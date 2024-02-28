@@ -72,13 +72,8 @@ namespace NBD6.Models
             }
         }
 
-        // Foreign Keys
-        [Display(Name = "Address ID")]
-        [ForeignKey("Address")]
-        [Required(ErrorMessage = "Address ID is required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
         public int AddressID { get; set; }
-        public Address Address { get; set; } // Navigation property to future address class
+        public Address Address { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
     }

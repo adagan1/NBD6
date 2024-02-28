@@ -81,6 +81,7 @@ namespace NBD6.Data
                 var addressesToUpdate = context.Addresses.ToList();
                 foreach (var address in addressesToUpdate)
                 {
+                    // Update ClientID and ProjectID in the Address table
                     address.ClientID = client.ClientID;
                     address.ProjectID = project.ProjectID;
                 }

@@ -11,14 +11,14 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240228195621_Initial")]
+    [Migration("20240228232346_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.15");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.16");
 
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
@@ -54,9 +54,8 @@ namespace NBD6.Data.NBDMigrations
 
                     b.HasKey("AddressID");
 
-                    b.HasIndex("ClientID");
-
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("ClientID")
+                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
@@ -74,11 +73,6 @@ namespace NBD6.Data.NBDMigrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("ClientPhone")
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
@@ -88,9 +82,21 @@ namespace NBD6.Data.NBDMigrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ClientID");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
-                    b.HasIndex("AddressID");
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ClientID");
 
                     b.ToTable("Clients");
                 });
@@ -127,7 +133,8 @@ namespace NBD6.Data.NBDMigrations
 
                     b.HasKey("ProjectID");
 
-                    b.HasIndex("AddressID");
+                    b.HasIndex("AddressID")
+                        .IsUnique();
 
                     b.HasIndex("ClientID");
 
@@ -137,38 +144,19 @@ namespace NBD6.Data.NBDMigrations
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
                     b.HasOne("NBD6.Models.Client", "Client")
-                        .WithMany("Addresses")
-                        .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NBD6.Models.Project", "Project")
-                        .WithMany("Addresses")
-                        .HasForeignKey("ProjectID")
+                        .WithOne("Address")
+                        .HasForeignKey("NBD6.Models.Address", "ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");
-
-                    b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("NBD6.Models.Client", b =>
-                {
-                    b.HasOne("NBD6.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("NBD6.Models.Project", b =>
                 {
                     b.HasOne("NBD6.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressID")
+                        .WithOne("Project")
+                        .HasForeignKey("NBD6.Models.Project", "AddressID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -183,16 +171,16 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("NBD6.Models.Client", b =>
+            modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("Projects");
+                    b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("NBD6.Models.Project", b =>
+            modelBuilder.Entity("NBD6.Models.Client", b =>
                 {
-                    b.Navigation("Addresses");
+                    b.Navigation("Address");
+
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

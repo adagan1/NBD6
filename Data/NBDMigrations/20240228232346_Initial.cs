@@ -12,6 +12,25 @@ namespace NBD6.Data.NBDMigrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    MiddleName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
@@ -27,28 +46,11 @@ namespace NBD6.Data.NBDMigrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.AddressID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ClientName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
-                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.ClientID);
                     table.ForeignKey(
-                        name: "FK_Clients_Addresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Addresses",
-                        principalColumn: "AddressID",
+                        name: "FK_Addresses_Clients_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Clients",
+                        principalColumn: "ClientID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -86,68 +88,32 @@ namespace NBD6.Data.NBDMigrations
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ClientID",
                 table: "Addresses",
-                column: "ClientID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_ProjectID",
-                table: "Addresses",
-                column: "ProjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_AddressID",
-                table: "Clients",
-                column: "AddressID");
+                column: "ClientID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_AddressID",
                 table: "Projects",
-                column: "AddressID");
+                column: "AddressID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_ClientID",
                 table: "Projects",
                 column: "ClientID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Addresses_Clients_ClientID",
-                table: "Addresses",
-                column: "ClientID",
-                principalTable: "Clients",
-                principalColumn: "ClientID",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Addresses_Projects_ProjectID",
-                table: "Addresses",
-                column: "ProjectID",
-                principalTable: "Projects",
-                principalColumn: "ProjectID",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Addresses_Clients_ClientID",
-                table: "Addresses");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Projects_Clients_ClientID",
-                table: "Projects");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Addresses_Projects_ProjectID",
-                table: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Clients");
-
             migrationBuilder.DropTable(
                 name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
         }
     }
 }

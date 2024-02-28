@@ -131,17 +131,21 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client)
+        public async Task<IActionResult> Create([Bind("CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,Address")] Client client)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // Ensure AddressID is set in the client object
-                    client.AddressID = client.AddressID;
+                    // Add the address to the context
+                    _context.Addresses.Add(client.Address);
+                    await _context.SaveChangesAsync();
 
-                    // Add the client and save changes
-                    _context.Add(client);
+                    // Set the AddressID for the client
+                    client.AddressID = client.Address.AddressID;
+
+                    // Add the client to the context
+                    _context.Clients.Add(client);
                     await _context.SaveChangesAsync();
 
                     TempData["NewClientID"] = client.ClientID;
@@ -175,7 +179,6 @@ namespace NBD6.Controllers
             }
 
             // If ModelState is not valid, return the view with validation errors
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
