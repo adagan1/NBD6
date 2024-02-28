@@ -63,7 +63,7 @@ namespace NBD6.Models
         [Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
         public int AddressID { get; set; }
         public Address Address { get; set; } // Navigation property to future address class
-        public virtual ICollection<Address> Addresses { get; set; }
+
         public virtual ICollection<Project> Projects { get; set; }
     }
 }

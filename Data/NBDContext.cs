@@ -27,14 +27,10 @@ namespace NBD6.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Address>()
-                .HasOne(a => a.Client)
-                .WithMany(c => c.Addresses)
-                .HasForeignKey(a => a.ClientID);
+                .HasOne(a => a.Client);
 
             modelBuilder.Entity<Address>()
-                .HasOne(p => p.Project)
-                .WithMany(c => c.Addresses)
-                .HasForeignKey(a => a.ProjectID);
+                .HasOne(p => p.Project);
         }
     }
 }

@@ -16,72 +16,78 @@ namespace NBD6.Data
             try
             {
                 // Delete and recreate the Database with every restart
-                //context.Database.EnsureDeleted();
-                //context.Database.EnsureCreated();
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
 
-                // Seed Addresses
                 if (!context.Addresses.Any())
                 {
-                    Address address = new Address
+                    // Create addresses without assigning foreign keys
+                    var addresses = new[]
                     {
-                        AddressID = GenerateUniqueID(),
-                        Country = "Canada",
-                        Province = "Ontario",
-                        Postal = "K1A 0B1",
-                        Street = "Highland Park",
+                        new Address
+                        {
+                            Country = "Canada",
+                            Province = "Ontario",
+                            Postal = "K1A 0B1",
+                            Street = "Highland Park"
+                        }
+                        // Add other Address entries similarly
                     };
-                    context.Addresses.Add(address);
+                    context.Addresses.AddRange(addresses);
                     context.SaveChanges();
                 }
 
-                // Seed Clients
                 if (!context.Clients.Any())
                 {
-                    int addressID = context.Addresses.FirstOrDefault()?.AddressID ?? 0; // Retrieve the first AddressID
-                    Client client = new Client
-                    {
-                        CompanyName = "Ravens HQ",
-                        ClientName = "Lamar Jackson",
-                        ClientContact = "lamarjackson@gmail.com",
-                        ClientPhone = "2222223212",
-                        AddressID = addressID,
-                    };
-                    context.Clients.Add(client);
+                    // Create clients
+                    context.Clients.AddRange(
+                        new Client
+                        {
+                            CompanyName = "Ravens HQ",
+                            ClientName = "Lamar Jackson",
+                            ClientContact = "lamarjackson@gmail.com",
+                            ClientPhone = "2222223212",
+                            AddressID = 1, // Assuming AddressID associated with this Client
+                        }
+                        // Add other Client entries similarly
+                    );
                     context.SaveChanges();
                 }
 
-                // Seed Projects
                 if (!context.Projects.Any())
                 {
-                    int clientID = context.Clients.FirstOrDefault()?.ClientID ?? 0; // Retrieve the first ClientID
-                    int addressID = context.Addresses.FirstOrDefault()?.AddressID ?? 0; // Retrieve the first AddressID
-                    Project project = new Project
-                    {
-                        ProjectName = "BU Glass Garden",
-                        ProjectStartDate = new DateTime(2023, 01, 01),
-                        ProjectEndDate = new DateTime(2023, 03, 22),
-                        ProjectSite = "Brock University",
-                        BidAmount = 21,
-                        ClientID = clientID,
-                        AddressID = addressID,
-                    };
-                    context.Projects.Add(project);
+                    // Create projects
+                    context.Projects.AddRange(
+                        new Project
+                        {
+                            ProjectName = "BU Glass Garden",
+                            ProjectStartDate = new DateTime(2023, 01, 01),
+                            ProjectEndDate = new DateTime(2023, 03, 22),
+                            ProjectSite = "Brock University",
+                            BidAmount = 21,
+                            ClientID = 1, // Assuming ClientID associated with this Project
+                            AddressID = 1, // Assuming AddressID associated with this Project
+                        }
+                        // Add other Project entries similarly
+                    );
                     context.SaveChanges();
                 }
+
+                // After creating clients and projects, update the addresses with the corresponding foreign keys
+                var client = context.Clients.FirstOrDefault();
+                var project = context.Projects.FirstOrDefault();
+                var addressesToUpdate = context.Addresses.ToList();
+                foreach (var address in addressesToUpdate)
+                {
+                    address.ClientID = client.ClientID;
+                    address.ProjectID = project.ProjectID;
+                }
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.GetBaseException().Message);
             }
-        }
-
-        // Assuming you have a method to generate unique IDs for seeding data
-        private static int GenerateUniqueID()
-        {
-            // Implement your logic to generate unique IDs here
-            // You can use a random number generator, GUID, or any other method that ensures uniqueness
-            // For simplicity, let's use a simple counter for demonstration purposes
-            return new Random().Next(1, 1000); // Generate a random number between 1 and 1000
         }
     }
 }
