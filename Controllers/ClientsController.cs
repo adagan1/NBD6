@@ -131,7 +131,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client)
         {
             try
             {
