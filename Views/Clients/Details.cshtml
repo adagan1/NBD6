@@ -62,6 +62,41 @@
         </dd>
     </dl>
 </div>
+
+<h4>Projects</h4>
+@if (Model.Projects != null && Model.Projects.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Project Site</th>
+                <th>Street</th>
+                <th>Postal Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.Projects)
+            {
+                <tr>
+                    <td>@project.ProjectName</td>
+                    <td>@project.ProjectStartDate.ToShortDateString()</td>
+                    <td>@project.ProjectEndDate.ToShortDateString()</td>
+                    <td>@project.ProjectSite</td>
+                    <td>@project.Address.Street</td>
+                    <td>@project.Address.Postal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No projects found for this client.</p>
+}
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ClientID">Edit</a> |
     <a asp-action="Index">Back to List</a>
