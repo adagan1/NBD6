@@ -39,38 +39,66 @@
             </dl>
         </div>
         <!-- Address Fields -->
-        <div class="col-sm-6">
-            <h4>Address</h4>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Address.Country)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Address.Country)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Address.Province)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Address.Province)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Address.Street)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Address.Street)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Address.Postal)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Address.Postal)
-                </dd>
-            </dl>
-        </div>
-    </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.Country)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Province)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.Province)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Street)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.Street)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address.Postal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address.Postal)
+        </dd>
+    </dl>
 </div>
+
+<h4>Projects</h4>
+@if (Model.Projects != null && Model.Projects.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Project Site</th>
+                <th>Street</th>
+                <th>Postal Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.Projects)
+            {
+                <tr>
+                    <td>@project.ProjectName</td>
+                    <td>@project.ProjectStartDate.ToShortDateString()</td>
+                    <td>@project.ProjectEndDate.ToShortDateString()</td>
+                    <td>@project.ProjectSite</td>
+                    <td>@project.Address.Street</td>
+                    <td>@project.Address.Postal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No projects found for this client.</p>
+}
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ClientID">Edit</a> |

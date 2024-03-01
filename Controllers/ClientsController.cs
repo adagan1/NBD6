@@ -113,6 +113,7 @@ namespace NBD6.Controllers
 
             var client = await _context.Clients
                 .Include(c => c.Address)
+                .Include(c => c.Projects)
                 .FirstOrDefaultAsync(m => m.ClientID == id);
             if (client == null)
             {
