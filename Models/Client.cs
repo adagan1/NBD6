@@ -52,4 +52,3 @@ namespace NBD6.Models
         public virtual ICollection<Project> Projects { get; set; }
     }
 }
-
