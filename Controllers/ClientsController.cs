@@ -20,9 +20,16 @@ namespace NBD6.Controllers
         // GET: Clients
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
+            var clientsQuery = _context.Clients
+                .Include(c => c.Address)
+                .Include(c => c.Projects)
+                .AsNoTracking()
+                .AsQueryable();
+
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
-            ViewBag.ClientNameSortParm = sortOrder == "clientname_asc" ? "clientname_desc" : "clientname_asc";
+            ViewBag.FirstNameSortParm = sortOrder == "firstname_asc" ? "firstname_desc" : "firstname_asc";
             ViewBag.ContactSortParm = sortOrder == "contact_asc" ? "contact_desc" : "contact_asc";
             ViewBag.PhoneSortParm = sortOrder == "phone_asc" ? "phone_desc" : "phone_asc";
             ViewBag.CountrySortParm = sortOrder == "country_asc" ? "country_desc" : "country_asc";
@@ -37,9 +44,7 @@ namespace NBD6.Controllers
             }
 
             ViewBag.CurrentFilter = searchTerm;
-
-            var clientsQuery = _context.Clients.Include(c => c.Address).AsQueryable();
-
+           
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
@@ -62,11 +67,11 @@ namespace NBD6.Controllers
                 case "companyname_desc":
                     clientsQuery = clientsQuery.OrderByDescending(c => c.CompanyName);
                     break;
-                case "clientname_asc":
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                case "firstname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.FirstName);
                     break;
-                case "clientname_desc":
-                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientName);
+                case "firstname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.FirstName);
                     break;
                 case "contact_asc":
                     clientsQuery = clientsQuery.OrderBy(c => c.ClientContact);
@@ -87,7 +92,7 @@ namespace NBD6.Controllers
                     clientsQuery = clientsQuery.OrderByDescending(c => c.Address.Country);
                     break;
                 default:
-                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                    clientsQuery = clientsQuery.OrderBy(c => c.FirstName);
                     break;
             }
 
@@ -131,22 +136,38 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Create([Bind("CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,Address")] Client client)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(client);
-                await _context.SaveChangesAsync();
-
-                TempData["NewClientID"] = client.ClientID;
-                TempData["NewClientSummary"] = client.ClientSummary;
-
-                if (TempData.ContainsKey("AddressUrl"))
+                if (ModelState.IsValid)
                 {
-                    if (TempData.ContainsKey("ProjectKey"))
+                    // Add the address to the context
+                    _context.Addresses.Add(client.Address);
+                    await _context.SaveChangesAsync();
+
+                    // Set the AddressID for the client
+                    client.AddressID = client.Address.AddressID;
+
+                    // Add the client to the context
+                    _context.Clients.Add(client);
+                    await _context.SaveChangesAsync();
+
+                    TempData["NewClientID"] = client.ClientID;
+                    TempData["NewClientSummary"] = client.ClientSummary;
+
+                    if (TempData.ContainsKey("AddressUrl"))
                     {
-                        TempData.Remove("ProjectKey");
-                        return RedirectToAction("Create", "Projects");
+                        if (TempData.ContainsKey("ProjectKey"))
+                        {
+                            TempData.Remove("ProjectKey");
+                            return RedirectToAction("Create", "Projects");
+                        }
+                        else
+                        {
+                            // Redirect back to the ClientUrl
+                            return RedirectToAction(nameof(Index));
+                        }
                     }
                     else
                     {
@@ -154,13 +175,15 @@ namespace NBD6.Controllers
                         return RedirectToAction(nameof(Index));
                     }
                 }
-                else
-                {
-                    // Redirect back to the ClientUrl
-                    return RedirectToAction(nameof(Index));
-                }
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                ModelState.AddModelError("", "Error occurred while creating the client.");
+                return View(client);
+            }
+
+            // If ModelState is not valid, return the view with validation errors
             return View(client);
         }
 

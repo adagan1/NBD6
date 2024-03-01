@@ -7,25 +7,34 @@ namespace NBD6.Data
     {
         public NBDContext(DbContextOptions<NBDContext> options)
             : base(options)
-            {
-            }
+        {
+        }
 
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Project> Projects { get; set; }
-        
+
         public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             // Prevent cascade delete
             modelBuilder.Entity<Client>()
-                .HasMany(c => c.Projects) 
-                .WithOne(p => p.Client)  
-                .HasForeignKey(p => p.ClientID) 
-                .OnDelete(DeleteBehavior.Restrict); 
+                .HasMany(c => c.Projects)
+                .WithOne(p => p.Client)
+                .HasForeignKey(p => p.ClientID)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Client>()
+                .HasOne(c => c.Address)
+                .WithOne(a => a.Client)
+                .HasForeignKey<Address>(a => a.ClientID);
+
+            modelBuilder.Entity<Address>()
+                .HasOne(p => p.Project)
+                .WithOne(p => p.Address)
+                .HasForeignKey<Project>(p => p.AddressID);
         }
     }
 }

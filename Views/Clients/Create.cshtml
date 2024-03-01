@@ -6,6 +6,8 @@
 
 <h1>Create</h1>
 
+<p>All fields marked with * are required to create a client.</p>
+
 <h4>Client</h4>
 <hr />
 <div class="row">
@@ -13,37 +15,57 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
+                <label asp-for="CompanyName" class="control-label">Company Name<span class="text-danger">*</span></label>
                 <input asp-for="CompanyName" class="form-control" placeholder="company" />
                 <span asp-validation-for="CompanyName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientName" class="control-label"></label>
-                <input asp-for="ClientName" class="form-control" placeholder="client name" />
-                <span asp-validation-for="ClientName" class="text-danger"></span>
+                <label asp-for="FirstName" class="control-label">First Name<span class="text-danger">*</span></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientContact" class="control-label"></label>
-                <input asp-for="ClientContact" class="form-control" placeholder="example@mail.com"/>
+                <label asp-for="MiddleName" class="control-label">Middle Name<span class="text-danger"></span></label>
+                <input asp-for="MiddleName" class="form-control" placeholder="Enter Middle Name" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last Name<span class="text-danger">*</span></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientContact" class="control-label">Client Contact<span class="text-danger">*</span></label>
+                <input asp-for="ClientContact" class="form-control" placeholder="example@mail.com" />
                 <span asp-validation-for="ClientContact" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientPhone" class="control-label"></label>
+                <label asp-for="ClientPhone" class="control-label">Client Phone<span class="text-danger">*</span></label>
                 <input asp-for="ClientPhone" class="form-control" placeholder="xxx-xxx-xxxx" />
                 <span asp-validation-for="ClientPhone" class="text-danger"></span>
             </div>
+            
+            @* Address Fields *@
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID">
-                    <option value="">Select a Address</option>
-                    @if (TempData["NewAddressID"] != null)
-                    {
-                        <option value="@TempData["NewAddressID"]" selected>@TempData["NewAddressSummary"]</option>
-                    }
-                </select>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Create">Create a new Address</a>
+                <label asp-for="Address.Country" class="control-label"></label>
+                <input asp-for="Address.Country" class="form-control" placeholder="country" />
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="Address.Province" class="control-label"></label>
+                <input asp-for="Address.Province" class="form-control" placeholder="province" />
+                <span asp-validation-for="Address.Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Postal" class="control-label"></label>
+                <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
+                <span asp-validation-for="Address.Postal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Street" class="control-label"></label>
+                <input asp-for="Address.Street" class="form-control" placeholder="street" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
