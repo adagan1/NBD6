@@ -34,11 +34,14 @@ namespace NBD6.Models
         public string LastName { get; set; }
 
         [Display(Name = "Contact")]
+        [Required(ErrorMessage = "You cannot leave the contact information blank.")]
         [StringLength(100, ErrorMessage = "Contact information cannot be more than 100 characters long.")]
-        [RegularExpression(@"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b$", ErrorMessage = "Please enter a valid email address.")]
+        [RegularExpression(@"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b$", ErrorMessage = "Please enter a valid email address, including the '@' symbol.")]
         public string ClientContact { get; set; }
 
+
         [Display(Name = "Phone")]
+        [Required(ErrorMessage = "You cannot leave the phone number blank.")] // Make this field required
         [Phone(ErrorMessage = "The phone number is not in a valid format.")]
         [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
         [RegularExpression(@"^\d{3}-?\d{3}-?\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
