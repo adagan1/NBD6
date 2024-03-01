@@ -13,51 +13,37 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ClientFirstName" class="control-label"></label>
-                <input asp-for="ClientFirstName" class="form-control" />
-                <span asp-validation-for="ClientFirstName" class="text-danger"></span>
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" placeholder="company" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClientLastName" class="control-label"></label>
-                <input asp-for="ClientLastName" class="form-control" />
-                <span asp-validation-for="ClientLastName" class="text-danger"></span>
+                <label asp-for="ClientName" class="control-label"></label>
+                <input asp-for="ClientName" class="form-control" placeholder="client name" />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClientContact" class="control-label"></label>
-                <input asp-for="ClientContact" class="form-control" />
+                <input asp-for="ClientContact" class="form-control" placeholder="example@mail.com"/>
                 <span asp-validation-for="ClientContact" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClientPhone" class="control-label"></label>
-                <input asp-for="ClientPhone" class="form-control" />
+                <input asp-for="ClientPhone" class="form-control" placeholder="xxx-xxx-xxxx" />
                 <span asp-validation-for="ClientPhone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressID" class="control-label"></label>
-                <input asp-for="AddressID" class="form-control" />
-                <span asp-validation-for="AddressID" class="text-danger"></span>
+                <label asp-for="Address" class="control-label"></label>
+                <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID">
+                    <option value="">Select a Address</option>
+                    @if (TempData["NewAddressID"] != null)
+                    {
+                        <option value="@TempData["NewAddressID"]" selected>New Address</option>
+                    }
+                </select>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Addresses" asp-action="Create">Create a new Address</a>
             </div>
-            @* Address Fields *@      
-            @* <div class="form-group">
-                <label asp-for="Address.Country" class="control-label"></label>
-                <input asp-for="Address.Country" class="form-control" />
-                <span asp-validation-for="Address.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address.ProvinceState" class="control-label"></label>
-                <input asp-for="Address.ProvinceState" class="form-control" />
-                <span asp-validation-for="Address.ProvinceState" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address.AreaCode" class="control-label"></label>
-                <input asp-for="Address.AreaCode" class="form-control" />
-                <span asp-validation-for="Address.AreaCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address.Street" class="control-label"></label>
-                <input asp-for="Address.Street" class="form-control" />
-                <span asp-validation-for="Address.Street" class="text-danger"></span>
-            </div> *@
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -66,9 +52,50 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="nav-link text-dark" href="javascript:history.back()">Go Back</a>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js">
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#AddressSummary").select2();
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to load saved data from sessionStorage
+            function loadData() {
+                document.querySelectorAll("#CompanyName, #ClientName, #ClientContact, #ClientPhone").forEach(function (input) {
+                    const savedValue = sessionStorage.getItem(input.id);
+                    if (savedValue) {
+                        input.value = savedValue;
+                    }
+                });
+            }
+            
+            document.querySelectorAll("#CompanyName, #ClientName, #ClientContact, #ClientPhone").forEach(function (input) {
+                input.addEventListener("input", function () {
+                    sessionStorage.setItem(this.id, this.value);
+                });
+            });
+
+            loadData();
+
+            document.querySelector("form").addEventListener("submit", function () {
+                ["CompanyName", "ClientName", "ClientContact", "ClientPhone"].forEach(function (fieldId) {
+                    sessionStorage.removeItem(fieldId);
+                });
+            });
+        });
+    </script>
 }

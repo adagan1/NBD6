@@ -21,21 +21,71 @@ namespace NBD6.Controllers
 
 
         // GET: Clients
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string sortOrder, string searchTerm)
         {
+            // Set up sorting parameters for all fields
+            ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
+            ViewBag.ClientNameSortParm = sortOrder == "clientname_asc" ? "clientname_desc" : "clientname_asc";
+            ViewBag.ContactSortParm = sortOrder == "contact_asc" ? "contact_desc" : "contact_asc";
+            ViewBag.PhoneSortParm = sortOrder == "phone_asc" ? "phone_desc" : "phone_asc";
+            ViewBag.CountrySortParm = sortOrder == "country_asc" ? "country_desc" : "country_asc";
+
+            // Retrieve clients with their associated addresses
             var clientsQuery = _context.Clients.Include(c => c.Address).AsQueryable();
 
+            // Apply search filter if searchTerm is provided
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
 
-                clientsQuery = clientsQuery.Where(c => c.ClientFirstName.ToLower().Contains(lowerCaseSearchTerm)
-                                                   || c.ClientLastName.ToLower().Contains(lowerCaseSearchTerm)
-                                                   || c.ClientContact.ToLower().Contains(lowerCaseSearchTerm)
-                                                   || c.ClientPhone.ToLower().Contains(lowerCaseSearchTerm)
-                                                   || c.Address.Country.ToLower().Contains(lowerCaseSearchTerm));
+                clientsQuery = clientsQuery.Where(c =>
+                    c.CompanyName.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.ClientName.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.ClientContact.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.ClientPhone.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.Address.Country.ToLower().Contains(lowerCaseSearchTerm)
+                );
             }
 
+            // Apply sorting based on sortOrder
+            switch (sortOrder)
+            {
+                case "companyname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.CompanyName);
+                    break;
+                case "companyname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.CompanyName);
+                    break;
+                case "clientname_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                    break;
+                case "clientname_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientName);
+                    break;
+                case "contact_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientContact);
+                    break;
+                case "contact_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientContact);
+                    break;
+                case "phone_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientPhone);
+                    break;
+                case "phone_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.ClientPhone);
+                    break;
+                case "country_asc":
+                    clientsQuery = clientsQuery.OrderBy(c => c.Address.Country);
+                    break;
+                case "country_desc":
+                    clientsQuery = clientsQuery.OrderByDescending(c => c.Address.Country);
+                    break;
+                default:
+                    clientsQuery = clientsQuery.OrderBy(c => c.ClientName);
+                    break;
+            }
+
+            // Execute the query and return the view with the sorted and filtered clients
             return View(await clientsQuery.ToListAsync());
         }
 
@@ -62,8 +112,9 @@ namespace NBD6.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode");
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             return View();
+
         }
 
         // POST: Clients/Create
@@ -71,7 +122,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +130,7 @@ namespace NBD6.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", client.AddressID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
@@ -99,7 +150,7 @@ namespace NBD6.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
@@ -108,7 +159,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientID,ClientFirstName,ClientLastName,ClientContact,ClientPhone,AddressID")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,ClientName,ClientContact,ClientPhone,AddressID")] Client client)
         {
             if (id != client.ClientID)
             {
@@ -135,7 +186,7 @@ namespace NBD6.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AreaCode", client.AddressID);
+            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
             return View(client);
         }
 
