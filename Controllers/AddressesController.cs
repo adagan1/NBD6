@@ -110,6 +110,30 @@ namespace NBD6.Controllers
         public IActionResult Create()
         {
             TempData["AddressUrl"] = HttpContext.Request.Headers["Referer"].ToString();
+            
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"            
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
+
             return View();
         }
 
@@ -120,6 +144,32 @@ namespace NBD6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AddressID,Country,Province,Postal,Street")] Address address)
         {
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
+
+          
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(address);
@@ -138,6 +188,9 @@ namespace NBD6.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
+
+
+
             }
             return View(address);
         }

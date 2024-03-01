@@ -153,6 +153,30 @@ namespace NBD6.Controllers
         {
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
+
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
+
             return View();
         }
 
@@ -180,6 +204,30 @@ namespace NBD6.Controllers
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             TempData["AlertMessageProjecct"] = "Project Successfully Added";
+
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
+
             return View(project);
         }
 
@@ -202,6 +250,29 @@ namespace NBD6.Controllers
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
+
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
             return View(project); // Pass the project to the view
         }
 
@@ -239,6 +310,30 @@ namespace NBD6.Controllers
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
+
+            ViewBag.Country = new SelectList(new[] { "Canada" });
+
+            // List of Canadian provinces as strings
+            var provinces = new[]
+            {
+                "Alberta",
+                "British Columbia",
+                "Manitoba",
+                "New Brunswick",
+                "Newfoundland and Labrador",
+                "Northwest Territories",
+                "Nova Scotia",
+                "Nunavut",
+                "Ontario",
+                "Prince Edward Island",
+                "Quebec",
+                "Saskatchewan",
+                "Yukon"
+            };
+
+            // Pass the list to the view using ViewBag or ViewData
+            ViewBag.Provinces = new SelectList(provinces, "Ontario");
+
             return View(project);
         }
 
