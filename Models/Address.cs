@@ -26,11 +26,11 @@ namespace NBD6.Models
         [MaxLength(200)]
         public string Street { get; set; }
 
-        public int ClientID { get; set; }
-        public Client Client { get; set; }
+        public int? ClientID { get; set; }
+        public Client? Client { get; set; }
 
-        public int ProjectID { get; set; }
-        public Project Project { get; set; }
+        public int? ProjectID { get; set; }
+        public Project? Project { get; set; }
 
         public string AddressSummary
         {

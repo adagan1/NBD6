@@ -23,7 +23,7 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ClientID")
+                    b.Property<int?>("ClientID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Country")
@@ -36,7 +36,7 @@ namespace NBD6.Data.NBDMigrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProjectID")
+                    b.Property<int?>("ProjectID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Province")
@@ -142,9 +142,7 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.HasOne("NBD6.Models.Client", "Client")
                         .WithOne("Address")
-                        .HasForeignKey("NBD6.Models.Address", "ClientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NBD6.Models.Address", "ClientID");
 
                     b.Navigation("Client");
                 });
@@ -160,7 +158,7 @@ namespace NBD6.Data.NBDMigrations
                     b.HasOne("NBD6.Models.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Address");

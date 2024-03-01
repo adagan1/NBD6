@@ -40,8 +40,8 @@ namespace NBD6.Data.NBDMigrations
                     Province = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Postal = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    ClientID = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false)
+                    ClientID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ProjectID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,8 +50,7 @@ namespace NBD6.Data.NBDMigrations
                         name: "FK_Addresses_Clients_ClientID",
                         column: x => x.ClientID,
                         principalTable: "Clients",
-                        principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClientID");
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +81,7 @@ namespace NBD6.Data.NBDMigrations
                         column: x => x.ClientID,
                         principalTable: "Clients",
                         principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

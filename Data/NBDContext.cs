@@ -19,13 +19,7 @@ namespace NBD6.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            // Prevent cascade delete
-            modelBuilder.Entity<Client>()
-                .HasMany(c => c.Projects)
-                .WithOne(p => p.Client)
-                .HasForeignKey(p => p.ClientID)
-                .OnDelete(DeleteBehavior.Restrict);
-
+            //FK
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.Address)
                 .WithOne(a => a.Client)

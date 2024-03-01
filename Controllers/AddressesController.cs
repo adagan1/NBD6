@@ -24,6 +24,12 @@ namespace NBD6.Controllers
         // GET: Addresses
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            var addresses = _context.Addresses
+                .Include(c => c.Client)
+                .Include(c => c.Project)
+                .AsNoTracking()
+                .AsQueryable();
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CountrySortParm = String.IsNullOrEmpty(sortOrder) ? "country_desc" : "";
             ViewBag.ProvinceSortParm = sortOrder == "Province" ? "province_desc" : "Province";
@@ -40,10 +46,7 @@ namespace NBD6.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
-            var addresses = from a in _context.Addresses
-                            select a;
-
+           
             if (!String.IsNullOrEmpty(searchString))
             {
                 addresses = addresses.Where(a => a.Country.ToLower().Contains(searchString.ToLower())

@@ -23,6 +23,12 @@ namespace NBD6.Controllers
         // GET: Projects
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
+            var projectsQuery = _context.Projects
+                .Include(p => p.Client)
+                .Include(p => p.Address)
+                .AsNoTracking()
+                .AsQueryable();
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder != "name_desc" ? "name_desc" : "name_asc";
             ViewBag.StartDateSortParm = sortOrder == "start_date_asc" ? "start_date_desc" : "start_date_asc";
@@ -42,12 +48,7 @@ namespace NBD6.Controllers
                 searchTerm = currentFilter;
             }
 
-            ViewBag.CurrentFilter = searchTerm;
-
-            var projectsQuery = _context.Projects
-                .Include(p => p.Client)
-                .Include(p => p.Address)
-                .AsQueryable();
+            ViewBag.CurrentFilter = searchTerm;          
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
