@@ -179,6 +179,7 @@ namespace NBD6.Controllers
             }
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
+            TempData["AlertMessageProjecct"] = "Project Successfully Added";
             return View(project);
         }
 
