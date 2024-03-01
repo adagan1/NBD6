@@ -20,6 +20,13 @@ namespace NBD6.Controllers
         // GET: Clients
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
+            var clientsQuery = _context.Clients
+                .Include(c => c.Address)
+                .Include(c => c.Projects)
+                .AsNoTracking()
+                .AsQueryable();
+
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.CompanyNameSortParm = sortOrder == "companyname_asc" ? "companyname_desc" : "companyname_asc";
             ViewBag.FirstNameSortParm = sortOrder == "firstname_asc" ? "firstname_desc" : "firstname_asc";
@@ -37,9 +44,7 @@ namespace NBD6.Controllers
             }
 
             ViewBag.CurrentFilter = searchTerm;
-
-            var clientsQuery = _context.Clients.Include(c => c.Address).AsQueryable();
-
+           
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
