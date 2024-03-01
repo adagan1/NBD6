@@ -19,6 +19,7 @@ namespace NBD6.Models
 
         [Display(Name = "Postal Code")]
         [Required]
+        [RegularExpression(@"[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]", ErrorMessage = "Postal Code must follow this format 'A1A1A1'")]
         [MaxLength(20)] // Assuming Postal is a shorter string
         public string Postal { get; set; }
 

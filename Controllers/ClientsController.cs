@@ -155,6 +155,8 @@ namespace NBD6.Controllers
 
                     TempData["NewClientID"] = client.ClientID;
                     TempData["NewClientSummary"] = client.ClientSummary;
+                    TempData["AlertMessageClient"] = "Client Successfully Added";
+
 
                     if (TempData.ContainsKey("AddressUrl"))
                     {
@@ -286,4 +288,5 @@ namespace NBD6.Controllers
             return _context.Clients.Any(e => e.ClientID == id);
         }
     }
+
 }

@@ -5,6 +5,16 @@
 
 <h1>Projects</h1>
 
+@if (TempData["AlertMessageProject"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageProject"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 @using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row mb-3">
