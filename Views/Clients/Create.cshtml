@@ -50,22 +50,22 @@
             <hr />
             @* Address Fields *@
             <div class="form-group">
-                <label asp-for="Address.Country" class="control-label"></label>
+                <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
                 <input asp-for="Address.Country" class="form-control" placeholder="country" />
                 <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Province" class="control-label"></label>
+                <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
                 <input asp-for="Address.Province" class="form-control" placeholder="province" />
                 <span asp-validation-for="Address.Province" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Postal" class="control-label"></label>
+                <label asp-for="Address.Postal" class="control-label">Postal<span class="text-danger">*</span></label>
                 <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
                 <span asp-validation-for="Address.Postal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Street" class="control-label"></label>
+                <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
                 <input asp-for="Address.Street" class="form-control" placeholder="street" />
                 <span asp-validation-for="Address.Street" class="text-danger"></span>
             </div>
