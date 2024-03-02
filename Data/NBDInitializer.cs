@@ -76,14 +76,14 @@ namespace NBD6.Data
                 }
 
                 // After creating clients and projects, update the addresses with the corresponding foreign keys
-                var client = context.Clients.FirstOrDefault();
-                var project = context.Projects.FirstOrDefault();
+                var clientInOrder = context.Clients.FirstOrDefault();
+                var projectInOrder = context.Projects.FirstOrDefault();
                 var addressesToUpdate = context.Addresses.ToList();
                 foreach (var address in addressesToUpdate)
                 {
                     // Update ClientID and ProjectID in the Address table
-                    address.ClientID = client.ClientID;
-                    address.ProjectID = project.ProjectID;
+                    address.ClientID = clientInOrder.ClientID;
+                    address.ProjectID = projectInOrder.ProjectID;
                 }
                 context.SaveChanges();
             }

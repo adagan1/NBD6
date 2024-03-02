@@ -245,14 +245,14 @@ namespace NBD6.Controllers
             }
 
             var client = await _context.Clients
-                .Include(c => c.Address) // Include the related Address data
+                .Include(c => c.Address)
+                .Include(c => c.Projects)
                 .FirstOrDefaultAsync(m => m.ClientID == id);
 
             if (client == null)
             {
                 return NotFound();
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
 
@@ -312,7 +312,6 @@ namespace NBD6.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", client.AddressID);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
 
