@@ -5,11 +5,21 @@
 
 <h1>Projects</h1>
 
+@if (TempData["AlertMessageProject"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageProject"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 @using (Html.BeginForm("Index", "Projects", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control w-100" placeholder="Search Projects..." />
+            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control w-100" placeholder="Search ProjectName, StartDate, EndDate, BidAmount, Client, ProjectSite..." />
         </div>
         <div class="col-md-6">
             <input type="submit" value="Search" class="btn btn-primary w-15" />

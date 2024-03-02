@@ -2,7 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Natural By Design</h1>
-
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <h1>Welcome to Natural By Design</h1>
+            <p>Welcome,   Explore the sections below to manage various aspects of your work.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Clients</h5>
+                    <p class="card-text">Manage client information.</p>
+                    <a href="@Url.Action("Index", "Clients")" class="btn btn-primary">Go to Clients</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Projects</h5>
+                    <p class="card-text">Manage project details.</p>
+                    <a href="@Url.Action("Index", "Projects")" class="btn btn-primary">Go to Projects</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bids</h5>
+                    <p class="card-text">View and manage bids.</p>
+                    <a href="@Url.Action("Index", "Bids")" class="btn btn-primary">Go to Bids</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

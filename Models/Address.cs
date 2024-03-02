@@ -18,19 +18,20 @@ namespace NBD6.Models
         public string Province { get; set; }
 
         [Display(Name = "Postal Code")]
-        [Required]
-        [MaxLength(20)] // Assuming Postal is a shorter string
+        [Required(ErrorMessage = "Postal code is required.")]
+        [MaxLength(20, ErrorMessage = "Postal code cannot be more than 20 characters long.")]
+        [RegularExpression(@"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$", ErrorMessage = "Postal code must be in the formatted like L2G 7L3, with or without a space.")]
         public string Postal { get; set; }
 
         [Required]
         [MaxLength(200)]
         public string Street { get; set; }
 
-        public int ClientID { get; set; }
-        public Client Client { get; set; }
+        public int? ClientID { get; set; }
+        public Client? Client { get; set; }
 
-        public int ProjectID { get; set; }
-        public Project Project { get; set; }
+        public int? ProjectID { get; set; }
+        public Project? Project { get; set; }
 
         public string AddressSummary
         {
