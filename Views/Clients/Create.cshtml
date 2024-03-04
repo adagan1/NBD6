@@ -75,6 +75,7 @@
     </div>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
+        <button type="button" id="autofillButton" class="btn btn-secondary">Autofill Data</button>
     </div>
 </form>
 
@@ -129,6 +130,57 @@
                     sessionStorage.removeItem(fieldId);
                 });
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Existing select2 initialization
+            $('#Address_Province').select2({
+                placeholder: "Select a province or territory",
+                allowClear: true
+            });
+            // Autofill functionality
+            function autofillData() {
+                // Arrays of possible values for names and company
+                const companyNames = ["Company One", "Company Two", "Company Three"];
+                const firstNames = ["John", "Jane", "Alex"];
+                const middleNames = ["A", "B", "C"];
+                const lastNames = ["Doe", "Smith", "Johnson"];
+                // Function to select a random item from an array
+                function getRandomItem(array) {
+                    return array[Math.floor(Math.random() * array.length)];
+                }
+                // Selecting random items from each array
+                const companyName = getRandomItem(companyNames);
+                const firstName = getRandomItem(firstNames);
+                const middleName = getRandomItem(middleNames);
+                const lastName = getRandomItem(lastNames);
+                // Updated client contact to use the first name in the email for variation
+                const clientContact = `${firstName.toLowerCase()}@@gmail.com`;
+                // Phone number remains random
+                const clientPhone = `${Math.floor(100 + Math.random() * 900)}-${Math.floor(100 + Math.random() * 900)}-${Math.floor(1000 + Math.random() * 9000)}`;
+                // Other fields remain unchanged
+                const country = $('#Address_Country option:first').val();
+                const province = $('#Address_Province option:first').val();
+                const postal = `A${Math.floor(Math.random() * 9)}A ${Math.floor(Math.random() * 9)}A${Math.floor(Math.random() * 9)}`;
+                const street = `Street ${Math.floor(Math.random() * 100)}`;
+                $('#CompanyName').val(companyName);
+                $('#FirstName').val(firstName);
+                $('#MiddleName').val(middleName);
+                $('#LastName').val(lastName);
+                $('#ClientContact').val(clientContact);
+                $('#ClientPhone').val(clientPhone);
+                $('#Address_Country').val(country).trigger('change');
+                $('#Address_Province').val(province).trigger('change');
+                $('#Address_Postal').val(postal);
+                $('#Address_Street').val(street);
+            }
+            // Binding autofillData function to the click event of the autofill button
+            $('#autofillButton').click(autofillData);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Existing sessionStorage logic
         });
     </script>
 }
