@@ -281,7 +281,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Country,Province,Postal,Street")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Address,Country,Province,Postal,Street")] Project project)
         {
             if (id != project.ProjectID)
             {
@@ -292,7 +292,33 @@ namespace NBD6.Controllers
             {
                 try
                 {
-                    _context.Update(project);
+                    // Retrieve the existing project including its associated address and client
+                    var existingProject = await _context.Projects
+                        .Include(p => p.Address)
+                        .Include(p => p.Client)
+                        .FirstOrDefaultAsync(p => p.ProjectID == id);
+
+                    if (existingProject == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update project properties
+                    existingProject.ProjectName = project.ProjectName;
+                    existingProject.ProjectStartDate = project.ProjectStartDate;
+                    existingProject.ProjectEndDate = project.ProjectEndDate;
+                    existingProject.ProjectSite = project.ProjectSite;
+                    existingProject.BidAmount = project.BidAmount;
+                    existingProject.ClientID = project.ClientID;
+
+                    // Update address properties
+                    existingProject.Address.Country = project.Address.Country;
+                    existingProject.Address.Province = project.Address.Province;
+                    existingProject.Address.Postal = project.Address.Postal;
+                    existingProject.Address.Street = project.Address.Street;
+
+                    // Save changes to the database
+                    _context.Update(existingProject);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -308,6 +334,8 @@ namespace NBD6.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            // If model state is not valid, prepare the necessary data and return to the view
             ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
 
