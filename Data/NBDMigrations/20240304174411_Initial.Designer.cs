@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240301211645_Initial")]
+    [Migration("20240304174411_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -70,10 +70,12 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ClientContact")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ClientPhone")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
@@ -125,6 +127,7 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProjectSite")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 

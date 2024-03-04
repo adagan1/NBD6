@@ -276,9 +276,9 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,Address")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client, Address address)
         {
-            if (id != client.ClientID)
+            if (id != client.ClientID || id != address.AddressID)
             {
                 return NotFound();
             }

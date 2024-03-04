@@ -21,8 +21,8 @@ namespace NBD6.Data.NBDMigrations
                     FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     MiddleName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -62,7 +62,7 @@ namespace NBD6.Data.NBDMigrations
                     ProjectName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ProjectStartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectEndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ProjectSite = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    ProjectSite = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     BidAmount = table.Column<decimal>(type: "TEXT", nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: false),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)

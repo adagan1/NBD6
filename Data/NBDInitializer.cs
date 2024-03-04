@@ -30,6 +30,13 @@ namespace NBD6.Data
                             Province = "Ontario",
                             Postal = "K1A 0B1",
                             Street = "Highland Park"
+                        },
+                        new Address
+                        {
+                            Country = "Canada",
+                            Province = "Manitoba",
+                            Postal = "K2A 0B2",
+                            Street = "Wind Street"
                         }
                         // Add other Address entries similarly
                     };
@@ -68,7 +75,7 @@ namespace NBD6.Data
                             ProjectSite = "Brock University",
                             BidAmount = 21,
                             ClientID = 1, // Assuming ClientID associated with this Project
-                            AddressID = 1, // Assuming AddressID associated with this Project
+                            AddressID = 2, // Assuming AddressID associated with this Project
                         }
                         // Add other Project entries similarly
                     );
