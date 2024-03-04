@@ -278,7 +278,7 @@ namespace NBD6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client, Address address)
         {
-            if (id != client.ClientID || id != address.AddressID)
+            if (id != client.ClientID)
             {
                 return NotFound();
             }
@@ -287,7 +287,31 @@ namespace NBD6.Controllers
             {
                 try
                 {
-                    _context.Update(client);
+                    // Retrieve the existing client including its associated address
+                    var existingClient = await _context.Clients
+                        .Include(c => c.Address)
+                        .FirstOrDefaultAsync(c => c.ClientID == id);
+
+                    if (existingClient == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Update client properties
+                    existingClient.CompanyName = client.CompanyName;
+                    existingClient.FirstName = client.FirstName;
+                    existingClient.MiddleName = client.MiddleName;
+                    existingClient.LastName = client.LastName;
+                    existingClient.ClientContact = client.ClientContact;
+                    existingClient.ClientPhone = client.ClientPhone;
+
+                    // Update address properties
+                    existingClient.Address.Country = address.Country;
+                    existingClient.Address.Province = address.Province;
+                    existingClient.Address.Postal = address.Postal;
+                    existingClient.Address.Street = address.Street;
+
+                    // Save changes to the database
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

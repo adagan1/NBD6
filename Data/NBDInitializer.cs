@@ -37,6 +37,13 @@ namespace NBD6.Data
                             Province = "Manitoba",
                             Postal = "K2A 0B2",
                             Street = "Wind Street"
+                        },
+                        new Address
+                        {
+                            Country = "Canada",
+                            Province = "Manitoba",
+                            Postal = "K2A 0B8",
+                            Street = "Thai Street"
                         }
                         // Add other Address entries similarly
                     };
@@ -57,6 +64,26 @@ namespace NBD6.Data
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
                             AddressID = 1, // Assuming AddressID associated with this Client
+                        },
+                        new Client
+                        {
+                            CompanyName = "Gators HQ",
+                            FirstName = "Kyle",
+                            MiddleName = "S",
+                            LastName = "Ziz",
+                            ClientContact = "kziz@gmail.com",
+                            ClientPhone = "2222223222",
+                            AddressID = 2, // Assuming AddressID associated with this Client
+                        },
+                        new Client
+                        {
+                            CompanyName = "Bulls HQ",
+                            FirstName = "Evan",
+                            MiddleName = "S",
+                            LastName = "My",
+                            ClientContact = "emy@gmail.com",
+                            ClientPhone = "2225223212",
+                            AddressID = 3, // Assuming AddressID associated with this Client
                         }
                         // Add other Client entries similarly
                     );
@@ -75,7 +102,27 @@ namespace NBD6.Data
                             ProjectSite = "Brock University",
                             BidAmount = 21,
                             ClientID = 1, // Assuming ClientID associated with this Project
+                            AddressID = 1, // Assuming AddressID associated with this Project
+                        },
+                        new Project
+                        {
+                            ProjectName = "NC Glass Garden",
+                            ProjectStartDate = new DateTime(2023, 01, 01),
+                            ProjectEndDate = new DateTime(2023, 03, 22),
+                            ProjectSite = "Niagara College",
+                            BidAmount = 21,
+                            ClientID = 2, // Assuming ClientID associated with this Project
                             AddressID = 2, // Assuming AddressID associated with this Project
+                        },
+                        new Project
+                        {
+                            ProjectName = "WU Glass Garden",
+                            ProjectStartDate = new DateTime(2023, 01, 01),
+                            ProjectEndDate = new DateTime(2023, 03, 22),
+                            ProjectSite = "Western Union",
+                            BidAmount = 21,
+                            ClientID = 3, // Assuming ClientID associated with this Project
+                            AddressID = 3, // Assuming AddressID associated with this Project
                         }
                         // Add other Project entries similarly
                     );
