@@ -86,7 +86,10 @@
 
     <div class="form-group col-md-12">
         <input type="submit" value="Create" class="btn btn-primary" />
+        <button type="button" id="autofillProjectData" class="btn btn-info">Autofill Project Data</button>
+
     </div>
+
 </form>
 
 <div>
@@ -133,4 +136,70 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Initialize select2 for dropdowns
+            $("#Address_Province").select2();
+            $("#ClientSummary").select2();
+
+            $('#autofillProjectData').click(function () {
+                // Project names for variety
+                const projectNames = [
+                    "Nexus Redevelopment Initiative",
+                    "Quantum Computing Research",
+                    "Green Energy Solutions",
+                    "Urban Renewal Outreach",
+                    "Digital Transformation Project",
+                    "NextGen Telecommunications Upgrade",
+                    "Eco-Friendly Housing Development",
+                    "Cybersecurity Enhancement Program",
+                    "Machine Learning Deployment",
+                    "Smart City Infrastructure Upgrade"
+                ];
+                const projectName = projectNames[Math.floor(Math.random() * projectNames.length)];
+
+                // Generating dynamic start and end dates
+                const startDate = new Date();
+                startDate.setDate(startDate.getDate() + Math.floor(Math.random() * 10) + 1);
+                const endDate = new Date(startDate);
+                endDate.setDate(startDate.getDate() + Math.floor(Math.random() * 90) + 30); 
+
+                // Formatting dates to YYYY-MM-DD
+                const projectStartDate = startDate.toISOString().split('T')[0];
+                const projectEndDate = endDate.toISOString().split('T')[0];
+
+                // Filling in the project fields
+                $('#ProjectName').val(projectName);
+                $('#ProjectStartDate').val(projectStartDate);
+                $('#ProjectEndDate').val(projectEndDate);
+                $('#ProjectSite').val("Project Site " + Math.floor(Math.random() * 100));
+                $('#BidAmount').val((Math.random() * (5000 - 1000) + 1000).toFixed(2)); 
+
+                // Address fields
+                if ($('#Address_Country option').length > 1) {
+                    $('#Address_Country').val($('#Address_Country option').eq(1).val()).trigger('change'); 
+                }
+
+                // Assuming your provinces are dynamically populated and you have a reasonable number of options:
+                if ($('#Address_Province option').length > 1) {
+                    const randomProvinceIndex = Math.floor(Math.random() * ($('#Address_Province option').length - 1)) + 1;
+                    $('#Address_Province').val($('#Address_Province option').eq(randomProvinceIndex).val()).trigger('change');
+                }
+
+                // Generating a more realistic postal code and street address
+                const postalCode = "A" + Math.floor(Math.random() * 9) + "B " + Math.floor(Math.random() * 9) + "C" + Math.floor(Math.random() * 9);
+                $('#Address_Postal').val(postalCode);
+                $('#Address_Street').val(Math.floor(Math.random() * 1000) + " Main Street");
+
+                // Selecting a client - adjust as needed
+                if ($('#ClientSummary option').length > 1) {
+                    $('#ClientSummary').val($('#ClientSummary option:eq(1)').val()).trigger('change');
+                }
+            });
+        });
+    </script>
+
+
+
 }
