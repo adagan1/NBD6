@@ -44,7 +44,7 @@ namespace NBD6.Controllers
             }
 
             ViewBag.CurrentFilter = searchTerm;
-           
+
             if (!String.IsNullOrEmpty(searchTerm))
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
@@ -181,23 +181,14 @@ namespace NBD6.Controllers
                     TempData["NewClientSummary"] = client.ClientSummary;
                     TempData["AlertMessageClient"] = "Client Successfully Added";
 
-
-                    if (TempData.ContainsKey("AddressUrl"))
+                    // Check if TempData contains the ReferrerUrl
+                    if (TempData.ContainsKey("ClientUrl"))
                     {
-                        if (TempData.ContainsKey("ProjectKey"))
-                        {
-                            TempData.Remove("ProjectKey");
-                            return RedirectToAction("Create", "Projects");
-                        }
-                        else
-                        {
-                            // Redirect back to the ClientUrl
-                            return RedirectToAction(nameof(Index));
-                        }
+                        // Redirect back to the ReferrerUrl
+                        return Redirect(TempData["ClientUrl"].ToString());
                     }
                     else
                     {
-                        // Redirect back to the ClientUrl
                         return RedirectToAction(nameof(Index));
                     }
                 }
