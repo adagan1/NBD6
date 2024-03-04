@@ -150,8 +150,7 @@ namespace NBD6.Controllers
 
         // GET: Projects/Create
         public IActionResult Create()
-        {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
+        {           
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -180,28 +179,25 @@ namespace NBD6.Controllers
             return View();
         }
 
-        // GET: Projects/ProjectCreate
-        public IActionResult ProjectCreate()
-        {
-            // Set "ProjectKey" only when accessing the project create action
-            TempData["ProjectKey"] = "Access";
-            return RedirectToAction("Create");
-        }
-
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,Address")] Project project)
+        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,AddressID,Country,Province,Postal,Street")] Project project, Client client, Address address)
         {
+
+            var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, x.Value.Errors })
+                .ToArray();
+
             if (ModelState.IsValid)
             {
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             TempData["AlertMessageProjecct"] = "Project Successfully Added";
 
@@ -248,7 +244,6 @@ namespace NBD6.Controllers
             {
                 return NotFound();
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -281,7 +276,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Address,Country,Province,Postal,Street")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,AddressID,Country,Province,Postal,Street")] Project project, Address address, Client client)
         {
             if (id != project.ProjectID)
             {
@@ -309,7 +304,9 @@ namespace NBD6.Controllers
                     existingProject.ProjectEndDate = project.ProjectEndDate;
                     existingProject.ProjectSite = project.ProjectSite;
                     existingProject.BidAmount = project.BidAmount;
-                    existingProject.ClientID = project.ClientID;
+
+                    // Update client properties
+                    existingProject.Client = project.Client;                  
 
                     // Update address properties
                     existingProject.Address.Country = project.Address.Country;
@@ -336,7 +333,6 @@ namespace NBD6.Controllers
             }
 
             // If model state is not valid, prepare the necessary data and return to the view
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary", project.AddressID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
