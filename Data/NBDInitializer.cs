@@ -18,39 +18,7 @@ namespace NBD6.Data
                 // Delete and recreate the Database with every restart
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-
-                if (!context.Addresses.Any())
-                {
-                    // Create addresses without assigning foreign keys
-                    var addresses = new[]
-                    {
-                        new Address
-                        {
-                            Country = "Canada",
-                            Province = "Ontario",
-                            Postal = "K1A 0B1",
-                            Street = "Highland Park"
-                        },
-                        new Address
-                        {
-                            Country = "Canada",
-                            Province = "Manitoba",
-                            Postal = "K2A 0B2",
-                            Street = "Wind Street"
-                        },
-                        new Address
-                        {
-                            Country = "Canada",
-                            Province = "Manitoba",
-                            Postal = "K2A 0B8",
-                            Street = "Thai Street"
-                        }
-                        // Add other Address entries similarly
-                    };
-                    context.Addresses.AddRange(addresses);
-                    context.SaveChanges();
-                }
-
+               
                 if (!context.Clients.Any())
                 {
                     // Create clients
@@ -63,7 +31,13 @@ namespace NBD6.Data
                             LastName = "Jackson",
                             ClientContact = "lamarjackson@gmail.com",
                             ClientPhone = "2222223212",
-                            AddressID = 1, // Assuming AddressID associated with this Client
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Ontario",
+                                Postal = "K1A 0B1",
+                                Street = "Highland Park"
+                            }
                         },
                         new Client
                         {
@@ -73,7 +47,13 @@ namespace NBD6.Data
                             LastName = "Ziz",
                             ClientContact = "kziz@gmail.com",
                             ClientPhone = "2222223222",
-                            AddressID = 2, // Assuming AddressID associated with this Client
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Manitoba",
+                                Postal = "K2A 0B2",
+                                Street = "Wind Street"
+                            },
                         },
                         new Client
                         {
@@ -83,7 +63,13 @@ namespace NBD6.Data
                             LastName = "My",
                             ClientContact = "emy@gmail.com",
                             ClientPhone = "2225223212",
-                            AddressID = 3, // Assuming AddressID associated with this Client
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Manitoba",
+                                Postal = "K2A 0B8",
+                                Street = "Thai Street"
+                            }
                         }
                         // Add other Client entries similarly
                     );
@@ -102,7 +88,13 @@ namespace NBD6.Data
                             ProjectSite = "Brock University",
                             BidAmount = 21,
                             ClientID = 1, // Assuming ClientID associated with this Project
-                            AddressID = 1, // Assuming AddressID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Yukon",
+                                Postal = "K5A 0Y8",
+                                Street = "Project Street 1"
+                            }
                         },
                         new Project
                         {
@@ -112,7 +104,13 @@ namespace NBD6.Data
                             ProjectSite = "Niagara College",
                             BidAmount = 21,
                             ClientID = 2, // Assuming ClientID associated with this Project
-                            AddressID = 2, // Assuming AddressID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Yukon",
+                                Postal = "K8A 0K8",
+                                Street = "Project Street 2"
+                            }
                         },
                         new Project
                         {
@@ -122,24 +120,18 @@ namespace NBD6.Data
                             ProjectSite = "Western Union",
                             BidAmount = 21,
                             ClientID = 3, // Assuming ClientID associated with this Project
-                            AddressID = 3, // Assuming AddressID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Yukon",
+                                Postal = "K9A 0A8",
+                                Street = "Project Street 3"
+                            }
                         }
                         // Add other Project entries similarly
                     );
                     context.SaveChanges();
-                }
-
-                // After creating clients and projects, update the addresses with the corresponding foreign keys
-                var clientInOrder = context.Clients.FirstOrDefault();
-                var projectInOrder = context.Projects.FirstOrDefault();
-                var addressesToUpdate = context.Addresses.ToList();
-                foreach (var address in addressesToUpdate)
-                {
-                    // Update ClientID and ProjectID in the Address table
-                    address.ClientID = clientInOrder.ClientID;
-                    address.ProjectID = projectInOrder.ProjectID;
-                }
-                context.SaveChanges();
+                }               
             }
             catch (Exception ex)
             {
