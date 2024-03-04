@@ -14,40 +14,62 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProjectID" />
             <div class="form-group">
-                <label asp-for="ProjectName" class="control-label"></label>
+                <label asp-for="ProjectName" class="control-label">Project Name<span class="text-danger">*</span></label>
                 <input asp-for="ProjectName" class="form-control" />
                 <span asp-validation-for="ProjectName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectStartDate" class="control-label"></label>
+                <label asp-for="ProjectStartDate" class="control-label">Start Date<span class="text-danger">*</span></label>
                 <input asp-for="ProjectStartDate" class="form-control" />
                 <span asp-validation-for="ProjectStartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectEndDate" class="control-label"></label>
+                <label asp-for="ProjectEndDate" class="control-label">End Date<span class="text-danger">*</span></label>
                 <input asp-for="ProjectEndDate" class="form-control" />
                 <span asp-validation-for="ProjectEndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectSite" class="control-label"></label>
+                <label asp-for="ProjectSite" class="control-label">Site<span class="text-danger">*</span></label>
                 <input asp-for="ProjectSite" class="form-control" />
                 <span asp-validation-for="ProjectSite" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BidAmount" class="control-label"></label>
+                <label asp-for="BidAmount" class="control-label">Bid Amount<span class="text-danger">*</span></label>
                 <input asp-for="BidAmount" class="form-control" />
                 <span asp-validation-for="BidAmount" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Address</h4>
+            <hr />
+            <div>
+                <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
+                <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
+                </select>
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <select id="AddressSummary" asp-for="AddressID" class="form-control" asp-items="ViewBag.AddressID"></select>
+                <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
+                <select asp-for="Address.Province" asp-items="ViewBag.Provinces" class="form-control">
+                </select>
+                <span asp-validation-for="Address.Province" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Postal" class="control-label">Postal<span class="text-danger">*</span></label>
+                <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
+                <span asp-validation-for="Address.Postal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
+                <input asp-for="Address.Street" class="form-control" placeholder="street" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6">
             <h4>Client</h4>
             <hr />
             <div class="form-group">
-                <label asp-for="Client" class="control-label"></label>
+                <label asp-for="Client" class="control-label">Client<span class="text-danger">*</span></label>
                 <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
             </div>
         </div>
@@ -63,7 +85,9 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
