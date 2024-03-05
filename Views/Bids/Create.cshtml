@@ -27,11 +27,19 @@
                 <input asp-for="BidEnd" class="form-control" />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Labours" class="control-label"></label>
-                <input asp-for="Labours" class="form-control" />
-                <span asp-validation-for="Labours" class="text-danger"></span>
+
+            <div id="labours-container">
+                <div class="labour-input">
+                    <div class="form-group">
+                        <label asp-for="Labours" class="control-label"></label>
+                        <input asp-for="Labours" class="form-control" />
+                        <span asp-validation-for="Labours" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
+            <button type="button" id="add-labour-btn" class="btn btn-primary">Add Another Labour</button>
+
             <div class="form-group">
                 <label asp-for="project" class="control-label">Project<span class="text-danger">*</span></label>
                 <select id="ProjectSummary" asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
@@ -56,4 +64,15 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('#add-labour-btn').click(function () {
+                var lastLabourInput = $('.labour-input').last();
+                var newLabourInput = lastLabourInput.clone();
+                newLabourInput.find('input').val(''); // Clear input value
+                $('#labours-container').append(newLabourInput);
+            });
+        });
+    </script>
 }
