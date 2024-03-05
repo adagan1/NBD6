@@ -42,27 +42,29 @@
         <div class="col-md-6">
             <h4>Address</h4>
             <hr />
-            <div>
+            <div class="form-group">
                 <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
                 <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
                 </select>
                 <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
+                <label asp-for="Address.Province" class="control-label">Province</label>
                 <select asp-for="Address.Province" asp-items="ViewBag.Provinces" class="form-control">
                 </select>
                 <span asp-validation-for="Address.Province" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address.Postal" class="control-label">Postal<span class="text-danger">*</span></label>
-                <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
+                <input asp-for="Address.Postal" class="form-control" placeholder="A1A 1A1 (Format: A1A 1A1)" />
                 <span asp-validation-for="Address.Postal" class="text-danger"></span>
+                <small class="form-text text-muted">Please enter the postal code in the format: A1A 1A1</small>
             </div>
             <div class="form-group">
                 <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
-                <input asp-for="Address.Street" class="form-control" placeholder="street" />
+                <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
                 <span asp-validation-for="Address.Street" class="text-danger"></span>
+                <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
             </div>
         </div>
         <div class="col-md-6">
@@ -76,7 +78,6 @@
                         <option value="@TempData["NewClientID"]" selected>@TempData["NewClientSummary"]</option>
                     }
                 </select>
-
             </div>
         </div>
     </div>
@@ -98,6 +99,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js">
+    </script>
+    <!-- Include Select2 CSS and JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize select2 for the province field
+            $('#Address_Province').select2({
+                placeholder: "Select a province or territory",
+                allowClear: true,
+                // Enable searching
+                minimumInputLength: 0 // Set to 0 to always show all options
+            });
+        });
     </script>
     <script type="text/javascript">
         $(function () {
