@@ -35,7 +35,6 @@ namespace NBD6.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) || sortOrder != "name_desc" ? "name_desc" : "name_asc";
             ViewBag.StartDateSortParm = sortOrder == "start_date_asc" ? "start_date_desc" : "start_date_asc";
             ViewBag.EndDateSortParm = sortOrder == "end_date_asc" ? "end_date_desc" : "end_date_asc";
-            ViewBag.BidAmountSortParm = sortOrder == "bid_amount_asc" ? "bid_amount_desc" : "bid_amount_asc";
             ViewBag.CompanySortParm = sortOrder == "company_asc" ? "company_desc" : "company_asc";
             ViewBag.SiteSortParm = sortOrder == "site_asc" ? "site_desc" : "site_asc";
             ViewBag.StreetSortParm = sortOrder == "street_asc" ? "street_desc" : "street_asc";
@@ -88,12 +87,6 @@ namespace NBD6.Controllers
                     break;
                 case "end_date_desc":
                     projectsQuery = projectsQuery.OrderByDescending(p => p.ProjectEndDate);
-                    break;
-                case "bid_amount_asc":
-                    projectsQuery = projectsQuery.OrderBy(p => p.BidAmount.ToString());
-                    break;
-                case "bid_amount_desc":
-                    projectsQuery = projectsQuery.OrderByDescending(p => p.BidAmount.ToString());
                     break;
                 case "company_asc":
                     projectsQuery = projectsQuery.OrderBy(p => p.Client.FirstName);
@@ -186,7 +179,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
+        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
         {
 
             
@@ -305,7 +298,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,Client,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
         {
             if (id != project.ProjectID)
             {
@@ -342,7 +335,6 @@ namespace NBD6.Controllers
                     existingProject.ProjectStartDate = project.ProjectStartDate;
                     existingProject.ProjectEndDate = project.ProjectEndDate;
                     existingProject.ProjectSite = project.ProjectSite;
-                    existingProject.BidAmount = project.BidAmount;
 
                     // Update client properties
                     //existingProject.Client = project.Client;

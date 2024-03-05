@@ -1,0 +1,47 @@
+﻿@model NBD6.Models.Bid
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Bid Create</h1>
+
+<h4>Bid</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BidName" class="control-label"></label>
+                <input asp-for="BidName" class="form-control" />
+                <span asp-validation-for="BidName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BidStart" class="control-label"></label>
+                <input asp-for="BidStart" class="form-control" />
+                <span asp-validation-for="BidStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BidEnd" class="control-label"></label>
+                <input asp-for="BidEnd" class="form-control" />
+                <span asp-validation-for="BidEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <select asp-for="ProjectID" class ="form-control" asp-items="ViewBag.ProjectID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

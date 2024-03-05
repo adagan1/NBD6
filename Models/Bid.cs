@@ -3,7 +3,7 @@ using static NBD6.Models.Bid;
 
 namespace NBD6.Models
 {
-    public class Bid
+    public class Bid : IValidatableObject
     {
         [Key]
         public int BidID { get; set; }
@@ -12,16 +12,23 @@ namespace NBD6.Models
         [RegularExpression(@"^[a-zA-Z0-9\s-]+$")]
         public string BidName { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "You must enter an Start date.")]
         public DateTime BidStart { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Compare("BidStart", ErrorMessage = "Bid End Date must be after the Bid Start Date.")]
+        [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "You must enter an end date.")]
         public DateTime BidEnd { get; set; }
 
-        public Bid()
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            BidStart = DateTime.Now;
+            // Check if the end date is before the start date
+            if (BidEnd < BidStart)
+            {
+                yield return new ValidationResult("Bid End date cannot end before it starts.", new[] { "BidEnd" });
+            }
         }
 
         // Total bid amount

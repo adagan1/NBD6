@@ -1,0 +1,40 @@
+﻿@model NBD6.Models.Bid
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Bid Details</h1>
+
+<div class="container">
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidStart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidStart)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidEnd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidEnd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.project)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.project.ProjectName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BidID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

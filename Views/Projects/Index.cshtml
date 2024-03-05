@@ -22,7 +22,7 @@
 {
     <div class="row mb-3">
         <div class="col-md-6">
-            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control w-100" placeholder="Search by ProjectName, StartDate, EndDate, BidAmount, Client, ProjectSite..." />
+            <input type="text" name="searchTerm" value="@ViewBag.CurrentFilter" class="form-control w-100" placeholder="Search by ProjectName, StartDate, EndDate, Client, ProjectSite..." />
         </div>
         <div class="col-md-6">
             <input type="submit" value="Search" class="btn btn-primary w-15" />
@@ -46,9 +46,6 @@
                 </th>
                 <th>
                     @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })
-                </th>
-                <th>
-                    @Html.ActionLink("Bid Amount", "Index", new { sortOrder = ViewBag.BidAmountSortParm })
                 </th>
                 <th>
                     @Html.ActionLink("Client", "Index", new { sortOrder = ViewBag.CompanySortParm })
@@ -77,9 +74,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProjectEndDate, "{0:d}")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BidAmount)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Client.CompanyName)

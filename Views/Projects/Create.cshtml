@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Project Create</h1>
 
 <p>All fields marked with * are required to create a Project.</p>
 
@@ -33,11 +33,6 @@
                 <label asp-for="ProjectSite" class="control-label">Project Site<span class="text-danger"></span></label>
                 <input asp-for="ProjectSite" class="form-control" placeholder="project site" />
                 <span asp-validation-for="ProjectSite" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BidAmount" class="control-label">Bid Amount<span class="text-danger">*</span></label>
-                <input asp-for="BidAmount" class="form-control" placeholder="000.00" />
-                <span asp-validation-for="BidAmount" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6">
@@ -117,7 +112,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Function to load saved data from sessionStorage
             function loadData() {
-                document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #BidAmount, #AddressSummary, #ClientSummary").forEach(function (input) {
+                document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #AddressSummary, #ClientSummary").forEach(function (input) {
                     const savedValue = sessionStorage.getItem(input.id);
                     if (savedValue) {
                         input.value = savedValue;
@@ -125,7 +120,7 @@
                 });
             }
 
-            document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #BidAmount, #AddressSummary, #ClientSummary").forEach(function (input) {
+            document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #AddressSummary, #ClientSummary").forEach(function (input) {
                 input.addEventListener("input", function () {
                     sessionStorage.setItem(this.id, this.value);
                 });
@@ -134,7 +129,7 @@
             loadData();
 
             document.querySelector("form").addEventListener("submit", function () {
-                ["ProjectName", "ProjectStartDate", "ProjectEndDate", "ProjectSite", "BidAmount", "AddressSummary", "ClientSummary"].forEach(function (fieldId) {
+                ["ProjectName", "ProjectStartDate", "ProjectEndDate", "ProjectSite", "AddressSummary", "ClientSummary"].forEach(function (fieldId) {
                     sessionStorage.removeItem(fieldId);
                 });
             });
@@ -178,7 +173,6 @@
                 $('#ProjectStartDate').val(projectStartDate);
                 $('#ProjectEndDate').val(projectEndDate);
                 $('#ProjectSite').val("Project Site " + Math.floor(Math.random() * 100));
-                $('#BidAmount').val((Math.random() * (5000 - 1000) + 1000).toFixed(2));
 
                 // Address fields
                 if ($('#Address_Country option').length > 1) {

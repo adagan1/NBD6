@@ -30,9 +30,10 @@
     </div>
 }
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
     <table class="table">
         <thead>
             <tr>
@@ -40,7 +41,7 @@
                     @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
                 </th>
                 <th>
-                    @Html.ActionLink("Client Name", "Index", new { sortOrder = ViewBag.ClientNameSortParm })
+                    @Html.ActionLink("Client Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
                 </th>
                 <th>
                     @Html.ActionLink("Contact", "Index", new { sortOrder = ViewBag.ContactSortParm })
@@ -62,7 +63,7 @@
                         @Html.DisplayFor(modelItem => item.CompanyName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ClientName)
+                        @Html.DisplayFor(modelItem => item.FirstName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ClientContact)
@@ -72,17 +73,18 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Address.Country)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<partial name="_PagingNavBar" model="Model" />
+    <partial name="_PagingNavBar" model="Model" />
+</form>
 
 @section Scripts {
     <script>

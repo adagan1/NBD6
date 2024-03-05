@@ -1,0 +1,52 @@
+﻿@model IEnumerable<NBD6.Models.Bid>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bids</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BidName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BidStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BidEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.project)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.project.ProjectName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BidID">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

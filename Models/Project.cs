@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBD6.Models
 {
@@ -30,12 +30,6 @@ namespace NBD6.Models
         [StringLength(200, ErrorMessage = "Project site cannot be more than 200 characters long.")]
         public string ProjectSite { get; set; }
 
-        [Display(Name = "Bid Amount")]
-        [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "You must enter a bid amount.")]
-        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Bid amount must be a number.")]
-        public decimal BidAmount { get; set; }
-
         //Foreign Keys
         [Display(Name = "Client ID")]
         [ForeignKey("Client")]
@@ -50,6 +44,8 @@ namespace NBD6.Models
         //[Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
         public int AddressID { get; set; }
         public Address Address { get; set; } // Navigation property to the Address class
+
+        public virtual ICollection<Bid> Bids { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
