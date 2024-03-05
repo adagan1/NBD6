@@ -36,7 +36,6 @@ namespace NBD6.Models
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Bid amount must be a number.")]
         public decimal BidAmount { get; set; }
 
-
         //Foreign Keys
         [Display(Name = "Client ID")]
         [ForeignKey("Client")]

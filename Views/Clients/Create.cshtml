@@ -136,6 +136,7 @@
         });
     </script>
 
+
     <script>
         $(document).ready(function () {
             // Existing select2 initialization
@@ -145,11 +146,22 @@
             });
             // Autofill functionality
             function autofillData() {
-                // Arrays of possible values for names and company
-                const companyNames = ["Company One", "Company Two", "Company Three"];
-                const firstNames = ["John", "Jane", "Alex"];
-                const middleNames = ["A", "B", "C"];
-                const lastNames = ["Doe", "Smith", "Johnson"];
+                // Arrays of possible values for company names, first names, middle names, and last names
+                const companyNames = [
+                    "Company One",
+                    "Company Two",
+                    "Company Three",
+                    "Company Four",
+                    "Company Five",
+                    "Company Six",
+                    "Company Seven",
+                    "Company Eight"
+                ];
+                const firstNames = ["John", "Jane", "Alex", "Emily"];
+                const middleNames = ["", "James", "Lily", "Michael"];
+                const lastNames = ["Doe", "Smith", "Johnson", "Brown"];
+                // Array of possible provinces
+                const provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland and Labrador", "Nova Scotia", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"];
                 // Function to select a random item from an array
                 function getRandomItem(array) {
                     return array[Math.floor(Math.random() * array.length)];
@@ -165,9 +177,10 @@
                 const clientPhone = `${Math.floor(100 + Math.random() * 900)}-${Math.floor(100 + Math.random() * 900)}-${Math.floor(1000 + Math.random() * 9000)}`;
                 // Other fields remain unchanged
                 const country = $('#Address_Country option:first').val();
-                const province = $('#Address_Province option:first').val();
+                const province = getRandomItem(provinces); // Selecting a random province
                 const postal = `A${Math.floor(Math.random() * 9)}A ${Math.floor(Math.random() * 9)}A${Math.floor(Math.random() * 9)}`;
-                const street = `Street ${Math.floor(Math.random() * 100)}`;
+                const streetNames = ["300 Maple Street", "121 Main Street", "178 Oak Street", "541 Elm Street", "332 Cedar Street", "128 Pine Street", "666 Birch Street"]; // Updated street names with real examples
+                const streetName = getRandomItem(streetNames);
                 $('#CompanyName').val(companyName);
                 $('#FirstName').val(firstName);
                 $('#MiddleName').val(middleName);
@@ -177,8 +190,9 @@
                 $('#Address_Country').val(country).trigger('change');
                 $('#Address_Province').val(province).trigger('change');
                 $('#Address_Postal').val(postal);
-                $('#Address_Street').val(street);
+                $('#Address_Street').val(streetName);
             }
+
             // Binding autofillData function to the click event of the autofill button
             $('#autofillButton').click(autofillData);
         });

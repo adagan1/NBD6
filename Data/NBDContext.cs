@@ -16,6 +16,14 @@ namespace NBD6.Data
 
         public DbSet<Address> Addresses { get; set; }
 
+        public DbSet<Bid > Bids { get; set; }
+
+        public DbSet<Material> Materials { get; set; }
+
+        public DbSet<Labour> Labours { get; set; }
+
+        public DbSet<Staff> Staffs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
