@@ -96,10 +96,10 @@ namespace NBD6.Controllers
                     projectsQuery = projectsQuery.OrderByDescending(p => p.BidAmount.ToString());
                     break;
                 case "company_asc":
-                    projectsQuery = projectsQuery.OrderBy(p => p.Client.ClientName);
+                    projectsQuery = projectsQuery.OrderBy(p => p.Client.FirstName);
                     break;
                 case "company_desc":
-                    projectsQuery = projectsQuery.OrderByDescending(p => p.Client.ClientName);
+                    projectsQuery = projectsQuery.OrderByDescending(p => p.Client.FirstName);
                     break;
                 case "site_asc":
                     projectsQuery = projectsQuery.OrderBy(p => p.ProjectSite);

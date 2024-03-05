@@ -17,10 +17,6 @@
     </div>
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
 <form asp-action="Index" method="get">
 <table class="table">
     <thead>
@@ -57,7 +53,6 @@
                     @Html.DisplayFor(modelItem => item.Street)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.AddressID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.AddressID">Details</a>
                 </td>
             </tr>
