@@ -51,7 +51,7 @@ namespace NBD6.Controllers
 
                 clientsQuery = clientsQuery.Where(c =>
                     c.CompanyName.ToLower().Contains(lowerCaseSearchTerm)
-                    || c.ClientName.ToLower().Contains(lowerCaseSearchTerm)
+                    || c.FirstName.ToLower().Contains(lowerCaseSearchTerm)
                     || c.ClientContact.ToLower().Contains(lowerCaseSearchTerm)
                     || c.ClientPhone.ToLower().Contains(lowerCaseSearchTerm)
                     || c.Address.Country.ToLower().Contains(lowerCaseSearchTerm)

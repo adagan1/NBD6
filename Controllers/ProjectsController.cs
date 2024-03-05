@@ -60,7 +60,7 @@ namespace NBD6.Controllers
                     p.ProjectName.ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectStartDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectEndDate.ToString().ToLower().Contains(lowerCaseSearchTerm)
-                    || p.Client.ClientName.ToLower().Contains(lowerCaseSearchTerm)
+                    || p.Client.FirstName.ToLower().Contains(lowerCaseSearchTerm)
                     || p.ProjectSite.ToLower().Contains(lowerCaseSearchTerm)
                     || p.Address.Street.ToLower().Contains(lowerCaseSearchTerm)
                     || p.Address.Postal.ToLower().Contains(lowerCaseSearchTerm));
