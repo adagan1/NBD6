@@ -222,13 +222,13 @@ namespace NBD6.Controllers
             {
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
+                TempData["AlertMessageProject"] = "Project Successfully Added";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             
             Debug.WriteLine(client);
-
-            TempData["AlertMessageProjecct"] = "Project Successfully Added";
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
 
