@@ -25,6 +25,7 @@ namespace NBD6.Models
 
         [Required]
         [MaxLength(200)]
+        [RegularExpression(@"^\d+\s[A-Za-z]+\s*(\w*\s*)*$", ErrorMessage = "Please enter the street in the format 'number streetname'")]
         public string Street { get; set; }
 
         public int? ClientID { get; set; }

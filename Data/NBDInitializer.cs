@@ -36,7 +36,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Ontario",
                                 Postal = "K1A 0B1",
-                                Street = "Highland Park"
+                                Street = "22 Highland Park"
                             }
                         },
                         new Client
@@ -52,7 +52,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Manitoba",
                                 Postal = "K2A 0B2",
-                                Street = "Wind Street"
+                                Street = "32 Wind Street"
                             },
                         },
                         new Client
@@ -68,7 +68,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Manitoba",
                                 Postal = "K2A 0B8",
-                                Street = "Thai Street"
+                                Street = "16 Thai Street"
                             }
                         }
                         // Add other Client entries similarly
@@ -93,7 +93,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Yukon",
                                 Postal = "K5A 0Y8",
-                                Street = "Project Street 1"
+                                Street = "1 Project Street "
                             }
                         },
                         new Project
@@ -109,7 +109,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Yukon",
                                 Postal = "K8A 0K8",
-                                Street = "Project Street 2"
+                                Street = "2 Project Street"
                             }
                         },
                         new Project
@@ -125,7 +125,7 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Yukon",
                                 Postal = "K9A 0A8",
-                                Street = "Project Street 3"
+                                Street = "3 Project Street "
                             }
                         }
                         // Add other Project entries similarly

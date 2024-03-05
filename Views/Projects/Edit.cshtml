@@ -56,13 +56,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Address.Postal" class="control-label">Postal<span class="text-danger">*</span></label>
-                <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
+                <input asp-for="Address.Postal" class="form-control" placeholder="A1A 1A1 (Format: A1A 1A1)" />
                 <span asp-validation-for="Address.Postal" class="text-danger"></span>
+                <small class="form-text text-muted">Please enter the postal code in the format: A1A 1A1</small>
             </div>
             <div class="form-group">
                 <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
-                <input asp-for="Address.Street" class="form-control" placeholder="street" />
+                <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
                 <span asp-validation-for="Address.Street" class="text-danger"></span>
+                <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
             </div>
         </div>
         <div class="col-md-6">
