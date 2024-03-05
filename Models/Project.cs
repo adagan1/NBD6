@@ -30,6 +30,14 @@ namespace NBD6.Models
         [StringLength(200, ErrorMessage = "Project site cannot be more than 200 characters long.")]
         public string ProjectSite { get; set; }
 
+        public string ProjectSummary
+        {
+            get
+            {
+                return $"{ProjectName} {ProjectSite}, Start Date: {ProjectStartDate}, End Date: {ProjectEndDate}";
+            }
+        }
+
         //Foreign Keys
         [Display(Name = "Client ID")]
         [ForeignKey("Client")]
