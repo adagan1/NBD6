@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
 using NBD6.Utilities;
+using NuGet.Protocol;
 
 namespace NBD6.Controllers
 {
@@ -184,14 +186,38 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Client client, Address address)
+        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
         {
 
+            
+            
+            var client = await _context.Clients
+                .Include(c => c.Address)
+                .Include(c => c.Projects)
+                .FirstOrDefaultAsync(m => m.ClientID == project.ClientID);
+
+           
+
+            _context.Addresses.Add(address);
+            await _context.SaveChangesAsync();
+
+            
+
+            // Set the AddressID for the client
+            project.AddressID = address.AddressID;
+            project.Address = address;
+            project.Client = client;
+            if (client.AddressID == 0)
+            {
+                client.AddressID = address.AddressID;
+                client.Address = address;
+            }
+            await _context.SaveChangesAsync();
             var errors = ModelState
                 .Where(x => x.Value.Errors.Count > 0)
                 .Select(x => new { x.Key, x.Value.Errors })
                 .ToArray();
-
+            
             if (ModelState.IsValid)
             {
                 _context.Add(project);
@@ -199,6 +225,9 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
+            
+            Debug.WriteLine(client);
+
             TempData["AlertMessageProjecct"] = "Project Successfully Added";
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -276,12 +305,22 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,AddressID,Country,Province,Postal,Street")] Project project, Address address, Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,BidAmount,Client,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
         {
             if (id != project.ProjectID)
             {
                 return NotFound();
             }
+
+            var client = await _context.Clients
+                .Include(c => c.Address)
+                .Include(c => c.Projects)
+                .FirstOrDefaultAsync(m => m.ClientID == project.ClientID);
+
+            var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, x.Value.Errors })
+                .ToArray();
 
             if (ModelState.IsValid)
             {
@@ -306,13 +345,15 @@ namespace NBD6.Controllers
                     existingProject.BidAmount = project.BidAmount;
 
                     // Update client properties
-                    existingProject.Client = project.Client;                  
+                    //existingProject.Client = project.Client;
+                    existingProject.Client = client;
+                    
 
                     // Update address properties
-                    existingProject.Address.Country = project.Address.Country;
-                    existingProject.Address.Province = project.Address.Province;
-                    existingProject.Address.Postal = project.Address.Postal;
-                    existingProject.Address.Street = project.Address.Street;
+                    existingProject.Address.Country = address.Country;
+                    existingProject.Address.Province = address.Province;
+                    existingProject.Address.Postal = address.Postal;
+                    existingProject.Address.Street = address.Street;
 
                     // Save changes to the database
                     _context.Update(existingProject);

@@ -41,14 +41,14 @@ namespace NBD6.Models
         [Display(Name = "Client ID")]
         [ForeignKey("Client")]
         [Required(ErrorMessage = "You must select a client.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Client ID must be a positive integer.")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Client ID must be a positive integer.")]
         public int ClientID { get; set; }
         public Client Client { get; set; } // Navigation property to the Client class
 
         [Display(Name = "Address ID")]
         [ForeignKey("Address")]
         [Required(ErrorMessage = "You must select an address.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
         public int AddressID { get; set; }
         public Address Address { get; set; } // Navigation property to the Address class
 

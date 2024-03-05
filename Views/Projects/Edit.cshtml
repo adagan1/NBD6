@@ -70,7 +70,13 @@
             <hr />
             <div class="form-group">
                 <label asp-for="Client" class="control-label">Client<span class="text-danger">*</span></label>
-                <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
+                <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID">
+                    @if (TempData["NewClientID"] != null)
+                    {
+                        <option value="@TempData["NewClientID"]" selected>@TempData["NewClientSummary"]</option>
+                    }
+                </select>
+
             </div>
         </div>
     </div>
