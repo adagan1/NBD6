@@ -38,48 +38,44 @@
                 </dd>
             </dl>
         </div>
-        @if (Model.Project != null)
-        {
+
             <div class="col-md-6">
                 <h4>Project</h4>
                 <hr />
                 <dl class="row">
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(Project => Project.ProjectName)
+                        @Html.DisplayNameFor(Model => Model.Project.ProjectName)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.ProjectName)
+                        @Html.DisplayFor(model => model.Project.ProjectName)
                     </dd>
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.ProjectStartDate)
+                        @Html.DisplayNameFor(model => model.Project.ProjectStartDate)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.ProjectStartDate)
+                        @Html.DisplayFor(model => model.Project.ProjectStartDate)
                     </dd>
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.ProjectEndDate)
+                        @Html.DisplayNameFor(model => model.Project.ProjectEndDate)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.ProjectEndDate)
+                        @Html.DisplayFor(model => model.Project.ProjectEndDate)
                     </dd>
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.ProjectSite)
+                        @Html.DisplayNameFor(model => model.Project.ProjectSite)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.ProjectSite)
+                        @Html.DisplayFor(model => model.Project.ProjectSite)
                     </dd>
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(model => model.BidAmount)
+                        @Html.DisplayNameFor(model => model.Project.BidAmount)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(model => model.BidAmount)
+                        @Html.DisplayFor(model => model.Project.BidAmount)
                     </dd>
                 </dl>
-            </div>
-        }
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.AddressID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
