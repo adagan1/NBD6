@@ -43,26 +43,25 @@
         <div class="col-md-6">
             <h4>Address</h4>
             <hr />
-            @* Address Fields *@
-            <div>
-                <label asp-for="Address.Country" class="control-label"></label>
+            <div class="form-group">
+                <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
                 <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
                 </select>
                 <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Province" class="control-label"></label>
+                <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
                 <select asp-for="Address.Province" asp-items="ViewBag.Provinces" class="form-control">
                 </select>
                 <span asp-validation-for="Address.Province" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Postal" class="control-label"></label>
+                <label asp-for="Address.Postal" class="control-label">Postal<span class="text-danger">*</span></label>
                 <input asp-for="Address.Postal" class="form-control" placeholder="postal" />
                 <span asp-validation-for="Address.Postal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Street" class="control-label"></label>
+                <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
                 <input asp-for="Address.Street" class="form-control" placeholder="street" />
                 <span asp-validation-for="Address.Street" class="text-danger"></span>
             </div>
@@ -73,23 +72,18 @@
             <div class="form-group">
                 <label asp-for="Client" class="control-label">Client<span class="text-danger">*</span></label>
                 <select id="ClientSummary" asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID">
-                    <option value="">Select a Client</option>
                     @if (TempData["NewClientID"] != null)
                     {
                         <option value="@TempData["NewClientID"]" selected>@TempData["NewClientSummary"]</option>
                     }
                 </select>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Create a new Client</a>
             </div>
-        </div>       
+        </div>
     </div>
 
-    <div class="form-group col-md-12">
-        <input type="submit" value="Create" class="btn btn-primary" />
-        <button type="button" id="autofillProjectData" class="btn btn-info">Autofill Project Data</button>
-
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
     </div>
-
 </form>
 
 <div>
