@@ -9,6 +9,7 @@ namespace NBD6.Models
         public int BidID { get; set; }
 
         [Required]
+        [Display(Name = "Bid Name")]
         [RegularExpression(@"^[a-zA-Z0-9\s-]+$")]
         public string BidName { get; set; }
 
