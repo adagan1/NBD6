@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
-using NBD6.Utilities;
 
 namespace NBD6.Controllers
 {
@@ -21,62 +20,10 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
+        public async Task<IActionResult> Index()
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Start Date" ? "start_date_desc" : "Start Date";
-            ViewBag.EndDateSortParm = sortOrder == "End Date" ? "end_date_desc" : "End Date";
-
-            if (searchTerm != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchTerm = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchTerm;
-
-            var bidsQuery = from b in _context.Bids
-                            select b;
-
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                var lowerCaseSearchTerm = searchTerm.ToLower();
-
-                bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
-                                                 || b.project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
-            }
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidName);
-                    break;
-                case "Start Date":
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidStart);
-                    break;
-                case "start_date_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidStart);
-                    break;
-                // Added case for sorting by end date
-                case "End Date":
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidEnd);
-                    break;
-                case "end_date_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidEnd);
-                    break;
-                default:
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidName);
-                    break;
-            }
-
-            int pageSize = 10; 
-            var pagedBids = await PaginatedList<Bid>.CreateAsync(bidsQuery.AsNoTracking(), page ?? 1, pageSize);
-
-            return View(pagedBids);
+            var nBDContext = _context.Bids.Include(b => b.project);
+            return View(await nBDContext.ToListAsync());
         }
 
         // GET: Bids/Details/5
@@ -110,7 +57,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID,LabourID,Hours,LabourDescription,LabourPrice,MaterialID,Type,Quantity,MaterialDescription,Size,MaterialPrice")] Bid bid)
+        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid)
         {
             if (ModelState.IsValid)
             {
@@ -144,7 +91,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,ProjectID")] Bid bid)
+        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid)
         {
             if (id != bid.BidID)
             {

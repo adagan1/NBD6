@@ -4,102 +4,86 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Bid Details</h1>
+<h1>Details</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <h4>Bid</h4>
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidName)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidName)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidStart)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidStart)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidEnd)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidEnd)
-                </dd>
-            </dl>
-        </div>
-        <div class="col-sm-6">
-            <h4>Project</h4>
-            <hr />
-            <dl class="row">
-                @* Project Fields *@
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.project)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.project.ProjectName)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.project.ProjectSite)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.project.ProjectSite)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.project.ProjectStartDate)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.project.ProjectStartDate)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.project.ProjectEndDate)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.project.ProjectEndDate)
-                </dd>
-            </dl>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <h4>Labour</h4>
-            <hr />
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.labour)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.labour.LabourDescription)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.labour.LabourPrice)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.labour.LabourPrice)
-            </dd>
-        </div>
-        <div class="col-sm-6">
-            <h4>Material</h4>
-            <hr />
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.material)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.material.MaterialDescription)
-            </dd>
-            <dt class="col-sm-4">
-                @Html.DisplayNameFor(model => model.material.MaterialPrice)
-            </dt>
-            <dd class="col-sm-8">
-                @Html.DisplayFor(model => model.material.MaterialPrice)
-            </dd>
-        </div>
-    </div>
+<div>
+    <h4>Bid</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidStart)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidStart)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BidEnd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BidEnd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaterialType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialQuantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaterialQuantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaterialDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialSize)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaterialSize)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaterialPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LabourHours)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LabourHours)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LabourDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LabourDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LabourPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LabourPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.project)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.project.ProjectName)
+        </dd>
+    </dl>
 </div>
-
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.BidID">Edit</a> |
     <a asp-action="Index">Back to List</a>

@@ -1,78 +1,101 @@
-﻿@model NBD6.Utilities.PaginatedList<NBD6.Models.Bid>
+﻿@model IEnumerable<NBD6.Models.Bid>
 
 @{
-    ViewData["Title"] = "Bids";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Bids</h1>
-
-@using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "form-inline" }))
-{
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <input type="text" name="searchString" class="form-control w-100" placeholder="Search by Bid Name , Start Date , End Date & Project Name..." />
-        </div>
-        <div class="col-md-6">
-            <input type="submit" value="Search" class="btn btn-primary w-15" />
-        </div>
-    </div>
-}
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-action="Index" method="get">
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.ActionLink("Bid Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.DisplayNameFor(model => model.BidName)
             </th>
             <th>
-                @Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.DisplayNameFor(model => model.BidStart)
             </th>
-                <th>
-                    @Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th>
-                    @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectNameSortParm, currentFilter = ViewBag.CurrentFilter })
-                </th>
-
-                <th>Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.BidEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LabourHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LabourDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LabourPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.project)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BidName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BidStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BidEnd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.project.ProjectName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BidID">Details</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BidEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaterialPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LabourHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LabourDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LabourPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.project.ProjectName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.BidID">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-<partial name="_PagingNavBar" model="Model" />
-</form>
-
-
-@section Scripts {
-    <script>
-        // Your existing scripts or any new ones if needed
-    </script>
-}

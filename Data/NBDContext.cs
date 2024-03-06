@@ -18,10 +18,6 @@ namespace NBD6.Data
 
         public DbSet<Bid > Bids { get; set; }
 
-        public DbSet<Material> Materials { get; set; }
-
-        public DbSet<Labour> Labours { get; set; }
-
         public DbSet<Staff> Staffs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,19 +40,6 @@ namespace NBD6.Data
                 .WithMany(p => p.Bids)   // Project has many Bids
                 .HasForeignKey(b => b.ProjectID)  // Bid.ProjectID is the foreign key
                 .IsRequired();  // Foreign key is required
-
-            //Collection
-            modelBuilder.Entity<Bid>()
-                .HasOne(b => b.labour)
-                .WithMany()  // Labour might not directly reference Bid
-                .HasForeignKey(b => b.LabourID)
-                .IsRequired();
-
-            modelBuilder.Entity<Bid>()
-                .HasOne(b => b.material)
-                .WithMany()  // Material might not directly reference Bid
-                .HasForeignKey(b => b.MaterialID)
-                .IsRequired();
         }
     }
 }
