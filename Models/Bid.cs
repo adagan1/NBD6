@@ -43,7 +43,7 @@ namespace NBD6.Models
                 {
                     foreach (var labour in Labours)
                     {
-                        totalAmount += labour.ExtendedPrice;
+                        totalAmount += labour.ExtendedLabourPrice;
                     }
                 }
 
@@ -52,7 +52,7 @@ namespace NBD6.Models
                 {
                     foreach (var material in Materials)
                     {
-                        totalAmount += material.ExtendedPrice;
+                        totalAmount += material.ExtendedMaterialPrice;
                     }
                 }
 
@@ -86,13 +86,13 @@ namespace NBD6.Models
 
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
-        public string Description { get; set; }
+        public string LabourDescription { get; set; }
 
         [Required]
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
-        public decimal UnitPrice { get; set; }
+        public decimal LabourPrice { get; set; }
 
-        public decimal ExtendedPrice => (decimal)Hours * UnitPrice;
+        public decimal ExtendedLabourPrice => (decimal)Hours * LabourPrice;
 
         public int BidID { get; set; }
         public Bid bid { get; set; }
@@ -116,15 +116,15 @@ namespace NBD6.Models
         public int Quantity { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
-        public string Description { get; set; }
+        public string MaterialDescription { get; set; }
 
         [RegularExpression(@"^(?:\d*\.?\d+)\s*(cm|m|l|g|kg|cubic\s*cm|cubic\s*m)$")]
         public string Size { get; set; }
 
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
-        public decimal UnitPrice { get; set; }
+        public decimal MaterialPrice { get; set; }
 
-        public decimal ExtendedPrice => Quantity * UnitPrice;
+        public decimal ExtendedMaterialPrice => Quantity * MaterialPrice;
 
         public int BidID { get; set; }
         public Bid bid { get; set; }

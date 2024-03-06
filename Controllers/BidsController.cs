@@ -110,7 +110,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID")] Bid bid)
+        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID,LabourID,Hours,LabourDescription,LabourPrice,MaterialID,Type,Quantity,MaterialDescription,Size,MaterialPrice")] Bid bid)
         {
             if (ModelState.IsValid)
             {

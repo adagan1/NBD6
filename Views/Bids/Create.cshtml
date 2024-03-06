@@ -6,11 +6,13 @@
 
 <h1>Bid Create</h1>
 
-<h4>Bid</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<p>All fields marked with * are required to create a Project.</p>
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Bid</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BidName" class="control-label"></label>
@@ -28,18 +30,6 @@
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
 
-            <div id="labours-container">
-                <div class="labour-input">
-                    <div class="form-group">
-                        <label asp-for="labour.Hours" class="control-label"></label>
-                        <input asp-for="labour.Hours" class="form-control" />
-                        <span asp-validation-for="labour.Hours" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <button type="button" id="add-labour-btn" class="btn btn-primary">Add Another Labour</button>
-
             <div class="form-group">
                 <label asp-for="project" class="control-label">Project<span class="text-danger">*</span></label>
                 <select id="ProjectSummary" asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
@@ -51,12 +41,72 @@
                 </select>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Create">Create a new Project</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+        @* Labour Fields *@
+        <div class="col-md-6">
+            <h4>Labour</h4>
+            <hr />
+            <div id="labours-container">
+                <div class="labour-input">
+                    <div class="form-group">
+                        <label asp-for="labour.Hours" class="control-label"></label>
+                        <input asp-for="labour.Hours" class="form-control" />
+                        <span asp-validation-for="labour.Hours" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="labour.LabourDescription" class="control-label"></label>
+                        <input asp-for="labour.LabourDescription" class="form-control" />
+                        <span asp-validation-for="labour.LabourDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="labour.LabourPrice" class="control-label"></label>
+                        <input asp-for="labour.LabourPrice" class="form-control" />
+                        <span asp-validation-for="labour.LabourPrice" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </form>
+            <button type="button" id="add-labour-btn" class="btn btn-primary">Add Another Labour</button>
+        </div>
+        @* Material Fields *@
+        <div class="col-md-6">
+            <h4>Materials</h4>
+            <hr />
+            <div id="materials-container">
+                <div class="material-input">
+                    <div class="form-group">
+                        <label asp-for="material.Type" class="control-label"></label>
+                        <input asp-for="material.Type" class="form-control" />
+                        <span asp-validation-for="material.Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="material.Quantity" class="control-label"></label>
+                        <input asp-for="material.Quantity" class="form-control" />
+                        <span asp-validation-for="material.Quantity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="material.MaterialDescription" class="control-label"></label>
+                        <input asp-for="material.MaterialDescription" class="form-control" />
+                        <span asp-validation-for="material.MaterialDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="material.Size" class="control-label"></label>
+                        <input asp-for="material.Size" class="form-control" />
+                        <span asp-validation-for="material.Size" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="material.MaterialPrice" class="control-label"></label>
+                        <input asp-for="material.MaterialPrice" class="form-control" />
+                        <span asp-validation-for="material.MaterialPrice" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="add-material-btn" class="btn btn-primary">Add Another Material</button>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
     </div>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -72,6 +122,13 @@
                 var newLabourInput = lastLabourInput.clone();
                 newLabourInput.find('input').val(''); // Clear input value
                 $('#labours-container').append(newLabourInput);
+            )};
+
+            $('#add-material-btn').click(function () {
+                var lastMaterialInput = $('.material-input').last();
+                var newMaterialInput = lastMaterialInput.clone();
+                newMaterialInput.find('input').val(''); // Clear input value
+                $('#material-container').append(newMaterialInput);
             });
         });
     </script>
