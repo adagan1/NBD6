@@ -20,31 +20,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BidEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialQuantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialSize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LabourHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LabourDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LabourPrice)
-            </th>
+            </th>           
             <th>
                 @Html.DisplayNameFor(model => model.project)
             </th>
@@ -62,38 +38,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BidEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaterialType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaterialQuantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaterialDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaterialSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaterialPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabourHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabourDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LabourPrice)
-            </td>
+            </td>           
             <td>
                 @Html.DisplayFor(modelItem => item.project.ProjectName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BidID">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.BidID">Details</a>
             </td>
         </tr>
 }
