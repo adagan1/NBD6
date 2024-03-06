@@ -68,12 +68,34 @@
         <div class="col-sm-6">
             <h4>Labour</h4>
             <hr />
-            
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.labour)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.labour.Description)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.labour.UnitPrice)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.labour.UnitPrice)
+            </dd>
         </div>
         <div class="col-sm-6">
             <h4>Material</h4>
             <hr />
-            <!-- Add your material details here -->
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.material)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.material.Description)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.material.UnitPrice)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.material.UnitPrice)
+            </dd>
         </div>
     </div>
 </div>
