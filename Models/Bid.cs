@@ -33,18 +33,23 @@ namespace NBD6.Models
         }
 
         //Material fields
+        [Display(Name = "Type")]
         [Required(ErrorMessage = "Material type is required.")]
         public string MaterialType { get; set; }
 
+        [Display(Name = "Quantity")]
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Quantity must be a valid number.")]
         public int MaterialQuantity { get; set; }
 
+        [Display(Name = "Description")]
         [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
         public string MaterialDescription { get; set; }
 
+        [Display(Name = "Size")]
         [RegularExpression(@"^(?:\d*\.?\d+)\s*(cm|m|l|g|kg|cubic\s*cm|cubic\s*m)$")]
         public string MaterialSize { get; set; }
 
+        [Display(Name = "Price")]
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
         public decimal MaterialPrice { get; set; }
 
@@ -52,14 +57,17 @@ namespace NBD6.Models
 
         //Labour Fields
         [Required]
+        [Display(Name = "Hours")]
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Hours must be a valid number.")]
         public double LabourHours { get; set; }
 
         [Required]
+        [Display(Name = "Description")]
         [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
         public string LabourDescription { get; set; }
 
         [Required]
+        [Display(Name = "Price")]
         [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
         public decimal LabourPrice { get; set; }
 
@@ -70,6 +78,7 @@ namespace NBD6.Models
 
         //FK
         public int ProjectID { get; set; }
+        [Display(Name = "Project")]
         public Project project { get; set; }
     }    
 }
