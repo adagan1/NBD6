@@ -37,6 +37,26 @@ namespace NBD6.Data
                 .HasOne(p => p.Project)
                 .WithOne(p => p.Address)
                 .HasForeignKey<Project>(p => p.AddressID);
+
+            
+            modelBuilder.Entity<Bid>()
+                .HasOne(b => b.project)  // Bid has one Project
+                .WithMany(p => p.Bids)   // Project has many Bids
+                .HasForeignKey(b => b.ProjectID)  // Bid.ProjectID is the foreign key
+                .IsRequired();  // Foreign key is required
+
+            //Collection
+            modelBuilder.Entity<Bid>()
+                .HasOne(b => b.labour)
+                .WithMany()  // Labour might not directly reference Bid
+                .HasForeignKey(b => b.LabourID)
+                .IsRequired();
+
+            modelBuilder.Entity<Bid>()
+                .HasOne(b => b.material)
+                .WithMany()  // Material might not directly reference Bid
+                .HasForeignKey(b => b.MaterialID)
+                .IsRequired();
         }
     }
 }

@@ -60,15 +60,20 @@ namespace NBD6.Models
             }
         }
 
-        //Things on the design bid
+        //Collections
         public virtual ICollection<Labour> Labours { get; set; }
-
         public virtual ICollection<Material> Materials { get; set; }
-
-        //FK/Collections
         public virtual ICollection<Staff> Staffs { get; set; }
+
+        //FK
         public int ProjectID { get; set; }
         public Project project { get; set; }
+
+        public int LabourID { get; set; }
+        public Labour labour { get; set; }
+
+        public int MaterialID { get; set; }
+        public Material material { get; set; }
     }
 
     public class Labour

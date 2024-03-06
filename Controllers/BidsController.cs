@@ -79,14 +79,6 @@ namespace NBD6.Controllers
             return View(pagedBids);
         }
 
-
-
-
-
-
-
-
-
         // GET: Bids/Details/5
         public async Task<IActionResult> Details(int? id)
         {
