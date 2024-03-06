@@ -25,6 +25,7 @@ namespace NBD6.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.ProjectNameSortParm = sortOrder == "Project Name" ? "project_name_desc" : "Project Name";
             ViewBag.DateSortParm = sortOrder == "Start Date" ? "start_date_desc" : "Start Date";
             ViewBag.EndDateSortParm = sortOrder == "End Date" ? "end_date_desc" : "End Date";
 
@@ -58,6 +59,12 @@ namespace NBD6.Controllers
                 case "name_desc":
                     bidsQuery = bidsQuery.OrderByDescending(b => b.BidName);
                     break;
+                case "Project Name":
+                    bidsQuery = bidsQuery.OrderBy(b => b.project.ProjectName);
+                    break;
+                case "project_name_desc":
+                    bidsQuery = bidsQuery.OrderByDescending(b => b.project.ProjectName);
+                    break;
                 case "Start Date":
                     bidsQuery = bidsQuery.OrderBy(b => b.BidStart);
                     break;
@@ -81,6 +88,7 @@ namespace NBD6.Controllers
 
             return View(pagedBids);
         }
+
 
 
         // GET: Bids/Details/5
