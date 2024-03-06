@@ -6,10 +6,10 @@
 
 <h1>Edit</h1>
 
-<h4>Bid</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
+        <h4>Bid</h4>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BidID" />
@@ -28,6 +28,37 @@
                 <input asp-for="BidEnd" class="form-control" />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
+
+            <!-- Bid Labor Section -->
+            <h4>Bid Labor</h4>
+            <hr />
+            <div class="form-group">
+                <label asp-for="LabourHours" class="control-label"></label>
+                <input asp-for="LabourHours" class="form-control" />
+                <span asp-validation-for="LabourHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LabourDescription" class="control-label"></label>
+                <input asp-for="LabourDescription" class="form-control" />
+                <span asp-validation-for="LabourDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LabourPrice" class="control-label"></label>
+                <input asp-for="LabourPrice" class="form-control" />
+                <span asp-validation-for="LabourPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProjectID" class="control-label"></label>
+                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
+                <span asp-validation-for="ProjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        <h4>Bid Material</h4>
+        <hr />
             <div class="form-group">
                 <label asp-for="MaterialType" class="control-label"></label>
                 <input asp-for="MaterialType" class="form-control" />
@@ -53,29 +84,6 @@
                 <input asp-for="MaterialPrice" class="form-control" />
                 <span asp-validation-for="MaterialPrice" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LabourHours" class="control-label"></label>
-                <input asp-for="LabourHours" class="form-control" />
-                <span asp-validation-for="LabourHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LabourDescription" class="control-label"></label>
-                <input asp-for="LabourDescription" class="form-control" />
-                <span asp-validation-for="LabourDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LabourPrice" class="control-label"></label>
-                <input asp-for="LabourPrice" class="form-control" />
-                <span asp-validation-for="LabourPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProjectID" class="control-label"></label>
-                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
-                <span asp-validation-for="ProjectID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
         </form>
     </div>
 </div>
@@ -85,5 +93,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
