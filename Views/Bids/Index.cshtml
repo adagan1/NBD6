@@ -1,10 +1,22 @@
-﻿@model NBD6.Utilities.PaginatedList<NBD6.Models.Bid>
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+@model NBD6.Utilities.PaginatedList<NBD6.Models.Bid>
 
 @{
     ViewData["Title"] = "Bids";
 }
 
 <h1>Bids</h1>
+
+@if (TempData["AlertMessageBid"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageBid"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 
 @using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "form-inline" }))
 {

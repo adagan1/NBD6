@@ -169,6 +169,7 @@ namespace NBD6.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(bid);
+                TempData["AlertMessageBid"] = "Bid Successfully Added";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
