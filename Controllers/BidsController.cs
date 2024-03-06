@@ -110,6 +110,48 @@ namespace NBD6.Controllers
             return View(bid);
         }
 
+        // GET: Bids/Approval/5
+        public async Task<IActionResult> Approval(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var bid = await _context.Bids
+                .Include(b => b.project)
+                .FirstOrDefaultAsync(m => m.BidID == id);
+
+            if (bid == null)
+            {
+                return NotFound();
+            }
+
+            return View(bid);
+        }
+
+        // POST: Bids/Approval/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Approval(int id, string notes, bool clientApproval, bool nbdApproval)
+        {
+            var bid = await _context.Bids.FindAsync(id);
+
+            if (bid == null)
+            {
+                return NotFound();
+            }
+
+            bid.Notes = notes;
+            bid.ClientApproved = clientApproval;
+            bid.NBDApproved = nbdApproval;
+
+            _context.Update(bid);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         // GET: Bids/Create
         public IActionResult Create()
         {

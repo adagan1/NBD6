@@ -23,6 +23,11 @@ namespace NBD6.Models
         [Required(ErrorMessage = "You must enter an end date.")]
         public DateTime BidEnd { get; set; }
 
+        //Scrapped together lmao
+        public string Notes {  get; set; }
+        public bool ClientApproved {  get; set; }
+        public bool NBDApproved { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             // Check if the end date is before the start date

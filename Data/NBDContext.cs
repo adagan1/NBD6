@@ -16,7 +16,7 @@ namespace NBD6.Data
 
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<Bid > Bids { get; set; }
+        public DbSet<Bid> Bids { get; set; }
 
         public DbSet<Staff> Staffs { get; set; }
 
@@ -34,12 +34,12 @@ namespace NBD6.Data
                 .WithOne(p => p.Address)
                 .HasForeignKey<Project>(p => p.AddressID);
 
-            
+
             modelBuilder.Entity<Bid>()
-                .HasOne(b => b.project)  // Bid has one Project
-                .WithMany(p => p.Bids)   // Project has many Bids
-                .HasForeignKey(b => b.ProjectID)  // Bid.ProjectID is the foreign key
-                .IsRequired();  // Foreign key is required
+                .HasOne(b => b.project)
+                .WithMany(p => p.Bids)
+                .HasForeignKey(b => b.ProjectID)
+                .IsRequired();
         }
     }
 }

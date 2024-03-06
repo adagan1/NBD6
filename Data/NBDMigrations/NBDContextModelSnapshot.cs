@@ -88,6 +88,9 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<DateTime>("BidStart")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("ClientApproved")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("LabourDescription")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -113,6 +116,12 @@ namespace NBD6.Data.NBDMigrations
 
                     b.Property<string>("MaterialType")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("NBDApproved")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectID")

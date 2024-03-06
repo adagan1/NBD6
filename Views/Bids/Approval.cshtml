@@ -1,0 +1,128 @@
+﻿@model NBD6.Models.Bid
+
+@{
+    ViewData["Title"] = "Approval";
+}
+
+<h1>Bid Approval</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Bid</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.BidName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidStart)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.BidStart)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidEnd)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.BidEnd)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Materials</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialType)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialType)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialQuantity)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialQuantity)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialDescription)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialDescription)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialSize)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialSize)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialPrice)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialPrice)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Labour</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourHours)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.LabourHours)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourDescription)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.LabourDescription)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourPrice)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.LabourPrice)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.project)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.project.ProjectName)
+                </dd>
+            </dl>
+        </div>
+        </dl>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Approval</h4>
+            <hr />
+            <form asp-action="Approval">
+                <div class="form-group">
+                    <label for="notes">Notes and Concerns:</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3" style="resize: none; height: 175px;">@Model.Notes</textarea>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="clientApproval" name="clientApproval" value="true" @(Model.ClientApproved ? "checked" : "")>
+                    <label class="form-check-label" for="clientApproval">Client Approval</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="nbdApproval" name="nbdApproval" value="true" @(Model.NBDApproved ? "checked" : "")>
+                    <label class="form-check-label" for="nbdApproval">NBD Approval</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Approval</button>
+            </form>
+        </div>
+    </div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BidID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
