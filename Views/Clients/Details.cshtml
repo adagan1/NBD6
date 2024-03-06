@@ -82,8 +82,6 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Project Site</th>
-                <th>Street</th>
-                <th>Postal Code</th>
             </tr>
         </thead>
         <tbody>
@@ -94,8 +92,6 @@
                     <td>@project.ProjectStartDate.ToShortDateString()</td>
                     <td>@project.ProjectEndDate.ToShortDateString()</td>
                     <td>@project.ProjectSite</td>
-                    <td>@(project.Address != null ? project.Address.Street : "N/A")</td>
-                    <td>@(project.Address != null ? project.Address.Postal : "N/A")</td>
                 </tr>
             }
         </tbody>
