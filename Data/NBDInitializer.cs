@@ -122,13 +122,66 @@ namespace NBD6.Data
                                 Country = "Canada",
                                 Province = "Yukon",
                                 Postal = "K9A 0A8",
-                                Street = "3 Project Street "
+                                Street = "3 Project Street"
                             }
                         }
                         // Add other Project entries similarly
                     );
                     context.SaveChanges();
-                }               
+                }
+                if (!context.Bids.Any())
+                {
+                    // Create bids
+                    context.Bids.AddRange(
+                        new Bid
+                        {
+                            BidName = "Glass Material Bid",
+                            BidStart = new DateTime(2024, 01, 01),
+                            BidEnd = new DateTime(2024, 01, 15),
+                            MaterialType = "Glass",
+                            MaterialQuantity = 100,
+                            MaterialDescription = "Tempered Glass Panels",
+                            MaterialSize = "10 cm",
+                            MaterialPrice = 50.00m,
+                            LabourHours = 40,
+                            LabourDescription = "Installation of Glass Panels",
+                            LabourPrice = 25.00m,
+                            ProjectID = 1 // Assuming ProjectID associated with this Bid
+                        },
+                        new Bid
+                        {
+                            BidName = "Steel Material Bid",
+                            BidStart = new DateTime(2024, 02, 01),
+                            BidEnd = new DateTime(2024, 02, 15),
+                            MaterialType = "Steel",
+                            MaterialQuantity = 200,
+                            MaterialDescription = "Structural Steel Beams",
+                            MaterialSize = "15 m",
+                            MaterialPrice = 100.00m,
+                            LabourHours = 60,
+                            LabourDescription = "Welding and Fabrication",
+                            LabourPrice = 30.00m,
+                            ProjectID = 2 // Assuming ProjectID associated with this Bid
+                        },
+                        new Bid
+                        {
+                            BidName = "Concrete Material Bid",
+                            BidStart = new DateTime(2024, 03, 01),
+                            BidEnd = new DateTime(2024, 03, 15),
+                            MaterialType = "Concrete",
+                            MaterialQuantity = 500,
+                            MaterialDescription = "Reinforced Concrete Slabs",
+                            MaterialSize = "20 cm",
+                            MaterialPrice = 75.00m,
+                            LabourHours = 80,
+                            LabourDescription = "Pouring and Finishing",
+                            LabourPrice = 35.00m,
+                            ProjectID = 3 // Assuming ProjectID associated with this Bid
+                        }
+                    // Add other Bid entries similarly
+                    );
+                    context.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
