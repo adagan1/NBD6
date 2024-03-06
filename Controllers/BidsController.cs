@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
+using NBD6.Utilities;
 
 namespace NBD6.Controllers
 {
@@ -20,11 +21,67 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
-            var nBDContext = _context.Bids.Include(b => b.project);
-            return View(await nBDContext.ToListAsync());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Start Date" ? "start_date_desc" : "Start Date";
+            ViewBag.EndDateSortParm = sortOrder == "End Date" ? "end_date_desc" : "End Date";
+
+            if (searchTerm != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchTerm = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchTerm;
+
+            // Include the 'Project' navigation property in your query
+            var bidsQuery = _context.Bids
+                .Include(b => b.project) // Ensure your Bid entity has a navigation property 'Project'
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                var lowerCaseSearchTerm = searchTerm.ToLower();
+
+                // Ensure your Bid and Project entities have properties 'BidName' and 'ProjectName'
+                bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
+                                                 || b.project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidName);
+                    break;
+                case "Start Date":
+                    bidsQuery = bidsQuery.OrderBy(b => b.BidStart);
+                    break;
+                case "start_date_desc":
+                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidStart);
+                    break;
+                // Added case for sorting by end date
+                case "End Date":
+                    bidsQuery = bidsQuery.OrderBy(b => b.BidEnd);
+                    break;
+                case "end_date_desc":
+                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidEnd);
+                    break;
+                default:
+                    bidsQuery = bidsQuery.OrderBy(b => b.BidName);
+                    break;
+            }
+
+            int pageSize = 10;
+            var pagedBids = await PaginatedList<Bid>.CreateAsync(bidsQuery.AsNoTracking(), page ?? 1, pageSize);
+
+            return View(pagedBids);
         }
+
 
         // GET: Bids/Details/5
         public async Task<IActionResult> Details(int? id)

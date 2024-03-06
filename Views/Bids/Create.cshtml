@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Bid Create</h1>
 
 <p>All fields marked with * are required to create a client.</p>
 
@@ -16,23 +16,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BidName" class="control-label"></label>
-                <input asp-for="BidName" class="form-control" />
+                <input asp-for="BidName" class="form-control" id="BidName" />
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BidStart" class="control-label"></label>
-                <input asp-for="BidStart" class="form-control" />
+                <input asp-for="BidStart" class="form-control" id="BidStart" />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BidEnd" class="control-label"></label>
-                <input asp-for="BidEnd" class="form-control" />
+                <input asp-for="BidEnd" class="form-control" id="BidEnd" />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
-                <select id="ProjectSummary" asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
+                <select asp-for="ProjectID" class="form-control" id="ProjectID" asp-items="ViewBag.ProjectID">
                     <option value="">Select a Project</option>
                     @if (TempData["NewProjectID"] != null)
                     {
@@ -50,17 +50,17 @@
             <div id="labours-container">
                 <div class="form-group">
                     <label asp-for="LabourHours" class="control-label"></label>
-                    <input asp-for="LabourHours" class="form-control" />
+                    <input asp-for="LabourHours" class="form-control" id="LabourHours" />
                     <span asp-validation-for="LabourHours" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="LabourDescription" class="control-label"></label>
-                    <input asp-for="LabourDescription" class="form-control" />
+                    <input asp-for="LabourDescription" class="form-control" id="LabourDescription" />
                     <span asp-validation-for="LabourDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="LabourPrice" class="control-label"></label>
-                    <input asp-for="LabourPrice" class="form-control" />
+                    <input asp-for="LabourPrice" class="form-control" id="LabourPrice" />
                     <span asp-validation-for="LabourPrice" class="text-danger"></span>
                 </div>
             </div>
@@ -73,34 +73,40 @@
             <div id="materials-container">
                 <div class="form-group">
                     <label asp-for="MaterialType" class="control-label"></label>
-                    <input asp-for="MaterialType" class="form-control" />
+                    <input asp-for="MaterialType" class="form-control" id="MaterialType" />
                     <span asp-validation-for="MaterialType" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="MaterialQuantity" class="control-label"></label>
-                    <input asp-for="MaterialQuantity" class="form-control" />
+                    <input asp-for="MaterialQuantity" class="form-control" id="MaterialQuantity" />
                     <span asp-validation-for="MaterialQuantity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="MaterialDescription" class="control-label"></label>
-                    <input asp-for="MaterialDescription" class="form-control" />
+                    <input asp-for="MaterialDescription" class="form-control" id="MaterialDescription" />
                     <span asp-validation-for="MaterialDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="MaterialSize" class="control-label"></label>
-                    <input asp-for="MaterialSize" class="form-control" />
+                    <input asp-for="MaterialSize" class="form-control" id="MaterialSize" />
                     <span asp-validation-for="MaterialSize" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="MaterialPrice" class="control-label"></label>
-                    <input asp-for="MaterialPrice" class="form-control" />
+                    <input asp-for="MaterialPrice" class="form-control" id="MaterialPrice" />
                     <span asp-validation-for="MaterialPrice" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Autofill button -->
+    <div class="form-group">
+
+        <input type="submit" value="Create" class="btn btn-primary" />
+
+        <button type="button" class="btn btn-primary" onclick="autofill()">Autofill</button>
+          
     </div>
 </form>
 
@@ -114,3 +120,77 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<script>
+    function autofill() {
+        // Generate random data for BidStart and BidEnd
+        var startDate = new Date(Date.now() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within next 30 days
+        var endDate = new Date(startDate.getTime() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within 30 days from start
+        document.getElementById("BidStart").value = startDate.toISOString().split('T')[0];
+        document.getElementById("BidEnd").value = endDate.toISOString().split('T')[0];
+
+        // Generate random data for ProjectID (assuming it's a select dropdown)
+        var projectOptions = document.getElementById("ProjectID").options;
+        var randomProjectIndex = Math.floor(Math.random() * (projectOptions.length - 1)) + 1; // Exclude the first option (Select a Project)
+        document.getElementById("ProjectID").selectedIndex = randomProjectIndex;
+
+        // Generate random data for Labour fields
+        document.getElementById("LabourHours").value = Math.floor(Math.random() * 40) + 1; // Random value between 1 and 40
+        document.getElementById("LabourPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+
+        // Generate random data for Material fields
+        document.getElementById("MaterialQuantity").value = Math.floor(Math.random() * 1000) + 1; // Random value between 1 and 1000
+        var materialSize = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+        var sizeUnit = Math.random() < 0.5 ? 'kg' : 'g'; // Randomly choose between kg and g
+        document.getElementById("MaterialSize").value = materialSize + ' ' + sizeUnit; // Concatenate size with unit
+        document.getElementById("MaterialPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+
+        // Generate random strings for BidName, MaterialType, MaterialDescription, and LabourDescription
+        document.getElementById("BidName").value = generateRandomBidName();
+        document.getElementById("MaterialType").value = generateRandomMaterialType();
+        document.getElementById("MaterialDescription").value = generateRandomMaterialDescription();
+        document.getElementById("LabourDescription").value = generateRandomLabourDescription();
+    }
+
+    // Function to generate random string of given length
+    function generateRandomString(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    // Function to generate random bid name
+    function generateRandomBidName() {
+        var prefixes = ['Construction of', 'Renovation of', 'Installation of', 'Repair of', 'Maintenance of', 'Design of', 'Development of', 'Remodeling of', 'Upgrade of', 'Expansion of'];
+        var suffixes = ['Building', 'Bridge', 'Road', 'Pipeline', 'Demolition', 'Foundation', 'Expansion', 'Upgrade', 'Refurbishment', 'Infrastructure', 'Facility', 'System', 'Project', 'Structure'];
+        return prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' + suffixes[Math.floor(Math.random() * suffixes.length)];
+    }
+
+
+
+    // Function to generate random material type
+    function generateRandomMaterialType() {
+        var types = ['Concrete', 'Steel', 'Wood', 'Plastic', 'Glass', 'Aluminum', 'Copper'];
+        return types[Math.floor(Math.random() * types.length)];
+    }
+
+    // Function to generate random material description
+    function generateRandomMaterialDescription() {
+        var descriptions = ['High quality', 'Durable', 'Eco friendly', 'Lightweight', 'Corrosion resistant', 'Fire resistant', 'Insulating'];
+        return  descriptions[Math.floor(Math.random() * descriptions.length)] + ' services';
+    }
+
+    // Function to generate random labour description
+    function generateRandomLabourDescription() {
+        var tasks = ['Excavation', 'Welding', 'Carpentry', 'Painting', 'Plumbing', 'Electrical wiring', 'Bricklaying'];
+        return  tasks[Math.floor(Math.random() * tasks.length)] + ' services';
+    }
+</script>
+
+
+
+
+
