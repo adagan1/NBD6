@@ -6,82 +6,98 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Bid</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BidName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BidName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BidStart)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BidStart)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BidEnd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BidEnd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaterialType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaterialType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaterialQuantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaterialQuantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaterialDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaterialDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaterialSize)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaterialSize)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaterialPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaterialPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LabourHours)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LabourHours)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LabourDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LabourDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LabourPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LabourPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.project)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.project.ProjectName)
-        </dd>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Project</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidName)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.BidName)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidStart)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.BidStart)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.BidEnd)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.BidEnd)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Materials</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialType)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialType)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialQuantity)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialQuantity)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialDescription)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialDescription)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialSize)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialSize)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.MaterialPrice)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.MaterialPrice)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <h4>Labour</h4>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourHours)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.LabourHours)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourDescription)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.LabourDescription)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.LabourPrice)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.LabourPrice)
+                </dd>
+                <dt class = "col-sm-4">
+                    @Html.DisplayNameFor(model => model.project)
+                </dt>
+                <dd class = "col-sm-8">
+                    @Html.DisplayFor(model => model.project.ProjectName)
+                </dd>
+            </dl>
+        </div>
     </dl>
 </div>
 <div>
