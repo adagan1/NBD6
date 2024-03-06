@@ -26,7 +26,7 @@ namespace NBD6.Models
         public DateTime ProjectEndDate { get; set; }
 
         [Display(Name = "Project Site")]
-        [Required(ErrorMessage = "Project site code is required.")]
+        [Required(ErrorMessage = "Project site is required.")]
         [StringLength(200, ErrorMessage = "Project site cannot be more than 200 characters long.")]
         public string ProjectSite { get; set; }
 

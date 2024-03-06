@@ -108,6 +108,14 @@ namespace NBD6.Data.NBDMigrations
                     BidName = table.Column<string>(type: "TEXT", nullable: false),
                     BidStart = table.Column<DateTime>(type: "TEXT", nullable: false),
                     BidEnd = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    MaterialType = table.Column<string>(type: "TEXT", nullable: false),
+                    MaterialQuantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaterialDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    MaterialSize = table.Column<string>(type: "TEXT", nullable: false),
+                    MaterialPrice = table.Column<decimal>(type: "TEXT", nullable: false),
+                    LabourHours = table.Column<double>(type: "REAL", nullable: false),
+                    LabourDescription = table.Column<string>(type: "TEXT", nullable: false),
+                    LabourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
                     ProjectID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -145,52 +153,6 @@ namespace NBD6.Data.NBDMigrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Labours",
-                columns: table => new
-                {
-                    LabourID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Hours = table.Column<double>(type: "REAL", nullable: false),
-                    LabourDescription = table.Column<string>(type: "TEXT", nullable: false),
-                    LabourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Labours", x => x.LabourID);
-                    table.ForeignKey(
-                        name: "FK_Labours_Bids_BidID",
-                        column: x => x.BidID,
-                        principalTable: "Bids",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Materials",
-                columns: table => new
-                {
-                    MaterialID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    MaterialDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    Size = table.Column<string>(type: "TEXT", nullable: true),
-                    MaterialPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Materials", x => x.MaterialID);
-                    table.ForeignKey(
-                        name: "FK_Materials_Bids_BidID",
-                        column: x => x.BidID,
-                        principalTable: "Bids",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ClientID",
                 table: "Addresses",
@@ -206,16 +168,6 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_BidStaff_StaffsStaffID",
                 table: "BidStaff",
                 column: "StaffsStaffID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Labours_BidID",
-                table: "Labours",
-                column: "BidID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Materials_BidID",
-                table: "Materials",
-                column: "BidID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_AddressID",
@@ -236,16 +188,10 @@ namespace NBD6.Data.NBDMigrations
                 name: "BidStaff");
 
             migrationBuilder.DropTable(
-                name: "Labours");
-
-            migrationBuilder.DropTable(
-                name: "Materials");
+                name: "Bids");
 
             migrationBuilder.DropTable(
                 name: "Staffs");
-
-            migrationBuilder.DropTable(
-                name: "Bids");
 
             migrationBuilder.DropTable(
                 name: "Projects");

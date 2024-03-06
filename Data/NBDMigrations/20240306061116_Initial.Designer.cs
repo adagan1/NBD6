@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240306021938_Initial")]
+    [Migration("20240306061116_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -91,6 +91,33 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<DateTime>("BidStart")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("LabourDescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("LabourHours")
+                        .HasColumnType("REAL");
+
+                    b.Property<decimal>("LabourPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MaterialDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("MaterialPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MaterialQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MaterialSize")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MaterialType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("ProjectID")
                         .HasColumnType("INTEGER");
 
@@ -142,63 +169,6 @@ namespace NBD6.Data.NBDMigrations
                     b.HasKey("ClientID");
 
                     b.ToTable("Clients");
-                });
-
-            modelBuilder.Entity("NBD6.Models.Labour", b =>
-                {
-                    b.Property<int>("LabourID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BidID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Hours")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("LabourDescription")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("LabourPrice")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("LabourID");
-
-                    b.HasIndex("BidID");
-
-                    b.ToTable("Labours");
-                });
-
-            modelBuilder.Entity("NBD6.Models.Material", b =>
-                {
-                    b.Property<int>("MaterialID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BidID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("MaterialDescription")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("MaterialPrice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("MaterialID");
-
-                    b.HasIndex("BidID");
-
-                    b.ToTable("Materials");
                 });
 
             modelBuilder.Entity("NBD6.Models.Project", b =>
@@ -297,28 +267,6 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("project");
                 });
 
-            modelBuilder.Entity("NBD6.Models.Labour", b =>
-                {
-                    b.HasOne("NBD6.Models.Bid", "bid")
-                        .WithMany("Labours")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("bid");
-                });
-
-            modelBuilder.Entity("NBD6.Models.Material", b =>
-                {
-                    b.HasOne("NBD6.Models.Bid", "bid")
-                        .WithMany("Materials")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("bid");
-                });
-
             modelBuilder.Entity("NBD6.Models.Project", b =>
                 {
                     b.HasOne("NBD6.Models.Address", "Address")
@@ -341,13 +289,6 @@ namespace NBD6.Data.NBDMigrations
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
                     b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("NBD6.Models.Bid", b =>
-                {
-                    b.Navigation("Labours");
-
-                    b.Navigation("Materials");
                 });
 
             modelBuilder.Entity("NBD6.Models.Client", b =>

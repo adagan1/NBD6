@@ -15,17 +15,17 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BidName" class="control-label"></label>
-                <input asp-for="BidName" class="form-control" id="BidName" />
+                <label asp-for="BidName" class="control-label">Bid Name<span class="text-danger">*</span></label>
+                <input asp-for="BidName" class="form-control" id="BidName" placeholder="Enter bid name"/>
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BidStart" class="control-label"></label>
+                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
                 <input asp-for="BidStart" class="form-control" id="BidStart" />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BidEnd" class="control-label"></label>
+                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
                 <input asp-for="BidEnd" class="form-control" id="BidEnd" />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
@@ -49,18 +49,18 @@
             <hr />
             <div id="labours-container">
                 <div class="form-group">
-                    <label asp-for="LabourHours" class="control-label"></label>
-                    <input asp-for="LabourHours" class="form-control" id="LabourHours" />
+                    <label asp-for="LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                    <input asp-for="LabourHours" class="form-control" id="LabourHours" placeholder="Please enter the number of hours worked"/>
                     <span asp-validation-for="LabourHours" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LabourDescription" class="control-label"></label>
-                    <input asp-for="LabourDescription" class="form-control" id="LabourDescription" />
-                    <span asp-validation-for="LabourDescription" class="text-danger"></span>
+                    <label asp-for="LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                    <input asp-for="LabourDescription" class="form-control" id="LabourDescription" placeholder="Enter the type of labour conducted"/>
+                    <span asp-validation-for="LabourDescription" class="text-danger"></span>                
                 </div>
                 <div class="form-group">
-                    <label asp-for="LabourPrice" class="control-label"></label>
-                    <input asp-for="LabourPrice" class="form-control" id="LabourPrice" />
+                    <label asp-for="LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
+                    <input asp-for="LabourPrice" class="form-control" id="LabourPrice" placeholder="ex: 100"/>
                     <span asp-validation-for="LabourPrice" class="text-danger"></span>
                 </div>
             </div>
@@ -72,27 +72,28 @@
             <hr />
             <div id="materials-container">
                 <div class="form-group">
-                    <label asp-for="MaterialType" class="control-label"></label>
-                    <input asp-for="MaterialType" class="form-control" id="MaterialType" />
+                    <label asp-for="MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
+                    <input asp-for="MaterialType" class="form-control" id="MaterialType" placeholder="ex: soil, bark, roses"/>
                     <span asp-validation-for="MaterialType" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MaterialQuantity" class="control-label"></label>
-                    <input asp-for="MaterialQuantity" class="form-control" id="MaterialQuantity" />
+                    <label asp-for="MaterialQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
+                    <input asp-for="MaterialQuantity" class="form-control" id="MaterialQuantity" placeholder="ex: 10"/>
                     <span asp-validation-for="MaterialQuantity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MaterialDescription" class="control-label"></label>
-                    <input asp-for="MaterialDescription" class="form-control" id="MaterialDescription" />
+                    <label asp-for="MaterialDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                    <input asp-for="MaterialDescription" class="form-control" id="MaterialDescription"/>
                     <span asp-validation-for="MaterialDescription" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MaterialSize" class="control-label"></label>
-                    <input asp-for="MaterialSize" class="form-control" id="MaterialSize" />
+                    <label asp-for="MaterialSize" class="control-label">Materials Size<span class="text-danger">*</span></label>
+                    <input asp-for="MaterialSize" class="form-control" id="MaterialSize" placeholder="ex: 10 kg" />
                     <span asp-validation-for="MaterialSize" class="text-danger"></span>
+                    <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MaterialPrice" class="control-label"></label>
+                    <label asp-for="MaterialPrice" class="control-label">Price<span class="text-danger">*</span></label>
                     <input asp-for="MaterialPrice" class="form-control" id="MaterialPrice" />
                     <span asp-validation-for="MaterialPrice" class="text-danger"></span>
                 </div>
@@ -112,7 +113,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="nav-link text-dark" href="javascript:history.back()">Go Back</a>
 </div>
 
 @section Scripts {
