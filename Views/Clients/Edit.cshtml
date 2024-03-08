@@ -15,7 +15,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ClientID" />
                 <div class="form-group">
-                    <label asp-for="CompanyName" class="control-label">Company Name</label>
+                    <label asp-for="CompanyName" class="control-label">Company Name<span class="text-danger">*</span></label>
                     <input asp-for="CompanyName" class="form-control" />
                     <span asp-validation-for="CompanyName" class="text-danger"></span>
                 </div>
@@ -35,12 +35,12 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ClientContact" class="control-label">Client Contact</label>
+                    <label asp-for="ClientContact" class="control-label">Client Contact<span class="text-danger">*</span></label>
                     <input asp-for="ClientContact" class="form-control" />
                     <span asp-validation-for="ClientContact" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ClientPhone" class="control-label">Client Phone</label>
+                    <label asp-for="ClientPhone" class="control-label">Client Phone<span class="text-danger">*</span></label>
                     <input asp-for="ClientPhone" class="form-control" />
                     <span asp-validation-for="ClientPhone" class="text-danger"></span>
                 </div>
@@ -49,13 +49,13 @@
                 <h4>Address</h4>
                 <hr />
                 <div class="form-group">
-                    <label asp-for="Address.Country" class="control-label">Country</label>
-                    <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
-                    </select>
-                    <span asp-validation-for="Address.Country" class="text-danger"></span>
+                    <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
+                    <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
+                    <span asp-validation-for="Address.Street" class="text-danger"></span>
+                    <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Address.Province" class="control-label">Province</label>
+                    <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
                     <select asp-for="Address.Province" asp-items="ViewBag.Provinces" class="form-control select2-province">
                     </select>
                     <span asp-validation-for="Address.Province" class="text-danger"></span>
@@ -67,10 +67,10 @@
                     <small class="form-text text-muted">Please enter the postal code in the format: A1A 1A1</small>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
-                    <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
-                    <span asp-validation-for="Address.Street" class="text-danger"></span>
-                    <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
+                    <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
+                    <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
+                    </select>
+                    <span asp-validation-for="Address.Country" class="text-danger"></span>
                 </div>
             </div>
         </div>

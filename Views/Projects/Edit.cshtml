@@ -38,13 +38,13 @@
             <h4>Address</h4>
             <hr />
             <div class="form-group">
-                <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
-                <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
-                </select>
-                <span asp-validation-for="Address.Country" class="text-danger"></span>
+                <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
+                <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
+                <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Province" class="control-label">Province</label>
+                <label asp-for="Address.Province" class="control-label">Province<span class="text-danger">*</span></label>
                 <select asp-for="Address.Province" asp-items="ViewBag.Provinces" class="form-control">
                 </select>
                 <span asp-validation-for="Address.Province" class="text-danger"></span>
@@ -56,10 +56,10 @@
                 <small class="form-text text-muted">Please enter the postal code in the format: A1A 1A1</small>
             </div>
             <div class="form-group">
-                <label asp-for="Address.Street" class="control-label">Street<span class="text-danger">*</span></label>
-                <input asp-for="Address.Street" class="form-control" placeholder="123 Example St (Format: Number, Street Name)" />
-                <span asp-validation-for="Address.Street" class="text-danger"></span>
-                <small class="form-text text-muted">Please enter the street address in the format: Number Street Name</small>
+                <label asp-for="Address.Country" class="control-label">Country<span class="text-danger">*</span></label>
+                <select asp-for="Address.Country" asp-items="ViewBag.Country" class="form-control">
+                </select>
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6">
