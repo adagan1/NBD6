@@ -347,6 +347,7 @@ namespace NBD6.Controllers
                     existingProject.Address.Postal = address.Postal;
                     existingProject.Address.Street = address.Street;
 
+                    TempData["AlertMessageProjectEdit"] = "Project Successfully Edited";
                     // Save changes to the database
                     _context.Update(existingProject);
                     await _context.SaveChangesAsync();

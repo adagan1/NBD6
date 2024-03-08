@@ -18,6 +18,16 @@
     </div>
 }
 
+@if (TempData["AlertMessageClientEdit"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageClientEdit"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 @using (Html.BeginForm("Index", "Clients", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row mb-3">

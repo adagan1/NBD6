@@ -211,6 +211,7 @@ namespace NBD6.Controllers
                 try
                 {
                     _context.Update(bid);
+                    TempData["AlertMessageBidEdit"] = "Bid Successfully Edited";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

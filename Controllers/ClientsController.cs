@@ -311,6 +311,7 @@ namespace NBD6.Controllers
                     existingClient.Address.Postal = address.Postal;
                     existingClient.Address.Street = address.Street;
 
+                    TempData["AlertMessageClientEdit"] = "Client Successfully Edited";
                     // Save changes to the database
                     await _context.SaveChangesAsync();
                 }

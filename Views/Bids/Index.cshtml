@@ -17,7 +17,15 @@
         </button>
     </div>
 }
-
+@if (TempData["AlertMessageBidEdit"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageBidEdit"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 @using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row mb-3">
