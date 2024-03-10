@@ -33,13 +33,5 @@ namespace NBD6.Models
 
         public int? ProjectID { get; set; }
         public Project? Project { get; set; }
-
-        public string AddressSummary
-        {
-            get
-            {
-                return $"{Country}, {Province}, {Street}, {Postal}";
-            }
-        }
     }
 }

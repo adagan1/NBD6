@@ -264,13 +264,13 @@ namespace NBD6.Data.NBDMigrations
 
             modelBuilder.Entity("NBD6.Models.Bid", b =>
                 {
-                    b.HasOne("NBD6.Models.Project", "project")
+                    b.HasOne("NBD6.Models.Project", "Project")
                         .WithMany("Bids")
                         .HasForeignKey("ProjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("project");
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("NBD6.Models.Project", b =>

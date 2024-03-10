@@ -127,7 +127,6 @@ namespace NBD6.Controllers
         public IActionResult Create()
         {
             TempData["ClientUrl"] = HttpContext.Request.Headers["Referer"].ToString();
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "AddressID", "AddressSummary");
             ViewBag.Country = new SelectList(new[] { "Canada" });
 
             // List of Canadian provinces as strings

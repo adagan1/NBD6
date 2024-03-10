@@ -42,7 +42,7 @@ namespace NBD6.Controllers
 
             // Include the 'Project' navigation property in your query
             var bidsQuery = _context.Bids
-                .Include(b => b.project) // Ensure your Bid entity has a navigation property 'Project'
+                .Include(b => b.Project) // Ensure your Bid entity has a navigation property 'Project'
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
@@ -51,7 +51,7 @@ namespace NBD6.Controllers
 
                 // Ensure your Bid and Project entities have properties 'BidName' and 'ProjectName'
                 bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
-                                                 || b.project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
+                                                 || b.Project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
             }
 
             switch (sortOrder)
@@ -60,10 +60,10 @@ namespace NBD6.Controllers
                     bidsQuery = bidsQuery.OrderByDescending(b => b.BidName);
                     break;
                 case "Project Name":
-                    bidsQuery = bidsQuery.OrderBy(b => b.project.ProjectName);
+                    bidsQuery = bidsQuery.OrderBy(b => b.Project.ProjectName);
                     break;
                 case "project_name_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.project.ProjectName);
+                    bidsQuery = bidsQuery.OrderByDescending(b => b.Project.ProjectName);
                     break;
                 case "Start Date":
                     bidsQuery = bidsQuery.OrderBy(b => b.BidStart);
@@ -100,7 +100,7 @@ namespace NBD6.Controllers
             }
 
             var bid = await _context.Bids
-                .Include(b => b.project)
+                .Include(b => b.Project)
                 .FirstOrDefaultAsync(m => m.BidID == id);
             if (bid == null)
             {
@@ -119,7 +119,7 @@ namespace NBD6.Controllers
             }
 
             var bid = await _context.Bids
-                .Include(b => b.project)
+                .Include(b => b.Project)
                 .FirstOrDefaultAsync(m => m.BidID == id);
 
             if (bid == null)
@@ -164,7 +164,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid)
+        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID, ProjectSummary")] Bid bid)
         {
             if (ModelState.IsValid)
             {
@@ -240,7 +240,7 @@ namespace NBD6.Controllers
             }
 
             var bid = await _context.Bids
-                .Include(b => b.project)
+                .Include(b => b.Project)
                 .FirstOrDefaultAsync(m => m.BidID == id);
             if (bid == null)
             {

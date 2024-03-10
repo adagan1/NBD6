@@ -36,7 +36,7 @@ namespace NBD6.Data
 
 
             modelBuilder.Entity<Bid>()
-                .HasOne(b => b.project)
+                .HasOne(b => b.Project)
                 .WithMany(p => p.Bids)
                 .HasForeignKey(b => b.ProjectID)
                 .IsRequired();

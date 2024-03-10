@@ -176,7 +176,6 @@ namespace NBD6.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["NewAddressID"] = address.AddressID; // Add address ID to TempData
-                TempData["NewAddressSummary"] = address.AddressSummary; // Add address summary to TempData
 
                 // Check if TempData contains the ReferrerUrl
                 if (TempData.ContainsKey("AddressUrl"))

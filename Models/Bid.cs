@@ -85,6 +85,6 @@ namespace NBD6.Models
         //FK
         public int ProjectID { get; set; }
         [Display(Name = "Project")]
-        public Project project { get; set; }
+        public Project Project { get; set; }
     }    
 }

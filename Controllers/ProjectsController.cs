@@ -145,7 +145,8 @@ namespace NBD6.Controllers
 
         // GET: Projects/Create
         public IActionResult Create()
-        {           
+        {
+            TempData["ProjectUrl"] = HttpContext.Request.Headers["Referer"].ToString();
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary");
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -182,19 +183,13 @@ namespace NBD6.Controllers
         public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
         {
 
-            
-            
             var client = await _context.Clients
                 .Include(c => c.Address)
                 .Include(c => c.Projects)
                 .FirstOrDefaultAsync(m => m.ClientID == project.ClientID);
 
-           
-
             _context.Addresses.Add(address);
-            await _context.SaveChangesAsync();
-
-            
+            await _context.SaveChangesAsync();   
 
             // Set the AddressID for the client
             project.AddressID = address.AddressID;
@@ -216,8 +211,20 @@ namespace NBD6.Controllers
                 _context.Add(project);
                 await _context.SaveChangesAsync();
 
+                TempData["NewProjectID"] = project.ProjectID;
+                TempData["NewProjectSummary"] = project.ProjectSummary;
                 TempData["AlertMessageProject"] = "Project Successfully Added";
-                return RedirectToAction(nameof(Index));
+
+                // Check if TempData contains the ReferrerUrl
+                if (TempData.ContainsKey("ProjectUrl"))
+                {
+                    // Redirect back to the ReferrerUrl
+                    return Redirect(TempData["ProjectUrl"].ToString());
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }               
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
             
