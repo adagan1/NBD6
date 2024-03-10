@@ -1,9 +1,5 @@
 ﻿using NBD6.Models;
-using System;
 using System.Diagnostics;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace NBD6.Data
 {
@@ -18,7 +14,7 @@ namespace NBD6.Data
                 // Delete and recreate the Database with every restart
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
-               
+
                 if (!context.Clients.Any())
                 {
                     // Create clients
@@ -85,7 +81,7 @@ namespace NBD6.Data
                             ProjectName = "BU Glass Garden",
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
-                            ProjectSite = "Brock University",                           
+                            ProjectSite = "Brock University",
                             ClientID = 1, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
@@ -138,14 +134,20 @@ namespace NBD6.Data
                             BidName = "Glass Material Bid",
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
-                            MaterialType = "Glass",
-                            MaterialQuantity = 100,
-                            MaterialDescription = "Tempered Glass Panels",
-                            MaterialSize = "10 cm",
-                            MaterialPrice = 50.00m,
-                            LabourHours = 40,
-                            LabourDescription = "Installation of Glass Panels",
-                            LabourPrice = 25.00m,
+                            Labour = new Labour
+                            {
+                                LabourHours = 40,
+                                LabourDescription = "Installation of Glass Panels",
+                                LabourPrice = 25.00m,
+                            },
+                            Material = new Material
+                            {
+                                MaterialType = "Glass",
+                                MaterialQuantity = 100,
+                                MaterialDescription = "Tempered Glass Panels",
+                                MaterialSize = "10 cm",
+                                MaterialPrice = 50.00m,
+                            },
                             ProjectID = 1 // Assuming ProjectID associated with this Bid
                         },
                         new Bid
@@ -153,14 +155,20 @@ namespace NBD6.Data
                             BidName = "Steel Material Bid",
                             BidStart = new DateTime(2024, 02, 01),
                             BidEnd = new DateTime(2024, 02, 15),
-                            MaterialType = "Steel",
-                            MaterialQuantity = 200,
-                            MaterialDescription = "Structural Steel Beams",
-                            MaterialSize = "15 m",
-                            MaterialPrice = 100.00m,
-                            LabourHours = 60,
-                            LabourDescription = "Welding and Fabrication",
-                            LabourPrice = 30.00m,
+                            Labour = new Labour
+                            {
+                                LabourHours = 60,
+                                LabourDescription = "Welding and Fabrication",
+                                LabourPrice = 30.00m,
+                            },
+                            Material = new Material
+                            {
+                                MaterialType = "Steel",
+                                MaterialQuantity = 200,
+                                MaterialDescription = "Structural Steel Beams",
+                                MaterialSize = "15 m",
+                                MaterialPrice = 100.00m,
+                            },
                             ProjectID = 2 // Assuming ProjectID associated with this Bid
                         },
                         new Bid
@@ -168,20 +176,27 @@ namespace NBD6.Data
                             BidName = "Concrete Material Bid",
                             BidStart = new DateTime(2024, 03, 01),
                             BidEnd = new DateTime(2024, 03, 15),
-                            MaterialType = "Concrete",
-                            MaterialQuantity = 500,
-                            MaterialDescription = "Reinforced Concrete Slabs",
-                            MaterialSize = "20 cm",
-                            MaterialPrice = 75.00m,
-                            LabourHours = 80,
-                            LabourDescription = "Pouring and Finishing",
-                            LabourPrice = 35.00m,
+                            Labour = new Labour
+                            {
+                                LabourHours = 80,
+                                LabourDescription = "Pouring and Finishing",
+                                LabourPrice = 35.00m,
+                            },
+                            Material = new Material
+                            {
+                                MaterialType = "Concrete",
+                                MaterialQuantity = 500,
+                                MaterialDescription = "Reinforced Concrete Slabs",
+                                MaterialSize = "20 cm",
+                                MaterialPrice = 75.00m,
+                            },
                             ProjectID = 3 // Assuming ProjectID associated with this Bid
                         }
                     // Add other Bid entries similarly
                     );
                     context.SaveChanges();
                 }
+
             }
             catch (Exception ex)
             {

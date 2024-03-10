@@ -42,6 +42,8 @@ namespace NBD6.Controllers
 
             // Include the 'Project' navigation property in your query
             var bidsQuery = _context.Bids
+                .Include(b => b.Labours)
+                .Include(b => b.Materials)
                 .Include(b => b.Project) // Ensure your Bid entity has a navigation property 'Project'
                 .AsQueryable();
 
@@ -164,15 +166,32 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID, ProjectSummary")] Bid bid)
+        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID")] Bid bid, List<Material> materials, List<Labour> labours)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bid);
-                TempData["AlertMessageBid"] = "Bid Successfully Added";
+                // Add the bid to the context
+                _context.Bids.Add(bid);
                 await _context.SaveChangesAsync();
+
+                // Bind materials and labours to the bid
+                foreach (var material in materials)
+                {
+                    material.BidID = bid.BidID; // Associate material with the bid
+                    _context.Materials.Add(material);
+                }
+
+                foreach (var labour in labours)
+                {
+                    labour.BidID = bid.BidID; // Associate labour with the bid
+                    _context.Labours.Add(labour);
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
             return View(bid);
         }
@@ -199,7 +218,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid)
+        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialID,LabourID,ProjectID, ProjectSummary")] Bid bid)
         {
             if (id != bid.BidID)
             {

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static NBD6.Models.Bid;
 
 namespace NBD6.Models
@@ -35,56 +36,32 @@ namespace NBD6.Models
             {
                 yield return new ValidationResult("Bid End date cannot end before it starts.", new[] { "BidEnd" });
             }
-        }
-
-        //Material fields
-        [Display(Name = "Type")]
-        [Required(ErrorMessage = "Material type is required.")]
-        public string MaterialType { get; set; }
-
-        [Display(Name = "Quantity")]
-        [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Quantity must be a valid number.")]
-        public int MaterialQuantity { get; set; }
-
-        [Display(Name = "Description")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
-        public string MaterialDescription { get; set; }
-
-        [Display(Name = "Size")]
-        [Required(ErrorMessage = "Please provide a unit of measurement after the digit (cm, m, l, g, kg)")]
-        [RegularExpression(@"^(?:\d*\.?\d+)\s*(cm|m|l|g|kg|cubic\s*cm|cubic\s*m)$")]
-        public string MaterialSize { get; set; }
-
-        [Display(Name = "Price")]
-        [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
-        public decimal MaterialPrice { get; set; }
-
-        public decimal ExtendedMaterialPrice => MaterialQuantity * MaterialPrice;
-
-        //Labour Fields
-        [Required]
-        [Display(Name = "Hours")]
-        [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Hours must be a valid number.")]
-        public double LabourHours { get; set; }
-
-        [Required]
-        [Display(Name = "Description")]
-        [RegularExpression(@"^[a-zA-Z0-9\s]+$")]
-        public string LabourDescription { get; set; }
-
-        [Required]
-        [Display(Name = "Price")]
-        [RegularExpression(@"^(?!-)\d+(\.\d{1,2})?$", ErrorMessage = "Unit Price must be a valid number.")]
-        public decimal LabourPrice { get; set; }
-
-        public decimal ExtendedLabourPrice => (decimal)LabourHours * LabourPrice;
-
-        //Collections
-        public virtual ICollection<Staff> Staffs { get; set; }
+        }                     
 
         //FK
         public int ProjectID { get; set; }
         [Display(Name = "Project")]
         public Project Project { get; set; }
+
+        //// Foreign key for Material
+        //[ForeignKey("Material")]
+        //public int MaterialID { get; set; }
+        //[Display(Name = "Material")]
+        //public Material Material { get; set; }
+
+        //// Foreign key for Labour
+        //[ForeignKey("Labour")]
+        //public int LabourID { get; set; }
+        //[Display(Name = "Labour")]
+        //public Labour Labour { get; set; }
+
+        //Collections
+        public virtual ICollection<Staff> Staffs { get; set; }
+
+        // Collection of materials
+        public ICollection<Material> Materials { get; set; }
+
+        // Collection of labour
+        public ICollection<Labour> Labours { get; set; }
     }    
 }

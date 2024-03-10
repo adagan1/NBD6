@@ -12,93 +12,50 @@
             <h4>Bid</h4>
             <hr />
             <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidName)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidName)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidStart)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidStart)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.BidEnd)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.BidEnd)
-                </dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.BidName)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BidName)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.BidStart)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BidStart)</dd>
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.BidEnd)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BidEnd)</dd>
             </dl>
         </div>
         <div class="col-md-6">
             <h4>Materials</h4>
             <hr />
             <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.MaterialType)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.MaterialType)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.MaterialQuantity)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.MaterialQuantity)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.MaterialDescription)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.MaterialDescription)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.MaterialSize)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.MaterialSize)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.MaterialPrice)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.MaterialPrice)
-                </dd>
+                @foreach (var material in Model.Materials)
+                {
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => material.MaterialType)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => material.MaterialType)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => material.MaterialQuantity)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => material.MaterialQuantity)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => material.MaterialDescription)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => material.MaterialDescription)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => material.MaterialSize)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => material.MaterialSize)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => material.MaterialPrice)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => material.MaterialPrice)</dd>
+                }
             </dl>
         </div>
         <div class="col-md-6">
             <h4>Labour</h4>
             <hr />
             <dl class="row">
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.LabourHours)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.LabourHours)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.LabourDescription)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.LabourDescription)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.LabourPrice)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.LabourPrice)
-                </dd>
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Project)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Project.ProjectName)
-                </dd>
+                @foreach (var labour in Model.Labours)
+                {
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => labour.LabourHours)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => labour.LabourHours)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => labour.LabourDescription)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => labour.LabourDescription)</dd>
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => labour.LabourPrice)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => labour.LabourPrice)</dd>
+                }
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Project.ProjectName)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Project.ProjectName)</dd>
             </dl>
         </div>
-        </dl>
     </div>
 
     <div class="row">
@@ -122,6 +79,7 @@
             </form>
         </div>
     </div>
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

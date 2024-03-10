@@ -20,6 +20,10 @@ namespace NBD6.Data
 
         public DbSet<Staff> Staffs { get; set; }
 
+        public DbSet<Labour> Labours { get; set; }
+
+        public DbSet<Material> Materials { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
 using NBD6.Utilities;
-using NuGet.Protocol;
+using System.Diagnostics;
 
 namespace NBD6.Controllers
 {
@@ -49,7 +44,7 @@ namespace NBD6.Controllers
                 searchTerm = currentFilter;
             }
 
-            ViewBag.CurrentFilter = searchTerm;          
+            ViewBag.CurrentFilter = searchTerm;
 
             if (!String.IsNullOrEmpty(searchTerm))
             {
@@ -189,7 +184,7 @@ namespace NBD6.Controllers
                 .FirstOrDefaultAsync(m => m.ClientID == project.ClientID);
 
             _context.Addresses.Add(address);
-            await _context.SaveChangesAsync();   
+            await _context.SaveChangesAsync();
 
             // Set the AddressID for the client
             project.AddressID = address.AddressID;
@@ -205,7 +200,7 @@ namespace NBD6.Controllers
                 .Where(x => x.Value.Errors.Count > 0)
                 .Select(x => new { x.Key, x.Value.Errors })
                 .ToArray();
-            
+
             if (ModelState.IsValid)
             {
                 _context.Add(project);
@@ -224,10 +219,10 @@ namespace NBD6.Controllers
                 else
                 {
                     return RedirectToAction(nameof(Index));
-                }               
+                }
             }
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
-            
+
             Debug.WriteLine(client);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -346,7 +341,7 @@ namespace NBD6.Controllers
                     // Update client properties
                     //existingProject.Client = project.Client;
                     existingProject.Client = client;
-                    
+
 
                     // Update address properties
                     existingProject.Address.Country = address.Country;
@@ -436,14 +431,14 @@ namespace NBD6.Controllers
             {
                 _context.Projects.Remove(project);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectExists(int id)
         {
-          return _context.Projects.Any(e => e.ProjectID == id);
+            return _context.Projects.Any(e => e.ProjectID == id);
         }
     }
 }

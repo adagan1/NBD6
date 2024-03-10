@@ -6,91 +6,131 @@
 
 <h1>Bid Edit</h1>
 
+<p>All fields marked with * are required to edit the bid.</p>
+
 <form asp-action="Edit">
-<div class="row">
-    <div class="col-md-6">
-        <h4>Bid</h4>
-        <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Bid</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BidID" />
             <div class="form-group">
-                <label asp-for="BidName" class="control-label"></label>
-                <input asp-for="BidName" class="form-control" />
+                <label asp-for="BidName" class="control-label">Bid Name<span class="text-danger">*</span></label>
+                <input asp-for="BidName" class="form-control" id="BidName" />
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BidStart" class="control-label"></label>
-                <input asp-for="BidStart" class="form-control" />
+                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
+                <input asp-for="BidStart" class="form-control" id="BidStart" />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BidEnd" class="control-label"></label>
-                <input asp-for="BidEnd" class="form-control" />
+                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
+                <input asp-for="BidEnd" class="form-control" id="BidEnd" />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ProjectID" class="control-label"></label>
-                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
-                <span asp-validation-for="ProjectID" class="text-danger"></span>
+                <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
+                <select asp-for="ProjectID" class="form-control" id="ProjectID" asp-items="ViewBag.ProjectID">
+                    <option value="">Select a Project</option>
+                    @if (TempData["NewProjectID"] != null)
+                    {
+                        <option value="@TempData["NewProjectID"]" selected>@TempData["NewProjectSummary"]</option>
+                    }
+                </select>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Create">Create a new Project</a>
             </div>
-            
+        </div>
+
+        <!-- Labour Fields -->
+        <div class="col-md-6">
+            <h4>Labour</h4>
+            <hr />
+            <div id="labours-container">
+                @if (Model.Labours != null && Model.Labours.Any())
+                {
+                    var laboursList = Model.Labours.ToList();
+                    for (int i = 0; i < laboursList.Count(); i++)
+                    {
+                        var labour = laboursList[i];
+                        <div class="form-group">
+                            <label asp-for="@labour.LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                            <input asp-for="@labour.LabourHours" class="form-control" placeholder="Please enter the number of hours worked" />
+                            <span asp-validation-for="@labour.LabourHours" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@labour.LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                            <input asp-for="@labour.LabourDescription" class="form-control" placeholder="Enter the type of labour conducted" />
+                            <span asp-validation-for="@labour.LabourDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@labour.LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
+                            <input asp-for="@labour.LabourPrice" class="form-control" placeholder="ex: 100" />
+                            <span asp-validation-for="@labour.LabourPrice" class="text-danger"></span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No labour items found.</p>
+                }
+            </div>
+        </div>
+
         <!-- Material Fields -->
-        <h4>Material</h4>
-        <hr />
-            <div class="form-group">
-                <label asp-for="MaterialType" class="control-label"></label>
-                <input asp-for="MaterialType" class="form-control" />
-                <span asp-validation-for="MaterialType" class="text-danger"></span>
+        <div class="col-md-6">
+            <h4>Materials</h4>
+            <hr />
+            <div id="materials-container">
+                @if (Model.Materials != null && Model.Materials.Any())
+                {
+                    var materialsList = Model.Materials.ToList();
+                    for (int i = 0; i < materialsList.Count(); i++)
+                    {
+                        var material = materialsList[i];
+                        <div class="form-group">
+                            <label asp-for="@material.MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
+                            <input asp-for="@material.MaterialType" class="form-control" placeholder="ex: soil, bark, roses" />
+                            <span asp-validation-for="@material.MaterialType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@material.MaterialQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
+                            <input asp-for="@material.MaterialQuantity" class="form-control" placeholder="ex: 10" />
+                            <span asp-validation-for="@material.MaterialQuantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@material.MaterialDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                            <input asp-for="@material.MaterialDescription" class="form-control" placeholder="Enter the description" />
+                            <span asp-validation-for="@material.MaterialDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@material.MaterialSize" class="control-label">Size<span class="text-danger">*</span></label>
+                            <input asp-for="@material.MaterialSize" class="form-control" placeholder="Enter the size" />
+                            <span asp-validation-for="@material.MaterialSize" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@material.MaterialPrice" class="control-label">Price<span class="text-danger">*</span></label>
+                            <input asp-for="@material.MaterialPrice" class="form-control" placeholder="Enter the price" />
+                            <span asp-validation-for="@material.MaterialPrice" class="text-danger"></span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No material items found.</p>
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="MaterialQuantity" class="control-label"></label>
-                <input asp-for="MaterialQuantity" class="form-control" />
-                <span asp-validation-for="MaterialQuantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaterialDescription" class="control-label"></label>
-                <input asp-for="MaterialDescription" class="form-control" />
-                <span asp-validation-for="MaterialDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaterialSize" class="control-label"></label>
-                <input asp-for="MaterialSize" class="form-control" />
-                <span asp-validation-for="MaterialSize" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaterialPrice" class="control-label"></label>
-                <input asp-for="MaterialPrice" class="form-control" />
-                <span asp-validation-for="MaterialPrice" class="text-danger"></span>
-            </div>
-        
+        </div>
     </div>
 
-    <!-- Labor Fields -->
-    <div class="col-md-6">
-        <h4>Labor</h4>
-        <hr />
-            <div class="form-group">
-                <label asp-for="LabourHours" class="control-label"></label>
-                <input asp-for="LabourHours" class="form-control" />
-                <span asp-validation-for="LabourHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LabourDescription" class="control-label"></label>
-                <input asp-for="LabourDescription" class="form-control" />
-                <span asp-validation-for="LabourDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LabourPrice" class="control-label"></label>
-                <input asp-for="LabourPrice" class="form-control" />
-                <span asp-validation-for="LabourPrice" class="text-danger"></span>
-            </div>       
-    </div>
+    <!-- Update button -->
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Update" class="btn btn-primary" />
     </div>
-</div>
 </form>
+
 
 <div class="col-md-1">
     <div>
