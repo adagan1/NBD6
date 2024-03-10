@@ -43,17 +43,17 @@ namespace NBD6.Models
         [Display(Name = "Project")]
         public Project Project { get; set; }
 
-        //// Foreign key for Material
-        //[ForeignKey("Material")]
-        //public int MaterialID { get; set; }
-        //[Display(Name = "Material")]
-        //public Material Material { get; set; }
+        // Foreign key for Material
+        [ForeignKey("Material")]
+        public int MaterialID { get; set; }
+        [Display(Name = "Material")]
+        public Material Material { get; set; }
 
-        //// Foreign key for Labour
-        //[ForeignKey("Labour")]
-        //public int LabourID { get; set; }
-        //[Display(Name = "Labour")]
-        //public Labour Labour { get; set; }
+        // Foreign key for Labour
+        [ForeignKey("Labour")]
+        public int LabourID { get; set; }
+        [Display(Name = "Labour")]
+        public Labour Labour { get; set; }
 
         //Collections
         public virtual ICollection<Staff> Staffs { get; set; }
