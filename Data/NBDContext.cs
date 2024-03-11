@@ -45,17 +45,15 @@ namespace NBD6.Data
                 .HasForeignKey(b => b.ProjectID)
                 .IsRequired();
 
-            // Configure the relationships between Bid and Material
             modelBuilder.Entity<Bid>()
-                .HasMany(b => b.Materials)
-                .WithOne(m => m.Bid)
-                .HasForeignKey(m => m.BidID);
+                .HasOne(l => l.Labour)
+                .WithOne(b => b.Bid)
+                .HasForeignKey<Labour>(l => l.LabourID); // Specify the foreign key property explicitly
 
-            // Configure the relationships between Bid and Labour
             modelBuilder.Entity<Bid>()
-                .HasMany(b => b.Labours)
-                .WithOne(l => l.Bid)
-                .HasForeignKey(l => l.BidID);
+                .HasOne(m => m.Material)
+                .WithOne(b => b.Bid)
+                .HasForeignKey<Material>(m => m.MaterialID); // Specify the foreign key property explicitly
         }
     }
 }

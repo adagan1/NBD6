@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NBD6.Models
 {
@@ -24,7 +25,12 @@ namespace NBD6.Models
 
         public decimal ExtendedLabourPrice => (decimal)LabourHours * LabourPrice;
 
-        public int? BidID { get; set; }
-        public Bid? Bid { get; set; }
+        //Foreign Key
+        [Display(Name = "Bid ID")]
+        [Required(ErrorMessage = "You must select a Bid.")]
+        public int BidID { get; set; }
+
+        // Navigation Property
+        public Bid Bid { get; set; }
     }
 }

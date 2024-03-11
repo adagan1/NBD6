@@ -111,9 +111,7 @@ namespace NBD6.Data.NBDMigrations
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ClientApproved = table.Column<bool>(type: "INTEGER", nullable: false),
                     NBDApproved = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false),
-                    MaterialID = table.Column<int>(type: "INTEGER", nullable: false),
-                    LabourID = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,11 +156,17 @@ namespace NBD6.Data.NBDMigrations
                     LabourHours = table.Column<double>(type: "REAL", nullable: false),
                     LabourDescription = table.Column<string>(type: "TEXT", nullable: false),
                     LabourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Labours", x => x.LabourID);
+                    table.ForeignKey(
+                        name: "FK_Labours_Bids_BidID",
+                        column: x => x.BidID,
+                        principalTable: "Bids",
+                        principalColumn: "BidID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Labours_Bids_LabourID",
                         column: x => x.LabourID,
@@ -181,11 +185,17 @@ namespace NBD6.Data.NBDMigrations
                     MaterialDescription = table.Column<string>(type: "TEXT", nullable: true),
                     MaterialSize = table.Column<string>(type: "TEXT", nullable: false),
                     MaterialPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Materials", x => x.MaterialID);
+                    table.ForeignKey(
+                        name: "FK_Materials_Bids_BidID",
+                        column: x => x.BidID,
+                        principalTable: "Bids",
+                        principalColumn: "BidID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Materials_Bids_MaterialID",
                         column: x => x.MaterialID,
@@ -201,16 +211,6 @@ namespace NBD6.Data.NBDMigrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bids_LabourID",
-                table: "Bids",
-                column: "LabourID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bids_MaterialID",
-                table: "Bids",
-                column: "MaterialID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bids_ProjectID",
                 table: "Bids",
                 column: "ProjectID");
@@ -219,6 +219,16 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_BidStaff_StaffsStaffID",
                 table: "BidStaff",
                 column: "StaffsStaffID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Labours_BidID",
+                table: "Labours",
+                column: "BidID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materials_BidID",
+                table: "Materials",
+                column: "BidID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_AddressID",
@@ -230,57 +240,22 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_Projects_ClientID",
                 table: "Projects",
                 column: "ClientID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Bids_Labours_LabourID",
-                table: "Bids",
-                column: "LabourID",
-                principalTable: "Labours",
-                principalColumn: "LabourID",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Bids_Materials_MaterialID",
-                table: "Bids",
-                column: "MaterialID",
-                principalTable: "Materials",
-                principalColumn: "MaterialID",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Addresses_Clients_ClientID",
-                table: "Addresses");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Projects_Clients_ClientID",
-                table: "Projects");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Bids_Labours_LabourID",
-                table: "Bids");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Bids_Materials_MaterialID",
-                table: "Bids");
-
             migrationBuilder.DropTable(
                 name: "BidStaff");
-
-            migrationBuilder.DropTable(
-                name: "Staffs");
-
-            migrationBuilder.DropTable(
-                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Labours");
 
             migrationBuilder.DropTable(
                 name: "Materials");
+
+            migrationBuilder.DropTable(
+                name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "Bids");
@@ -290,6 +265,9 @@ namespace NBD6.Data.NBDMigrations
 
             migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
         }
     }
 }

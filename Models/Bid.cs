@@ -7,6 +7,7 @@ namespace NBD6.Models
     public class Bid : IValidatableObject
     {
         [Key]
+        [Display(Name = "Bid ID")]
         public int BidID { get; set; }
 
         [Required]
@@ -36,11 +37,11 @@ namespace NBD6.Models
             {
                 yield return new ValidationResult("Bid End date cannot end before it starts.", new[] { "BidEnd" });
             }
-        }                     
+        }
 
         //FK
-        public int ProjectID { get; set; }
         [Display(Name = "Project")]
+        public int ProjectID { get; set; }       
         public Project Project { get; set; }
 
         //Collections
@@ -48,8 +49,10 @@ namespace NBD6.Models
 
         // Collection of materials
         public ICollection<Material> Materials { get; set; }
+        public Material Material { get; set; }
 
         // Collection of labour
         public ICollection<Labour> Labours { get; set; }
+        public Labour Labour { get; set; }
     }    
 }
