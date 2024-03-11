@@ -49,13 +49,13 @@ namespace NBD6.Data
             modelBuilder.Entity<Bid>()
                 .HasMany(b => b.Materials)
                 .WithOne(m => m.Bid)
-                .HasForeignKey(m => m.MaterialID);
+                .HasForeignKey(m => m.BidID);
 
             // Configure the relationships between Bid and Labour
             modelBuilder.Entity<Bid>()
                 .HasMany(b => b.Labours)
                 .WithOne(l => l.Bid)
-                .HasForeignKey(l => l.LabourID);
+                .HasForeignKey(l => l.BidID);
         }
     }
 }

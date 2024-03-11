@@ -7,10 +7,10 @@
 <h1>Bid Edit</h1>
 
 <form asp-action="Edit">
-<div class="row">
-    <div class="col-md-6">
-        <h4>Bid</h4>
-        <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Bid</h4>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BidID" />
             <div class="form-group">
@@ -34,62 +34,77 @@
                 <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
                 <span asp-validation-for="ProjectID" class="text-danger"></span>
             </div>
-            
-        <!-- Material Fields -->
-        <h4>Material</h4>
-        <hr />
-            <div class="form-group">
-                <label asp-for="Material.MaterialType" class="control-label"></label>
-                <input asp-for="Material.MaterialType" class="form-control" />
-                <span asp-validation-for="Material.MaterialType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialQuantity" class="control-label"></label>
-                <input asp-for="Material.MaterialQuantity" class="form-control" />
-                <span asp-validation-for="Material.MaterialQuantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialDescription" class="control-label"></label>
-                <input asp-for="Material.MaterialDescription" class="form-control" />
-                <span asp-validation-for="Material.MaterialDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialSize" class="control-label"></label>
-                <input asp-for="Material.MaterialSize" class="form-control" />
-                <span asp-validation-for="Material.MaterialSize" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialPrice" class="control-label"></label>
-                <input asp-for="Material.MaterialPrice" class="form-control" />
-                <span asp-validation-for="Material.MaterialPrice" class="text-danger"></span>
-            </div>
-        
-    </div>
+        </div>
 
-    <!-- Labor Fields -->
-    <div class="col-md-6">
-        <h4>Labor</h4>
-        <hr />
-            <div class="form-group">
-                <label asp-for="Labour.LabourHours" class="control-label"></label>
-                <input asp-for="Labour.LabourHours" class="form-control" />
-                <span asp-validation-for="Labour.LabourHours" class="text-danger"></span>
+        <!-- Material Fields -->
+        <div class="col-md-6">
+            <h4>Materials</h4>
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    @if (Model.Materials != null)
+                    {
+                        <div class="form-group">
+                            <label asp-for="Material.MaterialType" class="control-label"></label>
+                            <input asp-for="Material.MaterialType" class="form-control" />
+                            <span asp-validation-for="Material.MaterialType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Material.MaterialQuantity" class="control-label"></label>
+                            <input asp-for="Material.MaterialQuantity" class="form-control" />
+                            <span asp-validation-for="Material.MaterialQuantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Material.MaterialDescription" class="control-label"></label>
+                            <input asp-for="Material.MaterialDescription" class="form-control" />
+                            <span asp-validation-for="Material.MaterialDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Material.MaterialSize" class="control-label"></label>
+                            <input asp-for="Material.MaterialSize" class="form-control" />
+                            <span asp-validation-for="Material.MaterialSize" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Material.MaterialPrice" class="control-label"></label>
+                            <input asp-for="Material.MaterialPrice" class="form-control" />
+                            <span asp-validation-for="Material.MaterialPrice" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Labour.LabourDescription" class="control-label"></label>
-                <input asp-for="Labour.LabourDescription" class="form-control" />
-                <span asp-validation-for="Labour.LabourDescription" class="text-danger"></span>
+        </div>
+
+        <!-- Labor Fields -->
+        <div class="col-md-6">
+            <h4>Labor</h4>
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    @if (Model.Labour != null)
+                    {
+                        <div class="form-group">
+                            <label asp-for="Labour.LabourHours" class="control-label"></label>
+                            <input asp-for="Labour.LabourHours" class="form-control" />
+                            <span asp-validation-for="Labour.LabourHours" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Labour.LabourDescription" class="control-label"></label>
+                            <input asp-for="Labour.LabourDescription" class="form-control" />
+                            <span asp-validation-for="Labour.LabourDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Labour.LabourPrice" class="control-label"></label>
+                            <input asp-for="Labour.LabourPrice" class="form-control" />
+                            <span asp-validation-for="Labour.LabourPrice" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Labour.LabourPrice" class="control-label"></label>
-                <input asp-for="Labour.LabourPrice" class="form-control" />
-                <span asp-validation-for="Labour.LabourPrice" class="text-danger"></span>
-            </div>       
+        </div>
     </div>
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
     </div>
-</div>
 </form>
 
 <div class="col-md-1">

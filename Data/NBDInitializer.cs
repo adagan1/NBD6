@@ -134,62 +134,20 @@ namespace NBD6.Data
                             BidName = "Glass Material Bid",
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
-                            Labour = new Labour
-                            {
-                                LabourHours = 40,
-                                LabourDescription = "Installation of Glass Panels",
-                                LabourPrice = 25.00m,
-                            },
-                            Material = new Material
-                            {
-                                MaterialType = "Glass",
-                                MaterialQuantity = 100,
-                                MaterialDescription = "Tempered Glass Panels",
-                                MaterialSize = "10 cm",
-                                MaterialPrice = 50.00m,
-                            },
                             ProjectID = 1 // Assuming ProjectID associated with this Bid
                         },
                         new Bid
                         {
                             BidName = "Steel Material Bid",
                             BidStart = new DateTime(2024, 02, 01),
-                            BidEnd = new DateTime(2024, 02, 15),
-                            Labour = new Labour
-                            {
-                                LabourHours = 60,
-                                LabourDescription = "Welding and Fabrication",
-                                LabourPrice = 30.00m,
-                            },
-                            Material = new Material
-                            {
-                                MaterialType = "Steel",
-                                MaterialQuantity = 200,
-                                MaterialDescription = "Structural Steel Beams",
-                                MaterialSize = "15 m",
-                                MaterialPrice = 100.00m,
-                            },
+                            BidEnd = new DateTime(2024, 02, 15),                          
                             ProjectID = 2 // Assuming ProjectID associated with this Bid
                         },
                         new Bid
                         {
                             BidName = "Concrete Material Bid",
                             BidStart = new DateTime(2024, 03, 01),
-                            BidEnd = new DateTime(2024, 03, 15),
-                            Labour = new Labour
-                            {
-                                LabourHours = 80,
-                                LabourDescription = "Pouring and Finishing",
-                                LabourPrice = 35.00m,
-                            },
-                            Material = new Material
-                            {
-                                MaterialType = "Concrete",
-                                MaterialQuantity = 500,
-                                MaterialDescription = "Reinforced Concrete Slabs",
-                                MaterialSize = "20 cm",
-                                MaterialPrice = 75.00m,
-                            },
+                            BidEnd = new DateTime(2024, 03, 15),                           
                             ProjectID = 3 // Assuming ProjectID associated with this Bid
                         }
                     // Add other Bid entries similarly
