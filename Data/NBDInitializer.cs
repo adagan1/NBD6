@@ -137,6 +137,7 @@ namespace NBD6.Data
                     context.Bids.AddRange(
                         new Bid
                         {
+                            BidID = 1,
                             BidName = "Glass Material Bid",
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
@@ -198,7 +199,8 @@ namespace NBD6.Data
                         MaterialQuantity = 500,
                         MaterialDescription = "Reinforced Concrete Slabs",
                         MaterialSize = "20 cm",
-                        MaterialPrice = 75.00m
+                        MaterialPrice = 75.00m,
+                        BidID = 1
                     },
                     new Material
                     {
@@ -207,7 +209,8 @@ namespace NBD6.Data
                         MaterialQuantity = 200,
                         MaterialDescription = "Structural Steel Beams",
                         MaterialSize = "15 m",
-                        MaterialPrice = 100.00m
+                        MaterialPrice = 100.00m,
+                        BidID = 2
                     },
                     new Material
                     {
@@ -216,7 +219,8 @@ namespace NBD6.Data
                         MaterialQuantity = 100,
                         MaterialDescription = "Tempered Glass Panels",
                         MaterialSize = "10 cm",
-                        MaterialPrice = 50.00m
+                        MaterialPrice = 50.00m,
+                        BidID = 3
                     }
                     );
                     context.SaveChanges();
