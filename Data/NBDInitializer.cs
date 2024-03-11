@@ -4,6 +4,7 @@ using NBD6.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace NBD6.Data
 {
@@ -129,6 +130,36 @@ namespace NBD6.Data
                     );
                     context.SaveChanges();
                 }
+
+                if (!context.Bids.Any())
+                {
+                    // Create bids
+                    context.Bids.AddRange(
+                        new Bid
+                        {
+                            BidName = "Glass Material Bid",
+                            BidStart = new DateTime(2024, 01, 01),
+                            BidEnd = new DateTime(2024, 01, 15),
+                            ProjectID = 1 // Assuming ProjectID associated with this Bid
+                        },
+                        new Bid
+                        {
+                            BidName = "Steel Material Bid",
+                            BidStart = new DateTime(2024, 02, 01),
+                            BidEnd = new DateTime(2024, 02, 15),
+                            ProjectID = 2 // Assuming ProjectID associated with this Bid
+                        },
+                        new Bid
+                        {
+                            BidName = "Concrete Material Bid",
+                            BidStart = new DateTime(2024, 03, 01),
+                            BidEnd = new DateTime(2024, 03, 15),
+                            ProjectID = 3 // Assuming ProjectID associated with this Bid
+                        }
+                    );
+                    context.SaveChanges();
+                }
+
                 if (!context.Labours.Any())
                 {
                     context.Labours.AddRange(
@@ -156,11 +187,13 @@ namespace NBD6.Data
                     );
                     context.SaveChanges();
                 }
+
                 if (!context.Materials.Any())
                 {
                     context.Materials.AddRange(
                     new Material
                     {
+                        MaterialID = 1,
                         MaterialType = "Concrete",
                         MaterialQuantity = 500,
                         MaterialDescription = "Reinforced Concrete Slabs",
@@ -169,6 +202,7 @@ namespace NBD6.Data
                     },
                     new Material
                     {
+                        MaterialID = 2,
                         MaterialType = "Steel",
                         MaterialQuantity = 200,
                         MaterialDescription = "Structural Steel Beams",
@@ -177,6 +211,7 @@ namespace NBD6.Data
                     },
                     new Material
                     {
+                        MaterialID = 3,
                         MaterialType = "Glass",
                         MaterialQuantity = 100,
                         MaterialDescription = "Tempered Glass Panels",
@@ -186,37 +221,6 @@ namespace NBD6.Data
                     );
                     context.SaveChanges();
                 }
-
-                if (!context.Bids.Any())
-                {
-                    // Create bids
-                    context.Bids.AddRange(
-                        new Bid
-                        {
-                            BidName = "Glass Material Bid",
-                            BidStart = new DateTime(2024, 01, 01),
-                            BidEnd = new DateTime(2024, 01, 15),                           
-                            ProjectID = 1 // Assuming ProjectID associated with this Bid
-                        },
-                        new Bid
-                        {
-                            BidName = "Steel Material Bid",
-                            BidStart = new DateTime(2024, 02, 01),
-                            BidEnd = new DateTime(2024, 02, 15),                          
-                            ProjectID = 2 // Assuming ProjectID associated with this Bid
-                        },
-                        new Bid
-                        {
-                            BidName = "Concrete Material Bid",
-                            BidStart = new DateTime(2024, 03, 01),
-                            BidEnd = new DateTime(2024, 03, 15),
-                            ProjectID = 3 // Assuming ProjectID associated with this Bid
-                        }
-                    );
-                    context.SaveChanges();
-                }
-                
-
             }
             catch (Exception ex)
             {

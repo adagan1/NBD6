@@ -156,7 +156,7 @@ namespace NBD6.Data.NBDMigrations
                     LabourHours = table.Column<double>(type: "REAL", nullable: false),
                     LabourDescription = table.Column<string>(type: "TEXT", nullable: false),
                     LabourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,8 +165,7 @@ namespace NBD6.Data.NBDMigrations
                         name: "FK_Labours_Bids_BidID",
                         column: x => x.BidID,
                         principalTable: "Bids",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BidID");
                     table.ForeignKey(
                         name: "FK_Labours_Bids_LabourID",
                         column: x => x.LabourID,
@@ -185,7 +184,7 @@ namespace NBD6.Data.NBDMigrations
                     MaterialDescription = table.Column<string>(type: "TEXT", nullable: true),
                     MaterialSize = table.Column<string>(type: "TEXT", nullable: false),
                     MaterialPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,8 +193,7 @@ namespace NBD6.Data.NBDMigrations
                         name: "FK_Materials_Bids_BidID",
                         column: x => x.BidID,
                         principalTable: "Bids",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BidID");
                     table.ForeignKey(
                         name: "FK_Materials_Bids_MaterialID",
                         column: x => x.MaterialID,

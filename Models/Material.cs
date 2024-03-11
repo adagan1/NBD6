@@ -33,7 +33,7 @@ namespace NBD6.Models
 
         //Foreign Key
         [Display(Name = "Bid ID")]
-        [Required(ErrorMessage = "You must select a Bid.")]
+        //[Required(ErrorMessage = "You must select a Bid.")]
         public int? BidID { get; set; }
 
         // Navigation Property

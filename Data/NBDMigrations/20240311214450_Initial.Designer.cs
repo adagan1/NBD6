@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240311212740_Initial")]
+    [Migration("20240311214450_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -159,7 +159,6 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("BidID")
-                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LabourDescription")
@@ -185,7 +184,6 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("BidID")
-                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("MaterialDescription")
@@ -312,9 +310,7 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.HasOne("NBD6.Models.Bid", null)
                         .WithMany("Labours")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BidID");
 
                     b.HasOne("NBD6.Models.Bid", "Bid")
                         .WithOne("Labour")
@@ -329,9 +325,7 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.HasOne("NBD6.Models.Bid", null)
                         .WithMany("Materials")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BidID");
 
                     b.HasOne("NBD6.Models.Bid", "Bid")
                         .WithOne("Material")
