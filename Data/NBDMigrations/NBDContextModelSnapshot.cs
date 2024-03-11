@@ -155,7 +155,8 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("LabourID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BidID")
+                    b.Property<int?>("BidID")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LabourDescription")
@@ -180,7 +181,8 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("MaterialID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BidID")
+                    b.Property<int?>("BidID")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("MaterialDescription")

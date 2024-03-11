@@ -129,6 +129,63 @@ namespace NBD6.Data
                     );
                     context.SaveChanges();
                 }
+                if (!context.Labours.Any())
+                {
+                    context.Labours.AddRange(
+                    new Labour
+                    {
+                        LabourID = 1,
+                        LabourHours = 40,
+                        LabourDescription = "Installation of Glass Panels",
+                        LabourPrice = 25.00m
+                    },
+                    new Labour
+                    {
+                        LabourID = 2,
+                        LabourHours = 60,
+                        LabourDescription = "Welding and Fabrication",
+                        LabourPrice = 30.00m
+                    },
+                    new Labour
+                    {
+                        LabourID = 3,
+                        LabourHours = 80,
+                        LabourDescription = "Pouring and Finishing",
+                        LabourPrice = 35.00m
+                    }
+                    );
+                    context.SaveChanges();
+                }
+                if (!context.Materials.Any())
+                {
+                    context.Materials.AddRange(
+                    new Material
+                    {
+                        MaterialType = "Concrete",
+                        MaterialQuantity = 500,
+                        MaterialDescription = "Reinforced Concrete Slabs",
+                        MaterialSize = "20 cm",
+                        MaterialPrice = 75.00m
+                    },
+                    new Material
+                    {
+                        MaterialType = "Steel",
+                        MaterialQuantity = 200,
+                        MaterialDescription = "Structural Steel Beams",
+                        MaterialSize = "15 m",
+                        MaterialPrice = 100.00m
+                    },
+                    new Material
+                    {
+                        MaterialType = "Glass",
+                        MaterialQuantity = 100,
+                        MaterialDescription = "Tempered Glass Panels",
+                        MaterialSize = "10 cm",
+                        MaterialPrice = 50.00m
+                    }
+                    );
+                    context.SaveChanges();
+                }
 
                 if (!context.Bids.Any())
                 {
@@ -158,66 +215,7 @@ namespace NBD6.Data
                     );
                     context.SaveChanges();
                 }
-                if (!context.Labours.Any())
-                {
-                    context.Labours.AddRange(
-                    new Labour
-                    {
-                        LabourHours = 40,
-                        LabourDescription = "Installation of Glass Panels",
-                        LabourPrice = 25.00m,
-                        BidID = 1
-                    },
-                    new Labour
-                    {
-                        LabourHours = 60,
-                        LabourDescription = "Welding and Fabrication",
-                        LabourPrice = 30.00m,
-                        BidID = 2
-                    },
-                    new Labour
-                    {
-                        LabourHours = 80,
-                        LabourDescription = "Pouring and Finishing",
-                        LabourPrice = 35.00m,
-                        BidID = 3
-                    }
-                    );
-                    context.SaveChanges();
-                }
-                if (!context.Materials.Any())
-                {
-                    context.Materials.AddRange(
-                    new Material
-                    {
-                        MaterialType = "Concrete",
-                        MaterialQuantity = 500,
-                        MaterialDescription = "Reinforced Concrete Slabs",
-                        MaterialSize = "20 cm",
-                        MaterialPrice = 75.00m,
-                        BidID = 1
-                    },
-                    new Material
-                    {
-                        MaterialType = "Steel",
-                        MaterialQuantity = 200,
-                        MaterialDescription = "Structural Steel Beams",
-                        MaterialSize = "15 m",
-                        MaterialPrice = 100.00m,
-                        BidID = 2
-                    },
-                    new Material
-                    {
-                        MaterialType = "Glass",
-                        MaterialQuantity = 100,
-                        MaterialDescription = "Tempered Glass Panels",
-                        MaterialSize = "10 cm",
-                        MaterialPrice = 50.00m,
-                        BidID = 3
-                    }
-                    );
-                    context.SaveChanges();
-                }
+                
 
             }
             catch (Exception ex)
