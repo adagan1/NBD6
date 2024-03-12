@@ -32,7 +32,7 @@ namespace NBD6.Models
         public decimal ExtendedMaterialPrice => MaterialQuantity * MaterialPrice;
 
         // Foreign key property
-        public int BidID { get; set; }
-        public Bid Bid { get; set; }
+        public int? BidID { get; set; }
+        public Bid? Bid { get; set; }
     }
 }

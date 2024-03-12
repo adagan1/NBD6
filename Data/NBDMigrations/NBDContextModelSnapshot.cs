@@ -156,7 +156,7 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BidID")
+                    b.Property<int?>("BidID")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("BidID1")
@@ -188,7 +188,7 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BidID")
+                    b.Property<int?>("BidID")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("BidID1")
@@ -321,9 +321,7 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.HasOne("NBD6.Models.Bid", "Bid")
                         .WithMany("Labours")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BidID");
 
                     b.HasOne("NBD6.Models.Bid", null)
                         .WithOne("Labour")
@@ -336,9 +334,7 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.HasOne("NBD6.Models.Bid", "Bid")
                         .WithMany("Materials")
-                        .HasForeignKey("BidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BidID");
 
                     b.HasOne("NBD6.Models.Bid", null)
                         .WithOne("Material")
