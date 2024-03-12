@@ -175,7 +175,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
+        public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,ClientID,AddressID,Country,Province,Postal,Street,BidAmount")] Project project, Address address)
         {
 
             var client = await _context.Clients
@@ -195,6 +195,7 @@ namespace NBD6.Controllers
                 client.AddressID = address.AddressID;
                 client.Address = address;
             }
+
             await _context.SaveChangesAsync();
             var errors = ModelState
                 .Where(x => x.Value.Errors.Count > 0)
@@ -300,7 +301,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,Client,ClientID,AddressID,Country,Province,Postal,Street")] Project project, Address address)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,Client,ClientID,AddressID,Country,Province,Postal,Street,BidAmount")] Project project, Address address)
         {
             if (id != project.ProjectID)
             {
@@ -337,6 +338,7 @@ namespace NBD6.Controllers
                     existingProject.ProjectStartDate = project.ProjectStartDate;
                     existingProject.ProjectEndDate = project.ProjectEndDate;
                     existingProject.ProjectSite = project.ProjectSite;
+                    existingProject.BidAmount = project.BidAmount;
 
                     // Update client properties
                     //existingProject.Client = project.Client;

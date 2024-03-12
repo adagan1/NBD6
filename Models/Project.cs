@@ -30,6 +30,12 @@ namespace NBD6.Models
         [StringLength(200, ErrorMessage = "Project site cannot be more than 200 characters long.")]
         public string ProjectSite { get; set; }
 
+        [Display(Name = "Bid Amount")]
+        [Required(ErrorMessage = "Bid amount is required")]
+        [StringLength(200, ErrorMessage = "Bid amount can only contain positive numbers.")]
+        [RegularExpression(@"^\d*\.?\d+$", ErrorMessage = "Bid amount must be a positive number.")]
+        public decimal BidAmount { get; set; }
+
         public string ProjectSummary
         {
             get

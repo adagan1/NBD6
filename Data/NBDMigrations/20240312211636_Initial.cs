@@ -79,6 +79,7 @@ namespace NBD6.Data.NBDMigrations
                     ProjectStartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectEndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectSite = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    BidAmount = table.Column<decimal>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: false),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -252,6 +253,14 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_StaffBids_BidID",
                 table: "StaffBids",
                 column: "BidID");
+
+            migrationBuilder.AlterColumn<decimal>(
+            name: "BidAmount",
+            table: "Projects",
+            type: "decimal(18, 2)",
+            nullable: false,
+            oldClrType: typeof(string),
+            oldNullable: true);
         }
 
         /// <inheritdoc />
@@ -280,6 +289,13 @@ namespace NBD6.Data.NBDMigrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.AlterColumn<string>(
+            name: "BidAmount",
+            table: "Projects",
+            nullable: true,
+            oldClrType: typeof(decimal),
+            oldType: "decimal(18, 2)");
         }
     }
 }

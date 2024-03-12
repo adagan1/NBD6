@@ -16,7 +16,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ProjectName" class="control-label">Project Name<span class="text-danger">*</span></label>
-                <input asp-for="ProjectName" class="form-control" placeholder="project name" />
+                <input asp-for="ProjectName" class="form-control" placeholder="Project Name" />
                 <span asp-validation-for="ProjectName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -31,8 +31,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProjectSite" class="control-label">Project Site<span class="text-danger">*</span></label>
-                <input asp-for="ProjectSite" class="form-control" placeholder="project site" />
+                <input asp-for="ProjectSite" class="form-control" placeholder="Project Site" />
                 <span asp-validation-for="ProjectSite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BidAmount" class="control-label">Bid Amount<span class="text-danger">*</span></label>
+                <input asp-for="BidAmount" class="form-control" placeholder="Bid Amount" />
+                <span asp-validation-for="BidAmount" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6">
