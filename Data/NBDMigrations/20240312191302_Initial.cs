@@ -125,30 +125,6 @@ namespace NBD6.Data.NBDMigrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BidStaff",
-                columns: table => new
-                {
-                    BidsBidID = table.Column<int>(type: "INTEGER", nullable: false),
-                    StaffsStaffID = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BidStaff", x => new { x.BidsBidID, x.StaffsStaffID });
-                    table.ForeignKey(
-                        name: "FK_BidStaff_Bids_BidsBidID",
-                        column: x => x.BidsBidID,
-                        principalTable: "Bids",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BidStaff_Staffs_StaffsStaffID",
-                        column: x => x.StaffsStaffID,
-                        principalTable: "Staffs",
-                        principalColumn: "StaffID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Labours",
                 columns: table => new
                 {
@@ -204,6 +180,30 @@ namespace NBD6.Data.NBDMigrations
                         principalColumn: "BidID");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "StaffBids",
+                columns: table => new
+                {
+                    StaffID = table.Column<int>(type: "INTEGER", nullable: false),
+                    BidID = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffBids", x => new { x.StaffID, x.BidID });
+                    table.ForeignKey(
+                        name: "FK_StaffBids_Bids_BidID",
+                        column: x => x.BidID,
+                        principalTable: "Bids",
+                        principalColumn: "BidID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StaffBids_Staffs_StaffID",
+                        column: x => x.StaffID,
+                        principalTable: "Staffs",
+                        principalColumn: "StaffID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ClientID",
                 table: "Addresses",
@@ -214,11 +214,6 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_Bids_ProjectID",
                 table: "Bids",
                 column: "ProjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BidStaff_StaffsStaffID",
-                table: "BidStaff",
-                column: "StaffsStaffID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Labours_BidID",
@@ -252,14 +247,16 @@ namespace NBD6.Data.NBDMigrations
                 name: "IX_Projects_ClientID",
                 table: "Projects",
                 column: "ClientID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StaffBids_BidID",
+                table: "StaffBids",
+                column: "BidID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "BidStaff");
-
             migrationBuilder.DropTable(
                 name: "Labours");
 
@@ -267,10 +264,13 @@ namespace NBD6.Data.NBDMigrations
                 name: "Materials");
 
             migrationBuilder.DropTable(
-                name: "Staffs");
+                name: "StaffBids");
 
             migrationBuilder.DropTable(
                 name: "Bids");
+
+            migrationBuilder.DropTable(
+                name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "Projects");

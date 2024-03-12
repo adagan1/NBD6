@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using NBD6.Models;
-using System;
+﻿using NBD6.Models;
 using System.Diagnostics;
-using System.Linq;
 
 namespace NBD6.Data
 {
@@ -130,6 +126,28 @@ namespace NBD6.Data
                     context.SaveChanges();
                 }
 
+                if (!context.Staffs.Any())
+                {
+                    // Create staff members
+                    context.Staffs.AddRange(
+                        new Staff
+                        {
+                            FirstName = "John",
+                            LastName = "Doe",
+                            StaffPhone = "3333333333",
+                            StaffPosition = "Project Manager"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Jane",
+                            LastName = "Smith",
+                            StaffPhone = "4444444444",
+                            StaffPosition = "Construction Supervisor"
+                        }
+                    );
+                    context.SaveChanges();
+                }
+
                 if (!context.Bids.Any())
                 {
                     // Create bids
@@ -140,6 +158,7 @@ namespace NBD6.Data
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
                             ProjectID = 1, // Assuming ProjectID associated with this Bid
+                            
                             Materials = new List<Material>
                             {
                                 new Material
@@ -216,6 +235,23 @@ namespace NBD6.Data
                             }
                         }
                     );
+                    context.SaveChanges();
+                }
+
+                if (!context.StaffBids.Any())
+                {
+                    context.StaffBids.AddRange(
+                        new Views.Bids.StaffBid
+                        {
+                            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
+                            BidID = context.Bids.FirstOrDefault(B => B.BidName == "Glass Material Bid").BidID
+                        },
+                        new Views.Bids.StaffBid
+                        {
+                            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
+                            BidID = context.Bids.FirstOrDefault(B => B.BidName == "").BidID
+                        }
+                        );
                     context.SaveChanges();
                 }
             }

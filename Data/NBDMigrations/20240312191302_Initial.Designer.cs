@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240312045407_Initial")]
+    [Migration("20240312191302_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,21 +19,6 @@ namespace NBD6.Data.NBDMigrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.16");
-
-            modelBuilder.Entity("BidStaff", b =>
-                {
-                    b.Property<int>("BidsBidID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("StaffsStaffID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("BidsBidID", "StaffsStaffID");
-
-                    b.HasIndex("StaffsStaffID");
-
-                    b.ToTable("BidStaff");
-                });
 
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
@@ -285,19 +270,19 @@ namespace NBD6.Data.NBDMigrations
                     b.ToTable("Staffs");
                 });
 
-            modelBuilder.Entity("BidStaff", b =>
+            modelBuilder.Entity("NBD6.Views.Bids.StaffBid", b =>
                 {
-                    b.HasOne("NBD6.Models.Bid", null)
-                        .WithMany()
-                        .HasForeignKey("BidsBidID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("StaffID")
+                        .HasColumnType("INTEGER");
 
-                    b.HasOne("NBD6.Models.Staff", null)
-                        .WithMany()
-                        .HasForeignKey("StaffsStaffID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("BidID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("StaffID", "BidID");
+
+                    b.HasIndex("BidID");
+
+                    b.ToTable("StaffBids");
                 });
 
             modelBuilder.Entity("NBD6.Models.Address", b =>
@@ -365,6 +350,25 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("NBD6.Views.Bids.StaffBid", b =>
+                {
+                    b.HasOne("NBD6.Models.Bid", "Bid")
+                        .WithMany("StaffBids")
+                        .HasForeignKey("BidID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NBD6.Models.Staff", "Staff")
+                        .WithMany("StaffBids")
+                        .HasForeignKey("StaffID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bid");
+
+                    b.Navigation("Staff");
+                });
+
             modelBuilder.Entity("NBD6.Models.Address", b =>
                 {
                     b.Navigation("Project");
@@ -379,6 +383,8 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("Material");
 
                     b.Navigation("Materials");
+
+                    b.Navigation("StaffBids");
                 });
 
             modelBuilder.Entity("NBD6.Models.Client", b =>
@@ -391,6 +397,11 @@ namespace NBD6.Data.NBDMigrations
             modelBuilder.Entity("NBD6.Models.Project", b =>
                 {
                     b.Navigation("Bids");
+                });
+
+            modelBuilder.Entity("NBD6.Models.Staff", b =>
+                {
+                    b.Navigation("StaffBids");
                 });
 #pragma warning restore 612, 618
         }

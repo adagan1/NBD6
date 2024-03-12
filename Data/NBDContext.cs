@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NBD6.Models;
+using NBD6.Views.Bids;
 
 namespace NBD6.Data
 {
@@ -24,10 +25,12 @@ namespace NBD6.Data
 
         public DbSet<Material> Materials { get; set; }
 
+        public DbSet<StaffBid> StaffBids { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //FK
+            //FK for address
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.Address)
                 .WithOne(a => a.Client)
@@ -38,24 +41,37 @@ namespace NBD6.Data
                 .WithOne(p => p.Address)
                 .HasForeignKey<Project>(p => p.AddressID);
 
-
+            //Bid - Collection of projects
             modelBuilder.Entity<Bid>()
                 .HasOne(b => b.Project)
                 .WithMany(p => p.Bids)
                 .HasForeignKey(b => b.ProjectID)
                 .IsRequired();
 
-            // Configure one-to-many relationship between Bid and Labour
+            //Bid - labour/material
             modelBuilder.Entity<Labour>()
                 .HasOne(l => l.Bid)
                 .WithMany(b => b.Labours)
                 .HasForeignKey(l => l.BidID);
 
-            // Configure one-to-many relationship between Bid and Material
             modelBuilder.Entity<Material>()
                 .HasOne(m => m.Bid)
                 .WithMany(b => b.Materials)
                 .HasForeignKey(m => m.BidID);
+
+            // Configure many-to-many relationship
+            modelBuilder.Entity<StaffBid>()
+                .HasKey(sb => new { sb.StaffID, sb.BidID });
+
+            modelBuilder.Entity<StaffBid>()
+                .HasOne(sb => sb.Staff)
+                .WithMany(s => s.StaffBids)
+                .HasForeignKey(sb => sb.StaffID);
+
+            modelBuilder.Entity<StaffBid>()
+                .HasOne(sb => sb.Bid)
+                .WithMany(b => b.StaffBids)
+                .HasForeignKey(sb => sb.BidID);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBD6.Views.Bids;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,14 +47,12 @@ namespace NBD6.Models
         public Project Project { get; set; }
 
         // Collections
-        public virtual ICollection<Staff> Staffs { get; set; }
+        public virtual ICollection<StaffBid> StaffBids { get; set; }
 
-        // Collection of materials
+        // Lists
         public List<Material> Materials { get; set; }
         public Material Material { get; set; }
-        // Collection of labour
         public List<Labour> Labours { get; set; }
-
         public Labour Labour { get; set; }
 
         

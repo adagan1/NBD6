@@ -1,4 +1,6 @@
-﻿namespace NBD6.Models
+﻿using NBD6.Views.Bids;
+
+namespace NBD6.Models
 {
     public class Staff
     {
@@ -8,7 +10,7 @@
         public string StaffPhone {  get; set; }
         public string StaffPosition { get; set; }
 
-        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<StaffBid> StaffBids { get; set; }
 
         // Read-only property to get formatted phone number
         public string FormattedPhone
