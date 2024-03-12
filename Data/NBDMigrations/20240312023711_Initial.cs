@@ -152,11 +152,13 @@ namespace NBD6.Data.NBDMigrations
                 name: "Labours",
                 columns: table => new
                 {
-                    LabourID = table.Column<int>(type: "INTEGER", nullable: false),
+                    LabourID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     LabourHours = table.Column<double>(type: "REAL", nullable: false),
                     LabourDescription = table.Column<string>(type: "TEXT", nullable: false),
                     LabourPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: false),
+                    BidID1 = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,26 +167,28 @@ namespace NBD6.Data.NBDMigrations
                         name: "FK_Labours_Bids_BidID",
                         column: x => x.BidID,
                         principalTable: "Bids",
-                        principalColumn: "BidID");
-                    table.ForeignKey(
-                        name: "FK_Labours_Bids_LabourID",
-                        column: x => x.LabourID,
-                        principalTable: "Bids",
                         principalColumn: "BidID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Labours_Bids_BidID1",
+                        column: x => x.BidID1,
+                        principalTable: "Bids",
+                        principalColumn: "BidID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
                 {
-                    MaterialID = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaterialID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     MaterialType = table.Column<string>(type: "TEXT", nullable: false),
                     MaterialQuantity = table.Column<int>(type: "INTEGER", nullable: false),
                     MaterialDescription = table.Column<string>(type: "TEXT", nullable: true),
                     MaterialSize = table.Column<string>(type: "TEXT", nullable: false),
                     MaterialPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    BidID = table.Column<int>(type: "INTEGER", nullable: true)
+                    BidID = table.Column<int>(type: "INTEGER", nullable: false),
+                    BidID1 = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,13 +197,13 @@ namespace NBD6.Data.NBDMigrations
                         name: "FK_Materials_Bids_BidID",
                         column: x => x.BidID,
                         principalTable: "Bids",
-                        principalColumn: "BidID");
-                    table.ForeignKey(
-                        name: "FK_Materials_Bids_MaterialID",
-                        column: x => x.MaterialID,
-                        principalTable: "Bids",
                         principalColumn: "BidID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Materials_Bids_BidID1",
+                        column: x => x.BidID1,
+                        principalTable: "Bids",
+                        principalColumn: "BidID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -224,9 +228,21 @@ namespace NBD6.Data.NBDMigrations
                 column: "BidID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Labours_BidID1",
+                table: "Labours",
+                column: "BidID1",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Materials_BidID",
                 table: "Materials",
                 column: "BidID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materials_BidID1",
+                table: "Materials",
+                column: "BidID1",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_AddressID",

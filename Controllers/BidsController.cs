@@ -101,6 +101,8 @@ namespace NBD6.Controllers
 
             var bid = await _context.Bids
                 .Include(b => b.Project)
+                .Include(b => b.Materials)
+                .Include(b => b.Labours)
                 .FirstOrDefaultAsync(m => m.BidID == id);
             if (bid == null)
             {

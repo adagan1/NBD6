@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240311214450_Initial")]
+    [Migration("20240312023711_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -156,9 +156,13 @@ namespace NBD6.Data.NBDMigrations
             modelBuilder.Entity("NBD6.Models.Labour", b =>
                 {
                     b.Property<int>("LabourID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BidID")
+                    b.Property<int>("BidID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BidID1")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LabourDescription")
@@ -175,15 +179,22 @@ namespace NBD6.Data.NBDMigrations
 
                     b.HasIndex("BidID");
 
+                    b.HasIndex("BidID1")
+                        .IsUnique();
+
                     b.ToTable("Labours");
                 });
 
             modelBuilder.Entity("NBD6.Models.Material", b =>
                 {
                     b.Property<int>("MaterialID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BidID")
+                    b.Property<int>("BidID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BidID1")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("MaterialDescription")
@@ -206,6 +217,9 @@ namespace NBD6.Data.NBDMigrations
                     b.HasKey("MaterialID");
 
                     b.HasIndex("BidID");
+
+                    b.HasIndex("BidID1")
+                        .IsUnique();
 
                     b.ToTable("Materials");
                 });
@@ -308,30 +322,30 @@ namespace NBD6.Data.NBDMigrations
 
             modelBuilder.Entity("NBD6.Models.Labour", b =>
                 {
-                    b.HasOne("NBD6.Models.Bid", null)
-                        .WithMany("Labours")
-                        .HasForeignKey("BidID");
-
                     b.HasOne("NBD6.Models.Bid", "Bid")
-                        .WithOne("Labour")
-                        .HasForeignKey("NBD6.Models.Labour", "LabourID")
+                        .WithMany("Labours")
+                        .HasForeignKey("BidID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("NBD6.Models.Bid", null)
+                        .WithOne("Labour")
+                        .HasForeignKey("NBD6.Models.Labour", "BidID1");
 
                     b.Navigation("Bid");
                 });
 
             modelBuilder.Entity("NBD6.Models.Material", b =>
                 {
-                    b.HasOne("NBD6.Models.Bid", null)
-                        .WithMany("Materials")
-                        .HasForeignKey("BidID");
-
                     b.HasOne("NBD6.Models.Bid", "Bid")
-                        .WithOne("Material")
-                        .HasForeignKey("NBD6.Models.Material", "MaterialID")
+                        .WithMany("Materials")
+                        .HasForeignKey("BidID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("NBD6.Models.Bid", null)
+                        .WithOne("Material")
+                        .HasForeignKey("NBD6.Models.Material", "BidID1");
 
                     b.Navigation("Bid");
                 });

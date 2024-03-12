@@ -31,12 +31,8 @@ namespace NBD6.Models
 
         public decimal ExtendedMaterialPrice => MaterialQuantity * MaterialPrice;
 
-        //Foreign Key
-        [Display(Name = "Bid ID")]
-        //[Required(ErrorMessage = "You must select a Bid.")]
-        public int? BidID { get; set; }
-
-        // Navigation Property
-        public Bid? Bid { get; set; }
+        // Foreign key property
+        public int BidID { get; set; }
+        public Bid Bid { get; set; }
     }
 }

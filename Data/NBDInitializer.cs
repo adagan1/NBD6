@@ -4,7 +4,6 @@ using NBD6.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace NBD6.Data
 {
@@ -137,91 +136,85 @@ namespace NBD6.Data
                     context.Bids.AddRange(
                         new Bid
                         {
-                            BidID = 1,
                             BidName = "Glass Material Bid",
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
-                            ProjectID = 1 // Assuming ProjectID associated with this Bid
+                            ProjectID = 1, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Concrete",
+                                    MaterialQuantity = 500,
+                                    MaterialDescription = "Reinforced Concrete Slabs",
+                                    MaterialSize = "20 cm",
+                                    MaterialPrice = 75.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 40,
+                                    LabourDescription = "Installation of Glass Panels",
+                                    LabourPrice = 25.00m
+                                }
+                            }
                         },
                         new Bid
                         {
                             BidName = "Steel Material Bid",
                             BidStart = new DateTime(2024, 02, 01),
                             BidEnd = new DateTime(2024, 02, 15),
-                            ProjectID = 2 // Assuming ProjectID associated with this Bid
+                            ProjectID = 2, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Steel",
+                                    MaterialQuantity = 200,
+                                    MaterialDescription = "Structural Steel Beams",
+                                    MaterialSize = "15 m",
+                                    MaterialPrice = 100.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 60,
+                                    LabourDescription = "Welding and Fabrication",
+                                    LabourPrice = 30.00m
+                                }
+                            }
                         },
                         new Bid
                         {
                             BidName = "Concrete Material Bid",
                             BidStart = new DateTime(2024, 03, 01),
                             BidEnd = new DateTime(2024, 03, 15),
-                            ProjectID = 3 // Assuming ProjectID associated with this Bid
+                            ProjectID = 3, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Glass",
+                                    MaterialQuantity = 100,
+                                    MaterialDescription = "Tempered Glass Panels",
+                                    MaterialSize = "10 cm",
+                                    MaterialPrice = 50.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 80,
+                                    LabourDescription = "Pouring and Finishing",
+                                    LabourPrice = 35.00m
+                                }
+                            }
                         }
-                    );
-                    context.SaveChanges();
-                }
-
-                if (!context.Labours.Any())
-                {
-                    context.Labours.AddRange(
-                    new Labour
-                    {
-                        LabourID = 1,
-                        LabourHours = 40,
-                        LabourDescription = "Installation of Glass Panels",
-                        LabourPrice = 25.00m
-                    },
-                    new Labour
-                    {
-                        LabourID = 2,
-                        LabourHours = 60,
-                        LabourDescription = "Welding and Fabrication",
-                        LabourPrice = 30.00m
-                    },
-                    new Labour
-                    {
-                        LabourID = 3,
-                        LabourHours = 80,
-                        LabourDescription = "Pouring and Finishing",
-                        LabourPrice = 35.00m
-                    }
-                    );
-                    context.SaveChanges();
-                }
-
-                if (!context.Materials.Any())
-                {
-                    context.Materials.AddRange(
-                    new Material
-                    {
-                        MaterialID = 1,
-                        MaterialType = "Concrete",
-                        MaterialQuantity = 500,
-                        MaterialDescription = "Reinforced Concrete Slabs",
-                        MaterialSize = "20 cm",
-                        MaterialPrice = 75.00m,
-                        BidID = 1
-                    },
-                    new Material
-                    {
-                        MaterialID = 2,
-                        MaterialType = "Steel",
-                        MaterialQuantity = 200,
-                        MaterialDescription = "Structural Steel Beams",
-                        MaterialSize = "15 m",
-                        MaterialPrice = 100.00m,
-                        BidID = 2
-                    },
-                    new Material
-                    {
-                        MaterialID = 3,
-                        MaterialType = "Glass",
-                        MaterialQuantity = 100,
-                        MaterialDescription = "Tempered Glass Panels",
-                        MaterialSize = "10 cm",
-                        MaterialPrice = 50.00m,
-                        BidID = 3
-                    }
                     );
                     context.SaveChanges();
                 }

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static NBD6.Models.Bid;
 
 namespace NBD6.Models
 {
@@ -17,7 +18,7 @@ namespace NBD6.Models
 
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "You must enter an Start date.")]
+        [Required(ErrorMessage = "You must enter a Start date.")]
         public DateTime BidStart { get; set; }
 
         [Display(Name = "End Date")]
@@ -25,9 +26,9 @@ namespace NBD6.Models
         [Required(ErrorMessage = "You must enter an end date.")]
         public DateTime BidEnd { get; set; }
 
-        //Scrapped together lmao
-        public string Notes {  get; set; }
-        public bool ClientApproved {  get; set; }
+        // Scrapped together lmao
+        public string Notes { get; set; }
+        public bool ClientApproved { get; set; }
         public bool NBDApproved { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -39,20 +40,21 @@ namespace NBD6.Models
             }
         }
 
-        //FK
+        // FK
         [Display(Name = "Project")]
-        public int ProjectID { get; set; }       
+        public int ProjectID { get; set; }
         public Project Project { get; set; }
 
-        //Collections
+        // Collections
         public virtual ICollection<Staff> Staffs { get; set; }
 
         // Collection of materials
-        public ICollection<Material> Materials { get; set; }
-        public Material Material { get; set; }
-
+        public List<Material> Materials { get; set; }
         // Collection of labour
-        public ICollection<Labour> Labours { get; set; }
+        public List<Labour> Labours { get; set; }
+
         public Labour Labour { get; set; }
-    }    
+
+        public Material Material { get; set; }
+    }
 }

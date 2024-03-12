@@ -26,11 +26,8 @@ namespace NBD6.Models
         public decimal ExtendedLabourPrice => (decimal)LabourHours * LabourPrice;
 
         //Foreign Key
-        [Display(Name = "Bid ID")]
-        //[Required(ErrorMessage = "You must select a Bid.")]
-        public int? BidID { get; set; }
+        public int BidID { get; set; }
+        public Bid Bid { get; set; }
 
-        // Navigation Property
-        public Bid? Bid { get; set; }
     }
 }
