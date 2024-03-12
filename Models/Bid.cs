@@ -50,11 +50,12 @@ namespace NBD6.Models
 
         // Collection of materials
         public List<Material> Materials { get; set; }
+        public Material Material { get; set; }
         // Collection of labour
         public List<Labour> Labours { get; set; }
 
         public Labour Labour { get; set; }
 
-        public Material Material { get; set; }
+        
     }
 }
