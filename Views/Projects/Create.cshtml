@@ -119,7 +119,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Function to load saved data from sessionStorage
             function loadData() {
-                document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #ClientSummary").forEach(function (input) {
+                document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #ClientSummary, #BidAmount").forEach(function (input) {
                     const savedValue = sessionStorage.getItem(input.id);
                     if (savedValue) {
                         input.value = savedValue;
@@ -127,7 +127,7 @@
                 });
             }
 
-            document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #ClientSummary").forEach(function (input) {
+            document.querySelectorAll("#ProjectName, #ProjectStartDate, #ProjectEndDate, #ProjectSite, #ClientSummary, #BidAmount").forEach(function (input) {
                 input.addEventListener("input", function () {
                     sessionStorage.setItem(this.id, this.value);
                 });
@@ -136,14 +136,12 @@
             loadData();
 
             document.querySelector("form").addEventListener("submit", function () {
-                ["ProjectName", "ProjectStartDate", "ProjectEndDate", "ProjectSite", "ClientSummary"].forEach(function (fieldId) {
+                ["ProjectName", "ProjectStartDate", "ProjectEndDate", "ProjectSite", "ClientSummary", "BidAmount"].forEach(function (fieldId) {
                     sessionStorage.removeItem(fieldId);
                 });
             });
         });
-    </script>
 
-    <script type="text/javascript">
         $(document).ready(function () {
             // Initialize select2 for dropdowns
             $("#Address_Province").select2();
@@ -181,6 +179,7 @@
                 $('#ProjectEndDate').val(projectEndDate);
                 $('#ProjectSite').val("Project Site " + Math.floor(Math.random() * 100));
 
+
                 // Address fields
                 if ($('#Address_Country option').length > 1) {
                     $('#Address_Country').val($('#Address_Country option').eq(1).val()).trigger('change');
@@ -201,10 +200,11 @@
                 if ($('#ClientSummary option').length > 1) {
                     $('#ClientSummary').val($('#ClientSummary option:eq(1)').val()).trigger('change');
                 }
+
+                // Autofill BidAmount with a random number between 800 and 5000 with 2 decimal places
+                const bidAmount = (Math.random() * (5000 - 800) + 800).toFixed(2);
+                $('#BidAmount').val(bidAmount);
             });
         });
     </script>
-
-
-
 }
