@@ -79,6 +79,7 @@ namespace NBD6.Data.NBDMigrations
                     ProjectStartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectEndDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProjectSite = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    BidAmount = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: false),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                 },

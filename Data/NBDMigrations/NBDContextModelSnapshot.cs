@@ -215,6 +215,11 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("AddressID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("BidAmount")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("ClientID")
                         .HasColumnType("INTEGER");
 
