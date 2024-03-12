@@ -220,7 +220,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid)
+        public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid, Material material, Labour labour)
         {
             if (id != bid.BidID)
             {
@@ -231,7 +231,35 @@ namespace NBD6.Controllers
             {
                 try
                 {
+                    // Retrieve existing material and labor records
+                    var existingMaterial = await _context.Materials.FirstOrDefaultAsync(m => m.BidID == bid.BidID);
+                    var existingLabour = await _context.Labours.FirstOrDefaultAsync(l => l.BidID == bid.BidID);
+
+                    if (existingMaterial != null)
+                    {
+                        // Update existing material properties
+                        existingMaterial.MaterialType = material.MaterialType;
+                        existingMaterial.MaterialQuantity = material.MaterialQuantity;
+                        existingMaterial.MaterialDescription = material.MaterialDescription;
+                        existingMaterial.MaterialSize = material.MaterialSize;
+                        existingMaterial.MaterialPrice = material.MaterialPrice;
+
+                        _context.Update(existingMaterial);
+                    }
+
+                    if (existingLabour != null)
+                    {
+                        // Update existing labor properties
+                        existingLabour.LabourHours = labour.LabourHours;
+                        existingLabour.LabourDescription = labour.LabourDescription;
+                        existingLabour.LabourPrice = labour.LabourPrice;
+
+                        _context.Update(existingLabour);
+                    }
+
+                    // Update bid properties
                     _context.Update(bid);
+
                     TempData["AlertMessageBidEdit"] = "Bid Successfully Edited";
                     await _context.SaveChangesAsync();
                 }
