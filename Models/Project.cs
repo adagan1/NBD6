@@ -34,7 +34,7 @@ namespace NBD6.Models
         [Required(ErrorMessage = "Bid amount is required")]
         [StringLength(200, ErrorMessage = "Bid amount can only contain positive numbers.")]
         [RegularExpression(@"^\d*\.?\d+$", ErrorMessage = "Bid amount must be a positive number.")]
-        public decimal BidAmount { get; set; }
+        public string BidAmount { get; set; }
 
         public string ProjectSummary
         {
