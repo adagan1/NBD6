@@ -174,9 +174,18 @@ namespace NBD6.Controllers
         {
             if (ModelState.IsValid)
             {
+                _context.Add(bid);
+                await _context.SaveChangesAsync();
+
+                // Now bid has an ID assigned by the database
+
+                // Assign the Bid ID to Material and Labour
+                material.BidID = bid.BidID;
+                labour.BidID = bid.BidID;
+
                 _context.Add(material);
                 _context.Add(labour);
-                _context.Add(bid);         
+
                 TempData["AlertMessageBid"] = "Bid Successfully Added";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
