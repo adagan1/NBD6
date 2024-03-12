@@ -82,6 +82,7 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Brock University",
+                            BidAmount = "2000",
                             ClientID = 1, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
@@ -97,6 +98,7 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Niagara College",
+                            BidAmount = "1400",
                             ClientID = 2, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
@@ -112,6 +114,7 @@ namespace NBD6.Data
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Western Union",
+                            BidAmount = "3000",
                             ClientID = 3, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
