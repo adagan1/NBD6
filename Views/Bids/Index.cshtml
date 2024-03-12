@@ -58,6 +58,9 @@
                 <th>
                     @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectNameSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
+                <th>
+                    @Html.ActionLink("Approval Status", "Index", new { sortOrder = ViewBag.ProjectNameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
 
                 <th>Actions</th>
             </tr>
@@ -78,6 +81,61 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Project.ProjectName)
                     </td>
+                    <td>
+                        @* Style stuff *@
+                        <style>
+                            /* Hide the default checkbox */
+                            .custom-checkbox input {
+                                position: absolute;
+                                opacity: 0;
+                                cursor: pointer;
+                            }
+
+                            /* Style the custom checkbox */
+                            .custom-checkbox .checkmark {
+                                display: inline-block;
+                                width: 20px;
+                                height: 20px;
+                                border: 1px solid #ccc;
+                                position: relative;
+                            }
+
+                                /* Create the checkbox checkmark */
+                                .custom-checkbox .checkmark:after {
+                                    content: "";
+                                    position: absolute;
+                                    display: none;
+                                }
+
+                            /* Show the checkmark when the checkbox is checked */
+                            .custom-checkbox input:checked ~ .checkmark:after {
+                                display: block;
+                            }
+
+                            /* Style the checkmark color */
+                            .custom-checkbox .checkmark:after {
+                                left: 6px;
+                                top: 2px;
+                                width: 5px;
+                                height: 10px;
+                                border: solid black;
+                                border-width: 0 2px 2px 0;
+                                transform: rotate(45deg);
+                                border-color: green;
+                            }
+                        </style>
+                        Client: <label class="custom-checkbox">
+                            @Html.DisplayFor(modelItem => item.ClientApproved)
+                            <input type="checkbox" checked="@item.ClientApproved" />
+                            <span class="checkmark"></span>
+                        </label> <br>
+                        NBD: <label class="custom-checkbox">
+                            @Html.DisplayFor(modelItem => item.NBDApproved)
+                            <input type="checkbox" checked="@item.NBDApproved" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |

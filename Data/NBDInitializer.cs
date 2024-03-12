@@ -238,22 +238,22 @@ namespace NBD6.Data
                     context.SaveChanges();
                 }
 
-                if (!context.StaffBids.Any())
-                {
-                    context.StaffBids.AddRange(
-                        new Views.Bids.StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(B => B.BidName == "Glass Material Bid").BidID
-                        },
-                        new Views.Bids.StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(B => B.BidName == "").BidID
-                        }
-                        );
-                    context.SaveChanges();
-                }
+                //if (!context.StaffBids.Any())
+                //{
+                //    context.StaffBids.AddRange(
+                //        new Views.Bids.StaffBid
+                //        {
+                //            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
+                //            BidID = context.Bids.FirstOrDefault(B => B.BidName == "Glass Material Bid").BidID
+                //        },
+                //        new Views.Bids.StaffBid
+                //        {
+                //            StaffID = context.Staffs.FirstOrDefault(S => S.FirstName == "John").StaffID,
+                //            BidID = context.Bids.FirstOrDefault(B => B.BidName == "").BidID
+                //        }
+                //        );
+                //    context.SaveChanges();
+                //}
             }
             catch (Exception ex)
             {
