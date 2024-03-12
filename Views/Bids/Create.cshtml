@@ -51,21 +51,24 @@
             <!-- Adjusted to use form-group for better styling -->
             <h4>Labour</h4>
             <hr />
-            <div class="form-group">
-                <label asp-for="Labour.LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                <input asp-for="Labour.LabourHours" class="form-control" placeholder="Please enter the number of hours worked" required />
-                <span asp-validation-for="Labour.LabourHours" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Labour.LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
-                <input asp-for="Labour.LabourDescription" class="form-control" placeholder="Enter the type of labour conducted" required />
-                <span asp-validation-for="Labour.LabourDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Labour.LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
-                <input asp-for="Labour.LabourPrice" class="form-control" placeholder="ex: 100" required />
-                <span asp-validation-for="Labour.LabourPrice" class="text-danger"></span>
-            </div>
+            @for (var i = 0; i < Model.Labours.Count; i++)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.Labours[i].LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Labours[i].LabourHours" class="form-control" placeholder="Please enter the number of hours worked" required />
+                    <span asp-validation-for="@Model.Labours[i].LabourHours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Labours[i].LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Labours[i].LabourDescription" class="form-control" placeholder="Enter the type of labour conducted" required />
+                    <span asp-validation-for="@Model.Labours[i].LabourDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Labours[i].LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Labours[i].LabourPrice" class="form-control" placeholder="ex: 100" required />
+                    <span asp-validation-for="@Model.Labours[i].LabourPrice" class="text-danger"></span>
+                </div>
+            }
         </div>
 
         <!-- Material Fields -->
@@ -73,32 +76,35 @@
             <!-- Adjusted to use form-group for better styling -->
             <h4>Materials</h4>
             <hr />
-            <div class="form-group">
-                <label asp-for="Material.MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
-                <input asp-for="Material.MaterialType" class="form-control" placeholder="ex: soil, bark, roses" required />
-                <span asp-validation-for="Material.MaterialType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
-                <input asp-for="Material.MaterialQuantity" class="form-control" placeholder="ex: 10" required />
-                <span asp-validation-for="Material.MaterialQuantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialDescription" class="control-label">Description<span class="text-danger">*</span></label>
-                <input asp-for="Material.MaterialDescription" class="form-control" required />
-                <span asp-validation-for="Material.MaterialDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialSize" class="control-label">Materials Size<span class="text-danger">*</span></label>
-                <input asp-for="Material.MaterialSize" class="form-control" placeholder="ex: 10 kg" required />
-                <span asp-validation-for="Material.MaterialSize" class="text-danger"></span>
-                <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
-            </div>
-            <div class="form-group">
-                <label asp-for="Material.MaterialPrice" class="control-label">Price<span class="text-danger">*</span></label>
-                <input asp-for="Material.MaterialPrice" class="form-control" required />
-                <span asp-validation-for="Material.MaterialPrice" class="text-danger"></span>
-            </div>
+            @for (var i = 0; i < Model.Materials.Count; i++)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.Materials[i].MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Materials[i].MaterialType" class="form-control" placeholder="ex: soil, bark, roses" required />
+                    <span asp-validation-for="@Model.Materials[i].MaterialType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Materials[i].MaterialQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Materials[i].MaterialQuantity" class="form-control" placeholder="ex: 10" required />
+                    <span asp-validation-for="@Model.Materials[i].MaterialQuantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Materials[i].MaterialDescription" class="control-label">Description<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Materials[i].MaterialDescription" class="form-control" required />
+                    <span asp-validation-for="@Model.Materials[i].MaterialDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Materials[i].MaterialSize" class="control-label">Materials Size<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Materials[i].MaterialSize" class="form-control" placeholder="ex: 10 kg" required />
+                    <span asp-validation-for="@Model.Materials[i].MaterialSize" class="text-danger"></span>
+                    <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Materials[i].MaterialPrice" class="control-label">Price<span class="text-danger">*</span></label>
+                    <input asp-for="@Model.Materials[i].MaterialPrice" class="form-control" required />
+                    <span asp-validation-for="@Model.Materials[i].MaterialPrice" class="text-danger"></span>
+                </div>
+            }
         </div>
     </div>
 
@@ -117,49 +123,28 @@
 }
 <script>
     function autofill() {
-        // Generate random data for BidStart and BidEnd
-        var startDate = new Date(Date.now() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within next 30 days
-        var endDate = new Date(startDate.getTime() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within 30 days from start
-        document.getElementById("BidStart").value = startDate.toISOString().split('T')[0];
-        document.getElementById("BidEnd").value = endDate.toISOString().split('T')[0];
-
         // Generate random data for Labour fields
-        document.getElementById("LabourHours").value = Math.floor(Math.random() * 40) + 1; // Random value between 1 and 40
-        document.getElementById("LabourPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+        var labourCount = @Model.Labours.Count;
+        for (var i = 0; i < labourCount; i++) {
+            document.getElementById("Labours[" + i + "].LabourHours").value = Math.floor(Math.random() * 40) + 1; // Random value between 1 and 40
+            document.getElementById("Labours[" + i + "].LabourDescription").value = generateRandomLabourDescription();
+            document.getElementById("Labours[" + i + "].LabourPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+        }
 
         // Generate random data for Material fields
-        document.getElementById("MaterialQuantity").value = Math.floor(Math.random() * 1000) + 1; // Random value between 1 and 1000
-        var materialSize = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
-        var sizeUnit = Math.random() < 0.5 ? 'kg' : 'g'; // Randomly choose between kg and g
-        document.getElementById("MaterialSize").value = materialSize + ' ' + sizeUnit; // Concatenate size with unit
-        document.getElementById("MaterialPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
-
-        // Generate random strings for BidName, MaterialType, MaterialDescription, and LabourDescription
-        document.getElementById("BidName").value = generateRandomBidName();
-        document.getElementById("MaterialType").value = generateRandomMaterialType();
-        document.getElementById("MaterialDescription").value = generateRandomMaterialDescription();
-        document.getElementById("LabourDescription").value = generateRandomLabourDescription();
+        var materialCount = @Model.Materials.Count;
+        for (var i = 0; i < materialCount; i++) {
+            document.getElementById("Materials[" + i + "].MaterialType").value = generateRandomMaterialType();
+            document.getElementById("Materials[" + i + "].MaterialQuantity").value = Math.floor(Math.random() * 1000) + 1; // Random value between 1 and 1000
+            var materialSize = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+            var sizeUnit = Math.random() < 0.5 ? 'kg' : 'g'; // Randomly choose between kg and g
+            document.getElementById("Materials[" + i + "].MaterialSize").value = materialSize + ' ' + sizeUnit; // Concatenate size with unit
+            document.getElementById("Materials[" + i + "].MaterialDescription").value = generateRandomMaterialDescription();
+            document.getElementById("Materials[" + i + "].MaterialPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+        }
 
         // Display autofill message
         document.getElementById("autofill-message").innerText = "Form autofilled successfully.";
-    }
-
-    // Function to generate random string of given length
-    function generateRandomString(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
-    // Function to generate random bid name
-    function generateRandomBidName() {
-        var prefixes = ['Construction of', 'Renovation of', 'Installation of', 'Repair of', 'Maintenance of', 'Design of', 'Development of', 'Remodeling of', 'Upgrade of', 'Expansion of'];
-        var suffixes = ['Building', 'Bridge', 'Road', 'Pipeline', 'Demolition', 'Foundation', 'Expansion', 'Upgrade', 'Refurbishment', 'Infrastructure', 'Facility', 'System', 'Project', 'Structure'];
-        return prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' + suffixes[Math.floor(Math.random() * suffixes.length)];
     }
 
     // Function to generate random material type
