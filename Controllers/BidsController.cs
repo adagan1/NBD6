@@ -170,6 +170,8 @@ namespace NBD6.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName");
+            //Populate the staff dropdown
+            ViewData["StaffID"] = new MultiSelectList(_context.Staffs, "StaffID", "StaffSummary");
             return View();
         }
 
@@ -199,6 +201,7 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
+            ViewData["StaffID"] = new SelectList(_context.Staffs, "StaffID", "StaffSummary", bid.StaffBids);
             return View(bid);
         }
 

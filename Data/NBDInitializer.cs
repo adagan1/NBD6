@@ -298,161 +298,161 @@ namespace NBD6.Data
                 {
                     context.StaffBids.AddRange(
                         // First Staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         // Second staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Third staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Fourth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Fifth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Sixth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Seventh staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Eighth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Ninth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
                         },
                         //Tenth staff
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
                         },
-                        new Views.Bids.StaffBid
+                        new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID

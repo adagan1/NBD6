@@ -1,7 +1,6 @@
-﻿using NBD6.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NBD6.Views.Bids
+namespace NBD6.Models
 {
 
     public class StaffBid

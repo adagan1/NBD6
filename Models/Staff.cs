@@ -1,6 +1,4 @@
-﻿using NBD6.Views.Bids;
-
-namespace NBD6.Models
+﻿namespace NBD6.Models
 {
     public class Staff
     {

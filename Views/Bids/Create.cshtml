@@ -103,17 +103,16 @@
             </div>         
         </div>
 
-        @* <div class="col-md-6">
+        <div class="col-md-6">
             <h4>Staff</h4>
             <hr />
             <div class="form-group">
-                <label asp-for="SelectedStaff" class="control-label">Select Staff<span class="text-danger">*</span></label>
-                <select asp-for="SelectedStaff" class="form-control" id="SelectedStaff" asp-items="Model.AvailableStaff" multiple required>
+                <label asp-for="StaffBids" class="control-label">Staff<span class="text-danger">*</span></label>
+                <select asp-for="StaffBids" class="form-control" id="StaffID" asp-items="ViewBag.StaffID">
                     <option value="">Select Staff</option>
                 </select>
-                <span asp-validation-for="SelectedStaff" class="text-danger"></span>
             </div>
-        </div> *@
+        </div>
 
     <!-- Autofill button -->
     <div class="form-group">

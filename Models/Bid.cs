@@ -1,5 +1,4 @@
-﻿using NBD6.Views.Bids;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -54,7 +53,5 @@ namespace NBD6.Models
         public Material Material { get; set; }
         public List<Labour> Labours { get; set; }
         public Labour Labour { get; set; }
-
-        
     }
 }

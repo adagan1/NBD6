@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NBD6.Models;
-using NBD6.Views.Bids;
 
 namespace NBD6.Data
 {
