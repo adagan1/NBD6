@@ -100,8 +100,20 @@
                     <input asp-for="Material.MaterialPrice" class="form-control" id="MaterialPrice" />
                     <span asp-validation-for="Material.MaterialPrice" class="text-danger"></span>
                 </div>
+            </div>         
+        </div>
+
+        @* <div class="col-md-6">
+            <h4>Staff</h4>
+            <hr />
+            <div class="form-group">
+                <label asp-for="SelectedStaff" class="control-label">Select Staff<span class="text-danger">*</span></label>
+                <select asp-for="SelectedStaff" class="form-control" id="SelectedStaff" asp-items="Model.AvailableStaff" multiple required>
+                    <option value="">Select Staff</option>
+                </select>
+                <span asp-validation-for="SelectedStaff" class="text-danger"></span>
             </div>
-    </div>
+        </div> *@
 
     <!-- Autofill button -->
     <div class="form-group">

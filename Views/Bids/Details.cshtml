@@ -30,6 +30,12 @@
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.BidEnd)
                 </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Project)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Project.ProjectName)
+                </dd>
             </dl>
         </div>
         <div class="col-md-6">
@@ -95,13 +101,23 @@
                     <dd class="col-sm-8">
                         @Html.DisplayFor(_ => labour.LabourPrice)
                     </dd>
+                }                
+            </dl>
+        </div>
+        
+        <div class="col-md-6">
+            <h4>Staff</h4>
+            <hr />
+            <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
+                @foreach (var staffBid in Model.StaffBids)
+                {
+                    <dt class="col-sm-3">
+                        Staff
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(_ => staffBid.Staff.StaffSummary)
+                    </dd>
                 }
-                <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Project)
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.Project.ProjectName)
-                </dd>
             </dl>
         </div>
 

@@ -103,7 +103,10 @@ namespace NBD6.Controllers
                 .Include(b => b.Project)
                 .Include(b => b.Materials)
                 .Include(b => b.Labours)
+                .Include(b => b.StaffBids)
+                    .ThenInclude(sb => sb.Staff) // Include Staff entity
                 .FirstOrDefaultAsync(m => m.BidID == id);
+
             if (bid == null)
             {
                 return NotFound();
@@ -124,6 +127,8 @@ namespace NBD6.Controllers
                 .Include(b => b.Project)
                 .Include(b => b.Materials)
                 .Include(b => b.Labours)
+                .Include(b => b.StaffBids)
+                    .ThenInclude(sb => sb.Staff) // Include Staff entity
                 .FirstOrDefaultAsync(m => m.BidID == id);
             if (bid == null)
             {
@@ -142,7 +147,10 @@ namespace NBD6.Controllers
                 .Include(b => b.Project)
                 .Include(b => b.Materials)
                 .Include(b => b.Labours)
+                .Include(b => b.StaffBids)
+                    .ThenInclude(sb => sb.Staff) // Include Staff entity
                 .FirstOrDefaultAsync(m => m.BidID == id);
+
             if (bid == null)
             {
                 return NotFound();
