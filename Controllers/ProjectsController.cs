@@ -129,7 +129,9 @@ namespace NBD6.Controllers
             var project = await _context.Projects
                 .Include(a => a.Address)
                 .Include(c => c.Client)
+                .Include(b => b.Bids) 
                 .FirstOrDefaultAsync(m => m.ProjectID == id);
+
             if (project == null)
             {
                 return NotFound();
@@ -137,6 +139,7 @@ namespace NBD6.Controllers
 
             return View(project);
         }
+
 
         // GET: Projects/Create
         public IActionResult Create()
