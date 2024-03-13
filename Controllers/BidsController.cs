@@ -175,12 +175,9 @@ namespace NBD6.Controllers
             return View();
         }
 
-        // POST: Bids/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,MaterialID,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourID,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid, List<int> StaffIDList, Material material, Labour labour)
+        public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID")] Bid bid, List<Material> materials, List<Labour> labours, List<int> StaffIDList)
         {
             if (ModelState.IsValid)
             {
@@ -188,13 +185,6 @@ namespace NBD6.Controllers
                 await _context.SaveChangesAsync();
 
                 // Now bid has an ID assigned by the database
-
-                // Assign the Bid ID to Material and Labour
-                material.BidID = bid.BidID;
-                labour.BidID = bid.BidID;
-
-                _context.Add(material);
-                _context.Add(labour);
 
                 // Associate staff members with the bid
                 if (StaffIDList != null)
@@ -205,10 +195,32 @@ namespace NBD6.Controllers
                     }
                 }
 
+                // Associate materials with the bid
+                if (materials != null && materials.Any())
+                {
+                    foreach (var material in materials)
+                    {
+                        material.BidID = bid.BidID;
+                        _context.Add(material);
+                    }
+                }
+                Console.WriteLine(materials);
+                // Associate labours with the bid
+                if (labours != null && labours.Any())
+                {
+                    foreach (var labour in labours)
+                    {
+                        labour.BidID = bid.BidID;
+                        _context.Add(labour);
+                    }
+                }
+                Console.WriteLine(labours);
                 TempData["AlertMessageBid"] = "Bid Successfully Added";
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // If the model state is not valid, repopulate necessary data for the view
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
             ViewData["StaffID"] = new SelectList(_context.Staffs, "StaffID", "StaffSummary", bid.StaffBids);
             return View(bid);
