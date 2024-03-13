@@ -46,8 +46,32 @@
             </div>
         </div>
 
+        <!-- Labour Fields -->
+        <div class="col-md-6" id="labour-fields">
+            <h4>Labour</h4>
+            <hr />
+            <div class="labour-group">
+                <div class="form-group">
+                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Please enter the number of hours worked" required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Labour Description<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Enter description" required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Enter price" required />
+                </div>
+                <!-- Add more labour fields as needed -->
+            </div>
+            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
+        </div>
+
         <!-- Material Fields -->
-        <div id="material-fields">
+        <div class="col-md-6" id="material-fields">
+            <h4>Material</h4>
+            <hr />
             <div class="material-group">
                 <div class="form-group">
                     <label class="control-label">Material Type<span class="text-danger">*</span></label>
@@ -71,31 +95,9 @@
                 </div>
                 <!-- Add more material fields as needed -->
             </div>
+            <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
-        <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
-
-        <!-- Labour Fields -->
-        <div id="labour-fields">
-            <div class="labour-group">
-                <div class="form-group">
-                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Please enter the number of hours worked" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Labour Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Enter description" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Enter price" required />
-                </div>
-                <!-- Add more labour fields as needed -->
-            </div>
-        </div>
-        <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
-
-
-
+        
      <div class="col-md-6">
             <h4>Staff</h4>
             <hr />
@@ -109,9 +111,7 @@
         </div>
             <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
      </div>
-        
-
-            
+                
     <!-- Autofill button -->
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
