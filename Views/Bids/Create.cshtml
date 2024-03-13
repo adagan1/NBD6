@@ -149,6 +149,7 @@
             <div class="form-group">
                 <label class="control-label">Labour Price<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="LabourPrice" placeholder="ex: 100" required />
+
             </div>
         `;
         laboursContainer.appendChild(newLabourGroup);
@@ -185,48 +186,56 @@
         materialsContainer.appendChild(newMaterialGroup);
     }
 
-    // Function to get the index for the next material
-    function getNextMaterialIndex() {
-        var materialsContainer = document.querySelectorAll('.material-group');
-        return materialsContainer.length;
-    }
+        function autofill() {
+            // Generate random data for BidStart and BidEnd
+            var startDate = new Date(Date.now() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within next 30 days
+            var endDate = new Date(startDate.getTime() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within 30 days from start
+            document.getElementById("BidStart").value = startDate.toISOString().split('T')[0];
+            document.getElementById("BidEnd").value = endDate.toISOString().split('T')[0];
 
-    // Function to get the index for the next labour
-    function getNextLabourIndex() {
-        var laboursContainer = document.querySelectorAll('.labour-group');
-        return laboursContainer.length;
-    }
+            // Generate random data for ProjectID (assuming it's a select dropdown)
+            var projectOptions = document.getElementById("ProjectID").options;
+            var randomProjectIndex = Math.floor(Math.random() * (projectOptions.length - 1)) + 1; // Exclude the first option (Select a Project)
+            document.getElementById("ProjectID").selectedIndex = randomProjectIndex;
 
+            // Generate random data for Labour fields
+            document.getElementsByName("LabourHours").forEach(function (element) {
+                element.value = Math.floor(Math.random() * 40) + 1; // Random value between 1 and 40
+            });
+            document.getElementsByName("LabourDescription").forEach(function (element) {
+                element.value = generateRandomLabourDescription();
+            });
+            document.getElementsByName("LabourPrice").forEach(function (element) {
+                element.value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+            });
 
-    function autofill() {
-        // Generate random data for BidStart and BidEnd
-        var startDate = new Date(Date.now() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within next 30 days
-        var endDate = new Date(startDate.getTime() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within 30 days from start
-        document.getElementById("BidStart").value = startDate.toISOString().split('T')[0];
-        document.getElementById("BidEnd").value = endDate.toISOString().split('T')[0];
+            // Generate random data for Material fields
+            document.getElementsByName("MaterialType").forEach(function (element) {
+                element.value = generateRandomMaterialType();
+            });
+            document.getElementsByName("MaterialQuantity").forEach(function (element) {
+                element.value = Math.floor(Math.random() * 1000) + 1; // Random value between 1 and 1000
+            });
+            document.getElementsByName("MaterialDescription").forEach(function (element) {
+                element.value = generateRandomMaterialDescription();
+            });
+            document.getElementsByName("MaterialSize").forEach(function (element) {
+                var materialSize = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+                var sizeUnit = Math.random() < 0.5 ? 'kg' : 'g'; // Randomly choose between kg and g
+                element.value = materialSize + ' ' + sizeUnit; // Concatenate size with unit
+            });
+            document.getElementsByName("MaterialPrice").forEach(function (element) {
+                element.value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
+            });
 
-        // Generate random data for ProjectID (assuming it's a select dropdown)
-        var projectOptions = document.getElementById("ProjectID").options;
-        var randomProjectIndex = Math.floor(Math.random() * (projectOptions.length - 1)) + 1; // Exclude the first option (Select a Project)
-        document.getElementById("ProjectID").selectedIndex = randomProjectIndex;
+            // Generate random string for BidName
+            document.getElementsByName("BidName").forEach(function (element) {
+                element.value = generateRandomBidName();
+            });
 
-        // Generate random data for Labour fields
-        document.getElementById("LabourHours").value = Math.floor(Math.random() * 40) + 1; // Random value between 1 and 40
-        document.getElementById("LabourPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
-
-        // Generate random data for Material fields
-        document.getElementById("MaterialQuantity").value = Math.floor(Math.random() * 1000) + 1; // Random value between 1 and 1000
-        var materialSize = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
-        var sizeUnit = Math.random() < 0.5 ? 'kg' : 'g'; // Randomly choose between kg and g
-        document.getElementById("MaterialSize").value = materialSize + ' ' + sizeUnit; // Concatenate size with unit
-        document.getElementById("MaterialPrice").value = (Math.random() * 100).toFixed(2); // Random value between 0 and 100, rounded to 2 decimal places
-
-        // Generate random strings for BidName, MaterialType, MaterialDescription, and LabourDescription
-        document.getElementById("BidName").value = generateRandomBidName();
-        document.getElementById("MaterialType").value = generateRandomMaterialType();
-        document.getElementById("MaterialDescription").value = generateRandomMaterialDescription();
-        document.getElementById("LabourDescription").value = generateRandomLabourDescription();
-    }
+            // Display autofill message
+            document.getElementById("autofill-message").innerText = "Form autofilled with random data.";
+        }
 
     // Function to generate random string of given length
     function generateRandomString(length) {
@@ -245,8 +254,6 @@
         var suffixes = ['Building', 'Bridge', 'Road', 'Pipeline', 'Demolition', 'Foundation', 'Expansion', 'Upgrade', 'Refurbishment', 'Infrastructure', 'Facility', 'System', 'Project', 'Structure'];
         return prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' + suffixes[Math.floor(Math.random() * suffixes.length)];
     }
-
-
 
     // Function to generate random material type
     function generateRandomMaterialType() {
