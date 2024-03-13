@@ -21,13 +21,13 @@
                 <input asp-for="BidName" class="form-control" placeholder="Enter bid name" required />
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
-            <!-- Adjusted to use date input type -->
+
             <div class="form-group">
                 <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
                 <input asp-for="BidStart" class="form-control" type="date" required />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
             </div>
-            <!-- Adjusted to use date input type -->
+
             <div class="form-group">
                 <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
                 <input asp-for="BidEnd" class="form-control" type="date" required />
@@ -51,22 +51,22 @@
             <h4>Labour</h4>
             <hr />
             <div id="labours-container">
-                <div class="form-group">
-                    <label asp-for="Labour.LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                    <input asp-for="Labour.LabourHours" class="form-control" id="LabourHours" placeholder="Please enter the number of hours worked" />
-                    <span asp-validation-for="Labour.LabourHours" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Labour.LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
-                    <input asp-for="Labour.LabourDescription" class="form-control" id="LabourDescription" placeholder="Enter the type of labour conducted" />
-                    <span asp-validation-for="Labour.LabourDescription" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Labour.LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
-                    <input asp-for="Labour.LabourPrice" class="form-control" id="LabourPrice" placeholder="ex: 100" />
-                    <span asp-validation-for="Labour.LabourPrice" class="text-danger"></span>
+                <div class="labour-group">
+                    <div class="form-group">
+                        <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="LabourHours" placeholder="Please enter the number of hours worked" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="LabourDescription" placeholder="Enter the type of labour conducted" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Labour Price<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="LabourPrice" placeholder="ex: 100" required />
+                    </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
         </div>
 
         <!-- Material Fields -->
@@ -74,33 +74,31 @@
             <h4>Materials</h4>
             <hr />
             <div id="materials-container">
-                <div class="form-group">
-                    <label asp-for="Material.MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
-                    <input asp-for="Material.MaterialType" class="form-control" id="MaterialType" placeholder="ex: soil, bark, roses" />
-                    <span asp-validation-for="Material.MaterialType" class="text-danger"></span>
+                <div class="material-group">
+                    <div class="form-group">
+                        <label class="control-label">Material Type<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="MaterialType" placeholder="ex: soil, bark, roses" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Quantity<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="MaterialQuantity" placeholder="ex: 10" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="MaterialDescription" placeholder="Enter the type of material" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Materials Size<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="MaterialSize" placeholder="ex: 10 kg" required />
+                        <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Price<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="MaterialPrice" placeholder="Material price" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Material.MaterialQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
-                    <input asp-for="Material.MaterialQuantity" class="form-control" id="MaterialQuantity" placeholder="ex: 10" />
-                    <span asp-validation-for="Material.MaterialQuantity" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Material.MaterialDescription" class="control-label">Description<span class="text-danger">*</span></label>
-                    <input asp-for="Material.MaterialDescription" class="form-control" id="MaterialDescription" />
-                    <span asp-validation-for="Material.MaterialDescription" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Material.MaterialSize" class="control-label">Materials Size<span class="text-danger">*</span></label>
-                    <input asp-for="Material.MaterialSize" class="form-control" id="MaterialSize" placeholder="ex: 10 kg" />
-                    <span asp-validation-for="Material.MaterialSize" class="text-danger"></span>
-                    <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Material.MaterialPrice" class="control-label">Price<span class="text-danger">*</span></label>
-                    <input asp-for="Material.MaterialPrice" class="form-control" id="MaterialPrice" />
-                    <span asp-validation-for="Material.MaterialPrice" class="text-danger"></span>
-                </div>
-            </div>         
+            </div>
+            <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
 
         <div class="col-md-6">
@@ -134,6 +132,72 @@
     }
 }
 <script>
+    // Function to add another set of labour fields
+    function addLabour() {
+        var laboursContainer = document.getElementById("labours-container");
+        var newLabourGroup = document.createElement("div");
+        newLabourGroup.classList.add("labour-group");
+        newLabourGroup.innerHTML = `
+            <div class="form-group">
+                <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="LabourHours" placeholder="Please enter the number of hours worked" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="LabourDescription" placeholder="Enter the type of labour conducted" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Labour Price<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="LabourPrice" placeholder="ex: 100" required />
+            </div>
+        `;
+        laboursContainer.appendChild(newLabourGroup);
+    }
+
+    // Function to add another set of material fields
+    function addMaterial() {
+        var materialsContainer = document.getElementById("materials-container");
+        var newMaterialGroup = document.createElement("div");
+        newMaterialGroup.classList.add("material-group");
+        newMaterialGroup.innerHTML = `
+            <div class="form-group">
+                <label class="control-label">Material Type<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="MaterialType" placeholder="ex: soil, bark, roses" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Quantity<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="MaterialQuantity" placeholder="ex: 10" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="MaterialDescription" placeholder="Enter the type of material" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Materials Size<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="MaterialSize" placeholder="ex: 10 kg" required />
+                <small class="form-text text-muted">Please enter a unit of measurement after a digit(cm, m, l, g, kg)</small>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Price<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="MaterialPrice" placeholder="Material price" required />
+            </div>
+        `;
+        materialsContainer.appendChild(newMaterialGroup);
+    }
+
+    // Function to get the index for the next material
+    function getNextMaterialIndex() {
+        var materialsContainer = document.querySelectorAll('.material-group');
+        return materialsContainer.length;
+    }
+
+    // Function to get the index for the next labour
+    function getNextLabourIndex() {
+        var laboursContainer = document.querySelectorAll('.labour-group');
+        return laboursContainer.length;
+    }
+
+
     function autofill() {
         // Generate random data for BidStart and BidEnd
         var startDate = new Date(Date.now() + Math.random() * (1000 * 60 * 60 * 24 * 30)); // Random date within next 30 days
