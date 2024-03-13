@@ -136,28 +136,28 @@
             var newMaterialGroup = document.createElement("div");
             newMaterialGroup.classList.add("material-group");
             newMaterialGroup.innerHTML = `
-                <div class="form-group">
-                    <label class="control-label">Material Type<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Quantity<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[${materialCounter}].Quantity" placeholder="Quantity" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Enter description" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Size<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Enter size" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Enter price" required />
-                </div>
+                        <div class="form-group">
+                            <label class="control-label">Material Type<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Quantity<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].Quantity" placeholder="Quantity" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Material Description<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Enter description" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Material Size<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Enter size" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Material Price<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Enter price" required />
+                        </div>
 
-            `;
+                    `;
             materialFields.appendChild(newMaterialGroup);
             materialCounter++; // Increment counter for the next material
         }
@@ -167,22 +167,50 @@
             var newLabourGroup = document.createElement("div");
             newLabourGroup.classList.add("labour-group");
             newLabourGroup.innerHTML = `
-                <div class="form-group">
-                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Please enter the number of hours worked" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[${labourCounter}].Description" placeholder="Description" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Enter price" required />
-                </div>
+                        <div class="form-group">
+                            <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Please enter the number of hours worked" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Description<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].Description" placeholder="Description" required />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Labour Price<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Enter price" required />
+                        </div>
 
-            `;
+                    `;
             labourFields.appendChild(newLabourGroup);
             labourCounter++; // Increment counter for the next labour
+        }
+
+        function autofill() {
+            // Autofill data for bid
+            document.querySelector('input[name="BidName"]').value = "Sample Bid";
+            document.querySelector('input[name="BidStart"]').value = "2024-03-15";
+            document.querySelector('input[name="BidEnd"]').value = "2024-03-20";
+
+            // Autofill data for material
+            var materialFields = document.querySelectorAll('.material-group');
+            materialFields.forEach(function (materialField, index) {
+                materialField.querySelector('input[name="Materials[' + index + '].MaterialType"]').value = "Sample Material Type";
+                materialField.querySelector('input[name="Materials[' + index + '].Quantity"]').value = "10";
+                materialField.querySelector('input[name="Materials[' + index + '].MaterialDescription"]').value = "Sample Material Description";
+                materialField.querySelector('input[name="Materials[' + index + '].MaterialSize"]').value = "Sample Material Size";
+                materialField.querySelector('input[name="Materials[' + index + '].MaterialPrice"]').value = "100";
+            });
+
+            // Autofill data for labour
+            var labourFields = document.querySelectorAll('.labour-group');
+            labourFields.forEach(function (labourField, index) {
+                labourField.querySelector('input[name="Labours[' + index + '].LabourHours"]').value = "8";
+                labourField.querySelector('input[name="Labours[' + index + '].Description"]').value = "Sample Labour Description";
+                labourField.querySelector('input[name="Labours[' + index + '].LabourPrice"]').value = "20";
+            });
+
+            // Provide a success message or perform any additional actions if needed
+            document.getElementById('autofill-message').innerText = "Form autofilled successfully!";
         }
     </script>
 }
