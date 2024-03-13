@@ -41,9 +41,17 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ClientPhone" class="control-label">Client Phone<span class="text-danger">*</span></label>
-                    <input asp-for="ClientPhone" class="form-control" />
+                    <input asp-for="ClientPhone" class="form-control" id="clientPhoneInput" />
                     <span asp-validation-for="ClientPhone" class="text-danger"></span>
                 </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var clientPhoneInput = document.getElementById("clientPhoneInput");
+                        if (clientPhoneInput) {
+                            clientPhoneInput.value = clientPhoneInput.value.replace(/-/g, ''); // Removing hyphens
+                        }
+                    });
+                </script>
             </div>
             <div class="col-md-6">
                 <h4>Address</h4>
