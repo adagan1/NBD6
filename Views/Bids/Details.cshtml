@@ -41,7 +41,7 @@
         <div class="col-md-6">
             <h4>Materials</h4>
             <hr />
-            <dl class="row">
+            <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
                 @foreach (var material in Model.Materials.Where(m => m.BidID == Model.BidID))
                 {
                     <dt class="col-sm-4">
@@ -80,7 +80,7 @@
         <div class="col-md-6">
             <h4>Labour</h4>
             <hr />
-            <dl class="row">
+            <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
                 @foreach (var labour in Model.Labours.Where(l => l.BidID == Model.BidID))
                 {
                     <dt class="col-sm-4">
@@ -110,10 +110,7 @@
             <hr />
             <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
                 @foreach (var staffBid in Model.StaffBids)
-                {
-                    <dt class="col-sm-3">
-                        Staff
-                    </dt>
+                {                   
                     <dd class="col-sm-8">
                         @Html.DisplayFor(_ => staffBid.Staff.StaffSummary)
                     </dd>

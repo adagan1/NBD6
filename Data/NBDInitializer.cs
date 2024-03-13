@@ -145,7 +145,7 @@ namespace NBD6.Data
                             FirstName = "Jane",
                             LastName = "Smith",
                             StaffPhone = "4444444444",
-                            StaffPosition = "Construction Supervisor"
+                            StaffPosition = "Construction Worker"
                         },
                         new Staff
                         {

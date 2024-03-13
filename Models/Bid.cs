@@ -47,6 +47,7 @@ namespace NBD6.Models
 
         // Collections
         public virtual ICollection<StaffBid> StaffBids { get; set; }
+        public Staff Staff { get; set; }
 
         // Lists
         public List<Material> Materials { get; set; }

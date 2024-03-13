@@ -112,7 +112,8 @@ namespace NBD6.Data.NBDMigrations
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ClientApproved = table.Column<bool>(type: "INTEGER", nullable: false),
                     NBDApproved = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false)
+                    ProjectID = table.Column<int>(type: "INTEGER", nullable: false),
+                    StaffID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,6 +124,11 @@ namespace NBD6.Data.NBDMigrations
                         principalTable: "Projects",
                         principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bids_Staffs_StaffID",
+                        column: x => x.StaffID,
+                        principalTable: "Staffs",
+                        principalColumn: "StaffID");
                 });
 
             migrationBuilder.CreateTable(
@@ -217,6 +223,11 @@ namespace NBD6.Data.NBDMigrations
                 column: "ProjectID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bids_StaffID",
+                table: "Bids",
+                column: "StaffID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Labours_BidID",
                 table: "Labours",
                 column: "BidID");
@@ -271,10 +282,10 @@ namespace NBD6.Data.NBDMigrations
                 name: "Bids");
 
             migrationBuilder.DropTable(
-                name: "Staffs");
+                name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Staffs");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

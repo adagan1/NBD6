@@ -85,9 +85,14 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("ProjectID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("StaffID")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("BidID");
 
                     b.HasIndex("ProjectID");
+
+                    b.HasIndex("StaffID");
 
                     b.ToTable("Bids");
                 });
@@ -272,7 +277,7 @@ namespace NBD6.Data.NBDMigrations
                     b.ToTable("Staffs");
                 });
 
-            modelBuilder.Entity("NBD6.Views.Bids.StaffBid", b =>
+            modelBuilder.Entity("NBD6.Models.StaffBid", b =>
                 {
                     b.Property<int>("StaffID")
                         .HasColumnType("INTEGER");
@@ -304,7 +309,13 @@ namespace NBD6.Data.NBDMigrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NBD6.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffID");
+
                     b.Navigation("Project");
+
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("NBD6.Models.Labour", b =>
@@ -352,7 +363,7 @@ namespace NBD6.Data.NBDMigrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("NBD6.Views.Bids.StaffBid", b =>
+            modelBuilder.Entity("NBD6.Models.StaffBid", b =>
                 {
                     b.HasOne("NBD6.Models.Bid", "Bid")
                         .WithMany("StaffBids")

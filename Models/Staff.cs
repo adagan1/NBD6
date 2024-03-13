@@ -31,7 +31,7 @@
         {
             get
             {
-                return $"{StaffPosition}: {FirstName} {LastName} Phone:{FormattedPhone}";
+                return $"{StaffPosition}: {FirstName} {LastName}, Phone: {FormattedPhone}";
             }
         }
     }
