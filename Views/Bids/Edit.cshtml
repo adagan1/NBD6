@@ -100,6 +100,23 @@
         </div>
     </div>
 
+    @* <div class="col-md-6">
+        <h4>Staff</h4>
+        <hr />
+        <div id="staffContainer">
+            @foreach (var staff in Model.Staff)
+            {
+                <div class="staffFields">
+                    <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                    <select asp-for="@staff.StaffID" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                        <option value="">Select Staff</option>
+                    </select>
+                </div>
+            }
+        </div>
+        <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
+    </div> *@
+
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
     </div>
