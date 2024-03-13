@@ -132,3 +132,16 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<script>
+    document.getElementById('addStaffBtn').addEventListener('click', function () {
+        var staffContainer = document.getElementById('staffContainer');
+        var staffFields = document.querySelector('.staffFields');
+        var clone = staffFields.cloneNode(true);
+        staffContainer.appendChild(clone);
+    });
+
+    function removeStaff(element) {
+        element.parentNode.remove();
+    }
+</script>
