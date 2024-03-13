@@ -26,6 +26,24 @@
         </button>
     </div>
 }
+@if (TempData["AlertMessageApproval"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageApproval"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+@if (TempData["AlertMessageDecline"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["AlertMessageDecline"]
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 @using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "form-inline" }))
 {
     <div class="row mb-3">
@@ -60,6 +78,9 @@
                 </th>
                 <th>
                     @Html.ActionLink("Approval Status", "Index", new { sortOrder = ViewBag.ProjectNameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Bid Declined", "Index", new { sortOrder = ViewBag.ProjectNameSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
 
                 <th>Actions</th>
@@ -132,6 +153,13 @@
                         NBD: <label class="custom-checkbox">
                             @Html.DisplayFor(modelItem => item.NBDApproved)
                             <input type="checkbox" checked="@item.NBDApproved" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="custom-checkbox">
+                            @Html.DisplayFor(modelItem => item.BidDeclined)
+                            <input type="checkbox" checked="@item.BidDeclined" />
                             <span class="checkmark"></span>
                         </label>
                     </td>

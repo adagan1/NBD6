@@ -63,6 +63,9 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("BidDeclined")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("BidEnd")
                         .HasColumnType("TEXT");
 

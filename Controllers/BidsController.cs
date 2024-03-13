@@ -130,6 +130,7 @@ namespace NBD6.Controllers
                 .Include(b => b.StaffBids)
                     .ThenInclude(sb => sb.Staff) // Include Staff entity
                 .FirstOrDefaultAsync(m => m.BidID == id);
+
             if (bid == null)
             {
                 return NotFound();
@@ -141,7 +142,7 @@ namespace NBD6.Controllers
         // POST: Bids/Approval/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Approval(int id, string notes, bool clientApproval, bool nbdApproval)
+        public async Task<IActionResult> Approval(int id, string notes, bool clientApproval, bool nbdApproval, bool bidDeclined)
         {
             var bid = await _context.Bids
                 .Include(b => b.Project)
@@ -159,7 +160,16 @@ namespace NBD6.Controllers
             bid.Notes = notes;
             bid.ClientApproved = clientApproval;
             bid.NBDApproved = nbdApproval;
+            bid.BidDeclined = bidDeclined;
 
+            if (bid.BidDeclined == true)
+            {
+                TempData["AlertMessageDecline"] = "Bid Successfully Declined";
+            }
+            else if (bid.ClientApproved == true || bid.NBDApproved == true)
+            {
+                TempData["AlertMessageApproval"] = "Bid Successfully Approved";
+            }
             _context.Update(bid);
             await _context.SaveChangesAsync();
 
