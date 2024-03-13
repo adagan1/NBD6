@@ -111,13 +111,13 @@
         </div>
             <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
      </div>
-                
-    <!-- Autofill button -->
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-        <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
-        <span id="autofill-message" class="text-success"></span>
-    </div>
+
+        <!-- Autofill button -->
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
+            <span id="autofill-message" class="text-success"></span>
+        </div>
 </form>
 
 <div class="col-md-1">
@@ -153,6 +153,56 @@
     }
 }
     <script>
+        function autofill() {
+            // Autofill bid fields
+            document.querySelector('input[name="BidName"]').value = "Example Bid";
+            document.querySelector('input[name="BidStart"]').value = "2024-03-13"; // Example date
+            document.querySelector('input[name="BidEnd"]').value = "2024-03-20"; // Example date
+
+            // Autofill material fields
+            document.querySelectorAll('input[name^="Materials"]').forEach(function (input) {
+                if (input.name.includes("MaterialType")) {
+                    input.value = "Autofilled Material Type";
+                } else if (input.name.includes("MaterialQuantity")) {
+                    input.value = "10"; // Example quantity
+                } else if (input.name.includes("MaterialDescription")) {
+                    input.value = "Autofilled Material Description";
+                } else if (input.name.includes("MaterialSize")) {
+                    input.value = "30 kg"; // Example size
+                } else if (input.name.includes("MaterialPrice")) {
+                    input.value = "50"; // Example price
+                }
+            });
+
+            // Autofill labour fields
+            document.querySelectorAll('input[name^="Labours"]').forEach(function (input) {
+                if (input.name.includes("LabourHours")) {
+                    input.value = "8"; // Example hours worked
+                } else if (input.name.includes("LabourDescription")) {
+                    input.value = "Autofilled Labour Description";
+                } else if (input.name.includes("LabourPrice")) {
+                    input.value = "20"; // Example price
+                }
+            });
+
+            // Autofill staff fields
+            document.querySelectorAll('select[name^="Staff"]').forEach(function (select) {
+                var options = select.querySelectorAll('option');
+                if (options.length > 1) { // Skip if already populated
+                    return;
+                }
+                // Add options for staff members
+                var staffNames = ["John Doe", "Jane Smith", "Michael Johnson"]; // Example staff names
+                staffNames.forEach(function (name, index) {
+                    var option = document.createElement('option');
+                    option.value = index + 1; // Example staff ID
+                    option.text = name;
+                    select.appendChild(option);
+                });
+            });
+
+            document.getElementById('autofill-message').innerText = "Form autofilled successfully.";
+        }
         var materialCounter = 1; // Initialize counters
         var labourCounter = 1;
         var staffCounter = 1;
