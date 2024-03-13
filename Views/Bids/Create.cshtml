@@ -101,17 +101,23 @@
             <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
 
-        <div class="col-md-6">
+
+     <div class="col-md-6">
             <h4>Staff</h4>
             <hr />
-            <div class="form-group">
+        <div id="staffContainer">
+            <div class="staffFields">
                 <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                <select asp-for="Staff" class="form-control" id="StaffID" asp-items="ViewBag.StaffID" name="StaffIDList">
+                <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
                     <option value="">Select Staff</option>
                 </select>
-            </div>
+            </div>            
         </div>
+            <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
+     </div>
+        
 
+            
     <!-- Autofill button -->
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
@@ -132,6 +138,13 @@
     }
 }
 <script>
+    document.getElementById('addStaffBtn').addEventListener('click', function () {
+        var staffContainer = document.getElementById('staffContainer');
+        var staffFields = document.querySelector('.staffFields');
+        var clone = staffFields.cloneNode(true);
+        staffContainer.appendChild(clone);
+    });
+
     // Function to add another set of labour fields
     function addLabour() {
         var laboursContainer = document.getElementById("labours-container");
