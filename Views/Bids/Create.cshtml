@@ -137,28 +137,28 @@
             var newMaterialGroup = document.createElement("div");
             newMaterialGroup.classList.add("material-group");
             newMaterialGroup.innerHTML = `
-                            <div class="form-group">
-                                <label class="control-label">Material Type<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Quantity<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Materials[${materialCounter}].Quantity" placeholder="Quantity" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Material Description<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Enter description" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Material Size<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Enter size" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Material Price<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Enter price" required />
-                            </div>
-                            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-                        `;
+                                <div class="form-group">
+                                    <label class="control-label">Material Type<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Quantity<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Materials[${materialCounter}].Quantity" placeholder="Quantity" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Material Description<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Enter description" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Material Size<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Enter size" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Material Price<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Enter price" required />
+                                </div>
+                                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+                            `;
             materialFields.appendChild(newMaterialGroup);
             materialCounter++; // Increment counter for the next material
         }
@@ -168,23 +168,31 @@
             var newLabourGroup = document.createElement("div");
             newLabourGroup.classList.add("labour-group");
             newLabourGroup.innerHTML = `
-                            <div class="form-group">
-                                <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Please enter the number of hours worked" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Labour Description<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Enter price" required />
-                            </div>
-                            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-                        `;
+                                <div class="form-group">
+                                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Please enter the number of hours worked" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Labour Description<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Enter price" required />
+                                </div>
+                                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+                            `;
             labourFields.appendChild(newLabourGroup);
             labourCounter++; // Increment counter for the next labour
         }
+
+        document.getElementById('addStaffBtn').addEventListener('click', function () {
+            var staffContainer = document.getElementById('staffContainer');
+            var staffFields = document.querySelector('.staffFields');
+            var clone = staffFields.cloneNode(true);
+            clone.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>';
+            staffContainer.appendChild(clone);
+        });
 
         function removeElement(element) {
             element.parentNode.remove();
