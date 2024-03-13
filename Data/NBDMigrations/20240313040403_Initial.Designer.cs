@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240312235912_Initial")]
+    [Migration("20240313040403_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -64,6 +64,9 @@ namespace NBD6.Data.NBDMigrations
                 {
                     b.Property<int>("BidID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("BidDeclined")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("BidEnd")

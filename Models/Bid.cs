@@ -30,6 +30,7 @@ namespace NBD6.Models
         public string Notes { get; set; }
         public bool ClientApproved { get; set; }
         public bool NBDApproved { get; set; }
+        public bool BidDeclined { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

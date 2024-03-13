@@ -138,7 +138,19 @@
                     <input type="checkbox" class="form-check-input" id="nbdApproval" name="nbdApproval" value="true" @(Model.NBDApproved ? "checked" : "")>
                     <label class="form-check-label" for="nbdApproval">NBD Approval</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Approval</button>
+
+                <script>
+                    function setBidDeclined() {
+                        document.getElementById('BidDeclined').value = 'true';
+                    }
+                    function setBidApproved() {
+                        document.getElementById('BidDeclined').value = 'false';
+                    }
+                </script>
+
+                <button type="submit" class="btn btn-primary" onclick="setBidApproved()">Submit Approval</button>
+                <input type="hidden" id="BidDeclined" name="BidDeclined" value="false">
+                <button type="submit" class="btn btn-danger" onclick="setBidDeclined()">Decline Approval</button>
             </form>
         </div>
     </div>

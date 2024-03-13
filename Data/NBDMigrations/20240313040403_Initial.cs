@@ -112,6 +112,7 @@ namespace NBD6.Data.NBDMigrations
                     Notes = table.Column<string>(type: "TEXT", nullable: true),
                     ClientApproved = table.Column<bool>(type: "INTEGER", nullable: false),
                     NBDApproved = table.Column<bool>(type: "INTEGER", nullable: false),
+                    BidDeclined = table.Column<bool>(type: "INTEGER", nullable: false),
                     ProjectID = table.Column<int>(type: "INTEGER", nullable: false),
                     StaffID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
