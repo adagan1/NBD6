@@ -238,12 +238,16 @@ namespace NBD6.Controllers
                 .Include(b => b.Project)
                 .Include(b => b.Materials)
                 .Include(b => b.Labours)
+                .Include(b => b.StaffBids)
+                .Include(b => b.Staff)
                 .FirstOrDefaultAsync(m => m.BidID == id);
             if (bid == null)
             {
                 return NotFound();
             }
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
+            ViewData["StaffID"] = new SelectList(_context.Staffs, "StaffID", "StaffSummary", bid.StaffBids);
+
             return View(bid);
         }
 
