@@ -107,41 +107,40 @@
     </div>
 </div>
 
-<!-- Display Bids -->
 @if (Model.Bids != null && Model.Bids.Any())
 {
     <div class="container">
-        <h4>Bids</h4>
-        <hr />
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Bid Name</th>
-                    <th>Bid Start Date</th>
-                    <th>Bid End Date</th>
-                    <th>Bid Approval Client </th>
-                    <th>Bid Approval NBD </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var bid in Model.Bids)
-                {
+        <div class="float-md-right">
+            <!-- Align to bottom right -->
+            <h4>Bids</h4>
+            <hr />
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@bid.BidName</td>
-                        <td>@bid.BidStart</td>
-                        <td>@bid.BidEnd</td>
-                        <td>@bid.ClientApproved</td>
-                        <td>@bid.NBDApproved</td>
-
-
-
+                        <th>Bid Name</th>
+                        <th>Bid Start Date</th>
+                        <th>Bid End Date</th>
+                        <th>Client Approval </th>
+                        <th>NBD Approval </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var bid in Model.Bids)
+                    {
+                        <tr>
+                            <td>@bid.BidName</td>
+                            <td>@bid.BidStart</td>
+                            <td>@bid.BidEnd</td>
+                            <td>@(bid.ClientApproved ? "Yes" : "No")</td>
+                            <td>@(bid.NBDApproved ? "Yes" : "No")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 }
+
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.ProjectID">Edit</a> |
