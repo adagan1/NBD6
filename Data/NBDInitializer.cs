@@ -93,34 +93,43 @@ namespace NBD6.Data
             };
         }
 
-        public static Bid GenerateRandomBid(int projectID)
+        public static Bid GenerateRandomBid(int projectID, List<Staff> staffList)
         {
+            // Select two random staff members from the provided list
+            var randomStaff1 = staffList[random.Next(staffList.Count)];
+            var randomStaff2 = staffList[random.Next(staffList.Count)];
+
             return new Bid
             {
                 BidName = $"Random Bid {random.Next(1, 100)}",
                 BidStart = DateTime.Now.AddDays(random.Next(1, 10)),
                 BidEnd = DateTime.Now.AddDays(random.Next(11, 20)),
                 ProjectID = projectID,
+                StaffBids = new List<StaffBid>
+        {
+            new StaffBid { Staff = randomStaff1 },
+            new StaffBid { Staff = randomStaff2 }
+        },
                 Materials = new List<Material>
+        {
+            new Material
             {
-                new Material
-                {
-                    MaterialType = "Random Material",
-                    MaterialQuantity = random.Next(50, 200),
-                    MaterialDescription = $"Random Material Description {random.Next(1, 5)}",
-                    MaterialSize = $"{random.Next(5, 20)} cm",
-                    MaterialPrice = random.Next(50, 200)
-                }
-            },
-                Labours = new List<Labour>
-            {
-                new Labour
-                {
-                    LabourHours = random.Next(20, 100),
-                    LabourDescription = $"Random Labour Description {random.Next(1, 5)}",
-                    LabourPrice = random.Next(20, 50)
-                }
+                MaterialType = "Random Material",
+                MaterialQuantity = random.Next(50, 200),
+                MaterialDescription = $"Random Material Description {random.Next(1, 5)}",
+                MaterialSize = $"{random.Next(5, 20)} cm",
+                MaterialPrice = random.Next(50, 200)
             }
+        },
+                Labours = new List<Labour>
+        {
+            new Labour
+            {
+                LabourHours = random.Next(20, 100),
+                LabourDescription = $"Random Labour Description {random.Next(1, 5)}",
+                LabourPrice = random.Next(20, 50)
+            }
+        }
             };
         }
         public static void Seed(IApplicationBuilder applicationBuilder)
@@ -132,6 +141,84 @@ namespace NBD6.Data
                 // Your existing seeding logic here
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
+
+                if (!context.Staffs.Any())
+                {
+                    // Create staff members
+                    context.Staffs.AddRange(
+                        new Staff
+                        {
+                            FirstName = "John",
+                            LastName = "Doe",
+                            StaffPhone = "3333333333",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Jane",
+                            LastName = "Smith",
+                            StaffPhone = "4444444444",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Michael",
+                            LastName = "Johnson",
+                            StaffPhone = "5555555555",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Emily",
+                            LastName = "Brown",
+                            StaffPhone = "6666666666",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "David",
+                            LastName = "Williams",
+                            StaffPhone = "7777777777",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Alice",
+                            LastName = "Jones",
+                            StaffPhone = "8888888888",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Robert",
+                            LastName = "Davis",
+                            StaffPhone = "9999999999",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Sarah",
+                            LastName = "Taylor",
+                            StaffPhone = "1010101010",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Daniel",
+                            LastName = "Martinez",
+                            StaffPhone = "1111111111",
+                            StaffPosition = "Designer"
+                        },
+                        new Staff
+                        {
+                            FirstName = "Sophia",
+                            LastName = "Wilson",
+                            StaffPhone = "1212121212",
+                            StaffPosition = "Designer"
+                        }
+                    );
+                    context.SaveChanges();
+                }
                 // Generate random clients
                 for (int i = 0; i < 10; i++)
                 {
@@ -153,16 +240,16 @@ namespace NBD6.Data
 
                 // Retrieve existing project IDs
                 var projectIDs = context.Projects.Select(p => p.ProjectID).ToList();
+                var staffList = context.Staffs.ToList();
+
 
                 // Generate random bids for each project
                 foreach (var projectID in projectIDs)
                 {
-                    Bid randomBid = GenerateRandomBid(projectID);
+                    Bid randomBid = GenerateRandomBid(projectID, staffList);
                     context.Bids.Add(randomBid);
                 }
                 context.SaveChanges();
-
-                // Other seeding logic
             }
             catch (Exception ex)
             {
