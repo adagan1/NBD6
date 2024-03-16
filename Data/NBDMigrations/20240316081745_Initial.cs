@@ -22,7 +22,7 @@ namespace NBD6.Data.NBDMigrations
                     MiddleName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
                     LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     ClientContact = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    ClientPhone = table.Column<string>(type: "TEXT", maxLength: 12, nullable: false),
                     AddressID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -54,7 +54,7 @@ namespace NBD6.Data.NBDMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Country = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Province = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Postal = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Postal = table.Column<string>(type: "TEXT", maxLength: 7, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: true),
                     ProjectID = table.Column<int>(type: "INTEGER", nullable: true)

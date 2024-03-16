@@ -33,7 +33,7 @@ namespace NBD6.Data.NBDMigrations
 
                     b.Property<string>("Postal")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(7)
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("ProjectID")
@@ -116,7 +116,7 @@ namespace NBD6.Data.NBDMigrations
 
                     b.Property<string>("ClientPhone")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CompanyName")
