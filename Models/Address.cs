@@ -19,8 +19,8 @@ namespace NBD6.Models
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = "Postal code is required.")]
-        [MaxLength(20, ErrorMessage = "Postal code cannot be more than 20 characters long.")]
-        [RegularExpression(@"^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$", ErrorMessage = "Postal code must be in the formatted like L2G 7L3, with or without a space.")]
+        [MaxLength(7, ErrorMessage = "Postal code cannot be more than 20 characters long.")]
+        [RegularExpression(@"^[A-Za-z]\d[A-Za-z] [ -]?\d[A-Za-z]\d$", ErrorMessage = "Postal code must be in the format like L2G 7L3, with a space.")]
         public string Postal { get; set; }
 
         [Required]
