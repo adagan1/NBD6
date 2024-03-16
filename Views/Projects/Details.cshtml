@@ -111,19 +111,20 @@
 {
     <div class="container">
         <div class="float-md-right">
-            <!-- Align to bottom right -->
             <h4>Bids</h4>
             <hr />
             <table class="table">
+                <!-- Table headers -->
                 <thead>
                     <tr>
                         <th>Bid Name</th>
                         <th>Bid Start Date</th>
                         <th>Bid End Date</th>
-                        <th>Client Approval </th>
-                        <th>NBD Approval </th>
+                        <th>Client Approval</th>
+                        <th>NBD Approval</th>
                     </tr>
                 </thead>
+                <!-- Table body -->
                 <tbody>
                     @foreach (var bid in Model.Bids)
                     {
@@ -133,6 +134,8 @@
                             <td>@bid.BidEnd</td>
                             <td>@(bid.ClientApproved ? "Yes" : "No")</td>
                             <td>@(bid.NBDApproved ? "Yes" : "No")</td>
+                            <!-- Link to bid details -->
+                            <td><a asp-controller="Bids" asp-action="Details" asp-route-id="@bid.BidID">Details</a></td>
                         </tr>
                     }
                 </tbody>
