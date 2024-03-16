@@ -130,8 +130,8 @@ namespace NBD6.Data
             try
             {
                 // Your existing seeding logic here
-                //context.Database.EnsureDeleted();
-                //context.Database.EnsureCreated();
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
                 // Generate random clients
                 for (int i = 0; i < 10; i++)
                 {
