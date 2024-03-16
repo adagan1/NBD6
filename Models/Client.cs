@@ -41,10 +41,9 @@ namespace NBD6.Models
 
 
         [Display(Name = "Phone")]
-        [Required(ErrorMessage = "You cannot leave the phone number blank.")] // Make this field required
-        [Phone(ErrorMessage = "The phone number is not in a valid format.")]
-        [StringLength(20, ErrorMessage = "Phone number cannot be more than 20 characters long.")]
-        [RegularExpression(@"^\d{3}-?\d{3}-?\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
+        [Required(ErrorMessage = "You cannot leave the phone number blank.")]
+        [RegularExpression(@"^\d{10}$|^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone number must be in the format xxx-xxx-xxxx or xxxxxxxxxx.")]
+        [StringLength(12, MinimumLength = 10, ErrorMessage = "Phone number must be 10 digits long with or without dashes.")]
         public string ClientPhone { get; set; }
 
         // Read-only property to get concatenated client name

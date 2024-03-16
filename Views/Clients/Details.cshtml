@@ -82,6 +82,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Project Site</th>
+                <th>Action</th> <!-- Add Action column -->
             </tr>
         </thead>
         <tbody>
@@ -92,6 +93,7 @@
                     <td>@project.ProjectStartDate.ToShortDateString()</td>
                     <td>@project.ProjectEndDate.ToShortDateString()</td>
                     <td>@project.ProjectSite</td>
+                    <td><a asp-action="Details" asp-route-id="@project.ProjectID">View Details</a></td> <!-- Link to project details -->
                 </tr>
             }
         </tbody>
