@@ -169,15 +169,20 @@
 </div>
 
 <script>
-
-      
         function setBidDeclined() {
+            // Uncheck the NBD Approval checkbox
+            document.getElementById('nbdApproval').checked = false;
+
+            // Uncheck the Client Approval checkbox
+            document.getElementById('clientApproval').checked = false;
+
+            // Set BidDeclined to true
             document.getElementById('BidDeclined').value = 'true';
+
+            // Submit the form
+            document.getElementById('approvalForm').submit();
         }
-    function setBidApproved() {
-        document.getElementById('BidDeclined').value = 'false';
-    }
-    
+
     // Function to toggle client approval visibility
     function toggleClientApprovalVisibility() {
         var clientApprovalGroup = document.getElementById('clientApprovalGroup');
@@ -192,16 +197,17 @@
     // Call the function initially to set visibility based on NBD approval state
     toggleClientApprovalVisibility();
 
-    // Attach an event listener to NBD approval checkbox to toggle visibility
-    document.getElementById('nbdApproval').addEventListener('change', toggleClientApprovalVisibility);
+        // Attach an event listener to NBD approval checkbox to toggle visibility
+        document.getElementById('nbdApproval').addEventListener('change', toggleClientApprovalVisibility);
 
-    // Function to handle form submission
-    document.getElementById('approvalForm').addEventListener('submit', function (event) {
-        var nbdApprovalCheckbox = document.getElementById('nbdApproval');
-        if (!nbdApprovalCheckbox.checked) {
-            // Prevent form submission if NBD approval is not given
-            event.preventDefault();
-            alert('Please provide NBD approval before submitting.');
-        }
-    });
+        document.getElementById('approvalForm').addEventListener('submit', function (event) {
+            var nbdApprovalCheckbox = document.getElementById('nbdApproval');
+            var bidDeclinedField = document.getElementById('BidDeclined').value;
+
+            // Allow submission if the bid is being declined regardless of NBD approval state
+            if (bidDeclinedField !== 'true' && !nbdApprovalCheckbox.checked) {
+                event.preventDefault();
+                alert('Please provide NBD approval or decline the bid before submitting.');
+            }
+        });
 </script>
