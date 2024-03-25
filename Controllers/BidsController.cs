@@ -21,13 +21,14 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page, string approvalFilter = "All")
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.ProjectNameSortParm = sortOrder == "Project Name" ? "project_name_desc" : "Project Name";
             ViewBag.DateSortParm = sortOrder == "Start Date" ? "start_date_desc" : "Start Date";
             ViewBag.EndDateSortParm = sortOrder == "End Date" ? "end_date_desc" : "End Date";
+            ViewBag.CurrentApprovalFilter = approvalFilter;
 
             if (searchTerm != null)
             {
@@ -40,18 +41,31 @@ namespace NBD6.Controllers
 
             ViewBag.CurrentFilter = searchTerm;
 
-            // Include the 'Project' navigation property in your query
             var bidsQuery = _context.Bids
-                .Include(b => b.Project) // Ensure your Bid entity has a navigation property 'Project'
+                .Include(b => b.Project)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                var lowerCaseSearchTerm = searchTerm.ToLower();
+                bidsQuery = bidsQuery.Where(b => b.BidName.Contains(searchTerm)
+                                                 || b.Project.ProjectName.Contains(searchTerm));
+            }
 
-                // Ensure your Bid and Project entities have properties 'BidName' and 'ProjectName'
-                bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
-                                                 || b.Project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
+            // Filtering by approval status
+            if (!string.IsNullOrEmpty(approvalFilter) && approvalFilter != "All")
+            {
+                switch (approvalFilter)
+                {
+                    case "ClientApproved":
+                        bidsQuery = bidsQuery.Where(b => b.ClientApproved == true);
+                        break;
+                    case "NBDApproved":
+                        bidsQuery = bidsQuery.Where(b => b.NBDApproved == true);
+                        break;
+                    case "Declined":
+                        bidsQuery = bidsQuery.Where(b => b.BidDeclined == true);
+                        break;
+                }
             }
 
             switch (sortOrder)
@@ -71,7 +85,6 @@ namespace NBD6.Controllers
                 case "start_date_desc":
                     bidsQuery = bidsQuery.OrderByDescending(b => b.BidStart);
                     break;
-                // Added case for sorting by end date
                 case "End Date":
                     bidsQuery = bidsQuery.OrderBy(b => b.BidEnd);
                     break;

@@ -169,6 +169,15 @@
 </div>
 
 <script>
+
+      
+        function setBidDeclined() {
+            document.getElementById('BidDeclined').value = 'true';
+        }
+    function setBidApproved() {
+        document.getElementById('BidDeclined').value = 'false';
+    }
+    
     // Function to toggle client approval visibility
     function toggleClientApprovalVisibility() {
         var clientApprovalGroup = document.getElementById('clientApprovalGroup');
