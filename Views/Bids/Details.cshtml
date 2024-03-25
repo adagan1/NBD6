@@ -104,6 +104,19 @@
                 }                
             </dl>
         </div>
+
+        <div class="col-md-6">
+            <h4>Staff</h4>
+            <hr />
+            <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
+                @foreach (var staffBid in Model.StaffBids)
+                {
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(_ => staffBid.Staff.StaffSummary)
+                    </dd>
+                }
+            </dl>
+        </div>
         
         <div class="col-md-6">
             <h4>Total Prices</h4>
