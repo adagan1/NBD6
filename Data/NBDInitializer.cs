@@ -21,55 +21,85 @@ namespace NBD6.Data
                     context.Clients.AddRange(
                         new Client
                         {
-                            CompanyName = "Ravens HQ",
-                            FirstName = "Lamar",
+                            CompanyName = "Company One",
+                            FirstName = "Joe",
                             MiddleName = "S",
                             LastName = "Jackson",
-                            ClientContact = "lamarjackson@gmail.com",
+                            ClientContact = "Joejackson@gmail.com",
                             ClientPhone = "2222223212",
                             Address = new Address
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
-                                Postal = "K1A 0B1",
-                                Street = "22 Highland Park"
+                                Postal = "A1A 1A1",
+                                Street = "10 North Street"
                             }
                         },
                         new Client
                         {
-                            CompanyName = "Gators HQ",
-                            FirstName = "Kyle",
-                            MiddleName = "S",
-                            LastName = "Ziz",
-                            ClientContact = "kziz@gmail.com",
-                            ClientPhone = "2222223222",
+                            CompanyName = "Company Two",
+                            FirstName = "Alice",
+                            MiddleName = "M",
+                            LastName = "Johnson",
+                            ClientContact = "alicejohnson@gmail.com",
+                            ClientPhone = "3333334321",
                             Address = new Address
                             {
                                 Country = "Canada",
-                                Province = "Manitoba",
-                                Postal = "K2A 0B2",
-                                Street = "32 Wind Street"
-                            },
+                                Province = "Ontario",
+                                Postal = "B2B 2B2",
+                                Street = "20 South Street"
+                            }
                         },
                         new Client
                         {
-                            CompanyName = "Bulls HQ",
-                            FirstName = "Evan",
-                            MiddleName = "S",
-                            LastName = "My",
-                            ClientContact = "emy@gmail.com",
-                            ClientPhone = "2225223212",
+                            CompanyName = "Company Three",
+                            FirstName = "Emily",
+                            MiddleName = "R",
+                            LastName = "Smith",
+                            ClientContact = "emilysmith@gmail.com",
+                            ClientPhone = "4444445432",
                             Address = new Address
                             {
                                 Country = "Canada",
-                                Province = "Manitoba",
-                                Postal = "K2A 0B8",
-                                Street = "16 Thai Street"
+                                Province = "Quebec",
+                                Postal = "C3C 3C3",
+                                Street = "30 East Street"
                             }
-                        }
-                        // Add other Client entries similarly
-                    );
-                    context.SaveChanges();
+                        },
+                        new Client
+                        {
+                            CompanyName = "Company Four",
+                            FirstName = "Michael",
+                            MiddleName = "A",
+                            LastName = "Brown",
+                            ClientContact = "michaelbrown@gmail.com",
+                            ClientPhone = "5555556543",
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "British Columbia",
+                                Postal = "D4D 4D4",
+                                Street = "40 West Street"
+                            }
+                        },
+                        new Client
+                        {
+                            CompanyName = "Company Five",
+                            FirstName = "Sarah",
+                            MiddleName = "L",
+                            LastName = "Anderson",
+                            ClientContact = "sarahanderson@gmail.com",
+                            ClientPhone = "6666667654",
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Alberta",
+                                Postal = "E5E 5E5",
+                                Street = "50 Central Street"
+                            }
+                        });
+                   context.SaveChanges();
                 }
 
                 if (!context.Projects.Any())
@@ -78,7 +108,7 @@ namespace NBD6.Data
                     context.Projects.AddRange(
                         new Project
                         {
-                            ProjectName = "BU Glass Garden",
+                            ProjectName = "Project One",
                             ProjectStartDate = new DateTime(2023, 01, 01),
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Brock University",
@@ -94,37 +124,147 @@ namespace NBD6.Data
                         },
                         new Project
                         {
-                            ProjectName = "NC Glass Garden",
-                            ProjectStartDate = new DateTime(2023, 01, 01),
-                            ProjectEndDate = new DateTime(2023, 03, 22),
-                            ProjectSite = "Niagara College",
-                            BidAmount = "1400",
+                            ProjectName = "Project Two",
+                            ProjectStartDate = new DateTime(2023, 04, 15),
+                            ProjectEndDate = new DateTime(2023, 06, 30),
+                            ProjectSite = "University of Toronto",
+                            BidAmount = "2500",
                             ClientID = 2, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
                                 Country = "Canada",
-                                Province = "Yukon",
-                                Postal = "K8A 0K8",
+                                Province = "Ontario",
+                                Postal = "M5S 1A5",
                                 Street = "2 Project Street"
                             }
                         },
                         new Project
                         {
-                            ProjectName = "WU Glass Garden",
-                            ProjectStartDate = new DateTime(2023, 01, 01),
-                            ProjectEndDate = new DateTime(2023, 03, 22),
-                            ProjectSite = "Western Union",
+                            ProjectName = "Project Three",
+                            ProjectStartDate = new DateTime(2023, 07, 10),
+                            ProjectEndDate = new DateTime(2023, 09, 20),
+                            ProjectSite = "McMaster University",
                             BidAmount = "3000",
                             ClientID = 3, // Assuming ClientID associated with this Project
                             Address = new Address
                             {
                                 Country = "Canada",
-                                Province = "Yukon",
-                                Postal = "K9A 0A8",
+                                Province = "Ontario",
+                                Postal = "L8S 4L8",
                                 Street = "3 Project Street"
                             }
+                        }, new Project
+                        {
+                            ProjectName = "Project Four",
+                            ProjectStartDate = new DateTime(2023, 10, 05),
+                            ProjectEndDate = new DateTime(2023, 12, 15),
+                            ProjectSite = "University of British Columbia",
+                            BidAmount = "2800",
+                            ClientID = 4, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "British Columbia",
+                                Postal = "V6T 1Z4",
+                                Street = "4 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Five",
+                            ProjectStartDate = new DateTime(2024, 01, 10),
+                            ProjectEndDate = new DateTime(2024, 03, 25),
+                            ProjectSite = "Simon Fraser University",
+                            BidAmount = "3200",
+                            ClientID = 5, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "British Columbia",
+                                Postal = "V5A 1S6",
+                                Street = "5 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Six",
+                            ProjectStartDate = new DateTime(2024, 04, 01),
+                            ProjectEndDate = new DateTime(2024, 06, 10),
+                            ProjectSite = "University of Alberta",
+                            BidAmount = "2700",
+                            ClientID = 1, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Alberta",
+                                Postal = "T6G 2R3",
+                                Street = "6 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Seven",
+                            ProjectStartDate = new DateTime(2024, 07, 15),
+                            ProjectEndDate = new DateTime(2024, 09, 30),
+                            ProjectSite = "University of Calgary",
+                            BidAmount = "3100",
+                            ClientID = 2, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Alberta",
+                                Postal = "T2N 1N4",
+                                Street = "7 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Eight",
+                            ProjectStartDate = new DateTime(2024, 10, 10),
+                            ProjectEndDate = new DateTime(2024, 12, 20),
+                            ProjectSite = "University of Waterloo",
+                            BidAmount = "2900",
+                            ClientID = 3, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Ontario",
+                                Postal = "N2L 3G1",
+                                Street = "8 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Nine",
+                            ProjectStartDate = new DateTime(2025, 01, 05),
+                            ProjectEndDate = new DateTime(2025, 03, 15),
+                            ProjectSite = "Queen's University",
+                            BidAmount = "3300",
+                            ClientID = 4, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Ontario",
+                                Postal = "K7L 3N6",
+                                Street = "9 Project Street"
+                            }
+                        },
+                        new Project
+                        {
+                            ProjectName = "Project Ten",
+                            ProjectStartDate = new DateTime(2025, 04, 01),
+                            ProjectEndDate = new DateTime(2025, 06, 10),
+                            ProjectSite = "University of Ottawa",
+                            BidAmount = "2600",
+                            ClientID = 5, // Assuming ClientID associated with this Project
+                            Address = new Address
+                            {
+                                Country = "Canada",
+                                Province = "Ontario",
+                                Postal = "K1N 6N5",
+                                Street = "10 Project Street"
+                            }
                         }
-                        // Add other Project entries similarly
                     );
                     context.SaveChanges();
                 }
@@ -292,34 +432,213 @@ namespace NBD6.Data
                                     LabourPrice = 35.00m
                                 }
                             }
+                        }, new Bid
+                        {
+                            BidName = "Electrical Work Bid",
+                            BidStart = new DateTime(2024, 04, 01),
+                            BidEnd = new DateTime(2024, 04, 15),
+                            ProjectID = 4, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Electrical Components",
+                                    MaterialQuantity = 50,
+                                    MaterialDescription = "Wiring and Cables",
+                                    MaterialSize = "Various",
+                                    MaterialPrice = 80.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 50,
+                                    LabourDescription = "Installation of Electrical Systems",
+                                    LabourPrice = 40.00m
+                                }
+                            }
+                        },
+                        new Bid
+                        {
+                            BidName = "Plumbing Material Bid",
+                            BidStart = new DateTime(2024, 05, 01),
+                            BidEnd = new DateTime(2024, 05, 15),
+                            ProjectID = 5, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Plumbing Fixtures",
+                                    MaterialQuantity = 30,
+                                    MaterialDescription = "Sinks, Toilets, and Faucets",
+                                    MaterialSize = "Various",
+                                    MaterialPrice = 120.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 45,
+                                    LabourDescription = "Installation of Plumbing Systems",
+                                    LabourPrice = 50.00m
+                                }
+                            }
+                        },
+                        new Bid
+                        {
+                            BidName = "Roofing Material Bid",
+                            BidStart = new DateTime(2024, 06, 01),
+                            BidEnd = new DateTime(2024, 06, 15),
+                            ProjectID = 6, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Roofing Shingles",
+                                    MaterialQuantity = 1500,
+                                    MaterialDescription = "Asphalt Roofing Shingles",
+                                    MaterialSize = "30 cm x 30 cm",
+                                    MaterialPrice = 90.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 55,
+                                    LabourDescription = "Installation of Roofing Materials",
+                                    LabourPrice = 45.00m
+                                }
+                            }
+                        },
+                        new Bid
+                        {
+                            BidName = "Painting Bid",
+                            BidStart = new DateTime(2024, 05, 01),
+                            BidEnd = new DateTime(2024, 05, 15),
+                            ProjectID = 5, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Paint",
+                                    MaterialQuantity = 30,
+                                    MaterialDescription = "Interior and Exterior Paint",
+                                    MaterialSize = "Various",
+                                    MaterialPrice = 120.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 45,
+                                    LabourDescription = "Painting Walls and Ceilings",
+                                    LabourPrice = 50.00m
+                                }
+                            }
+                        },
+                        new Bid
+                        {
+                            BidName = "Flooring Bid",
+                            BidStart = new DateTime(2024, 06, 01),
+                            BidEnd = new DateTime(2024, 06, 15),
+                            ProjectID = 6, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Flooring",
+                                    MaterialQuantity = 1500,
+                                    MaterialDescription = "Hardwood Flooring",
+                                    MaterialSize = "15 cm x 15 cm",
+                                    MaterialPrice = 90.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 55,
+                                    LabourDescription = "Installation of Flooring Materials",
+                                    LabourPrice = 45.00m
+                                }
+                            }
+                        }, 
+                        new Bid
+                        {
+                            BidName = "Landscaping Bid",
+                            BidStart = new DateTime(2024, 08, 01),
+                            BidEnd = new DateTime(2024, 08, 15),
+                            ProjectID = 8, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "Plants",
+                                    MaterialQuantity = 100,
+                                    MaterialDescription = "Assorted Flowers and Shrubs",
+                                    MaterialSize = "Various",
+                                    MaterialPrice = 30.00m
+                                },
+                                new Material
+                                {
+                                    MaterialType = "Mulch",
+                                    MaterialQuantity = 10,
+                                    MaterialDescription = "Wood Chips",
+                                    MaterialSize = "N/A",
+                                    MaterialPrice = 20.00m
+                                }
+                            },
+                                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 40,
+                                    LabourDescription = "Planting and Mulching",
+                                    LabourPrice = 40.00m
+                                }
+                            }
+                        },
+                        new Bid
+                        {
+                            BidName = "HVAC System Bid",
+                            BidStart = new DateTime(2024, 07, 01),
+                            BidEnd = new DateTime(2024, 07, 15),
+                            ProjectID = 7, // Assuming ProjectID associated with this Bid
+                            Materials = new List<Material>
+                            {
+                                new Material
+                                {
+                                    MaterialType = "HVAC Components",
+                                    MaterialQuantity = 20,
+                                    MaterialDescription = "Air Conditioning Units and Ducts",
+                                    MaterialSize = "Various",
+                                    MaterialPrice = 200.00m
+                                }
+                            },
+                            Labours = new List<Labour>
+                            {
+                                new Labour
+                                {
+                                    LabourHours = 60,
+                                    LabourDescription = "Installation of HVAC Systems",
+                                    LabourPrice = 60.00m
+                                }
+                            }
                         }
-                    );
+                    );             
                     context.SaveChanges();
                 }
 
                 if (!context.StaffBids.Any())
                 {
-                    context.StaffBids.AddRange(
-                        // First Staff
+                    context.StaffBids.AddRange(                     
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        // Second staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
                         },
                         new StaffBid
@@ -329,136 +648,43 @@ namespace NBD6.Data
                         },
                         new StaffBid
                         {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Third staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
                             BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Fourth staff
+                        },                      
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Fifth staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Electrical Work Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Sixth staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Plumbing Material Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Seventh staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Roofing Material Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Eighth staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Painting Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Ninth staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Flooring Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
-                        },
-                        //Tenth staff
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Landscaping Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
-                        },
-                        new StaffBid
-                        {
-                            StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "HVAC System Bid").BidID
                         }
                     );
                     context.SaveChanges();
