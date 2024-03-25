@@ -119,43 +119,80 @@
         </div>
     </div>
 
-    
 
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Approval</h4>
-            <hr />
-            <form asp-action="Approval">
-                <div class="form-group">
-                    <label for="notes">Notes and Concerns:</label>
-                    <textarea class="form-control" id="notes" name="notes" rows="3" style="resize: none; height: 175px;">@Model.Notes</textarea>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="clientApproval" name="clientApproval" value="true" @(Model.ClientApproved ? "checked" : "")>
-                    <label class="form-check-label" for="clientApproval">Client Approval</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="nbdApproval" name="nbdApproval" value="true" @(Model.NBDApproved ? "checked" : "")>
-                    <label class="form-check-label" for="nbdApproval">NBD Approval</label>
-                </div>
 
-                <script>
-                    function setBidDeclined() {
-                        document.getElementById('BidDeclined').value = 'true';
-                    }
-                    function setBidApproved() {
-                        document.getElementById('BidDeclined').value = 'false';
-                    }
-                </script>
+    <div class="container">
+        <!-- Other code remains unchanged -->
 
-                <button type="submit" class="btn btn-primary" onclick="setBidApproved()">Submit Approval</button>
-                <input type="hidden" id="BidDeclined" name="BidDeclined" value="false">
-                <button type="submit" class="btn btn-danger" onclick="setBidDeclined()">Decline Approval</button>
-            </form>
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Approval</h4>
+                <hr />
+                <form asp-action="Approval" id="approvalForm">
+                    <!-- NBD Approval Checkbox -->
+                    <div class="form-group">
+                        <label for="nbdApproval">NBD Approval</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="nbdApproval" name="nbdApproval" value="true" @(Model.NBDApproved ? "checked" : "")>
+                            <label class="form-check-label" for="nbdApproval">NBD Approval</label>
+                        </div>
+                    </div>
+
+                    <!-- Client Approval Checkbox -->
+                    <div class="form-group" id="clientApprovalGroup" @(Model.NBDApproved ? "" : "style='display:none;'")>
+                        <label for="clientApproval">Client Approval</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="clientApproval" name="clientApproval" value="true" @(Model.ClientApproved ? "checked" : "")>
+                            <label class="form-check-label" for="clientApproval">Client Approval</label>
+                        </div>
+                    </div>
+
+                    <!-- Notes and Concerns -->
+                    <div class="form-group">
+                        <label for="notes">Notes and Concerns:</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3" style="resize: none; height: 175px;">@Model.Notes</textarea>
+                    </div>
+
+                    <!-- Hidden field to track BidDeclined -->
+                    <input type="hidden" id="BidDeclined" name="BidDeclined" value="false">
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">Submit Approval</button>
+                    <button type="button" class="btn btn-danger" onclick="setBidDeclined()">Decline Approval</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    // Function to toggle client approval visibility
+    function toggleClientApprovalVisibility() {
+        var clientApprovalGroup = document.getElementById('clientApprovalGroup');
+        var nbdApprovalCheckbox = document.getElementById('nbdApproval');
+        if (nbdApprovalCheckbox.checked) {
+            clientApprovalGroup.style.display = 'block';
+        } else {
+            clientApprovalGroup.style.display = 'none';
+        }
+    }
+
+    // Call the function initially to set visibility based on NBD approval state
+    toggleClientApprovalVisibility();
+
+    // Attach an event listener to NBD approval checkbox to toggle visibility
+    document.getElementById('nbdApproval').addEventListener('change', toggleClientApprovalVisibility);
+
+    // Function to handle form submission
+    document.getElementById('approvalForm').addEventListener('submit', function (event) {
+        var nbdApprovalCheckbox = document.getElementById('nbdApproval');
+        if (!nbdApprovalCheckbox.checked) {
+            // Prevent form submission if NBD approval is not given
+            event.preventDefault();
+            alert('Please provide NBD approval before submitting.');
+        }
+    });
+</script>
