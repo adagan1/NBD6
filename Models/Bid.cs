@@ -55,5 +55,7 @@ namespace NBD6.Models
         public Material Material { get; set; }
         public List<Labour> Labours { get; set; }
         public Labour Labour { get; set; }
+        public decimal ProjectAmount { get; set; }
+
     }
 }

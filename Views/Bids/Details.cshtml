@@ -106,18 +106,43 @@
         </div>
         
         <div class="col-md-6">
-            <h4>Staff</h4>
+            <h4>Total Prices</h4>
             <hr />
-            <dl class="row" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;">
-                @foreach (var staffBid in Model.StaffBids)
-                {                   
-                    <dd class="col-sm-8">
-                        @Html.DisplayFor(_ => staffBid.Staff.StaffSummary)
-                    </dd>
-                }
+            <dl class="row">
+                <dt class="col-sm-4">Bid Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal bidAmount = Convert.ToDecimal(Model.Project.BidAmount);
+                    }
+                    $@bidAmount
+                </dd>
+
+                <dt class="col-sm-4">Material Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal materialAmount = Model.Materials.Sum(m => m.MaterialPrice);
+                    }
+                    $@materialAmount
+                </dd>
+
+                <dt class="col-sm-4">Labour Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal labourAmount = Model.Labours.Sum(l => l.LabourPrice);
+                    }
+                    $@labourAmount
+                </dd>
+
+                <dt class="col-sm-4">Total Left</dt>
+                <dd class="col-sm-8">
+                    @{
+                        // Adjusting this calculation to show what's left from bidAmount after subtracting material and labour costs.
+                        decimal totalLeft = bidAmount - (materialAmount + labourAmount);
+                    }
+                    $@totalLeft
+                </dd>
             </dl>
         </div>
-
 
     </div>
 </div>
