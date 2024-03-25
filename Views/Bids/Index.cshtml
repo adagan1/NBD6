@@ -120,7 +120,14 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
-                    <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
+                    @if (item.ClientApproved && item.NBDApproved)
+                    {
+                        <a asp-action="Approval" asp-route-id="@item.BidID" class="disabled-link">Locked</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
+                    }
                 </td>
             </tr>
         }
@@ -138,6 +145,11 @@
 }
 
 <style>
+    .disabled-link {
+        color: #6c757d; /* Adjust color to match disabled state */
+        pointer-events: none; /* Prevent click events */
+        cursor: default; /* Show cursor as default */
+    }
     .table-striped tbody tr:nth-child(odd) {
         background-color: #f2f2f2;
     }
