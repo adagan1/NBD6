@@ -11,14 +11,14 @@ using NBD6.Data;
 namespace NBD6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125042516_Initial")]
+    [Migration("20240326210453_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.15");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.16");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {

@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240316081745_Initial")]
+    [Migration("20240326210508_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -86,6 +86,9 @@ namespace NBD6.Data.NBDMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("ProjectAmount")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ProjectID")

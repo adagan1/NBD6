@@ -114,7 +114,8 @@ namespace NBD6.Data.NBDMigrations
                     NBDApproved = table.Column<bool>(type: "INTEGER", nullable: false),
                     BidDeclined = table.Column<bool>(type: "INTEGER", nullable: false),
                     ProjectID = table.Column<int>(type: "INTEGER", nullable: false),
-                    StaffID = table.Column<int>(type: "INTEGER", nullable: true)
+                    StaffID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ProjectAmount = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

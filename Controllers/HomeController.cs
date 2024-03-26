@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NBD6.Models;
 using System.Diagnostics;
+//using System.Web.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NBD6.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

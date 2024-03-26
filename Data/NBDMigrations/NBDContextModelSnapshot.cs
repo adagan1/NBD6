@@ -85,6 +85,9 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
+                    b.Property<decimal>("ProjectAmount")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("ProjectID")
                         .HasColumnType("INTEGER");
 
