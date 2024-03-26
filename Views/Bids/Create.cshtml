@@ -289,15 +289,30 @@
         button.closest("tr").remove();
     }
 
-    document.getElementById('addStaffBtn').addEventListener('click', function () {
+    function addStaff() {
         var staffContainer = document.getElementById('staffContainer');
-        var staffFields = document.querySelector('.staffFields');
-        var clone = staffFields.cloneNode(true);
-        clone.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>';
-        staffContainer.appendChild(clone);
-    });
 
-    function removeElement(element) {
-        element.parentNode.remove();
+        // Create a new set of elements for staff selection
+        var newStaffFields = document.createElement('div');
+        newStaffFields.classList.add('staffFields');
+        newStaffFields.innerHTML = `
+                    <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                    <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                        <option value="">Select Staff</option>
+                    </select>
+                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+            `;
+
+        staffContainer.appendChild(newStaffFields);
+        staffCounter++; // Increment the staff counter
+
+        // Initialize Select2 for the newly added staff dropdown
+        $(newStaffFields.querySelector('select')).select2({
+            placeholder: "Select Staff",
+            allowClear: true
+        });
     }
+
+    // Event listener for the addStaffBtn button
+    document.getElementById('addStaffBtn').addEventListener('click', addStaff);
 </script>
