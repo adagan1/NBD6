@@ -127,7 +127,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Clients/Create
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public IActionResult Create()
         {
             TempData["ClientUrl"] = HttpContext.Request.Headers["Referer"].ToString();
@@ -163,7 +163,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public async Task<IActionResult> Create([Bind("CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,Address")] Client client)
         {
             try
@@ -232,7 +232,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Clients/Edit/5
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Clients == null)
@@ -281,7 +281,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public async Task<IActionResult> Edit(int id, [Bind("ClientID,CompanyName,FirstName,MiddleName,LastName,ClientContact,ClientPhone,AddressID,Country,Province,Postal,Street")] Client client, Address address)
         {
             if (id != client.ClientID)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
@@ -21,6 +22,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids
+        [Authorize(Roles = "Admin, Management, Designer, Sales")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page, string approvalFilter = "All")
         {
             ViewBag.CurrentSort = sortOrder;
@@ -106,6 +108,7 @@ namespace NBD6.Controllers
 
 
         // GET: Bids/Details/5
+        [Authorize(Roles = "Admin, Management, Designer, Sales")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Bids == null)
@@ -130,6 +133,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids/Approval/5
+        [Authorize(Roles = "Admin, Management")]
         public async Task<IActionResult> Approval(int? id)
         {
             if (id == null)
@@ -156,6 +160,7 @@ namespace NBD6.Controllers
         // POST: Bids/Approval/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Management")]
         public async Task<IActionResult> Approval(int id, string notes, bool clientApproval, bool nbdApproval, bool bidDeclined)
         {
             var bid = await _context.Bids
@@ -191,6 +196,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids/Create
+        [Authorize(Roles = "Admin, Management, Designer")]
         public IActionResult Create()
         {
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName");
@@ -201,6 +207,7 @@ namespace NBD6.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Create([Bind("BidID,BidName,BidStart,BidEnd,ProjectID")] Bid bid, List<Material> materials, List<Labour> labours, List<int> StaffIDList)
         {
             if (ModelState.IsValid)
@@ -251,6 +258,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids/Edit/5
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Bids == null)
@@ -280,6 +288,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Edit(int id, [Bind("BidID,BidName,BidStart,BidEnd,MaterialID,MaterialType,MaterialQuantity,MaterialDescription,MaterialSize,MaterialPrice,LabourID,LabourHours,LabourDescription,LabourPrice,ProjectID")] Bid bid, Material material, Labour labour)
         {
             if (id != bid.BidID)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
@@ -18,6 +19,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Projects
+        [Authorize(Roles = "Admin, Management, Designer, Sales")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
             var projectsQuery = _context.Projects
@@ -119,6 +121,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Project/Details/5
+        [Authorize(Roles = "Admin, Management, Designer, Sales")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Projects == null)
@@ -142,6 +145,7 @@ namespace NBD6.Controllers
 
 
         // GET: Projects/Create
+        [Authorize(Roles = "Admin, Management, Designer")]
         public IActionResult Create()
         {
             TempData["ProjectUrl"] = HttpContext.Request.Headers["Referer"].ToString();
@@ -178,6 +182,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Create([Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,ClientID,AddressID,Country,Province,Postal,Street,BidAmount")] Project project, Address address)
         {
 
@@ -256,6 +261,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Projects == null)
@@ -304,6 +310,7 @@ namespace NBD6.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Edit(int id, [Bind("ProjectID,ProjectName,ProjectStartDate,ProjectEndDate,ProjectSite,Client,ClientID,AddressID,Country,Province,Postal,Street,BidAmount")] Project project, Address address)
         {
             if (id != project.ProjectID)
