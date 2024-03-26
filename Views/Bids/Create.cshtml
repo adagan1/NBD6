@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <!-- Bid Fields -->
+            <!-- Bid Name and Project Fields -->
             <h4>Bid</h4>
             <hr />
             <div class="form-group">
@@ -23,19 +23,8 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
-                <input asp-for="BidStart" class="form-control" type="date" required />
-                <span asp-validation-for="BidStart" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
-                <input asp-for="BidEnd" class="form-control" type="date" required />
-                <span asp-validation-for="BidEnd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
-                <select asp-for="ProjectID" class="form-control" id="ProjectID" asp-items="ViewBag.ProjectID">
+                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
                     <option value="">Select a Project</option>
                     @if (TempData["NewProjectID"] != null)
                     {
@@ -46,78 +35,117 @@
             </div>
         </div>
 
-        <!-- Labour Fields -->
-        <div class="col-md-6" id="labour-fields">
+        <div class="col-md-6">
+            <h4 style="visibility: hidden;">Bid</h4>
+            <div class="form-group" style="margin-top: 32px;">
+                <!-- Adjust the margin-top to align with Bid Name field -->
+                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
+                <input asp-for="BidStart" class="form-control" type="date" required />
+                <span asp-validation-for="BidStart" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
+                <input asp-for="BidEnd" class="form-control" type="date" required />
+                <span asp-validation-for="BidEnd" the="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <!-- Labour Fields Table -->
+        <div id="labour-fields">
             <h4>Labour</h4>
             <hr />
-            <div class="labour-group">
-                <div class="form-group">
-                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Please enter the number of hours worked" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Labour Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Enter description" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Enter price" required />
-                </div>
-                <!-- Add more labour fields as needed -->
-            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Labour Hours<span class="text-danger">*</span></th>
+                        <th>Labour Description<span class="text-danger">*</span></th>
+                        <th>Labour Price<span class="text-danger">*</span></th>
+                    </tr>
+                </thead>
+                <tbody class="labour-group">
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Hours worked" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Price" required />
+                        </td>
+                    </tr>
+                    <!-- Additional labour rows can be dynamically added here -->
+                </tbody>
+            </table>
             <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
         </div>
 
-        <!-- Material Fields -->
-        <div class="col-md-6" id="material-fields">
+        <!-- Spacer between Labour and Material sections -->
+        <div style="height: 20px;"></div> <!-- Optional spacing for visual separation -->
+        <!-- Material Fields Table -->
+        <div id="material-fields">
             <h4>Material</h4>
             <hr />
-            <div class="material-group">
-                <div class="form-group">
-                    <label class="control-label">Material Type<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialType" placeholder="ex: soil, bark, roses" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Quantity<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Enter quantity" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialDescription" placeholder="Enter description" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Size<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialSize" placeholder="Enter size" required />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Material Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialPrice" placeholder="Enter price" required />
-                </div>
-                <!-- Add more material fields as needed -->
-            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Material Type<span class="text-danger">*</span></th>
+                        <th>Material Quantity<span class="text-danger">*</span></th>
+                        <th>Material Description<span class="text-danger">*</span></th>
+                        <th>Material Size<span class="text-danger">*</span></th>
+                        <th>Material Price<span class="text-danger">*</span></th>
+                    </tr>
+                </thead>
+                <tbody class="material-group">
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[0].MaterialType" placeholder="Type" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Quantity" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[0].MaterialDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[0].MaterialSize" placeholder="Size" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[0].MaterialPrice" placeholder="Price" required />
+                        </td>
+                    </tr>
+                    <!-- Additional material rows can be dynamically added here -->
+                </tbody>
+            </table>
             <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
-        
-     <div class="col-md-6">
-            <h4>Staff</h4>
-            <hr />
+    </div>
+
+
+
+    <div class="col-md-6">
+        <h4>Staff</h4>
+        <hr />
         <div id="staffContainer">
             <div class="staffFields">
                 <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
                 <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
                     <option value="">Select Staff</option>
                 </select>
-            </div>            
+            </div>
         </div>
-            <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
-     </div>
+        <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
+    </div>
 
-        <!-- Autofill button -->
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
-            <span id="autofill-message" class="text-success"></span>
-        </div>
+    <!-- Autofill button -->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
+        <span id="autofill-message" class="text-success"></span>
+    </div>
 </form>
 
 <div class="col-md-1">
@@ -151,124 +179,125 @@
         </script>
     }
 }
-    <script>
-        function autofill() {
-            // Autofill bid fields
-            document.querySelector('input[name="BidName"]').value = "Example Bid";
-            document.querySelector('input[name="BidStart"]').value = "2024-03-13"; // Example date
-            document.querySelector('input[name="BidEnd"]').value = "2024-03-20"; // Example date
+<script>
+    function autofill() {
+        // Autofill bid fields
+        document.querySelector('input[name="BidName"]').value = "Example Bid";
+        document.querySelector('input[name="BidStart"]').value = "2024-03-13"; // Example date
+        document.querySelector('input[name="BidEnd"]').value = "2024-03-20"; // Example date
 
-            // Autofill material fields
-            document.querySelectorAll('input[name^="Materials"]').forEach(function (input) {
-                if (input.name.includes("MaterialType")) {
-                    input.value = "Autofilled Material Type";
-                } else if (input.name.includes("MaterialQuantity")) {
-                    input.value = "10"; // Example quantity
-                } else if (input.name.includes("MaterialDescription")) {
-                    input.value = "Autofilled Material Description";
-                } else if (input.name.includes("MaterialSize")) {
-                    input.value = "30 kg"; // Example size
-                } else if (input.name.includes("MaterialPrice")) {
-                    input.value = "50"; // Example price
-                }
-            });
-
-            // Autofill labour fields
-            document.querySelectorAll('input[name^="Labours"]').forEach(function (input) {
-                if (input.name.includes("LabourHours")) {
-                    input.value = "8"; // Example hours worked
-                } else if (input.name.includes("LabourDescription")) {
-                    input.value = "Autofilled Labour Description";
-                } else if (input.name.includes("LabourPrice")) {
-                    input.value = "20"; // Example price
-                }
-            });
-
-            // Autofill staff fields
-            document.querySelectorAll('select[name^="Staff"]').forEach(function (select) {
-                var options = select.querySelectorAll('option');
-                if (options.length > 1) { // Skip if already populated
-                    return;
-                }
-                // Add options for staff members
-                var staffNames = ["John Doe", "Jane Smith", "Michael Johnson"]; // Example staff names
-                staffNames.forEach(function (name, index) {
-                    var option = document.createElement('option');
-                    option.value = index + 1; // Example staff ID
-                    option.text = name;
-                    select.appendChild(option);
-                });
-            });
-
-            document.getElementById('autofill-message').innerText = "Form autofilled successfully.";
-        }
-        var materialCounter = 1; // Initialize counters
-        var labourCounter = 1;
-        var staffCounter = 1;
-
-        function addMaterial() {
-            var materialFields = document.getElementById("material-fields");
-            var newMaterialGroup = document.createElement("div");
-            newMaterialGroup.classList.add("material-group");
-            newMaterialGroup.innerHTML = `
-                                <div class="form-group">
-                                    <label class="control-label">Material Type<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Quantity<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Materials[${materialCounter}].Quantity" placeholder="Quantity" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Material Description<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Enter description" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Material Size<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Enter size" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Material Price<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Enter price" required />
-                                </div>
-                                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-                            `;
-            materialFields.appendChild(newMaterialGroup);
-            materialCounter++; // Increment counter for the next material
-        }
-
-        function addLabour() {
-            var labourFields = document.getElementById("labour-fields");
-            var newLabourGroup = document.createElement("div");
-            newLabourGroup.classList.add("labour-group");
-            newLabourGroup.innerHTML = `
-                                <div class="form-group">
-                                    <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Please enter the number of hours worked" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Labour Description<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Enter price" required />
-                                </div>
-                                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-                            `;
-            labourFields.appendChild(newLabourGroup);
-            labourCounter++; // Increment counter for the next labour
-        }
-
-        document.getElementById('addStaffBtn').addEventListener('click', function () {
-            var staffContainer = document.getElementById('staffContainer');
-            var staffFields = document.querySelector('.staffFields');
-            var clone = staffFields.cloneNode(true);
-            clone.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>';
-            staffContainer.appendChild(clone);
+        // Autofill material fields
+        document.querySelectorAll('input[name^="Materials"]').forEach(function (input) {
+            if (input.name.includes("MaterialType")) {
+                input.value = "Autofilled Material Type";
+            } else if (input.name.includes("MaterialQuantity")) {
+                input.value = "10"; // Example quantity
+            } else if (input.name.includes("MaterialDescription")) {
+                input.value = "Autofilled Material Description";
+            } else if (input.name.includes("MaterialSize")) {
+                input.value = "30 kg"; // Example size
+            } else if (input.name.includes("MaterialPrice")) {
+                input.value = "50"; // Example price
+            }
         });
 
-        function removeElement(element) {
-            element.parentNode.remove();
-        }
-    </script>
+        // Autofill labour fields
+        document.querySelectorAll('input[name^="Labours"]').forEach(function (input) {
+            if (input.name.includes("LabourHours")) {
+                input.value = "8"; // Example hours worked
+            } else if (input.name.includes("LabourDescription")) {
+                input.value = "Autofilled Labour Description";
+            } else if (input.name.includes("LabourPrice")) {
+                input.value = "20"; // Example price
+            }
+        });
+
+        // Autofill staff fields
+        document.querySelectorAll('select[name^="Staff"]').forEach(function (select) {
+            var options = select.querySelectorAll('option');
+            if (options.length > 1) { // Skip if already populated
+                return;
+            }
+            // Add options for staff members
+            var staffNames = ["John Doe", "Jane Smith", "Michael Johnson"]; // Example staff names
+            staffNames.forEach(function (name, index) {
+                var option = document.createElement('option');
+                option.value = index + 1; // Example staff ID
+                option.text = name;
+                select.appendChild(option);
+            });
+        });
+
+        document.getElementById('autofill-message').innerText = "Form autofilled successfully.";
+    }
+    var materialCounter = 1; // Initialize counters
+    var labourCounter = 1;
+    var staffCounter = 1;
+
+    function addMaterial() {
+        var materialTableBody = document.querySelector("#material-fields tbody");
+        var newRow = materialTableBody.insertRow();
+        newRow.innerHTML = `
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                    </td>
+                </tr>
+            `;
+        materialCounter++;
+    }
+
+    function addLabour() {
+        var labourTableBody = document.querySelector("#labour-fields tbody");
+        var newRow = labourTableBody.insertRow();
+        newRow.innerHTML = `
+                <tr>
+                    <td>
+                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                    </td>
+                </tr>
+            `;
+        labourCounter++;
+    }
+
+    function removeTableRow(button) {
+        // Find the row where the button is located and remove it
+        button.closest("tr").remove();
+    }
+
+    document.getElementById('addStaffBtn').addEventListener('click', function () {
+        var staffContainer = document.getElementById('staffContainer');
+        var staffFields = document.querySelector('.staffFields');
+        var clone = staffFields.cloneNode(true);
+        clone.innerHTML += '<button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>';
+        staffContainer.appendChild(clone);
+    });
+
+    function removeElement(element) {
+        element.parentNode.remove();
+    }
+</script>
