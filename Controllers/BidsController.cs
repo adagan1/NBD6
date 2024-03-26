@@ -47,8 +47,9 @@ namespace NBD6.Controllers
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                bidsQuery = bidsQuery.Where(b => b.BidName.Contains(searchTerm)
-                                                 || b.Project.ProjectName.Contains(searchTerm));
+                var lowerCaseSearchTerm = searchTerm.ToLower();
+                bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
+                                                 || b.Project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
             }
 
             // Filtering by approval status

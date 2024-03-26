@@ -296,22 +296,44 @@
         var newStaffFields = document.createElement('div');
         newStaffFields.classList.add('staffFields');
         newStaffFields.innerHTML = `
-                    <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                    <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                        <option value="">Select Staff</option>
-                    </select>
-                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-            `;
+            <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+            <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                <option value="">Select Staff</option>
+            </select>
+            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+        `;
 
         staffContainer.appendChild(newStaffFields);
         staffCounter++; // Increment the staff counter
 
         // Initialize Select2 for the newly added staff dropdown
-        $(newStaffFields.querySelector('select')).select2({
+        var newStaffSelect = newStaffFields.querySelector('select');
+        $(newStaffSelect).select2({
             placeholder: "Select Staff",
             allowClear: true
         });
+
+        // Populate the new staff dropdown with existing staff options
+        var existingStaffOptions = document.querySelectorAll('select[name^="Staff"] option:not([value=""])');
+        existingStaffOptions.forEach(function (option) {
+            var newOption = document.createElement('option');
+            newOption.value = option.value;
+            newOption.text = option.text;
+            newStaffSelect.appendChild(newOption);
+        });
     }
+
+    function removeElement(button) {
+        // Find the parent div with class 'staffFields' and remove it
+        button.closest('.staffFields').remove();
+    }
+
+    // Event listener for the remove button inside staffFields div
+    document.querySelectorAll('.staffFields .btn-danger').forEach(function (button) {
+        button.addEventListener('click', function () {
+            removeElement(this);
+        });
+    });
 
     // Event listener for the addStaffBtn button
     document.getElementById('addStaffBtn').addEventListener('click', addStaff);

@@ -16,6 +16,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
+<!-- Alert Messages -->
 @if (TempData["AlertMessageBidEdit"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -38,50 +40,22 @@
     </div>
 }
 
-@using (Html.BeginForm("Index", "Bids", FormMethod.Get))
+@using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "d-flex justify-content-between" }))
 {
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <input type="text" name="searchTerm" class="form-control" placeholder="Search..." value="@ViewBag.CurrentFilter" />
-        </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <label class="input-group-text" for="approvalFilter">Filter by:</label>
-                <select name="approvalFilter" class="form-select" id="approvalFilter">
-                    <option value="All">All</option>
-                    @if (ViewBag.CurrentApprovalFilter == "ClientApproved")
-                    {
-                        <option value="ClientApproved" selected>Client Approved</option>
-                    }
-                    else
-                    {
-                        <option value="ClientApproved">Client Approved</option>
-                    }
-                    @if (ViewBag.CurrentApprovalFilter == "NBDApproved")
-                    {
-                        <option value="NBDApproved" selected>NBD Approved</option>
-                    }
-                    else
-                    {
-                        <option value="NBDApproved">NBD Approved</option>
-                    }
-                    @if (ViewBag.CurrentApprovalFilter == "Declined")
-                    {
-                        <option value="Declined" selected>Declined</option>
-                    }
-                    else
-                    {
-                        <option value="Declined">Declined</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <input type="submit" value="Search and Filter" class="btn btn-primary" />
-        </div>
+    <div class="input-group search-filter-bar">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search by Bid Name & Project Name..." value="@ViewBag.CurrentFilter" aria-label="Search" />
+
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+        <ul class="dropdown-menu">
+            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="All">All</button></li>
+            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="ClientApproved" @(ViewBag.CurrentApprovalFilter == "ClientApproved" ? "selected" : "")>Client Approved</button></li>
+            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="NBDApproved" @(ViewBag.CurrentApprovalFilter == "NBDApproved" ? "selected" : "")>NBD Approved</button></li>
+            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="Declined" @(ViewBag.CurrentApprovalFilter == "Declined" ? "selected" : "")>Declined</button></li>
+        </ul>
+
+        <button type="submit" class="btn btn-primary">Search</button>
     </div>
 }
-
 
 <p>
     <a asp-action="Create" class="btn btn-success">Create New</a>
@@ -90,52 +64,52 @@
 <form asp-action="Index" method="get">
 
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@Html.ActionLink("Bid Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-            <th>@Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-            <th>@Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })</th>
-            <th>@Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectNameSortParm })</th>
-            <th>Client Approved</th>
-            <th>NBD Approved</th>
-            <th>Bid Declined</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.BidName)</td>
-                <td>@Html.DisplayFor(modelItem => item.BidStart)</td>
-                <td>@Html.DisplayFor(modelItem => item.BidEnd)</td>
-                <td>@Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
-                <td>
-                    <input type="checkbox" @(item.ClientApproved ? "checked" : "") disabled />
-                </td>
-                <td>
-                    <input type="checkbox" @(item.NBDApproved ? "checked" : "") disabled />
-                </td>
-                <td>
-                    <input type="checkbox" @(item.BidDeclined ? "checked" : "") disabled />
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
-                    @if (item.ClientApproved && item.NBDApproved)
-                    {
-                        <a asp-action="Approval" asp-route-id="@item.BidID" class="disabled-link">Locked</a>
-                    }
-                    else
-                    {
-                        <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
-                    }
-                </td>
+                <th>@Html.ActionLink("Bid Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>@Html.ActionLink("Start Date", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
+                <th>@Html.ActionLink("End Date", "Index", new { sortOrder = ViewBag.EndDateSortParm })</th>
+                <th>@Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectNameSortParm })</th>
+                <th>Client Approved</th>
+                <th>NBD Approved</th>
+                <th>Bid Declined</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.BidName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BidStart)</td>
+                    <td>@Html.DisplayFor(modelItem => item.BidEnd)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
+                    <td>
+                        <input type="checkbox" @(item.ClientApproved ? "checked" : "") disabled />
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.NBDApproved ? "checked" : "") disabled />
+                    </td>
+                    <td>
+                        <input type="checkbox" @(item.BidDeclined ? "checked" : "") disabled />
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
+                        @if (item.ClientApproved && item.NBDApproved)
+                        {
+                            <a asp-action="Approval" asp-route-id="@item.BidID" class="disabled-link">Locked</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
     <partial name="_PagingNavBar" model="Model" />
 </form>
@@ -155,6 +129,7 @@
         pointer-events: none; /* Prevent click events */
         cursor: default; /* Show cursor as default */
     }
+
     .table-striped tbody tr:nth-child(odd) {
         background-color: #f2f2f2;
     }
@@ -193,5 +168,8 @@
         border-width: 0 3px 3px 0;
         transform: rotate(45deg);
     }
-</style>
 
+    .search-filter-bar {
+        max-width: 600px; /* Adjust this value to make the search bar shorter */
+    }
+</style>
