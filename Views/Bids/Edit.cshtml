@@ -7,26 +7,18 @@
 <h1>Bid Edit</h1>
 
 <form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
     <div class="row">
         <div class="col-md-6">
             <h4>Bid</h4>
             <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BidID" />
             <div class="form-group">
                 <label asp-for="BidName" class="control-label">Bid Name<span class="text-danger">*</span></label>
                 <input asp-for="BidName" class="form-control" />
                 <span asp-validation-for="BidName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
-                <input asp-for="BidStart" class="form-control" type="date" />
-                <span asp-validation-for="BidStart" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
-                <input asp-for="BidEnd" class="form-control" type="date" />
-                <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
@@ -37,67 +29,112 @@
             </div>
         </div>
 
-        <!-- Labor Fields -->
         <div class="col-md-6">
+            <!-- Using a spacer to align the first form-group with the left column -->
+            <div style="margin-top: 60px;">
+                <!-- Adjust this margin-top value as needed -->
+                <div class="form-group">
+                    <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
+                    <input asp-for="BidStart" class="form-control" type="date" />
+                    <span asp-validation-for="BidStart" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
+                    <input asp-for="BidEnd" class="form-control" type="date" />
+                    <span asp-validation-for="BidEnd" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12">
+            <!-- Note the change to full width -->
             <h4>Labor</h4>
             <hr />
-            @foreach (var labour in Model.Labours)
-            {
-                <div class="labour-item">
-                    <div class="form-group">
-                        <label asp-for="@labour.LabourHours" class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                        <input asp-for="@labour.LabourHours" class="form-control" />
-                        <span asp-validation-for="@labour.LabourHours" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@labour.LabourDescription" class="control-label">Description<span class="text-danger">*</span></label>
-                        <input asp-for="@labour.LabourDescription" class="form-control" />
-                        <span asp-validation-for="@labour.LabourDescription" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@labour.LabourPrice" class="control-label">Labour Price<span class="text-danger">*</span></label>
-                        <input asp-for="@labour.LabourPrice" class="form-control" />
-                        <span asp-validation-for="@labour.LabourPrice" class="text-danger"></span>
-                    </div>
-                </div>
-            }
+            <table class="table" id="labor-fields">
+                <thead>
+                    <tr>
+                        <th>Labor Hours<span class="text-danger">*</span></th>
+                        <th>Description<span class="text-danger">*</span></th>
+                        <th>Labor Price<span class="text-danger">*</span></th>
+                        <th>Action</th> <!-- Column for potential 'remove' buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var labour in Model.Labours)
+                    {
+                        <tr class="labour-item">
+                            <td>
+                                <input asp-for="@labour.LabourHours" class="form-control" />
+                                <span asp-validation-for="@labour.LabourHours" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="@labour.LabourDescription" class="form-control" />
+                                <span asp-validation-for="@labour.LabourDescription" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="@labour.LabourPrice" class="form-control" />
+                                <span asp-validation-for="@labour.LabourPrice" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <!-- Placeholder for potential 'remove' button -->
+                                <!-- Implement remove functionality if needed -->
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labor</button>
         </div>
 
-        <!-- Material Fields -->
-        <div class="col-md-6">
-            <h4>Materials</h4>
-            <hr />
-            @foreach (var material in Model.Materials)
-            {
-                <div class="material-item">
-                    <div class="form-group">
-                        <label asp-for="@material.MaterialType" class="control-label">Material Type<span class="text-danger">*</span></label>
-                        <input asp-for="@material.MaterialType" class="form-control" />
-                        <span asp-validation-for="@material.MaterialType" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@material.MaterialQuantity" class="control-label">Material Quantity<span class="text-danger">*</span></label>
-                        <input asp-for="@material.MaterialQuantity" class="form-control" />
-                        <span asp-validation-for="@material.MaterialQuantity" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@material.MaterialDescription" class="control-label">Material Description<span class="text-danger">*</span></label>
-                        <input asp-for="@material.MaterialDescription" class="form-control" />
-                        <span asp-validation-for="@material.MaterialDescription" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@material.MaterialSize" class="control-label">Material Size<span class="text-danger">*</span></label>
-                        <input asp-for="@material.MaterialSize" class="form-control" />
-                        <span asp-validation-for="@material.MaterialSize" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="@material.MaterialPrice" class="control-label">Material Price<span class="text-danger">*</span></label>
-                        <input asp-for="@material.MaterialPrice" class="form-control" />
-                        <span asp-validation-for="@material.MaterialPrice" class="text-danger"></span>
-                    </div>
-                </div>
-            }
-        </div>
+    <div class="col-md-12">
+        <!-- Adjusted for full width to match the rest of the form layout -->
+        <h4>Materials</h4>
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Material Type<span class="text-danger">*</span></th>
+                    <th>Material Quantity<span class="text-danger">*</span></th>
+                    <th>Material Description<span class="text-danger">*</span></th>
+                    <th>Material Size<span class="text-danger">*</span></th>
+                    <th>Material Price<span class="text-danger">*</span></th>
+                    <th>Action</th> <!-- Column for remove button -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var material in Model.Materials)
+                {
+                    <tr class="material-item">
+                        <td>
+                            <input asp-for="@material.MaterialType" class="form-control" />
+                            <span asp-validation-for="@material.MaterialType" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@material.MaterialQuantity" class="form-control" />
+                            <span asp-validation-for="@material.MaterialQuantity" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@material.MaterialDescription" class="form-control" />
+                            <span asp-validation-for="@material.MaterialDescription" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@material.MaterialSize" class="form-control" />
+                            <span asp-validation-for="@material.MaterialSize" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@material.MaterialPrice" class="form-control" />
+                            <span asp-validation-for="@material.MaterialPrice" class="text-danger"></span>
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
+    </div>
+    <div>
         <div class="col-md-6">
             <h4>Staff</h4>
             <hr />
@@ -162,5 +199,64 @@
 
     function removeStaff(element) {
         element.parentNode.remove();
+    }
+
+    var materialCounter = 1; // Initialize counters
+    var labourCounter = 1;
+    var staffCounter = 1;
+
+    function addMaterial() {
+        var materialTableBody = document.querySelector("#material-fields tbody");
+        var newRow = materialTableBody.insertRow();
+        newRow.innerHTML = `
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                        </td>
+                    </tr>
+                `;
+        materialCounter++;
+    }
+
+    function addLabour() {
+        var labourTableBody = document.querySelector("#labour-fields tbody");
+        var newRow = labourTableBody.insertRow();
+        newRow.innerHTML = `
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                        </td>
+                    </tr>
+                `;
+        labourCounter++;
+    }
+
+    function removeTableRow(button) {
+        // Find the row where the button is located and remove it
+        button.closest("tr").remove();
     }
 </script>
