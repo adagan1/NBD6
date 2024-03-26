@@ -278,70 +278,70 @@ namespace NBD6.Data
                             FirstName = "John",
                             LastName = "Doe",
                             StaffPhone = "3333333333",
-                            StaffPosition = "Project Manager"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Jane",
                             LastName = "Smith",
                             StaffPhone = "4444444444",
-                            StaffPosition = "Construction Worker"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Michael",
                             LastName = "Johnson",
                             StaffPhone = "5555555555",
-                            StaffPosition = "Architect"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Emily",
                             LastName = "Brown",
                             StaffPhone = "6666666666",
-                            StaffPosition = "Civil Engineer"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "David",
                             LastName = "Williams",
                             StaffPhone = "7777777777",
-                            StaffPosition = "Foreman"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Alice",
                             LastName = "Jones",
                             StaffPhone = "8888888888",
-                            StaffPosition = "Architect"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Robert",
                             LastName = "Davis",
                             StaffPhone = "9999999999",
-                            StaffPosition = "Engineer"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Sarah",
                             LastName = "Taylor",
                             StaffPhone = "1010101010",
-                            StaffPosition = "Supervisor"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Daniel",
                             LastName = "Martinez",
                             StaffPhone = "1111111111",
-                            StaffPosition = "Technician"
+                            StaffPosition = "Designer"
                         },
                         new Staff
                         {
                             FirstName = "Sophia",
                             LastName = "Wilson",
                             StaffPhone = "1212121212",
-                            StaffPosition = "Manager"
+                            StaffPosition = "Designer"
                         }
                     );
                     context.SaveChanges();
