@@ -87,6 +87,9 @@
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
 
+<form asp-action="Index" method="get">
+
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -134,7 +137,9 @@
     </tbody>
 </table>
 
-@await Html.PartialAsync("_PagingNavBar", Model)
+    <partial name="_PagingNavBar" model="Model" />
+</form>
+
 
 @section Scripts {
     <script>
