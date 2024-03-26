@@ -92,7 +92,7 @@
         <!-- Adjusted for full width to match the rest of the form layout -->
         <h4>Materials</h4>
         <hr />
-        <table class="table">
+        <table class="table" id="material-fields">
             <thead>
                 <tr>
                     <th>Material Type<span class="text-danger">*</span></th>
@@ -205,54 +205,71 @@
     var labourCounter = 1;
     var staffCounter = 1;
 
+    var materialCounter = 0; // Initialize the counter
+
     function addMaterial() {
         var materialTableBody = document.querySelector("#material-fields tbody");
         var newRow = materialTableBody.insertRow();
+
         newRow.innerHTML = `
-                    <tr>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                        </td>
-                    </tr>
-                `;
-        materialCounter++;
+            <td>
+                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                <span class="text-danger"></span>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialQuantity" placeholder="Quantity" required />
+                <span class="text-danger"></span>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialDescription" placeholder="Description" required />
+                <span class="text-danger"></span>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialSize" placeholder="Size" required />
+                <span class="text-danger"></span>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialPrice" placeholder="Price" required />
+                <span class="text-danger"></span>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+            </td>
+        `;
     }
 
+    function removeTableRow(button) {
+        var row = button.closest('tr');
+        row.parentNode.removeChild(row);
+    }
+
+    var labourCounter = 0; // Initialize the counter
+
     function addLabour() {
-        var labourTableBody = document.querySelector("#labour-fields tbody");
+        var labourTableBody = document.querySelector("#labor-fields tbody");
         var newRow = labourTableBody.insertRow();
+
         newRow.innerHTML = `
-                    <tr>
-                        <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                        </td>
-                    </tr>
-                `;
+            <td>
+                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+            </td>
+            <td>
+                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+            </td>
+        `;
+
         labourCounter++;
+    }
+
+    function removeTableRow(button) {
+        var row = button.closest('tr');
+        row.parentNode.removeChild(row);
     }
 
     function removeTableRow(button) {
