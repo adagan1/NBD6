@@ -74,9 +74,12 @@
                     <dd class="col-sm-8">
                         $@Html.DisplayFor(_ => material.MaterialPrice)
                     </dd>
+                    <hr /> <!-- Add separation after each material -->
                 }
             </dl>
         </div>
+
+
         <div class="col-md-6">
             <h4>Labour</h4>
             <hr />
@@ -87,7 +90,7 @@
                         @Html.DisplayNameFor(_ => labour.LabourHours)
                     </dt>
                     <dd class="col-sm-8">
-                        @Html.DisplayFor(_ => labour.LabourHours)
+                        @Html.DisplayFor(_ => labour.LabourHours) hours
                     </dd>
                     <dt class="col-sm-4">
                         @Html.DisplayNameFor(_ => labour.LabourDescription)
@@ -96,14 +99,23 @@
                         @Html.DisplayFor(_ => labour.LabourDescription)
                     </dd>
                     <dt class="col-sm-4">
-                        @Html.DisplayNameFor(_ => labour.LabourPrice)
+                        Price Per Hour
                     </dt>
                     <dd class="col-sm-8">
-                        $@Html.DisplayFor(_ => labour.LabourPrice)
+                        $@labour.LabourPrice.ToString("N2")
                     </dd>
+                    <dt class="col-sm-4">
+                        Total Cost
+                    </dt>
+                    <dd class="col-sm-8">
+                        $@((decimal)labour.LabourHours * labour.LabourPrice)
+                    </dd>
+                    <hr /> <!-- Add separation after each labour -->
                 }
             </dl>
         </div>
+
+
 
         <div class="col-md-6">
             <h4>Staff</h4>
@@ -117,46 +129,46 @@
                 }
             </dl>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        <h4>Total Prices</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-4">Bid Amount</dt>
-            <dd class="col-sm-8">
-                @{
-                    decimal bidAmount = Convert.ToDecimal(Model.Project.BidAmount);
-                }
-                $@bidAmount
-            </dd>
+        <div class="col-md-6">
+            <h4>Total Prices</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">Bid Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal bidAmount = Convert.ToDecimal(Model.Project.BidAmount);
+                    }
+                    $@bidAmount
+                </dd>
 
-            <dt class="col-sm-4">Material Amount</dt>
-            <dd class="col-sm-8">
-                @{
-                    decimal materialAmount = Model.Materials.Sum(m => m.MaterialPrice);
-                }
-                $@materialAmount
-            </dd>
+                <dt class="col-sm-4">Material Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal materialAmount = Model.Materials.Sum(m => m.MaterialPrice);
+                    }
+                    $@materialAmount
+                </dd>
 
-            <dt class="col-sm-4">Labour Amount</dt>
-            <dd class="col-sm-8">
-                @{
-                    decimal labourAmount = Model.Labours.Sum(l => l.LabourPrice);
-                }
-                $@labourAmount
-            </dd>
+                <dt class="col-sm-4">Labour Amount</dt>
+                <dd class="col-sm-8">
+                    @{
+                        decimal labourAmount = Model.Labours.Sum(l => (decimal)l.LabourHours * l.LabourPrice);
+                    }
+                    $@labourAmount.ToString("N2")
+                </dd>
 
-            <dt class="col-sm-4">Total Left</dt>
-            <dd class="col-sm-8">
-                @{
-                    // Adjusting this calculation to show what's left from bidAmount after subtracting material and labour costs.
-                    decimal totalLeft = bidAmount - (materialAmount + labourAmount);
-                }
-                $@totalLeft
-            </dd>
-        </dl>
-    </div>
+
+                <dt class="col-sm-4">Total Left</dt>
+                <dd class="col-sm-8">
+                    @{
+                        // Adjusting this calculation to show what's left from bidAmount after subtracting material and labour costs.
+                        decimal totalLeft = bidAmount - (materialAmount + labourAmount);
+                    }
+                    $@totalLeft
+                </dd>
+            </dl>
+        </div>
 
 
 
