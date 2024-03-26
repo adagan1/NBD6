@@ -18,7 +18,7 @@
             <hr />
             <div class="form-group">
                 <label asp-for="BidName" class="control-label">Bid Name<span class="text-danger">*</span></label>
-                <input asp-for="BidName" class="form-control" placeholder="Enter bid name" required />
+                <input asp-for="BidName" class="form-control" placeholder="Enter bid name, e.g., 'Downtown Bridge Construction 1st Bid'" required />
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
 
@@ -26,15 +26,20 @@
                 <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
                 <input asp-for="BidStart" class="form-control" type="date" required />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
+                <small class="form-text text-muted">Please select the date when the bid starts.</small>
             </div>
 
             <div class="form-group">
                 <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
                 <input asp-for="BidEnd" class="form-control" type="date" required />
                 <span asp-validation-for="BidEnd" class="text-danger"></span>
+                <small class="form-text text-muted">Please select the date when the bid ends.</small>
             </div>
+
             <div class="form-group">
-                <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
+                <label asp-for="ProjectID" class="control-label">
+                    Project<span class="text-danger">*</span><small class="form-text text-muted">Select the project associated with this bid.</small>
+                </label>
                 <select asp-for="ProjectID" class="form-control" id="ProjectID" asp-items="ViewBag.ProjectID">
                     <option value="">Select a Project</option>
                     @if (TempData["NewProjectID"] != null)
@@ -50,18 +55,20 @@
         <div class="col-md-6" id="labour-fields">
             <h4>Labour</h4>
             <hr />
+
             <div class="labour-group">
                 <div class="form-group">
                     <label class="control-label">Labour Hours<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Please enter the number of hours worked" required />
+                    <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Enter the number of hours worked, e.g., '40'" required />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Labour Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Enter description" required />
+                    <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Enter description, e.g., 'Electrical installation'" required />
+                    <small class="form-text text-muted">Please enter the type of labour above.</small>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Labour Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Enter price" required />
+                    <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Enter price, e.g., '$25 per hour'" required />
                 </div>
                 <!-- Add more labour fields as needed -->
             </div>
@@ -79,38 +86,40 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Material Quantity<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Enter quantity" required />
+                    <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Enter quantity, e.g., '30 bags', '15 cubic yards'" required />
                 </div>
+
                 <div class="form-group">
                     <label class="control-label">Material Description<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialDescription" placeholder="Enter description" required />
+                    <input type="text" class="form-control" name="Materials[0].MaterialDescription" placeholder="Enter description, e.g., 'High-quality topsoil for lawn'" required />
                 </div>
                 <div class="form-group">
                     <label class="control-label">Material Size<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialSize" placeholder="Enter size" required />
+                    <input type="text" class="form-control" name="Materials[0].MaterialSize" placeholder="Enter size, e.g., '50 kg bags', '2 meters long'" required />
+                    <small class="form-text text-muted">Please enter the size in the format: [number] [unit] (e.g., 10 cm, 5 m, 2 kg).</small>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Material Price<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="Materials[0].MaterialPrice" placeholder="Enter price" required />
+                    <input type="text" class="form-control" name="Materials[0].MaterialPrice" placeholder="Enter price, e.g., '$20 per bag', '$500 total'" required />
                 </div>
                 <!-- Add more material fields as needed -->
             </div>
             <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
-        
-     <div class="col-md-6">
-            <h4>Staff</h4>
+
+        <div class="col-md-6">
+            <h4>Designer Staff</h4>
             <hr />
-        <div id="staffContainer">
-            <div class="staffFields">
-                <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                    <option value="">Select Staff</option>
-                </select>
-            </div>            
+            <div id="staffContainer">
+                <div class="staffFields">
+                    <label asp-for="Staff" class="control-label">Designer Staff<span class="text-danger">*</span></label>
+                    <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                        <option value="">Select Designer</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" id="addStaffBtn" class="btn btn-primary">Add Another Designer</button>
         </div>
-            <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
-     </div>
 
         <!-- Autofill button -->
         <div class="form-group">
@@ -118,6 +127,9 @@
             <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
             <span id="autofill-message" class="text-success"></span>
         </div>
+        </div>
+
+        
 </form>
 
 <div class="col-md-1">
