@@ -129,21 +129,28 @@
     <div class="col-md-6">
         <h4>Staff</h4>
         <hr />
-        <div id="staffContainer">
-            <div class="staffFields">
-                <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                    <option value="">Select Staff</option>
-                </select>
+        <div class="row">
+            <div class="col-md-9">
+                <div id="staffContainer">
+                    <div class="staffFields">
+                        <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                        <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                            <option value="">Select Staff</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="addStaffBtn" class="btn btn-primary" style="margin-top: 20px; padding: 6px 12px; font-size: 14px; line-height: 1.5;">Add More Staff</button>
             </div>
         </div>
-        <button type="button" id="addStaffBtn" class="btn btn-primary">Add More Staff</button>
     </div>
+
 
     <!-- Autofill button -->
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-        <button type="button" class="btn btn-secondary" onclick="autofill()">Autofill Form</button>
+        <input type="submit" value="Create" class="btn btn-success" style="margin-top: 10px;" />
+        <button type="button" class="btn btn-info" style="margin-top: 10px;" onclick="autofill()">Autofill Form</button>
         <span id="autofill-message" class="text-success"></span>
     </div>
 </form>
@@ -238,27 +245,27 @@
         var materialTableBody = document.querySelector("#material-fields tbody");
         var newRow = materialTableBody.insertRow();
         newRow.innerHTML = `
-                <tr>
-                    <td>
-                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                    </td>
-                </tr>
-            `;
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                        </td>
+                    </tr>
+                `;
         materialCounter++;
     }
 
@@ -266,21 +273,21 @@
         var labourTableBody = document.querySelector("#labour-fields tbody");
         var newRow = labourTableBody.insertRow();
         newRow.innerHTML = `
-                <tr>
-                    <td>
-                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                    </td>
-                </tr>
-            `;
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                        </td>
+                    </tr>
+                `;
         labourCounter++;
     }
 
@@ -296,12 +303,12 @@
         var newStaffFields = document.createElement('div');
         newStaffFields.classList.add('staffFields');
         newStaffFields.innerHTML = `
-            <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-            <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                <option value="">Select Staff</option>
-            </select>
-            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-        `;
+                <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                    <option value="">Select Staff</option>
+                </select>
+                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+            `;
 
         staffContainer.appendChild(newStaffFields);
         staffCounter++; // Increment the staff counter
