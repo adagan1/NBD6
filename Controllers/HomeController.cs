@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NBD6.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,6 +15,7 @@ namespace NBD6.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Admin, Management, Designer, Sales")]
         public IActionResult Index()
         {
             return View();
