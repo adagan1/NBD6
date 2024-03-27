@@ -12,8 +12,8 @@ namespace NBD6.Data
             try
             {
                 // Delete and recreate the Database with every restart
-                //context.Database.EnsureDeleted();
-                //context.Database.EnsureCreated();
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
 
                 if (!context.Clients.Any())
                 {
