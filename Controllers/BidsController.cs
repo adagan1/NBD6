@@ -23,7 +23,7 @@ namespace NBD6.Controllers
 
         // GET: Bids
         [Authorize(Roles = "Admin, Management, Designer, Sales")]
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page, string approvalFilter = "All")
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page, string approvalFilter = "All", string timeframeFilter = "AllTime", DateTime? startDate = null, DateTime? endDate = null)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -51,7 +51,7 @@ namespace NBD6.Controllers
             {
                 var lowerCaseSearchTerm = searchTerm.ToLower();
                 bidsQuery = bidsQuery.Where(b => b.BidName.ToLower().Contains(lowerCaseSearchTerm)
-                                                 || b.Project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
+                                              || b.Project.ProjectName.ToLower().Contains(lowerCaseSearchTerm));
             }
 
             // Filtering by approval status
@@ -71,31 +71,75 @@ namespace NBD6.Controllers
                 }
             }
 
+            // Filter by timeframe
+            if (timeframeFilter != "AllTime")
+            {
+                DateTime today = DateTime.Today;
+                switch (timeframeFilter)
+                {
+                    case "ThisWeek":
+                        startDate = today.AddDays(-(int)today.DayOfWeek);
+                        endDate = startDate.Value.AddDays(6);
+                        break;
+                    case "ThisMonth":
+                        startDate = new DateTime(today.Year, today.Month, 1);
+                        endDate = startDate.Value.AddMonths(1).AddDays(-1);
+                        break;
+                    case "Custom":
+                        // Use the provided startDate and endDate values
+                        break;
+                }
+
+                bidsQuery = bidsQuery.Where(b => b.BidStart >= startDate && b.BidEnd <= endDate);
+            }
+
+            // Retrieve the filtered bids from the database asynchronously
+            var filteredBids = await bidsQuery.ToListAsync();
+
+            decimal totalValue = 0;
+            if (approvalFilter == "ClientApproved")
+            {
+                totalValue = filteredBids.Where(b => b.ClientApproved).Sum(b => b.ProjectAmount);
+            }
+            else if (approvalFilter == "NBDApproved")
+            {
+                totalValue = filteredBids.Where(b => b.NBDApproved).Sum(b => b.ProjectAmount);
+            }
+            else if (approvalFilter == "Declined")
+            {
+                totalValue = filteredBids.Where(b => b.BidDeclined).Sum(b => b.ProjectAmount);
+            }
+            else
+            {
+                totalValue = filteredBids.Sum(b => b.ProjectAmount);
+            }
+
+            ViewBag.TotalValue = totalValue;
             switch (sortOrder)
             {
                 case "name_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidName);
+                    filteredBids = filteredBids.OrderByDescending(b => b.BidName).ToList();
                     break;
                 case "Project Name":
-                    bidsQuery = bidsQuery.OrderBy(b => b.Project.ProjectName);
+                    filteredBids = filteredBids.OrderBy(b => b.Project.ProjectName).ToList();
                     break;
                 case "project_name_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.Project.ProjectName);
+                    filteredBids = filteredBids.OrderByDescending(b => b.Project.ProjectName).ToList();
                     break;
                 case "Start Date":
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidStart);
+                    filteredBids = filteredBids.OrderBy(b => b.BidStart).ToList();
                     break;
                 case "start_date_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidStart);
+                    filteredBids = filteredBids.OrderByDescending(b => b.BidStart).ToList();
                     break;
                 case "End Date":
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidEnd);
+                    filteredBids = filteredBids.OrderBy(b => b.BidEnd).ToList();
                     break;
                 case "end_date_desc":
-                    bidsQuery = bidsQuery.OrderByDescending(b => b.BidEnd);
+                    filteredBids = filteredBids.OrderByDescending(b => b.BidEnd).ToList();
                     break;
                 default:
-                    bidsQuery = bidsQuery.OrderBy(b => b.BidName);
+                    filteredBids = filteredBids.OrderBy(b => b.BidName).ToList();
                     break;
             }
 
@@ -104,8 +148,6 @@ namespace NBD6.Controllers
 
             return View(pagedBids);
         }
-
-
 
         // GET: Bids/Details/5
         [Authorize(Roles = "Admin, Management, Designer, Sales")]
