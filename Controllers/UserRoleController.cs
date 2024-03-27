@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using NBD6.Data;
 using NBD6.Models;
 
 namespace NBD6.Controllers
 {
+    [Authorize(Roles = "Admin, Management")]
     public class UserRoleController : Controller
     {
         private readonly ApplicationDbContext _context;
