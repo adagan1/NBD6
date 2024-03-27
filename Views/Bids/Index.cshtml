@@ -40,28 +40,77 @@
     </div>
 }
 
-@using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "d-flex justify-content-between" }))
+@using (Html.BeginForm("Index", "Bids", FormMethod.Get, new { @class = "d-flex justify-content-between align-items-center" }))
 {
     <div class="input-group search-filter-bar">
         <input type="text" name="searchTerm" class="form-control" placeholder="Search by Bid Name & Project Name..." value="@ViewBag.CurrentFilter" aria-label="Search" />
 
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
-        <ul class="dropdown-menu">
-            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="All">All</button></li>
-            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="ClientApproved" @(ViewBag.CurrentApprovalFilter == "ClientApproved" ? "selected" : "")>Client Approved</button></li>
-            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="NBDApproved" @(ViewBag.CurrentApprovalFilter == "NBDApproved" ? "selected" : "")>NBD Approved</button></li>
-            <li><button class="dropdown-item" type="submit" name="approvalFilter" value="Declined" @(ViewBag.CurrentApprovalFilter == "Declined" ? "selected" : "")>Declined</button></li>
-        </ul>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="submit" name="approvalFilter" value="All">All</button></li>
+                <li><button class="dropdown-item" type="submit" name="approvalFilter" value="ClientApproved" @(ViewBag.CurrentApprovalFilter == "ClientApproved" ? "selected" : "")>Client Approved</button></li>
+                <li><button class="dropdown-item" type="submit" name="approvalFilter" value="NBDApproved" @(ViewBag.CurrentApprovalFilter == "NBDApproved" ? "selected" : "")>NBD Approved</button></li>
+                <li><button class="dropdown-item" type="submit" name="approvalFilter" value="Declined" @(ViewBag.CurrentApprovalFilter == "Declined" ? "selected" : "")>Declined</button></li>
+            </ul>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Timeframe
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="submit" name="timeframeFilter" value="AllTime">All Time</button></li>
+                <li><button class="dropdown-item" type="submit" name="timeframeFilter" value="ThisWeek">This Week</button></li>
+                <li><button class="dropdown-item" type="submit" name="timeframeFilter" value="ThisMonth">This Month</button></li>
+                <li>
+                    <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#customDateModal">
+                        Custom Range
+                    </button>
+                </li>
+            </ul>
+        </div>
 
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
 }
 
+<!-- Modal for custom date range -->
+<div class="modal fade" id="customDateModal" tabindex="-1" aria-labelledby="customDateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customDateModalLabel">Custom Date Range</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" form="customDateForm">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <p>
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
 
-<form asp-action="Index" method="get">
+<form asp-action="Index" method="get" id="customDateForm">
+
 
 
     <table class="table table-striped">
@@ -112,13 +161,17 @@
     </table>
 
     <partial name="_PagingNavBar" model="Model" />
-</form>
 
+</form>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Any specific scripts you need to run
+            // Show/hide custom date range inputs
+            $('#customDateModal').on('shown.bs.modal', function () {
+                $('#startDate').val(''); // Clear the start date input
+                $('#endDate').val(''); // Clear the end date input
+            });
         });
     </script>
 }
@@ -170,6 +223,6 @@
     }
 
     .search-filter-bar {
-        max-width: 600px; /* Adjust this value to make the search bar shorter */
+        max-width: 700px; /* Adjust this value to make the search bar shorter */
     }
 </style>
