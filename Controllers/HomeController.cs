@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NBD6.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin, Management, Designer, Sales")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
