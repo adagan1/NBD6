@@ -145,14 +145,18 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.BidID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.BidID">Details</a> |
-                        @if (item.ClientApproved && item.NBDApproved)
+                        <a asp-action="Details" asp-route-id="@item.BidID">Details</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Management"))
                         {
-                            <a asp-action="Approval" asp-route-id="@item.BidID" class="disabled-link">Locked</a>
-                        }
-                        else
-                        {
-                            <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
+                            @:|
+                            if (item.ClientApproved && item.NBDApproved)
+                            {                               
+                                <a asp-action="Approval" asp-route-id="@item.BidID" class="disabled-link">Locked</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Approval" asp-route-id="@item.BidID">Approval</a>
+                            }
                         }
                     </td>
                 </tr>
