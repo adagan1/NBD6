@@ -10,32 +10,53 @@
         </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Clients</h5>
-                    <p class="card-text">Manage clients in the system.</p>
-                    <a href="@Url.Action("Index", "Clients")" class="btn btn-primary">Go to Clients</a>
+        @if (User.IsInRole("Admin") || User.IsInRole("Management"))
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Clients</h5>
+                        <p class="card-text">Manage clients in the system.</p>
+                        <a href="@Url.Action("Index", "Clients")" class="btn btn-primary">Go to Clients</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Projects</h5>
-                    <p class="card-text">Manage projects in the system.</p>
-                    <a href="@Url.Action("Index", "Projects")" class="btn btn-primary">Go to Projects</a>
+        }
+
+        @if (User.IsInRole("Admin") || User.IsInRole("Management") || User.IsInRole("Designer"))
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Projects</h5>
+                        <p class="card-text">Manage projects in the system.</p>
+                        <a href="@Url.Action("Index", "Projects")" class="btn btn-primary">Go to Projects</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Bids</h5>
-                    <p class="card-text">View and manage bids.</p>
-                    <a href="@Url.Action("Index", "Bids")" class="btn btn-primary">Go to Bids</a>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bids</h5>
+                        <p class="card-text">View and manage bids.</p>
+                        <a href="@Url.Action("Index", "Bids")" class="btn btn-primary">Go to Bids</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+
+        @if (User.IsInRole("Sales"))
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Clients</h5>
+                        <p class="card-text">Manage clients in the system.</p>
+                        <a href="@Url.Action("Index", "Clients")" class="btn btn-primary">Go to Clients</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

@@ -19,7 +19,7 @@ namespace NBD6.Controllers
 
 
         // GET: Clients
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
             var clientsQuery = _context.Clients
@@ -106,7 +106,7 @@ namespace NBD6.Controllers
 
 
         // GET: Clients/Details/5
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Sales")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Clients == null)

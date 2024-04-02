@@ -22,7 +22,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page, string approvalFilter = "All", string timeframeFilter = "AllTime", DateTime? startDate = null, DateTime? endDate = null)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -150,7 +150,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Bids/Details/5
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Bids == null)
