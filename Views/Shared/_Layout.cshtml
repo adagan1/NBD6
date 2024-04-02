@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-              
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Natural by Design</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,18 +31,30 @@
                     <ul class="navbar-nav flex-grow-1 @((User.Identity.IsAuthenticated) ? "ml-auto" : "")">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Bids" asp-action="Index">Bids</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="UserRole" asp-action="Index">Manage Users</a>
-                            </li>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Sales"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Designer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Designer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Bids" asp-action="Index">Bids</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="UserRole" asp-action="Index">Manage Users</a>
+                                </li>
+                            }
                         }
                     </ul>
                     <partial name="_LoginPartial" />
