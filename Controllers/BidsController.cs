@@ -82,7 +82,6 @@ namespace NBD6.Controllers
                         endDate = startDate.Value.AddMonths(1).AddDays(-1);
                         break;
                     case "Custom":
-                        // Use the provided startDate and endDate values
                         break;
                 }
 
