@@ -261,7 +261,13 @@
         newRow.innerHTML = `
                     <tr>
                         <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialType" placeholder="ex: soil, bark, roses" required />
+                            <select class="form-control" name="materials[${materialCounter}].MaterialType" required>
+                                <option value="">Select Material Type</option>
+    @foreach (var materialType in ViewBag.MaterialTypes)
+    {
+                                        <option value="@materialType.Value">@materialType.Text</option>
+    }
+                            </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
@@ -292,7 +298,13 @@
                             <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
+                            <select class="form-control" name="labours[${labourCounter}].LabourDescription" required>
+                                <option value="">Select Labour Description</option>
+    @foreach (var labourDescription in ViewBag.LabourDescriptions)
+    {
+                                        <option value="@labourDescription">@labourDescription</option>
+    }
+                            </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
