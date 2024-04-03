@@ -70,65 +70,63 @@
                         <td>
                             <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Hours worked" required />
                         </td>
-                        <!-- Labour Description Dropdown -->
                         <td>
-                            <select class="form-control" name="labours[0].LabourDescription" required>
-                                <option value="">Select Labour Description</option>
-                                @foreach (var labourDescription in ViewBag.LabourDescriptions)
-                                {
-                                    <option value="@labourDescription">@labourDescription</option>
-                                }
+                            <select class="form-control labour-description" name="Labours[0].LabourDescription" required onchange="setLabourPrice(this)">
+                                <option value=""disabled>Select Labour</option>
+                                <option data-price="30" value="Production Worker">Production Worker</option>
+                                <option data-price="65" value="Designer">Designer</option>
+                                <option data-price="55" value="Equipment Operator">Equipment Operator</option>
+                                <option data-price="75" value="Botanist">Botanist</option>
                             </select>
+
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Price" required />
+                            <input type="text" class="form-control labour-price" name="Labours[0].LabourPrice" placeholder="Price" required readonly />
                         </td>
                     </tr>
-                    <!-- Additional labour rows can be dynamically added here -->
                 </tbody>
             </table>
             <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
         </div>
 
-        <!-- Spacer between Labour and Material sections -->
-        <div style="height: 20px;"></div> <!-- Optional spacing for visual separation -->
+        <div style="height: 20px;"></div>
         <!-- Material Fields Table -->
-        <div id="material-fields">
+        <div id="material-fields" class="container mt-5">
             <h4>Material</h4>
             <hr />
             <table class="table">
                 <thead>
                     <tr>
                         <th>Material Type<span class="text-danger">*</span></th>
-                        <th>Material Quantity<span class="text-danger">*</span></th>
                         <th>Material Description<span class="text-danger">*</span></th>
+                        <th>Material Quantity<span class="text-danger">*</span></th>
                         <th>Material Size<span class="text-danger">*</span></th>
                         <th>Material Price<span class="text-danger">*</span></th>
                     </tr>
                 </thead>
                 <tbody class="material-group">
                     <tr>
-                        <!-- Material Type Dropdown -->
                         <td>
-                            <select class="form-control" name="materials[0].MaterialType" required>
-                                <option value="">Select Material Type</option>
-                                @foreach (var materialType in ViewBag.MaterialTypes)
-                                {
-                                    <option value="@materialType.Value">@materialType.Text</option>
-                                }
+                            <select class="form-control material-type" name="Materials[0].MaterialType" onchange="updateMaterialDescriptionOptions(this)" required>
+                                <option value=""disabled>Select Material Type</option>
+                                <option value="Plants">Plants</option>
+                                <option value="Pottery">Pottery</option>
+                                <option value="Materials">Materials</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control material-description" name="Materials[0].MaterialDescription" onchange="setMaterialPrice(this)" required>
+                                <option value="">Please select Material Type first</option>
                             </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Quantity" required />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="Materials[0].MaterialDescription" placeholder="Description" required />
-                        </td>
-                        <td>
                             <input type="text" class="form-control" name="Materials[0].MaterialSize" placeholder="Size" required />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="Materials[0].MaterialPrice" placeholder="Price" required />
+                            <input type="text" class="form-control material-price" name="Materials[0].MaterialPrice" placeholder="Price" required readonly />
                         </td>
                     </tr>
                     <!-- Additional material rows can be dynamically added here -->
@@ -136,37 +134,36 @@
             </table>
             <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
         </div>
-    </div>
 
 
 
-    <div class="col-md-6">
-        <h4>Staff</h4>
-        <hr />
-        <div class="row">
-            <div class="col-md-9">
-                <div id="staffContainer">
-                    <div class="staffFields">
-                        <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                        <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                            <option value="">Select Staff</option>
-                        </select>
+        <div class="col-md-6">
+            <h4>Staff</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="staffContainer">
+                        <div class="staffFields">
+                            <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                            <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                                <option value="">Select Staff</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <button type="button" id="addStaffBtn" class="btn btn-primary" style="margin-top: 20px; padding: 6px 12px; font-size: 14px; line-height: 1.5;">Add More Staff</button>
+                <div class="col-md-3">
+                    <button type="button" id="addStaffBtn" class="btn btn-primary" style="margin-top: 20px; padding: 6px 12px; font-size: 14px; line-height: 1.5;">Add More Staff</button>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <!-- Autofill button -->
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-success" style="margin-top: 10px;" />
-        <button type="button" class="btn btn-info" style="margin-top: 10px;" onclick="autofill()">Autofill Form</button>
-        <span id="autofill-message" class="text-success"></span>
-    </div>
+        <!-- Autofill button -->
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-success" style="margin-top: 10px;" />
+            <button type="button" class="btn btn-info" style="margin-top: 10px;" onclick="autofill()">Autofill Form</button>
+            <span id="autofill-message" class="text-success"></span>
+        </div>
 </form>
 
 <div class="col-md-1">
@@ -200,122 +197,64 @@
         </script>
     }
 }
+
+
 <script>
     function autofill() {
-        // Autofill bid fields
-        document.querySelector('input[name="BidName"]').value = "Example Bid";
-        document.querySelector('input[name="BidStart"]').value = "2024-03-13"; // Example date
-        document.querySelector('input[name="BidEnd"]').value = "2024-03-20"; // Example date
+        // Array of random bid names
+        var bidNames = ["Garden Renovation", "Landscaping Project", "Park Enhancement", "Outdoor Design", "Green Space Development"];
 
-        // Autofill material fields
-        document.querySelectorAll('input[name^="Materials"]').forEach(function (input) {
-            if (input.name.includes("MaterialType")) {
-                input.value = "Autofilled Material Type";
-            } else if (input.name.includes("MaterialQuantity")) {
-                input.value = "10"; // Example quantity
-            } else if (input.name.includes("MaterialDescription")) {
-                input.value = "Autofilled Material Description";
+        // Select a random bid name from the array
+        var randomBidName = bidNames[Math.floor(Math.random() * bidNames.length)];
+
+        // Autofill bid name field
+        document.querySelector('input[name="BidName"]').value = randomBidName;
+
+        // Generate random dates for Bid Start and Bid End
+        var startDate = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000)); // Random date within the last 10000 days
+        var endDate = new Date(startDate.getTime() + Math.floor(Math.random() * 1000000000)); // Random date within 1000 days of the start date
+        document.querySelector('input[name="BidStart"]').valueAsDate = startDate;
+        document.querySelector('input[name="BidEnd"]').valueAsDate = endDate;
+
+        // Randomly select options for dropdowns and use predefined prices where applicable
+        var dropdowns = document.querySelectorAll('select');
+        dropdowns.forEach(function (dropdown) {
+            var options = dropdown.querySelectorAll('option');
+            if (options.length > 1) { // Check if options exist
+                // Randomly select an option (excluding the placeholder, typically at index 0)
+                var randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
+                dropdown.value = options[randomIndex].value;
+
+                // Trigger change event to update dependent fields, if any
+                var event = new Event('change');
+                dropdown.dispatchEvent(event);
+
+                if (dropdown.classList.contains('labour-description') || dropdown.classList.contains('material-description')) {
+                    // For labour and material descriptions, set price from the selected option
+                    var selectedOption = options[randomIndex];
+                    var priceInput = dropdown.closest('tr').querySelector('.labour-price, .material-price');
+                    if (selectedOption && priceInput && selectedOption.dataset.price) {
+                        priceInput.value = selectedOption.dataset.price;
+                    }
+                }
+            }
+        });
+
+        // Autofill other fields like material and labour quantities, descriptions, sizes
+        document.querySelectorAll('input[type="text"]').forEach(function (input) {
+            if (input.name.includes("MaterialQuantity") || input.name.includes("LabourHours")) {
+                input.value = Math.floor(Math.random() * 100) + 1; // Random quantity or hours
             } else if (input.name.includes("MaterialSize")) {
-                input.value = "30 kg"; // Example size
-            } else if (input.name.includes("MaterialPrice")) {
-                input.value = "50"; // Example price
+                input.value = (Math.floor(Math.random() * 100) + 1) + " cm"; // Random size with unit
             }
         });
 
-        // Autofill labour fields
-        document.querySelectorAll('input[name^="Labours"]').forEach(function (input) {
-            if (input.name.includes("LabourHours")) {
-                input.value = "8"; // Example hours worked
-            } else if (input.name.includes("LabourDescription")) {
-                input.value = "Autofilled Labour Description";
-            } else if (input.name.includes("LabourPrice")) {
-                input.value = "20"; // Example price
-            }
-        });
-
-        // Autofill staff fields
-        document.querySelectorAll('select[name^="Staff"]').forEach(function (select) {
-            var options = select.querySelectorAll('option');
-            if (options.length > 1) { // Skip if already populated
-                return;
-            }
-            // Add options for staff members
-            var staffNames = ["John Doe", "Jane Smith", "Michael Johnson"]; // Example staff names
-            staffNames.forEach(function (name, index) {
-                var option = document.createElement('option');
-                option.value = index + 1; // Example staff ID
-                option.text = name;
-                select.appendChild(option);
-            });
-        });
-
-        document.getElementById('autofill-message').innerText = "Form autofilled successfully.";
+        document.getElementById('autofill-message').innerText = "Form autofilled successfully with random values.";
     }
+
     var materialCounter = 1; // Initialize counters
     var labourCounter = 1;
     var staffCounter = 1;
-
-    function addMaterial() {
-        var materialTableBody = document.querySelector("#material-fields tbody");
-        var newRow = materialTableBody.insertRow();
-        newRow.innerHTML = `
-                    <tr>
-                        <td>
-                            <select class="form-control" name="materials[${materialCounter}].MaterialType" required>
-                                <option value="">Select Material Type</option>
-    @foreach (var materialType in ViewBag.MaterialTypes)
-    {
-                                        <option value="@materialType.Value">@materialType.Text</option>
-    }
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialQuantity" placeholder="Quantity" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialDescription" placeholder="Description" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialSize" placeholder="Size" required />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Materials[${materialCounter}].MaterialPrice" placeholder="Price" required />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                        </td>
-                    </tr>
-                `;
-        materialCounter++;
-    }
-
-    function addLabour() {
-        var labourTableBody = document.querySelector("#labour-fields tbody");
-        var newRow = labourTableBody.insertRow();
-        newRow.innerHTML = `
-                    <tr>
-                        <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
-                        </td>
-                        <td>
-                            <select class="form-control" name="labours[${labourCounter}].LabourDescription" required>
-                                <option value="">Select Labour Description</option>
-    @foreach (var labourDescription in ViewBag.LabourDescriptions)
-    {
-                                        <option value="@labourDescription">@labourDescription</option>
-    }
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                        </td>
-                    </tr>
-                `;
-        labourCounter++;
-    }
 
     function removeTableRow(button) {
         // Find the row where the button is located and remove it
@@ -329,12 +268,12 @@
         var newStaffFields = document.createElement('div');
         newStaffFields.classList.add('staffFields');
         newStaffFields.innerHTML = `
-                <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
-                <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                    <option value="">Select Staff</option>
-                </select>
-                <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
-            `;
+                            <label asp-for="Staff" class="control-label">Staff<span class="text-danger">*</span></label>
+                            <select asp-for="Staff" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                                <option value="">Select Staff</option>
+                            </select>
+                            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+                        `;
 
         staffContainer.appendChild(newStaffFields);
         staffCounter++; // Increment the staff counter
@@ -370,4 +309,134 @@
 
     // Event listener for the addStaffBtn button
     document.getElementById('addStaffBtn').addEventListener('click', addStaff);
+
+
+    function setLabourPrice(selectElement) {
+        var price = selectElement.options[selectElement.selectedIndex].getAttribute('data-price');
+        var priceInput = selectElement.closest('tr').querySelector('.labour-price');
+        priceInput.value = price;
+    }
+
+    function addLabour() {
+        var labourTableBody = document.querySelector("#labour-fields tbody");
+        var newRow = labourTableBody.insertRow();
+        var newIndex = document.querySelectorAll(".labour-group tr").length - 1;
+        newRow.innerHTML = `
+                                <tr>
+                                    <td>
+                                        <input type="text" class="form-control" name="Labours[${newIndex}].LabourHours" placeholder="Hours worked" required />
+                                    </td>
+                                    <td>
+                                        <select class="form-control labour-description" name="Labours[${newIndex}].LabourDescription" required onchange="setLabourPrice(this)">
+                                            <option value="">Select Labour </option>
+                                            <option data-price="30" value="Production Worker">Production Worker</option>
+                                            <option data-price="65" value="Designer">Designer</option>
+                                            <option data-price="55" value="Equipment Operator">Equipment Operator</option>
+                                            <option data-price="75" value="Botanist">Botanist</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control labour-price" name="Labours[${newIndex}].LabourPrice" placeholder="Price" required readonly />
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
+                                    </td>
+                                </tr>
+                            `;
+    }
+
+    function updateMaterialDescriptionOptions(materialTypeSelect) {
+        var materialDescriptionSelect = materialTypeSelect.closest('tr').querySelector('.material-description');
+        var materialType = materialTypeSelect.value;
+        var options = [];
+
+        switch (materialType) {
+            case "Plants":
+                options = [
+                    { text: "Rose", value: "Rose", price: "5" },
+                    { text: "Tulip", value: "Tulip", price: "3" },
+                    { text: "Lavender", value: "Lavender", price: "4" },
+                    { text: "Orchid", value: "Orchid", price: "7" },
+                    { text: "Sunflower", value: "Sunflower", price: "2" }
+                ];
+                break;
+            case "Pottery":
+                options = [
+                    { text: "Granite Fountain", value: "Granite Fountain", price: "200" },
+                    { text: "Granite Pots", value: "Granite Pots", price: "50" },
+                    { text: "Clay Vase", value: "Clay Vase", price: "20" },
+                    { text: "Porcelain Bowl", value: "Porcelain Bowl", price: "30" },
+                    { text: "Terracotta Planter", value: "Terracotta Planter", price: "25" }
+                ];
+                break;
+            case "Materials":
+                options = [
+                    { text: "Decorative Cedar Bark", value: "Decorative Cedar Bark", price: "15" },
+                    { text: "Top Soil", value: "Top Soil", price: "10" },
+                    { text: "Mulch", value: "Mulch", price: "8" },
+                    { text: "Peat Moss", value: "Peat Moss", price: "12" },
+                    { text: "River Stones", value: "River Stones", price: "20" }
+                ];
+                break;
+            default:
+                options = [{ text: "Please select Material Type first", value: "", price: "0" }];
+                break;
+        }
+
+        // Clear existing options
+        materialDescriptionSelect.innerHTML = '';
+
+        // Populate with new options
+        options.forEach(function (option) {
+            var newOption = new Option(option.text, option.value);
+            newOption.dataset.price = option.price;
+            materialDescriptionSelect.appendChild(newOption);
+        });
+    }
+
+    function setMaterialPrice(materialDescriptionSelect) {
+        var priceInput = materialDescriptionSelect.closest('tr').querySelector('.material-price');
+        var selectedOption = materialDescriptionSelect.options[materialDescriptionSelect.selectedIndex];
+
+        if (selectedOption && selectedOption.dataset.price) {
+            priceInput.value = selectedOption.dataset.price;
+        } else {
+            priceInput.value = '';
+        }
+    }
+
+    function addMaterial() {
+        var materialTableBody = document.querySelector("#material-fields tbody");
+        var index = materialTableBody.querySelectorAll("tr").length;
+        var newRow = materialTableBody.insertRow(-1);
+        newRow.innerHTML = `
+                        <tr>
+                            <td>
+                                <select class="form-control material-type" name="Materials[${index}].MaterialType" onchange="updateMaterialDescriptionOptions(this)" required>
+                                    <option value="">Select Material Type</option>
+                                    <option value="Plants">Plants</option>
+                                    <option value="Pottery">Pottery</option>
+                                    <option value="Materials">Materials</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control material-description" name="Materials[${index}].MaterialDescription" onchange="setMaterialPrice(this)" required>
+                                    <option value="">Please select Material Type first</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="Materials[${index}].MaterialQuantity" placeholder="Quantity" required />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="Materials[${index}].MaterialSize" placeholder="Size" required />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control material-price" name="Materials[${index}].MaterialPrice" placeholder="Price" required readonly />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                            </td>
+                        </tr>
+                    `;
+    }
 </script>
