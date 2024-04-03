@@ -83,6 +83,27 @@ namespace NBD6.Controllers
             PopulateAssignedRoleData(user);
             return View(user);
         }
+        // Disable action method
+        public async Task<IActionResult> Disable(string id)
+        {
+            if (id == null)
+            {
+                return new BadRequestResult();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            await _userManager.RemoveFromRoleAsync(user, "Admin");
+            await _userManager.RemoveFromRoleAsync(user, "Designer");
+            await _userManager.RemoveFromRoleAsync(user, "Management");
+            await _userManager.RemoveFromRoleAsync(user, "Sales");
+
+            return RedirectToAction("Index");
+        }
 
         private void PopulateAssignedRoleData(UserVM user)
         {//Prepare checkboxes for all Roles
@@ -144,7 +165,6 @@ namespace NBD6.Controllers
                 }
             }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
