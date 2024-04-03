@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NBD6.Data;
 using NBD6.Models;
@@ -244,6 +240,26 @@ namespace NBD6.Controllers
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName");
             //Populate the staff dropdown
             ViewData["StaffID"] = new MultiSelectList(_context.Staffs, "StaffID", "StaffSummary");
+
+            // Populate ViewBag.MaterialTypes with Material Types from your data source
+            ViewBag.MaterialTypes = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Plants", Text = "Plants" },
+                new SelectListItem { Value = "Pottery", Text = "Pottery" },
+                new SelectListItem { Value = "Tools", Text = "Tools" },
+                new SelectListItem { Value = "Materials", Text = "Materials" }
+                
+            };
+
+            // Populate ViewBag.LabourDescriptions with Labour Descriptions from your data source
+            ViewBag.LabourDescriptions = new List<string>
+            {
+                "Production Worker",
+                "Designer",
+                "Equipment Operator",
+                "Botanist"
+            };
+
             return View();
         }
 

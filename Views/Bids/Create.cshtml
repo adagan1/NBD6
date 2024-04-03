@@ -70,8 +70,15 @@
                         <td>
                             <input type="text" class="form-control" name="Labours[0].LabourHours" placeholder="Hours worked" required />
                         </td>
+                        <!-- Labour Description Dropdown -->
                         <td>
-                            <input type="text" class="form-control" name="Labours[0].LabourDescription" placeholder="Description" required />
+                            <select class="form-control" name="labours[0].LabourDescription" required>
+                                <option value="">Select Labour Description</option>
+                                @foreach (var labourDescription in ViewBag.LabourDescriptions)
+                                {
+                                    <option value="@labourDescription">@labourDescription</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="Labours[0].LabourPrice" placeholder="Price" required />
@@ -101,8 +108,15 @@
                 </thead>
                 <tbody class="material-group">
                     <tr>
+                        <!-- Material Type Dropdown -->
                         <td>
-                            <input type="text" class="form-control" name="Materials[0].MaterialType" placeholder="Type" required />
+                            <select class="form-control" name="materials[0].MaterialType" required>
+                                <option value="">Select Material Type</option>
+                                @foreach (var materialType in ViewBag.MaterialTypes)
+                                {
+                                    <option value="@materialType.Value">@materialType.Text</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="Materials[0].MaterialQuantity" placeholder="Quantity" required />
