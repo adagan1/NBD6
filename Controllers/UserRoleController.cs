@@ -18,6 +18,32 @@ namespace NBD6.Controllers
             _context = context;
             _userManager = userManager;
         }
+        // GET: Users/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+        // POST: Users/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UserVM userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = userVM.UserName };
+                var result = await _userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(userVM);
+        }
         // GET: User
         public async Task<IActionResult> Index()
         {
