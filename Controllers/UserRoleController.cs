@@ -30,7 +30,7 @@ namespace NBD6.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = userVM.UserName };
+                var user = new IdentityUser { UserName = userVM.UserName, Email = userVM.UserName };
                 var result = await _userManager.CreateAsync(user);
 
                 if (result.Succeeded)
