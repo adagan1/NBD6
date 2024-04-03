@@ -6,6 +6,10 @@
 
 <h2>User Role Assignments</h2>
 
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Create New User</a>
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -35,6 +39,10 @@
                 <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
                    role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
                     &#x270E;
+                </a>
+                <a asp-action="Disable" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger disable-role"
+                   role="button" data-bs-toggle="tooltip" title="Disable @ViewData["ControllerFriendlyName"]">
+                    &#x2718;
                 </a>
             </td>
         </tr>

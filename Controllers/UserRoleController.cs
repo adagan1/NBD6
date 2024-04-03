@@ -18,6 +18,32 @@ namespace NBD6.Controllers
             _context = context;
             _userManager = userManager;
         }
+        // GET: Users/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+        // POST: Users/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(UserVM userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = userVM.UserName, Email = userVM.UserName };
+                var result = await _userManager.CreateAsync(user, userVM.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            return View(userVM);
+        }
         // GET: User
         public async Task<IActionResult> Index()
         {
@@ -83,6 +109,27 @@ namespace NBD6.Controllers
             PopulateAssignedRoleData(user);
             return View(user);
         }
+        // Disable action method
+        public async Task<IActionResult> Disable(string id)
+        {
+            if (id == null)
+            {
+                return new BadRequestResult();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            await _userManager.RemoveFromRoleAsync(user, "Admin");
+            await _userManager.RemoveFromRoleAsync(user, "Designer");
+            await _userManager.RemoveFromRoleAsync(user, "Management");
+            await _userManager.RemoveFromRoleAsync(user, "Sales");
+
+            return RedirectToAction("Index");
+        }
 
         private void PopulateAssignedRoleData(UserVM user)
         {//Prepare checkboxes for all Roles
@@ -144,7 +191,6 @@ namespace NBD6.Controllers
                 }
             }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -81,7 +81,10 @@
                         <option value="@TempData["NewClientID"]" selected>@TempData["NewClientSummary"]</option>
                     }
                 </select>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Create a new Client</a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Management"))
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Create">Create a new Client</a>
+                }                
             </div>
         </div>
     </div>

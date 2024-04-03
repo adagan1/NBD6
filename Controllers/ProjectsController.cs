@@ -19,7 +19,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Projects
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchTerm, int? page)
         {
             var projectsQuery = _context.Projects
@@ -121,7 +121,7 @@ namespace NBD6.Controllers
         }
 
         // GET: Project/Details/5
-        [Authorize(Roles = "Admin, Management, Designer, Sales")]
+        [Authorize(Roles = "Admin, Management, Designer")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Projects == null)

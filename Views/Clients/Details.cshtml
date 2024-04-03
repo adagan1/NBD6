@@ -94,7 +94,10 @@
                     <td>@project.ProjectEndDate.ToShortDateString()</td>
                     <td>@project.ProjectSite</td>
                     <td>
-                        <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.ProjectID">Details</a>
+                        @if (!User.IsInRole("Sales"))
+                        {
+                            <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.ProjectID">Details</a>
+                        }
                     </td> <!-- Link to project details page -->
                 </tr>
             }
