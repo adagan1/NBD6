@@ -74,7 +74,7 @@
                     <dd class="col-sm-8">
                         $@Html.DisplayFor(_ => material.MaterialPrice)
                     </dd>
-                    <hr /> <!-- Add separation after each material -->
+                    <hr />
                 }
             </dl>
         </div>
@@ -110,7 +110,7 @@
                     <dd class="col-sm-8">
                         $@((decimal)labour.LabourHours * labour.LabourPrice)
                     </dd>
-                    <hr /> <!-- Add separation after each labour -->
+                    <hr /> 
                 }
             </dl>
         </div>
@@ -162,7 +162,6 @@
                 <dt class="col-sm-4">Total Left</dt>
                 <dd class="col-sm-8">
                     @{
-                        // Adjusting this calculation to show what's left from bidAmount after subtracting material and labour costs.
                         decimal totalLeft = bidAmount - (materialAmount + labourAmount);
                     }
                     $@totalLeft
@@ -173,14 +172,12 @@
 
 
     <div class="container">
-        <!-- Other code remains unchanged -->
 
         <div class="row">
             <div class="col-md-6">
                 <h4>Approval</h4>
                 <hr />
                 <form asp-action="Approval" id="approvalForm">
-                    <!-- NBD Approval Checkbox -->
                     <div class="form-group">
                         <label for="nbdApproval">NBD Approval</label>
                         <div class="form-check">
@@ -189,7 +186,6 @@
                         </div>
                     </div>
 
-                    <!-- Client Approval Checkbox -->
                     <div class="form-group" id="clientApprovalGroup" @(Model.NBDApproved ? "" : "style='display:none;'")>
                         <label for="clientApproval">Client Approval</label>
                         <div class="form-check">
@@ -198,16 +194,13 @@
                         </div>
                     </div>
 
-                    <!-- Notes and Concerns -->
                     <div class="form-group">
                         <label for="notes">Notes and Concerns:</label>
                         <textarea class="form-control" id="notes" name="notes" rows="3" style="resize: none; height: 175px;">@Model.Notes</textarea>
                     </div>
 
-                    <!-- Hidden field to track BidDeclined -->
                     <input type="hidden" id="BidDeclined" name="BidDeclined" value="false">
 
-                    <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary">Submit Approval</button>
                     <button type="button" class="btn btn-danger" onclick="setBidDeclined()">Decline Approval</button>
                 </form>
@@ -221,16 +214,12 @@
 
 <script>
         function setBidDeclined() {
-            // Uncheck the NBD Approval checkbox
             document.getElementById('nbdApproval').checked = false;
 
-            // Uncheck the Client Approval checkbox
             document.getElementById('clientApproval').checked = false;
 
-            // Set BidDeclined to true
             document.getElementById('BidDeclined').value = 'true';
 
-            // Submit the form
             document.getElementById('approvalForm').submit();
         }
 
@@ -245,7 +234,6 @@
         }
     }
 
-    // Call the function initially to set visibility based on NBD approval state
     toggleClientApprovalVisibility();
 
         // Attach an event listener to NBD approval checkbox to toggle visibility

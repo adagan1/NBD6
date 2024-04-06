@@ -30,9 +30,7 @@
         </div>
 
         <div class="col-md-6">
-            <!-- Using a spacer to align the first form-group with the left column -->
             <div style="margin-top: 60px;">
-                <!-- Adjust this margin-top value as needed -->
                 <div class="form-group">
                     <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
                     <input asp-for="BidStart" class="form-control" type="date" />
@@ -49,7 +47,6 @@
     </div>
     
     <div class="col-md-12">
-            <!-- Note the change to full width -->
             <h4>Labor</h4>
             <hr />
             <table class="table" id="labor-fields">
@@ -58,7 +55,7 @@
                         <th>Labor Hours<span class="text-danger">*</span></th>
                         <th>Description<span class="text-danger">*</span></th>
                         <th>Labor Price<span class="text-danger">*</span></th>
-                        <th>Action</th> <!-- Column for potential 'remove' buttons -->
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,7 +76,6 @@
                             </td>
                             <td>
                                 <!-- Placeholder for potential 'remove' button -->
-                                <!-- Implement remove functionality if needed -->
                             </td>
                         </tr>
                     }
@@ -89,7 +85,6 @@
         </div>
 
     <div class="col-md-12">
-        <!-- Adjusted for full width to match the rest of the form layout -->
         <h4>Materials</h4>
         <hr />
         <table class="table" id="material-fields">
@@ -100,7 +95,7 @@
                     <th>Material Description<span class="text-danger">*</span></th>
                     <th>Material Size<span class="text-danger">*</span></th>
                     <th>Material Price<span class="text-danger">*</span></th>
-                    <th>Action</th> <!-- Column for remove button -->
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -179,17 +174,12 @@
                     allowClear: true
                 });
 
-                // Correct the selector to match the generated ID for the staff dropdown
                 $('[name="StaffIDList"]').select2({
                     placeholder: "Select Staff",
                     allowClear: true
                 });
             });
-        </script>
-    }
-}
 
-<script>
     document.getElementById('addStaffBtn').addEventListener('click', function () {
         var staffContainer = document.getElementById('staffContainer');
         var staffFields = document.querySelector('.staffFields');
@@ -201,11 +191,11 @@
         element.parentNode.remove();
     }
 
-    var materialCounter = 1; // Initialize counters
+    var materialCounter = 1;
     var labourCounter = 1;
     var staffCounter = 1;
 
-    var materialCounter = 0; // Initialize the counter
+    var materialCounter = 0;
 
     function addMaterial() {
         var materialTableBody = document.querySelector("#material-fields tbody");
@@ -243,7 +233,7 @@
         row.parentNode.removeChild(row);
     }
 
-    var labourCounter = 0; // Initialize the counter
+    var labourCounter = 0;
 
     function addLabour() {
         var labourTableBody = document.querySelector("#labor-fields tbody");
@@ -273,7 +263,8 @@
     }
 
     function removeTableRow(button) {
-        // Find the row where the button is located and remove it
         button.closest("tr").remove();
     }
 </script>
+    }
+}

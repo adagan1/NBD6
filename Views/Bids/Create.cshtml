@@ -38,7 +38,6 @@
         <div class="col-md-6">
             <h4 style="visibility: hidden;">Bid</h4>
             <div class="form-group" style="margin-top: 32px;">
-                <!-- Adjust the margin-top to align with Bid Name field -->
                 <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
                 <input asp-for="BidStart" class="form-control" type="date" required />
                 <span asp-validation-for="BidStart" class="text-danger"></span>
@@ -129,7 +128,6 @@
                             <input type="text" class="form-control material-price" name="Materials[0].MaterialPrice" placeholder="Price" required readonly />
                         </td>
                     </tr>
-                    <!-- Additional material rows can be dynamically added here -->
                 </tbody>
             </table>
             <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
@@ -157,8 +155,6 @@
             </div>
         </div>
 
-
-        <!-- Autofill button -->
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-success" style="margin-top: 10px;" />
             <button type="button" class="btn btn-info" style="margin-top: 10px;" onclick="autofill()">Autofill Form</button>
@@ -188,31 +184,23 @@
                     allowClear: true
                 });
 
-                // Correct the selector to match the generated ID for the staff dropdown
                 $('[name="StaffIDList"]').select2({
                     placeholder: "Select Staff",
                     allowClear: true
                 });
             });
-        </script>
-    }
-}
-
-
-<script>
+        
     function autofill() {
         // Array of random bid names
         var bidNames = ["Garden Renovation", "Landscaping Project", "Park Enhancement", "Outdoor Design", "Green Space Development"];
 
-        // Select a random bid name from the array
         var randomBidName = bidNames[Math.floor(Math.random() * bidNames.length)];
 
-        // Autofill bid name field
         document.querySelector('input[name="BidName"]').value = randomBidName;
 
-        // Generate random dates for Bid Start and Bid End
-        var startDate = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000)); // Random date within the last 10000 days
-        var endDate = new Date(startDate.getTime() + Math.floor(Math.random() * 1000000000)); // Random date within 1000 days of the start date
+        // Generate random dates
+        var startDate = new Date(+(new Date()) - Math.floor(Math.random() * 10000000000));
+        var endDate = new Date(startDate.getTime() + Math.floor(Math.random() * 1000000000));
         document.querySelector('input[name="BidStart"]').valueAsDate = startDate;
         document.querySelector('input[name="BidEnd"]').valueAsDate = endDate;
 
@@ -220,17 +208,14 @@
         var dropdowns = document.querySelectorAll('select');
         dropdowns.forEach(function (dropdown) {
             var options = dropdown.querySelectorAll('option');
-            if (options.length > 1) { // Check if options exist
-                // Randomly select an option (excluding the placeholder, typically at index 0)
+            if (options.length > 1) {
                 var randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
                 dropdown.value = options[randomIndex].value;
 
-                // Trigger change event to update dependent fields, if any
                 var event = new Event('change');
                 dropdown.dispatchEvent(event);
 
                 if (dropdown.classList.contains('labour-description') || dropdown.classList.contains('material-description')) {
-                    // For labour and material descriptions, set price from the selected option
                     var selectedOption = options[randomIndex];
                     var priceInput = dropdown.closest('tr').querySelector('.labour-price, .material-price');
                     if (selectedOption && priceInput && selectedOption.dataset.price) {
@@ -243,21 +228,20 @@
         // Autofill other fields like material and labour quantities, descriptions, sizes
         document.querySelectorAll('input[type="text"]').forEach(function (input) {
             if (input.name.includes("MaterialQuantity") || input.name.includes("LabourHours")) {
-                input.value = Math.floor(Math.random() * 100) + 1; // Random quantity or hours
+                input.value = Math.floor(Math.random() * 100) + 1;
             } else if (input.name.includes("MaterialSize")) {
-                input.value = (Math.floor(Math.random() * 100) + 1) + " cm"; // Random size with unit
+                input.value = (Math.floor(Math.random() * 100) + 1) + " cm";
             }
         });
 
         document.getElementById('autofill-message').innerText = "Form autofilled successfully with random values.";
     }
 
-    var materialCounter = 1; // Initialize counters
+    var materialCounter = 1;
     var labourCounter = 1;
     var staffCounter = 1;
 
     function removeTableRow(button) {
-        // Find the row where the button is located and remove it
         button.closest("tr").remove();
     }
 
@@ -276,9 +260,8 @@
                         `;
 
         staffContainer.appendChild(newStaffFields);
-        staffCounter++; // Increment the staff counter
+        staffCounter++;
 
-        // Initialize Select2 for the newly added staff dropdown
         var newStaffSelect = newStaffFields.querySelector('select');
         $(newStaffSelect).select2({
             placeholder: "Select Staff",
@@ -296,7 +279,6 @@
     }
 
     function removeElement(button) {
-        // Find the parent div with class 'staffFields' and remove it
         button.closest('.staffFields').remove();
     }
 
@@ -307,7 +289,6 @@
         });
     });
 
-    // Event listener for the addStaffBtn button
     document.getElementById('addStaffBtn').addEventListener('click', addStaff);
 
 
@@ -440,3 +421,5 @@
                     `;
     }
 </script>
+    }
+}

@@ -77,7 +77,6 @@
     </div>
 }
 
-<!-- Modal for custom date range -->
 <div class="modal fade" id="customDateModal" tabindex="-1" aria-labelledby="customDateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -173,8 +172,8 @@
         $(document).ready(function () {
             // Show/hide custom date range inputs
             $('#customDateModal').on('shown.bs.modal', function () {
-                $('#startDate').val(''); // Clear the start date input
-                $('#endDate').val(''); // Clear the end date input
+                $('#startDate').val('');
+                $('#endDate').val('');
             });
         });
     </script>

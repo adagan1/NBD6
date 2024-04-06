@@ -103,7 +103,6 @@
 
     <script>
         $(document).ready(function () {
-            // Make sure to add the 'select2-province' class to your province select element for this to work
             $('#Address_Province').select2({
                 placeholder: "Select a province or territory",
                 allowClear: true
@@ -142,11 +141,12 @@
 
     <script>
         $(document).ready(function () {
-            // Existing select2 initialization
+
             $('#Address_Province').select2({
                 placeholder: "Select a province or territory",
                 allowClear: true
             });
+
             // Autofill functionality
             function autofillData() {
                 // Arrays of possible values for company names, first names, middle names, and last names

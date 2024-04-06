@@ -146,7 +146,6 @@
         });
 
         $(document).ready(function () {
-            // Initialize select2 for dropdowns
             $("#Address_Province").select2();
             $("#ClientSummary").select2();
 
@@ -188,7 +187,6 @@
                     $('#Address_Country').val($('#Address_Country option').eq(1).val()).trigger('change');
                 }
 
-                // Assuming your provinces are dynamically populated and you have a reasonable number of options:
                 if ($('#Address_Province option').length > 1) {
                     const randomProvinceIndex = Math.floor(Math.random() * ($('#Address_Province option').length - 1)) + 1;
                     $('#Address_Province').val($('#Address_Province option').eq(randomProvinceIndex).val()).trigger('change');
