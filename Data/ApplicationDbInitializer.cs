@@ -28,6 +28,7 @@ namespace NBD6.Data
                         roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
                     }
                 }
+
                 //Create Users
                 var userManager = applicationBuilder.ApplicationServices.CreateScope()
                     .ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
@@ -100,7 +101,6 @@ namespace NBD6.Data
                     };
 
                     IdentityResult result = userManager.CreateAsync(user, "user").Result;
-                    //Not in any role
                 }
             }
             catch (Exception ex)

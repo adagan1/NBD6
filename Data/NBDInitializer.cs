@@ -113,7 +113,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 03, 22),
                             ProjectSite = "Brock University",
                             BidAmount = "2000",
-                            ClientID = 1, // Assuming ClientID associated with this Project
+                            ClientID = 1,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -129,7 +129,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 06, 30),
                             ProjectSite = "University of Toronto",
                             BidAmount = "2500",
-                            ClientID = 2, // Assuming ClientID associated with this Project
+                            ClientID = 2,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -145,7 +145,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 09, 20),
                             ProjectSite = "McMaster University",
                             BidAmount = "3000",
-                            ClientID = 3, // Assuming ClientID associated with this Project
+                            ClientID = 3,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -160,7 +160,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2023, 12, 15),
                             ProjectSite = "University of British Columbia",
                             BidAmount = "2800",
-                            ClientID = 4, // Assuming ClientID associated with this Project
+                            ClientID = 4,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -176,7 +176,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2024, 03, 25),
                             ProjectSite = "Simon Fraser University",
                             BidAmount = "3200",
-                            ClientID = 5, // Assuming ClientID associated with this Project
+                            ClientID = 5,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -192,7 +192,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2024, 06, 10),
                             ProjectSite = "University of Alberta",
                             BidAmount = "2700",
-                            ClientID = 1, // Assuming ClientID associated with this Project
+                            ClientID = 1,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -208,7 +208,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2024, 09, 30),
                             ProjectSite = "University of Calgary",
                             BidAmount = "3100",
-                            ClientID = 2, // Assuming ClientID associated with this Project
+                            ClientID = 2,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -224,7 +224,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2024, 12, 20),
                             ProjectSite = "University of Waterloo",
                             BidAmount = "2900",
-                            ClientID = 3, // Assuming ClientID associated with this Project
+                            ClientID = 3,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -240,7 +240,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2025, 03, 15),
                             ProjectSite = "Queen's University",
                             BidAmount = "3300",
-                            ClientID = 4, // Assuming ClientID associated with this Project
+                            ClientID = 4,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -256,7 +256,7 @@ namespace NBD6.Data
                             ProjectEndDate = new DateTime(2025, 06, 10),
                             ProjectSite = "University of Ottawa",
                             BidAmount = "2600",
-                            ClientID = 5, // Assuming ClientID associated with this Project
+                            ClientID = 5,
                             Address = new Address
                             {
                                 Country = "Canada",
@@ -356,7 +356,7 @@ namespace NBD6.Data
                             BidName = "Glass Material Bid",
                             BidStart = new DateTime(2024, 01, 01),
                             BidEnd = new DateTime(2024, 01, 15),
-                            ProjectID = 1, // Assuming ProjectID associated with this Bid
+                            ProjectID = 1,
 
                             Materials = new List<Material>
                             {
@@ -384,7 +384,7 @@ namespace NBD6.Data
                             BidName = "Steel Material Bid",
                             BidStart = new DateTime(2024, 02, 01),
                             BidEnd = new DateTime(2024, 02, 15),
-                            ProjectID = 2, // Assuming ProjectID associated with this Bid
+                            ProjectID = 2,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -411,7 +411,7 @@ namespace NBD6.Data
                             BidName = "Concrete Material Bid",
                             BidStart = new DateTime(2024, 03, 01),
                             BidEnd = new DateTime(2024, 03, 15),
-                            ProjectID = 3, // Assuming ProjectID associated with this Bid
+                            ProjectID = 3,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -437,7 +437,7 @@ namespace NBD6.Data
                             BidName = "Electrical Work Bid",
                             BidStart = new DateTime(2024, 04, 01),
                             BidEnd = new DateTime(2024, 04, 15),
-                            ProjectID = 4, // Assuming ProjectID associated with this Bid
+                            ProjectID = 4,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -464,7 +464,7 @@ namespace NBD6.Data
                             BidName = "Plumbing Material Bid",
                             BidStart = new DateTime(2024, 05, 01),
                             BidEnd = new DateTime(2024, 05, 15),
-                            ProjectID = 5, // Assuming ProjectID associated with this Bid
+                            ProjectID = 5,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -491,7 +491,7 @@ namespace NBD6.Data
                             BidName = "Roofing Material Bid",
                             BidStart = new DateTime(2024, 06, 01),
                             BidEnd = new DateTime(2024, 06, 15),
-                            ProjectID = 6, // Assuming ProjectID associated with this Bid
+                            ProjectID = 6,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -518,7 +518,7 @@ namespace NBD6.Data
                             BidName = "Painting Bid",
                             BidStart = new DateTime(2024, 05, 01),
                             BidEnd = new DateTime(2024, 05, 15),
-                            ProjectID = 5, // Assuming ProjectID associated with this Bid
+                            ProjectID = 5,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -545,7 +545,7 @@ namespace NBD6.Data
                             BidName = "Flooring Bid",
                             BidStart = new DateTime(2024, 06, 01),
                             BidEnd = new DateTime(2024, 06, 15),
-                            ProjectID = 6, // Assuming ProjectID associated with this Bid
+                            ProjectID = 6,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -572,7 +572,7 @@ namespace NBD6.Data
                             BidName = "Landscaping Bid",
                             BidStart = new DateTime(2024, 08, 01),
                             BidEnd = new DateTime(2024, 08, 15),
-                            ProjectID = 8, // Assuming ProjectID associated with this Bid
+                            ProjectID = 8,
                             Materials = new List<Material>
                             {
                                 new Material
@@ -607,7 +607,7 @@ namespace NBD6.Data
                             BidName = "HVAC System Bid",
                             BidStart = new DateTime(2024, 07, 01),
                             BidEnd = new DateTime(2024, 07, 15),
-                            ProjectID = 7, // Assuming ProjectID associated with this Bid
+                            ProjectID = 7,
                             Materials = new List<Material>
                             {
                                 new Material
