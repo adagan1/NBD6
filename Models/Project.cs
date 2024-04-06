@@ -44,20 +44,20 @@ namespace NBD6.Models
             }
         }
 
-        //Foreign Keys
+        //FK
         [Display(Name = "Client ID")]
         [ForeignKey("Client")]
         [Required(ErrorMessage = "You must select a client.")]
-        //[Range(1, int.MaxValue, ErrorMessage = "Client ID must be a positive integer.")]
+
         public int ClientID { get; set; }
-        public Client Client { get; set; } // Navigation property to the Client class
+        public Client Client { get; set; }
 
         [Display(Name = "Address ID")]
         [ForeignKey("Address")]
         [Required(ErrorMessage = "You must select an address.")]
-        //[Range(1, int.MaxValue, ErrorMessage = "Address ID must be a positive integer.")]
+
         public int AddressID { get; set; }
-        public Address Address { get; set; } // Navigation property to the Address class
+        public Address Address { get; set; }
 
         public virtual ICollection<Bid> Bids { get; set; }
 

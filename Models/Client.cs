@@ -46,11 +46,9 @@ namespace NBD6.Models
         [StringLength(12, MinimumLength = 12, ErrorMessage = "Phone number must be 12 characters long in the format xxx-xxx-xxxx.")]
         public string ClientPhone { get; set; }
 
-        // Read-only property to get concatenated client name
         [Display(Name = "Client Name")]
         public string ClientName => $"{FirstName} {MiddleName} {LastName}";
 
-        // Read-only property to get formatted phone number
         public string FormattedPhone
         {
             get
@@ -63,7 +61,7 @@ namespace NBD6.Models
                 if (digits.Length == 10)
                     return $"{digits.Substring(0, 3)}-{digits.Substring(3, 3)}-{digits.Substring(6)}";
                 else
-                    return ClientPhone; // Return as is if not exactly 10 digits
+                    return ClientPhone;
             }
         }
         public string ClientSummary

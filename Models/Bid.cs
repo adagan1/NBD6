@@ -26,7 +26,6 @@ namespace NBD6.Models
         [Required(ErrorMessage = "You must enter an end date.")]
         public DateTime BidEnd { get; set; }
 
-        // Scrapped together lmao
         public string Notes { get; set; }
         public bool ClientApproved { get; set; }
         public bool NBDApproved { get; set; }

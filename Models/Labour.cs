@@ -25,7 +25,7 @@ namespace NBD6.Models
 
         public decimal ExtendedLabourPrice => (decimal)LabourHours * LabourPrice;
 
-        //Foreign Key
+        //FK
         public int? BidID { get; set; }
         public Bid? Bid { get; set; }
 

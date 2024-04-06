@@ -5,7 +5,7 @@ namespace NBD6.Models
 
     public class StaffBid
     {
-        // Foreign keys
+        //FK
         public int StaffID { get; set; }
         public Staff Staff { get; set; }
 

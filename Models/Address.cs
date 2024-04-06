@@ -6,10 +6,10 @@ namespace NBD6.Models
     public class Address
     {
         [Key]
-        public int AddressID { get; set; }  // Assuming AddressID is an integer primary key
+        public int AddressID { get; set; }
 
         [Required]
-        [MaxLength(100)] // Assuming a max length of 100 for string fields
+        [MaxLength(100)]
         public string Country { get; set; }
 
         [Display(Name = "Province")]

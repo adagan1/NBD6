@@ -10,7 +10,6 @@
 
         public virtual ICollection<StaffBid> StaffBids { get; set; }
 
-        // Read-only property to get formatted phone number
         public string FormattedPhone
         {
             get
@@ -23,7 +22,7 @@
                 if (digits.Length == 10)
                     return $"{digits.Substring(0, 3)}-{digits.Substring(3, 3)}-{digits.Substring(6)}";
                 else
-                    return StaffPhone; // Return as is if not exactly 10 digits
+                    return StaffPhone;
             }
         }
 
