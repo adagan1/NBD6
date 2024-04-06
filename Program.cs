@@ -88,7 +88,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-//To seed data. Can comment this out most of the time.
 NBDInitializer.Seed(app);
 ApplicationDbInitializer.Seed(app);
 
