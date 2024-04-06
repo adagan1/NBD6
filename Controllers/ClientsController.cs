@@ -60,7 +60,7 @@ namespace NBD6.Controllers
                 );
             }
 
-            // Apply sorting based on sortOrder
+            // Apply sorting
             switch (sortOrder)
             {
                 case "companyname_asc":
@@ -151,7 +151,6 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View();
@@ -170,14 +169,12 @@ namespace NBD6.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // Add the address to the context
                     _context.Addresses.Add(client.Address);
                     await _context.SaveChangesAsync();
 
                     // Set the AddressID for the client
                     client.AddressID = client.Address.AddressID;
 
-                    // Add the client to the context
                     _context.Clients.Add(client);
                     await _context.SaveChangesAsync();
 
@@ -185,10 +182,10 @@ namespace NBD6.Controllers
                     TempData["NewClientSummary"] = client.ClientSummary;
                     TempData["AlertMessageClient"] = "Client Successfully Added";
 
-                    // Check if TempData contains the ReferrerUrl
+                    // Check if TempData contains client temp
                     if (TempData.ContainsKey("ClientUrl"))
                     {
-                        // Redirect back to the ReferrerUrl
+                        // Redirect back a page
                         return Redirect(TempData["ClientUrl"].ToString());
                     }
                     else
@@ -199,7 +196,6 @@ namespace NBD6.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it appropriately
                 ModelState.AddModelError("", "Error occurred while creating the client.");
                 return View(client);
             }
@@ -224,10 +220,8 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
-            // If ModelState is not valid, return the view with validation errors
             return View(client);
         }
 
@@ -270,7 +264,6 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View(client);
@@ -318,7 +311,6 @@ namespace NBD6.Controllers
                     existingClient.Address.Street = address.Street;
 
                     TempData["AlertMessageClientEdit"] = "Client Successfully Edited";
-                    // Save changes to the database
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -355,48 +347,9 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View(client);
-        }
-
-        // GET: Clients/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Clients == null)
-            {
-                return NotFound();
-            }
-
-            var client = await _context.Clients
-                .Include(c => c.Address)
-                .FirstOrDefaultAsync(m => m.ClientID == id);
-            if (client == null)
-            {
-                return NotFound();
-            }
-
-            return View(client);
-        }
-
-        // POST: Clients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Clients == null)
-            {
-                return Problem("Entity set 'NBDContext.Clients'  is null.");
-            }
-            var client = await _context.Clients.FindAsync(id);
-            if (client != null)
-            {
-                _context.Clients.Remove(client);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(int id)

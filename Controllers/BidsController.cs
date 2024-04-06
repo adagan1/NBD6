@@ -88,7 +88,7 @@ namespace NBD6.Controllers
                 bidsQuery = bidsQuery.Where(b => b.BidStart >= startDate && b.BidEnd <= endDate);
             }
 
-            // Retrieve the filtered bids from the database asynchronously
+            // Retrieve the filtered bids
             var filteredBids = await bidsQuery.ToListAsync();
 
             decimal totalValue = 0;
@@ -205,7 +205,7 @@ namespace NBD6.Controllers
                 .Include(b => b.Materials)
                 .Include(b => b.Labours)
                 .Include(b => b.StaffBids)
-                    .ThenInclude(sb => sb.Staff) // Include Staff entity
+                    .ThenInclude(sb => sb.Staff)
                 .FirstOrDefaultAsync(m => m.BidID == id);
 
             if (bid == null)
@@ -237,10 +237,9 @@ namespace NBD6.Controllers
         public IActionResult Create()
         {
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName");
-            //Populate the staff dropdown
             ViewData["StaffID"] = new MultiSelectList(_context.Staffs, "StaffID", "StaffSummary");
 
-            // Populate ViewBag.MaterialTypes with Material Types from your data source
+            // Populate ViewBag.MaterialTypes with Material Types
             ViewBag.MaterialTypes = new List<SelectListItem>
             {
                 new SelectListItem { Value = "Plants", Text = "Plants" },
@@ -250,7 +249,7 @@ namespace NBD6.Controllers
                 
             };
 
-            // Populate ViewBag.LabourDescriptions with Labour Descriptions from your data source
+            // Populate ViewBag.LabourDescriptions with Labour Descriptions
             ViewBag.LabourDescriptions = new List<string>
             {
                 "Production Worker",
@@ -272,9 +271,6 @@ namespace NBD6.Controllers
                 _context.Add(bid);
                 await _context.SaveChangesAsync();
 
-                // Now bid has an ID assigned by the database
-
-                // Associate staff members with the bid
                 if (StaffIDList != null)
                 {
                     foreach (var staffID in StaffIDList)
@@ -293,6 +289,7 @@ namespace NBD6.Controllers
                     }
                 }
                 Console.WriteLine(materials);
+
                 // Associate labours with the bid
                 if (labours != null && labours.Any())
                 {
@@ -383,7 +380,6 @@ namespace NBD6.Controllers
                         _context.Update(existingLabour);
                     }
 
-                    // Update bid properties
                     _context.Update(bid);
 
                     TempData["AlertMessageBidEdit"] = "Bid Successfully Edited";
@@ -404,45 +400,7 @@ namespace NBD6.Controllers
             }
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
             return View(bid);
-        }
-
-        // GET: Bids/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Bids == null)
-            {
-                return NotFound();
-            }
-
-            var bid = await _context.Bids
-                .Include(b => b.Project)
-                .FirstOrDefaultAsync(m => m.BidID == id);
-            if (bid == null)
-            {
-                return NotFound();
-            }
-
-            return View(bid);
-        }
-
-        // POST: Bids/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Bids == null)
-            {
-                return Problem("Entity set 'NBDContext.Bids'  is null.");
-            }
-            var bid = await _context.Bids.FindAsync(id);
-            if (bid != null)
-            {
-                _context.Bids.Remove(bid);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        }        
 
         private bool BidExists(int id)
         {

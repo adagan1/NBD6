@@ -18,11 +18,13 @@ namespace NBD6.Controllers
             _context = context;
             _userManager = userManager;
         }
+
         // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
+
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -44,6 +46,7 @@ namespace NBD6.Controllers
             }
             return View(userVM);
         }
+
         // GET: User
         public async Task<IActionResult> Index()
         {
@@ -58,10 +61,10 @@ namespace NBD6.Controllers
             {
                 var _user = await _userManager.FindByIdAsync(u.ID);
                 u.UserRoles = (List<string>)await _userManager.GetRolesAsync(_user);
-                //Note: we needed the explicit cast above because GetRolesAsync() returns an IList<string>
             };
             return View(users);
         }
+
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -69,7 +72,7 @@ namespace NBD6.Controllers
             {
                 return new BadRequestResult();
             }
-            var _user = await _userManager.FindByIdAsync(id);//IdentityRole
+            var _user = await _userManager.FindByIdAsync(id);
             if (_user == null)
             {
                 return NotFound();
@@ -89,7 +92,7 @@ namespace NBD6.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string Id, string[] selectedRoles)
         {
-            var _user = await _userManager.FindByIdAsync(Id);//IdentityRole
+            var _user = await _userManager.FindByIdAsync(Id);
             UserVM user = new UserVM
             {
                 ID = _user.Id,
@@ -109,7 +112,7 @@ namespace NBD6.Controllers
             PopulateAssignedRoleData(user);
             return View(user);
         }
-        // Disable action method
+
         public async Task<IActionResult> Disable(string id)
         {
             if (id == null)
@@ -132,7 +135,7 @@ namespace NBD6.Controllers
         }
 
         private void PopulateAssignedRoleData(UserVM user)
-        {//Prepare checkboxes for all Roles
+        {
             var allRoles = _context.Roles;
             var currentRoles = user.UserRoles;
             var viewModel = new List<RoleVM>();
@@ -150,12 +153,11 @@ namespace NBD6.Controllers
 
         private async Task UpdateUserRoles(string[] selectedRoles, UserVM userToUpdate)
         {
-            var UserRoles = userToUpdate.UserRoles;//Current roles use is in
-            var _user = await _userManager.FindByIdAsync(userToUpdate.ID);//IdentityUser
+            var UserRoles = userToUpdate.UserRoles;
+            var _user = await _userManager.FindByIdAsync(userToUpdate.ID);
 
             if (selectedRoles == null)
-            {
-                //No roles selected so just remove any currently assigned
+            {               
                 foreach (var r in UserRoles)
                 {
                     await _userManager.RemoveFromRoleAsync(_user, r);
@@ -163,13 +165,6 @@ namespace NBD6.Controllers
             }
             else
             {
-                //At least one role checked so loop through all the roles
-                //and add or remove as required
-
-                //We need to do this next line because foreach loops don't always work well
-                //for data returned by EF when working async.  Pulling it into an IList<>
-                //first means we can safely loop over the colleciton making async calls and avoid
-                //the error 'New transaction is not allowed because there are other threads running in the session'
                 IList<IdentityRole> allRoles = _context.Roles.ToList<IdentityRole>();
 
                 foreach (var r in allRoles)

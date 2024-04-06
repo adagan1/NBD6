@@ -62,9 +62,7 @@ namespace NBD6.Controllers
                     || p.Address.Postal.ToLower().Contains(lowerCaseSearchTerm));
             }
 
-            // Apply dynamic sorting
-            // Note: Sorting for related entities should be handled differently if needed
-
+            // Apply sorting
             switch (sortOrder)
             {
                 case "name_asc":
@@ -114,7 +112,7 @@ namespace NBD6.Controllers
                     break;
             }
 
-            int pageSize = 10; // Set your page size
+            int pageSize = 10;
             var pagedData = await PaginatedList<Project>.CreateAsync(projectsQuery.AsNoTracking(), page ?? 1, pageSize);
 
             return View(pagedData);
@@ -171,7 +169,6 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View();
@@ -219,10 +216,10 @@ namespace NBD6.Controllers
                 TempData["NewProjectSummary"] = project.ProjectSummary;
                 TempData["AlertMessageProject"] = "Project Successfully Added";
 
-                // Check if TempData contains the ReferrerUrl
+                // Check if TempData contains the project temp data
                 if (TempData.ContainsKey("ProjectUrl"))
                 {
-                    // Redirect back to the ReferrerUrl
+                    // Redirect back a page
                     return Redirect(TempData["ProjectUrl"].ToString());
                 }
                 else
@@ -254,7 +251,6 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View(project);
@@ -300,9 +296,8 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
-            return View(project); // Pass the project to the view
+            return View(project);
         }
 
         // POST: Projects/Edit/5
@@ -351,7 +346,6 @@ namespace NBD6.Controllers
                     existingProject.BidAmount = project.BidAmount;
 
                     // Update client properties
-                    //existingProject.Client = project.Client;
                     existingProject.Client = client;
 
 
@@ -362,7 +356,7 @@ namespace NBD6.Controllers
                     existingProject.Address.Street = address.Street;
 
                     TempData["AlertMessageProjectEdit"] = "Project Successfully Edited";
-                    // Save changes to the database
+
                     _context.Update(existingProject);
                     await _context.SaveChangesAsync();
                 }
@@ -380,7 +374,7 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // If model state is not valid, prepare the necessary data and return to the view
+            // If model state is not valid
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientSummary", project.ClientID);
 
             ViewBag.Country = new SelectList(new[] { "Canada" });
@@ -403,49 +397,9 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
 
             return View(project);
-        }
-
-        // GET: Projects/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Projects == null)
-            {
-                return NotFound();
-            }
-
-            var project = await _context.Projects
-                .Include(p => p.Address)
-                .Include(p => p.Client)
-                .FirstOrDefaultAsync(m => m.ProjectID == id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-
-            return View(project);
-        }
-
-        // POST: Projects/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Projects == null)
-            {
-                return Problem("Entity set 'NBDContext.Projects'  is null.");
-            }
-            var project = await _context.Projects.FindAsync(id);
-            if (project != null)
-            {
-                _context.Projects.Remove(project);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectExists(int id)

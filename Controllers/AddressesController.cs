@@ -165,23 +165,19 @@ namespace NBD6.Controllers
                 "Yukon"
             };
 
-            // Pass the list to the view using ViewBag or ViewData
+            // Pass the list to the view using ViewBag
             ViewBag.Provinces = new SelectList(provinces, "Ontario");
-
-          
-
 
             if (ModelState.IsValid)
             {
                 _context.Add(address);
                 await _context.SaveChangesAsync();
 
-                TempData["NewAddressID"] = address.AddressID; // Add address ID to TempData
+                TempData["NewAddressID"] = address.AddressID;
 
-                // Check if TempData contains the ReferrerUrl
+                // Check if TempData contains the Address temp data
                 if (TempData.ContainsKey("AddressUrl"))
                 {
-                    // Redirect back to the ReferrerUrl
                     return Redirect(TempData["AddressUrl"].ToString());
                 }
                 else
@@ -244,43 +240,6 @@ namespace NBD6.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(address);
-        }
-
-        // GET: Addresses/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Addresses == null)
-            {
-                return NotFound();
-            }
-
-            var address = await _context.Addresses
-                .FirstOrDefaultAsync(m => m.AddressID == id);
-            if (address == null)
-            {
-                return NotFound();
-            }
-
-            return View(address);
-        }
-
-        // POST: Addresses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Addresses == null)
-            {
-                return Problem("Entity set 'NBDContext.Addresses'  is null.");
-            }
-            var address = await _context.Addresses.FindAsync(id);
-            if (address != null)
-            {
-                _context.Addresses.Remove(address);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool AddressExists(int id)
