@@ -71,7 +71,7 @@
                         </td>
                         <td>
                             <select class="form-control labour-description" name="Labours[0].LabourDescription" required onchange="setLabourPrice(this)">
-                                <option value=""disabled>Select Labour</option>
+                                <option value="">Select Labour</option>
                                 <option data-price="30" value="Production Worker">Production Worker</option>
                                 <option data-price="65" value="Designer">Designer</option>
                                 <option data-price="55" value="Equipment Operator">Equipment Operator</option>
@@ -107,7 +107,7 @@
                     <tr>
                         <td>
                             <select class="form-control material-type" name="Materials[0].MaterialType" onchange="updateMaterialDescriptionOptions(this)" required>
-                                <option value=""disabled>Select Material Type</option>
+                                <option value="">Select Material Type</option>
                                 <option value="Plants">Plants</option>
                                 <option value="Pottery">Pottery</option>
                                 <option value="Materials">Materials</option>
@@ -420,6 +420,54 @@
                         </tr>
                     `;
     }
+
+            function setMaterialPrice(materialDescriptionSelect) {
+                var priceInput = materialDescriptionSelect.closest('tr').querySelector('.material-price');
+                var materialSizeInput = materialDescriptionSelect.closest('tr').querySelector('input[name$=".MaterialSize"]');
+                var selectedOption = materialDescriptionSelect.options[materialDescriptionSelect.selectedIndex];
+                var materialType = materialDescriptionSelect.closest('tr').querySelector('.material-type').value;
+                var options = [];
+
+                switch (materialType) {
+                    case "Plants":
+                        options = [
+                            { text: "Rose", value: "Rose", price: "5", size: "5 gal" },
+                            { text: "Tulip", value: "Tulip", price: "3", size: "3 gal" },
+                            { text: "Lavender", value: "Lavender", price: "4", size: "4 gal" },
+                            { text: "Orchid", value: "Orchid", price: "7", size: "6 gal" },
+                            { text: "Sunflower", value: "Sunflower", price: "2", size: "2 gal" }
+                        ];
+                        break;
+                    case "Pottery":
+                        options = [
+                            { text: "Granite Fountain", value: "Granite Fountain", price: "200", size: "36 in, 15 gal" },
+                            { text: "Granite Pots", value: "Granite Pots", price: "50", size: "18 in, 10 gal" },
+                            { text: "Clay Vase", value: "Clay Vase", price: "20", size: "12 in, 3 gal" },
+                            { text: "Porcelain Bowl", value: "Porcelain Bowl", price: "30", size: "12 in, 4 gal" },
+                            { text: "Terracotta Planter", value: "Terracotta Planter", price: "25", size: "6 gal" }
+                        ];
+                        break;
+                    case "Materials":
+                        options = [
+                            { text: "Decorative Cedar Bark", value: "Decorative Cedar Bark", price: "15", size: "22 yd" },
+                            { text: "Top Soil", value: "Top Soil", price: "10", size: "9 yd" },
+                            { text: "Mulch", value: "Mulch", price: "8", size: "12 yd" },
+                            { text: "Peat Moss", value: "Peat Moss", price: "12", size: "34 yd" },
+                            { text: "River Stones", value: "River Stones", price: "20", size: "26 yd" }
+                        ];
+                        break;
+                }
+
+                if (selectedOption && selectedOption.dataset.price) {
+                    priceInput.value = selectedOption.dataset.price;
+                    var size = options.find(opt => opt.value === selectedOption.value).size;
+                    materialSizeInput.value = size;
+                } else {
+                    priceInput.value = '';
+                    materialSizeInput.value = '';
+                }
+            }
+
 </script>
     }
 }

@@ -73,6 +73,9 @@
 </div>
 
 <h4>Projects</h4>
+<div>
+    <a asp-controller="Projects" asp-action="Create" asp-route-clientId="@Model.ClientID">Add Project</a>
+</div>
 @if (Model.Projects != null && Model.Projects.Any())
 {
     <table class="table">

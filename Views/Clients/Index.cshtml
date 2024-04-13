@@ -36,6 +36,7 @@
         </div>
         <div class="col-md-6">
             <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-secondary" onclick="clearSearch()">Clear</button>
         </div>
     </div>
 }
@@ -99,6 +100,10 @@
 @section Scripts {
     <script>
         sessionStorage.clear();
+
+        function clearSearch() {
+            document.querySelector('input[name="searchTerm"]').value = ''; // Clear the search input
+        }
     </script>
 }
 

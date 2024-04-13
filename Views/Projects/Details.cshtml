@@ -112,6 +112,7 @@
     <div class="container">
         <div class="float-md-right">
             <h4>Bids</h4>
+            <a asp-controller="Bids" asp-action="Create" asp-route-projectId="@Model.ProjectID" class="btn btn-link">Create New Bid</a>
             <hr />
             <table class="table">
                 <thead>
@@ -121,6 +122,7 @@
                         <th>Bid End Date</th>
                         <th>Client Approval</th>
                         <th>NBD Approval</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,6 +140,14 @@
                 </tbody>
             </table>
         </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <h4>Bids</h4>
+        <a asp-controller="Bids" asp-action="Create" asp-route-projectId="@Model.ProjectID" class="btn btn-link">Create New Bid</a>
+        <p>No bids found for this project.</p>
     </div>
 }
 

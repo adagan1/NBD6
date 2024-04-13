@@ -35,6 +35,7 @@
         </div>
         <div class="col-md-6">
             <input type="submit" value="Search" class="btn btn-primary w-15" />
+            <button type="submit" class="btn btn-secondary" onclick="clearSearch()">Clear</button>
         </div>
     </div>
 }
@@ -111,8 +112,13 @@
 @section Scripts {
     <script>
         sessionStorage.clear();
+
+        function clearSearch() {
+            document.querySelector('input[name="searchTerm"]').value = ''; // Clear the search input
+        }
     </script>
 }
+
 <style>
     /* Style for odd rows */
     .table-striped tbody tr:nth-child(odd) {

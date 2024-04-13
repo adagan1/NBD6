@@ -73,9 +73,11 @@
             </ul>
         </div>
 
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Search</button>
+        <button type="button" class="btn btn-secondary" onclick="clearSearch()">Clear</button>
     </div>
 }
+
 
 <div class="modal fade" id="customDateModal" tabindex="-1" aria-labelledby="customDateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -176,8 +178,15 @@
                 $('#endDate').val('');
             });
         });
+
+        function clearSearch() {
+            $('input[name="searchTerm"]').val(''); // Clear the search input
+            $('button[name="approvalFilter"][value="All"]').click(); // Reset approval filter to 'All'
+            $('button[name="timeframeFilter"][value="AllTime"]').click(); // Reset timeframe filter to 'All Time'
+        }
     </script>
 }
+
 
 <style>
     .disabled-link {
