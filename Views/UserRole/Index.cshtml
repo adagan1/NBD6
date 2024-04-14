@@ -36,7 +36,11 @@
                 }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                @{
+                    // Disable edit button for users with the Admin role
+                    var isAdmin = item.UserRoles.Contains("Admin");
+                }
+                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary @(isAdmin ? "disabled" : "")"
                    role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
                     &#x270E;
                 </a>
