@@ -21,8 +21,9 @@ namespace NBD6.Models
         public string MaterialDescription { get; set; }
 
         [Display(Name = "Size")]
-        [Required(ErrorMessage = "Please provide a unit of measurement after the digit (cm, m, l, g, kg)")]
-        [RegularExpression(@"^(?:\d*\.?\d+)\s*(cm|m|l|g|kg|cubic\s*cm|cubic\s*m)$")]
+        [Required(ErrorMessage = "Please provide a unit of measurement after the digit (cm, m, l, g, kg, gal, yd, in)")]
+        [RegularExpression(@"^(?:\d*\.?\d+)\s*(cm|m|l|g|kg|cubic\s*cm|cubic\s*m|gal|yd|in)$")]
+
         public string MaterialSize { get; set; }
 
         [Display(Name = "Price")]
