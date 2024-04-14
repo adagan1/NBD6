@@ -21,7 +21,13 @@
                 <input asp-for="Password" class="form-control" placeholder="Password must be 5 letters long" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            
+            <div class="form-group">
+                <label class="control-label">Roles</label><br />
+                <label><input type="checkbox" name="Roles" value="Admin" /> Admin</label><br />
+                <label><input type="checkbox" name="Roles" value="Management" /> Management</label><br />
+                <label><input type="checkbox" name="Roles" value="Designer" /> Designer</label><br />
+                <label><input type="checkbox" name="Roles" value="Sales" /> Sales</label><br />
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -30,9 +36,9 @@
                 </div>
             </div>
         </div>
-    </form>
+</form>
 
-    <div class="col-md-1">
+<div class="col-md-1">
     <div>
         <a class="nav-link text-dark" href="javascript:history.back()">Go Back</a>
     </div>

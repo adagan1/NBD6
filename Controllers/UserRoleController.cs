@@ -28,7 +28,7 @@ namespace NBD6.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserVM userVM)
+        public async Task<IActionResult> Create(UserVM userVM, string[] roles)
         {
             if (ModelState.IsValid)
             {
@@ -37,6 +37,12 @@ namespace NBD6.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Assign roles to the user
+                    foreach (var role in roles)
+                    {
+                        await _userManager.AddToRoleAsync(user, role);
+                    }
+
                     return RedirectToAction(nameof(Index));
                 }
                 foreach (var error in result.Errors)
