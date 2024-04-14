@@ -40,10 +40,12 @@
         </div>
     </div>
 }
-
+@if (!User.IsInRole("Designer"))
+{
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+}
 <form asp-action="Index" method="get">
     <table class="table table-striped">
         <thead>
@@ -63,7 +65,10 @@
                 <th>
                     @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
                 </th>
-                <th>Actions</th>
+                @if (!User.IsInRole("Designer"))
+                {
+                    <th>Actions</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -85,10 +90,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Address.Country)
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
-                    </td>
+                    @if (!User.IsInRole("Designer"))
+                    {
+                        <td>
+
+                            <a asp-action="Edit" asp-route-id="@item.ClientID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ClientID">Details</a>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

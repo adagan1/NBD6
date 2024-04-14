@@ -31,7 +31,7 @@
                     <ul class="navbar-nav flex-grow-1 @((User.Identity.IsAuthenticated) ? "ml-auto" : "")">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            @if (User.IsInRole("Admin") || User.IsInRole("Management") || User.IsInRole("Sales"))
+                            @if (User.IsInRole("Admin") || User.IsInRole("Management") || User.IsInRole("Sales") || User.IsInRole("Designer"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
