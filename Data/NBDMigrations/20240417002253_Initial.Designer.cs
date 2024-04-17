@@ -11,7 +11,7 @@ using NBD6.Data;
 namespace NBD6.Data.NBDMigrations
 {
     [DbContext(typeof(NBDContext))]
-    [Migration("20240414175831_Initial")]
+    [Migration("20240417002253_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,6 +25,11 @@ namespace NBD6.Data.NBDMigrations
                     b.Property<int>("AddressID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("ClientID")
                         .HasColumnType("INTEGER");

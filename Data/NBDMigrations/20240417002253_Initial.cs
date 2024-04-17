@@ -54,6 +54,7 @@ namespace NBD6.Data.NBDMigrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Country = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Province = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Postal = table.Column<string>(type: "TEXT", maxLength: 7, nullable: false),
                     Street = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     ClientID = table.Column<int>(type: "INTEGER", nullable: true),

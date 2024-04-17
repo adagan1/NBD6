@@ -307,6 +307,7 @@ namespace NBD6.Controllers
                     // Update address properties
                     existingClient.Address.Country = address.Country;
                     existingClient.Address.Province = address.Province;
+                    existingClient.Address.City = address.City;
                     existingClient.Address.Postal = address.Postal;
                     existingClient.Address.Street = address.Street;
 

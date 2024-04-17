@@ -23,6 +23,11 @@ namespace NBD6.Data.NBDMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("ClientID")
                         .HasColumnType("INTEGER");
 

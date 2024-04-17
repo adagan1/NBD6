@@ -17,6 +17,11 @@ namespace NBD6.Models
         [MaxLength(100)]
         public string Province { get; set; }
 
+        [Display(Name = "City")]
+        [Required]
+        [MaxLength(100)]
+        public string City { get; set; }
+
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = "Postal code is required.")]
         [MaxLength(7, ErrorMessage = "Postal code cannot be more than 20 characters long.")]
