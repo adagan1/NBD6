@@ -6,20 +6,23 @@
 
 <h1>Bid Edit</h1>
 
+<p>All fields marked with * are required to edit a bid.</p>
+
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
     <div class="row">
         <div class="col-md-6">
+            <!-- Bid Name and Project Fields -->
             <h4>Bid</h4>
             <hr />
             <input type="hidden" asp-for="BidID" />
             <div class="form-group">
                 <label asp-for="BidName" class="control-label">Bid Name<span class="text-danger">*</span></label>
-                <input asp-for="BidName" class="form-control" />
+                <input asp-for="BidName" class="form-control" placeholder="Enter bid name" required />
                 <span asp-validation-for="BidName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="ProjectID" class="control-label">Project<span class="text-danger">*</span></label>
                 <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID">
@@ -30,125 +33,143 @@
         </div>
 
         <div class="col-md-6">
-            <div style="margin-top: 60px;">
-                <div class="form-group">
-                    <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
-                    <input asp-for="BidStart" class="form-control" type="date" />
-                    <span asp-validation-for="BidStart" class="text-danger"></span>
-                </div>
+            <h4 style="visibility: hidden;">Bid</h4>
+            <div class="form-group" style="margin-top: 32px;">
+                <label asp-for="BidStart" class="control-label">Bid Start Date<span class="text-danger">*</span></label>
+                <input asp-for="BidStart" class="form-control" type="date" required />
+                <span asp-validation-for="BidStart" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
-                    <input asp-for="BidEnd" class="form-control" type="date" />
-                    <span asp-validation-for="BidEnd" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="BidEnd" class="control-label">Bid End Date<span class="text-danger">*</span></label>
+                <input asp-for="BidEnd" class="form-control" type="date" required />
+                <span asp-validation-for="BidEnd" class="text-danger"></span>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-12">
-            <h4>Labor</h4>
+        <!-- Labour Fields Table -->
+        <div id="labour-fields">
+            <h4>Labour</h4>
             <hr />
-            <table class="table" id="labor-fields">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Labor Hours<span class="text-danger">*</span></th>
-                        <th>Description<span class="text-danger">*</span></th>
-                        <th>Labor Price<span class="text-danger">*</span></th>
+                        <th>Labour Hours<span class="text-danger">*</span></th>
+                        <th>Labour Description<span class="text-danger">*</span></th>
+                        <th>Labour Price<span class="text-danger">*</span></th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="labour-group">
                     @foreach (var labour in Model.Labours)
                     {
-                        <tr class="labour-item">
+                        <tr>
                             <td>
-                                <input asp-for="@labour.LabourHours" class="form-control" />
-                                <span asp-validation-for="@labour.LabourHours" class="text-danger"></span>
+                                <input asp-for="@labour.LabourHours" class="form-control" placeholder="Hours worked" required />
                             </td>
                             <td>
-                                <input asp-for="@labour.LabourDescription" class="form-control" />
-                                <span asp-validation-for="@labour.LabourDescription" class="text-danger"></span>
+                                <select asp-for="@labour.LabourDescription" class="form-control labour-description" required onchange="setLabourPrice(this)">
+                                    <option value="">Select Labour</option>
+                                    <option data-price="30" value="Production Worker">Production Worker</option>
+                                    <option data-price="65" value="Designer">Designer</option>
+                                    <option data-price="55" value="Equipment Operator">Equipment Operator</option>
+                                    <option data-price="75" value="Botanist">Botanist</option>
+                                </select>
                             </td>
                             <td>
-                                <input asp-for="@labour.LabourPrice" class="form-control" />
-                                <span asp-validation-for="@labour.LabourPrice" class="text-danger"></span>
+                                <input asp-for="@labour.LabourPrice" class="form-control labour-price" placeholder="Price" required readonly />
                             </td>
                             <td>
-                                <!-- Placeholder for potential 'remove' button -->
+                                <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labor</button>
+            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
         </div>
 
-    <div class="col-md-12">
-        <h4>Materials</h4>
-        <hr />
-        <table class="table" id="material-fields">
-            <thead>
-                <tr>
-                    <th>Material Type<span class="text-danger">*</span></th>
-                    <th>Material Quantity<span class="text-danger">*</span></th>
-                    <th>Material Description<span class="text-danger">*</span></th>
-                    <th>Material Size<span class="text-danger">*</span></th>
-                    <th>Material Price<span class="text-danger">*</span></th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var material in Model.Materials)
-                {
-                    <tr class="material-item">
-                        <td>
-                            <input asp-for="@material.MaterialType" class="form-control" />
-                            <span asp-validation-for="@material.MaterialType" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <input asp-for="@material.MaterialQuantity" class="form-control" />
-                            <span asp-validation-for="@material.MaterialQuantity" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <input asp-for="@material.MaterialDescription" class="form-control" />
-                            <span asp-validation-for="@material.MaterialDescription" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <input asp-for="@material.MaterialSize" class="form-control" />
-                            <span asp-validation-for="@material.MaterialSize" class="text-danger"></span>
-                        </td>
-                        <td>
-                            <input asp-for="@material.MaterialPrice" class="form-control" />
-                            <span asp-validation-for="@material.MaterialPrice" class="text-danger"></span>
-                        </td>
-                        
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
-    </div>
-    <div>
-        <div class="col-md-6">
-            <h4>Staff</h4>
+        <div style="height: 20px;"></div>
+        <!-- Material Fields Table -->
+        <div id="material-fields" class="container mt-5">
+            <h4>Material</h4>
             <hr />
-            <div id="staffContainer">
-                @foreach (var staff in Model.StaffBids)
-                {
-                    <div class="staffFields">
-                        <label asp-for="@staff.StaffID" class="control-label">Staff<span class="text-danger">*</span></label>
-                        <select asp-for="@staff.StaffID" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
-                            <option value="">Select Staff</option>
-                        </select>
-                    </div>
-                }
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Material Type<span class="text-danger">*</span></th>
+                        <th>Material Description<span class="text-danger">*</span></th>
+                        <th>Material Quantity<span class="text-danger">*</span></th>
+                        <th>Material Size<span class="text-danger">*</span></th>
+                        <th>Material Price<span class="text-danger">*</span></th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="material-group">
+                    @foreach (var material in Model.Materials)
+                    {
+                        <tr>
+                            <td>
+                                <select asp-for="@material.MaterialType" class="form-control material-type" onchange="updateMaterialDescriptionOptions(this)" required>
+                                    <option value="">Select Material Type</option>
+                                    <option value="Plants">Plants</option>
+                                    <option value="Pottery">Pottery</option>
+                                    <option value="Materials">Materials</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select asp-for="@material.MaterialDescription" class="form-control material-description" onchange="setMaterialPrice(this)" required>
+                                    <option value="">Please select Material Type first</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input asp-for="@material.MaterialQuantity" class="form-control" placeholder="Quantity" required />
+                            </td>
+                            <td>
+                                <input asp-for="@material.MaterialSize" class="form-control" placeholder="Size" required readonly />
+                            </td>
+                            <td>
+                                <input asp-for="@material.MaterialPrice" class="form-control material-price" placeholder="Price" required readonly />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Staff</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-9">
+                <div id="staffContainer">
+                    @foreach (var staff in Model.StaffBids)
+                    {
+                        <div class="staffFields">
+                            <label asp-for="@staff.StaffID" class="control-label">Staff<span class="text-danger">*</span></label>
+                            <select asp-for="@staff.StaffID" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
+                                <option value="">Select Staff</option>
+                            </select>
+                            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="addStaffBtn" class="btn btn-primary" style="margin-top: 20px; padding: 6px 12px; font-size: 14px; line-height: 1.5;">Add More Staff</button>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Save" class="btn btn-primary" style="margin-top: 10px;" />
     </div>
 </form>
 
@@ -180,91 +201,187 @@
                 });
             });
 
-    document.getElementById('addStaffBtn').addEventListener('click', function () {
-        var staffContainer = document.getElementById('staffContainer');
-        var staffFields = document.querySelector('.staffFields');
-        var clone = staffFields.cloneNode(true);
-        staffContainer.appendChild(clone);
-    });
+            function setLabourPrice(selectElement) {
+                var price = selectElement.options[selectElement.selectedIndex].getAttribute('data-price');
+                var priceInput = selectElement.closest('tr').querySelector('.labour-price');
+                priceInput.value = price;
+            }
 
-    function removeStaff(element) {
-        element.parentNode.remove();
-    }
+            function addLabour() {
+                var labourTableBody = document.querySelector("#labour-fields tbody");
+                var newRow = labourTableBody.insertRow();
+                var newIndex = document.querySelectorAll(".labour-group tr").length - 1;
+                newRow.innerHTML = `
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" name="Labours[${newIndex}].LabourHours" placeholder="Hours worked" required />
+                                                </td>
+                                                <td>
+                                                    <select class="form-control labour-description" name="Labours[${newIndex}].LabourDescription" required onchange="setLabourPrice(this)">
+                                                        <option value="">Select Labour</option>
+                                                        <option data-price="30" value="Production Worker">Production Worker</option>
+                                                        <option data-price="65" value="Designer">Designer</option>
+                                                        <option data-price="55" value="Equipment Operator">Equipment Operator</option>
+                                                        <option data-price="75" value="Botanist">Botanist</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control labour-price" name="Labours[${newIndex}].LabourPrice" placeholder="Price" required readonly />
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
+                                                </td>
+                                            </tr>
+                                        `;
+            }
 
-    var materialCounter = 1;
-    var labourCounter = 1;
-    var staffCounter = 1;
+            function removeLabourRow(button) {
+                button.closest("tr").remove();
+            }
 
-    var materialCounter = 0;
+            function updateMaterialDescriptionOptions(materialTypeSelect) {
+                var materialDescriptionSelect = materialTypeSelect.closest('tr').querySelector('.material-description');
+                var materialType = materialTypeSelect.value;
+                var options = [];
 
-    function addMaterial() {
-        var materialTableBody = document.querySelector("#material-fields tbody");
-        var newRow = materialTableBody.insertRow();
+                switch (materialType) {
+                    case "Plants":
+                        options = [
+                            { text: "Rose", value: "Rose", price: "5" },
+                            { text: "Tulip", value: "Tulip", price: "3" },
+                            { text: "Lavender", value: "Lavender", price: "4" },
+                            { text: "Orchid", value: "Orchid", price: "7" },
+                            { text: "Sunflower", value: "Sunflower", price: "2" }
+                        ];
+                        break;
+                    case "Pottery":
+                        options = [
+                            { text: "Granite Fountain", value: "Granite Fountain", price: "200" },
+                            { text: "Granite Pots", value: "Granite Pots", price: "50" },
+                            { text: "Clay Vase", value: "Clay Vase", price: "20" },
+                            { text: "Porcelain Bowl", value: "Porcelain Bowl", price: "30" },
+                            { text: "Terracotta Planter", value: "Terracotta Planter", price: "25" }
+                        ];
+                        break;
+                    case "Materials":
+                        options = [
+                            { text: "Decorative Cedar Bark", value: "Decorative Cedar Bark", price: "15" },
+                            { text: "Top Soil", value: "Top Soil", price: "10" },
+                            { text: "Mulch", value: "Mulch", price: "8" },
+                            { text: "Peat Moss", value: "Peat Moss", price: "12" },
+                            { text: "River Stones", value: "River Stones", price: "20" }
+                        ];
+                        break;
+                    default:
+                        options = [{ text: "Please select Material Type first", value: "", price: "0" }];
+                        break;
+                }
 
-        newRow.innerHTML = `
-            <td>
-                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialType" placeholder="ex: soil, bark, roses" required />
-                <span class="text-danger"></span>
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialQuantity" placeholder="Quantity" required />
-                <span class="text-danger"></span>
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialDescription" placeholder="Description" required />
-                <span class="text-danger"></span>
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialSize" placeholder="Size" required />
-                <span class="text-danger"></span>
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Materials[${document.querySelectorAll('.material-item').length}].MaterialPrice" placeholder="Price" required />
-                <span class="text-danger"></span>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-            </td>
-        `;
-    }
+                // Clear existing options
+                materialDescriptionSelect.innerHTML = '';
 
-    function removeTableRow(button) {
-        var row = button.closest('tr');
-        row.parentNode.removeChild(row);
-    }
+                // Populate with new options
+                options.forEach(function (option) {
+                    var newOption = new Option(option.text, option.value);
+                    newOption.dataset.price = option.price;
+                    materialDescriptionSelect.appendChild(newOption);
+                });
+            }
 
-    var labourCounter = 0;
+            function setMaterialPrice(materialDescriptionSelect) {
+                var priceInput = materialDescriptionSelect.closest('tr').querySelector('.material-price');
+                var materialSizeInput = materialDescriptionSelect.closest('tr').querySelector('input[name$=".MaterialSize"]');
+                var selectedOption = materialDescriptionSelect.options[materialDescriptionSelect.selectedIndex];
+                var materialType = materialDescriptionSelect.closest('tr').querySelector('.material-type').value;
+                var options = [];
 
-    function addLabour() {
-        var labourTableBody = document.querySelector("#labor-fields tbody");
-        var newRow = labourTableBody.insertRow();
+                switch (materialType) {
+                    case "Plants":
+                        options = [
+                            { text: "Rose", value: "Rose", price: "5", size: "5 gal" },
+                            { text: "Tulip", value: "Tulip", price: "3", size: "3 gal" },
+                            { text: "Lavender", value: "Lavender", price: "4", size: "4 gal" },
+                            { text: "Orchid", value: "Orchid", price: "7", size: "6 gal" },
+                            { text: "Sunflower", value: "Sunflower", price: "2", size: "2 gal" }
+                        ];
+                        break;
+                    case "Pottery":
+                        options = [
+                            { text: "Granite Fountain", value: "Granite Fountain", price: "200", size: "36 in" },
+                            { text: "Granite Pots", value: "Granite Pots", price: "50", size: "18 in" },
+                            { text: "Clay Vase", value: "Clay Vase", price: "20", size: "12 in" },
+                            { text: "Porcelain Bowl", value: "Porcelain Bowl", price: "30", size: "12 in" },
+                            { text: "Terracotta Planter", value: "Terracotta Planter", price: "25", size: "6 in" }
+                        ];
+                        break;
+                    case "Materials":
+                        options = [
+                            { text: "Decorative Cedar Bark", value: "Decorative Cedar Bark", price: "15", size: "22 yd" },
+                            { text: "Top Soil", value: "Top Soil", price: "10", size: "9 yd" },
+                            { text: "Mulch", value: "Mulch", price: "8", size: "12 yd" },
+                            { text: "Peat Moss", value: "Peat Moss", price: "12", size: "34 yd" },
+                            { text: "River Stones", value: "River Stones", price: "20", size: "26 yd" }
+                        ];
+                        break;
+                }if (selectedOption && selectedOption.dataset.price) {
+                    priceInput.value = selectedOption.dataset.price;
+                    var size = options.find(opt => opt.value === selectedOption.value).size;
+                    materialSizeInput.value = size;
+                } else {
+                    priceInput.value = '';
+                    materialSizeInput.value = '';
+                }
+            }
 
-        newRow.innerHTML = `
-            <td>
-                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourHours" placeholder="Hours worked" required />
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourDescription" placeholder="Description" required />
-            </td>
-            <td>
-                <input type="text" class="form-control" name="Labours[${labourCounter}].LabourPrice" placeholder="Price" required />
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-            </td>
-        `;
+            function addMaterial() {
+                var materialTableBody = document.querySelector("#material-fields tbody");
+                var index = materialTableBody.querySelectorAll("tr").length;
+                var newRow = materialTableBody.insertRow(-1);
+                newRow.innerHTML = `
+                                        <tr>
+                                            <td>
+                                                <select class="form-control material-type" name="Materials[${index}].MaterialType" onchange="updateMaterialDescriptionOptions(this)" required>
+                                                    <option value="">Select Material Type</option>
+                                                    <option value="Plants">Plants</option>
+                                                    <option value="Pottery">Pottery</option>
+                                                    <option value="Materials">Materials</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-control material-description" name="Materials[${index}].MaterialDescription" onchange="setMaterialPrice(this)" required>
+                                                    <option value="">Please select Material Type first</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="Materials[${index}].MaterialQuantity" placeholder="Quantity" required />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" name="Materials[${index}].MaterialSize" placeholder="Size" required readonly />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control material-price" name="Materials[${index}].MaterialPrice" placeholder="Price" required readonly />
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
+                                            </td>
+                                        </tr>
+                                    `;
+            }
 
-        labourCounter++;
-    }
+            function removeTableRow(button) {
+                button.closest("tr").remove();
+            }
 
-    function removeTableRow(button) {
-        var row = button.closest('tr');
-        row.parentNode.removeChild(row);
-    }
+            document.getElementById('addStaffBtn').addEventListener('click', function () {
+                var staffContainer = document.getElementById('staffContainer');
+                var staffFields = document.querySelector('.staffFields');
+                var clone = staffFields.cloneNode(true);
+                staffContainer.appendChild(clone);
+            });
 
-    function removeTableRow(button) {
-        button.closest("tr").remove();
-    }
-</script>
+            function removeElement(element) {
+                element.parentNode.remove();
+            }
+        </script>
     }
 }

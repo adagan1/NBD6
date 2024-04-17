@@ -304,27 +304,27 @@
         var newRow = labourTableBody.insertRow();
         var newIndex = document.querySelectorAll(".labour-group tr").length - 1;
         newRow.innerHTML = `
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control" name="Labours[${newIndex}].LabourHours" placeholder="Hours worked" required />
-                                    </td>
-                                    <td>
-                                        <select class="form-control labour-description" name="Labours[${newIndex}].LabourDescription" required onchange="setLabourPrice(this)">
-                                            <option value="">Select Labour </option>
-                                            <option data-price="30" value="Production Worker">Production Worker</option>
-                                            <option data-price="65" value="Designer">Designer</option>
-                                            <option data-price="55" value="Equipment Operator">Equipment Operator</option>
-                                            <option data-price="75" value="Botanist">Botanist</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control labour-price" name="Labours[${newIndex}].LabourPrice" placeholder="Price" required readonly />
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
-                                    </td>
-                                </tr>
-                            `;
+            <tr>
+                <td>
+                    <input type="text" class="form-control" name="Labours[${newIndex}].LabourHours" placeholder="Hours worked" required />
+                </td>
+                <td>
+                    <select class="form-control labour-description" name="Labours[${newIndex}].LabourDescription" required onchange="setLabourPrice(this)">
+                        <option value="">Select Labour </option>
+                        <option data-price="30" value="Production Worker">Production Worker</option>
+                        <option data-price="65" value="Designer">Designer</option>
+                        <option data-price="55" value="Equipment Operator">Equipment Operator</option>
+                        <option data-price="75" value="Botanist">Botanist</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" class="form-control labour-price" name="Labours[${newIndex}].LabourPrice" placeholder="Price" required readonly />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
+                </td>
+            </tr>
+        `;
     }
 
     function updateMaterialDescriptionOptions(materialTypeSelect) {

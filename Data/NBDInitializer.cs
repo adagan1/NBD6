@@ -377,7 +377,7 @@ namespace NBD6.Data
                             {
                                 new Material
                                 {
-                                    MaterialType = "Concrete",
+                                    MaterialType = "Material",
                                     MaterialQuantity = 500,
                                     MaterialDescription = "Reinforced Concrete Slabs",
                                     MaterialSize = "20 cm",
@@ -389,8 +389,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 40,
-                                    LabourDescription = "Installation of Glass Panels",
-                                    LabourPrice = 25.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         },
@@ -416,8 +416,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 60,
-                                    LabourDescription = "Welding and Fabrication",
-                                    LabourPrice = 30.00m
+                                    LabourDescription = "Designer",
+                                    LabourPrice = 65.00m
                                 }
                             }
                         },
@@ -443,8 +443,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 80,
-                                    LabourDescription = "Pouring and Finishing",
-                                    LabourPrice = 35.00m
+                                    LabourDescription = "Equipment Operator",
+                                    LabourPrice = 55.00m
                                 }
                             }
                         }, new Bid
@@ -469,8 +469,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 50,
-                                    LabourDescription = "Installation of Electrical Systems",
-                                    LabourPrice = 40.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         },
@@ -496,8 +496,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 45,
-                                    LabourDescription = "Installation of Plumbing Systems",
-                                    LabourPrice = 50.00m
+                                    LabourDescription = "Designer",
+                                    LabourPrice = 65.00m
                                 }
                             }
                         },
@@ -523,8 +523,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 55,
-                                    LabourDescription = "Installation of Roofing Materials",
-                                    LabourPrice = 45.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         },
@@ -550,8 +550,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 45,
-                                    LabourDescription = "Painting Walls and Ceilings",
-                                    LabourPrice = 50.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         },
@@ -577,8 +577,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 55,
-                                    LabourDescription = "Installation of Flooring Materials",
-                                    LabourPrice = 45.00m
+                                    LabourDescription = "Designer",
+                                    LabourPrice = 65.00m
                                 }
                             }
                         }, 
@@ -607,13 +607,13 @@ namespace NBD6.Data
                                     MaterialPrice = 20.00m
                                 }
                             },
-                                            Labours = new List<Labour>
+                            Labours = new List<Labour>
                             {
                                 new Labour
                                 {
                                     LabourHours = 40,
-                                    LabourDescription = "Planting and Mulching",
-                                    LabourPrice = 40.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         },
@@ -639,8 +639,8 @@ namespace NBD6.Data
                                 new Labour
                                 {
                                     LabourHours = 60,
-                                    LabourDescription = "Installation of HVAC Systems",
-                                    LabourPrice = 60.00m
+                                    LabourDescription = "Production Worker",
+                                    LabourPrice = 30.00m
                                 }
                             }
                         }
