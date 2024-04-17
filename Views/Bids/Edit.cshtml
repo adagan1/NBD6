@@ -121,9 +121,9 @@
                             </td>
                             <td>
                                 <select asp-for="@material.MaterialDescription" class="form-control material-description" onchange="setMaterialPrice(this)" required>
-                                    @if (ViewBag.MaterialOptions != null)
+                                    @if (ViewBag.MaterialDescriptions != null)
                                     {
-                                        foreach (var option in ViewBag.MaterialOptions)
+                                        foreach (var option in ViewBag.MaterialDescriptions)
                                         {
                                             <option value="@option.Value" selected="@((string)option.Value == (material.MaterialDescription?.ToString()))">@option.Text</option>
                                         }
