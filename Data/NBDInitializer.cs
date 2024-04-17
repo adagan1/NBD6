@@ -31,6 +31,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Niagara Falls",
                                 Postal = "A1A 1A1",
                                 Street = "10 North Street"
                             }
@@ -47,6 +48,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Brampton",
                                 Postal = "B2B 2B2",
                                 Street = "20 South Street"
                             }
@@ -63,6 +65,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Quebec",
+                                City = "Quebec City",
                                 Postal = "C3C 3C3",
                                 Street = "30 East Street"
                             }
@@ -79,6 +82,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "British Columbia",
+                                City = "Vancouver",
                                 Postal = "D4D 4D4",
                                 Street = "40 West Street"
                             }
@@ -95,6 +99,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Alberta",
+                                City = "Edmonton",
                                 Postal = "E5E 5E5",
                                 Street = "50 Central Street"
                             }
@@ -118,6 +123,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Yukon",
+                                City = "Watson Lake",
                                 Postal = "K5A 0Y8",
                                 Street = "1 Project Street "
                             }
@@ -134,6 +140,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Toronto",
                                 Postal = "M5S 1A5",
                                 Street = "2 Project Street"
                             }
@@ -150,6 +157,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "London",
                                 Postal = "L8S 4L8",
                                 Street = "3 Project Street"
                             }
@@ -165,6 +173,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "British Columbia",
+                                City = "Victoria",
                                 Postal = "V6T 1Z4",
                                 Street = "4 Project Street"
                             }
@@ -181,6 +190,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "British Columbia",
+                                City = "Parksville",
                                 Postal = "V5A 1S6",
                                 Street = "5 Project Street"
                             }
@@ -197,6 +207,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Alberta",
+                                City = "Calgary",
                                 Postal = "T6G 2R3",
                                 Street = "6 Project Street"
                             }
@@ -213,6 +224,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Alberta",
+                                City = "Red Deer",
                                 Postal = "T2N 1N4",
                                 Street = "7 Project Street"
                             }
@@ -229,6 +241,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Windsor",
                                 Postal = "N2L 3G1",
                                 Street = "8 Project Street"
                             }
@@ -245,6 +258,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Etobicoke",
                                 Postal = "K7L 3N6",
                                 Street = "9 Project Street"
                             }
@@ -261,6 +275,7 @@ namespace NBD6.Data
                             {
                                 Country = "Canada",
                                 Province = "Ontario",
+                                City = "Oshawa",
                                 Postal = "K1N 6N5",
                                 Street = "10 Project Street"
                             }
