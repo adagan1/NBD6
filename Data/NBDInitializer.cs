@@ -364,289 +364,283 @@ namespace NBD6.Data
 
                 if (!context.Bids.Any())
                 {
-                    // Create bids
-                    context.Bids.AddRange(
-                        new Bid
+                // Create bids
+                context.Bids.AddRange(
+                    new Bid
+                    {
+                        BidName = "Landscaping with Roses Bid",
+                        BidStart = new DateTime(2024, 01, 01),
+                        BidEnd = new DateTime(2024, 01, 15),
+                        ProjectID = 1,
+                        Materials = new List<Material>
+                    {
+                        new Material
                         {
-                            BidName = "Glass Material Bid",
-                            BidStart = new DateTime(2024, 01, 01),
-                            BidEnd = new DateTime(2024, 01, 15),
-                            ProjectID = 1,
-
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Material",
-                                    MaterialQuantity = 500,
-                                    MaterialDescription = "Reinforced Concrete Slabs",
-                                    MaterialSize = "20 cm",
-                                    MaterialPrice = 75.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 40,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Steel Material Bid",
-                            BidStart = new DateTime(2024, 02, 01),
-                            BidEnd = new DateTime(2024, 02, 15),
-                            ProjectID = 2,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Steel",
-                                    MaterialQuantity = 200,
-                                    MaterialDescription = "Structural Steel Beams",
-                                    MaterialSize = "15 m",
-                                    MaterialPrice = 100.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 60,
-                                    LabourDescription = "Designer",
-                                    LabourPrice = 65.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Concrete Material Bid",
-                            BidStart = new DateTime(2024, 03, 01),
-                            BidEnd = new DateTime(2024, 03, 15),
-                            ProjectID = 3,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Glass",
-                                    MaterialQuantity = 100,
-                                    MaterialDescription = "Tempered Glass Panels",
-                                    MaterialSize = "10 cm",
-                                    MaterialPrice = 50.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 80,
-                                    LabourDescription = "Equipment Operator",
-                                    LabourPrice = 55.00m
-                                }
-                            }
-                        }, new Bid
-                        {
-                            BidName = "Electrical Work Bid",
-                            BidStart = new DateTime(2024, 04, 01),
-                            BidEnd = new DateTime(2024, 04, 15),
-                            ProjectID = 4,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Electrical Components",
-                                    MaterialQuantity = 50,
-                                    MaterialDescription = "Wiring and Cables",
-                                    MaterialSize = "Various",
-                                    MaterialPrice = 80.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 50,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Plumbing Material Bid",
-                            BidStart = new DateTime(2024, 05, 01),
-                            BidEnd = new DateTime(2024, 05, 15),
-                            ProjectID = 5,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Plumbing Fixtures",
-                                    MaterialQuantity = 30,
-                                    MaterialDescription = "Sinks, Toilets, and Faucets",
-                                    MaterialSize = "Various",
-                                    MaterialPrice = 120.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 45,
-                                    LabourDescription = "Designer",
-                                    LabourPrice = 65.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Roofing Material Bid",
-                            BidStart = new DateTime(2024, 06, 01),
-                            BidEnd = new DateTime(2024, 06, 15),
-                            ProjectID = 6,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Roofing Shingles",
-                                    MaterialQuantity = 1500,
-                                    MaterialDescription = "Asphalt Roofing Shingles",
-                                    MaterialSize = "30 cm x 30 cm",
-                                    MaterialPrice = 90.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 55,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Painting Bid",
-                            BidStart = new DateTime(2024, 05, 01),
-                            BidEnd = new DateTime(2024, 05, 15),
-                            ProjectID = 5,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Paint",
-                                    MaterialQuantity = 30,
-                                    MaterialDescription = "Interior and Exterior Paint",
-                                    MaterialSize = "Various",
-                                    MaterialPrice = 120.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 45,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "Flooring Bid",
-                            BidStart = new DateTime(2024, 06, 01),
-                            BidEnd = new DateTime(2024, 06, 15),
-                            ProjectID = 6,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Flooring",
-                                    MaterialQuantity = 1500,
-                                    MaterialDescription = "Hardwood Flooring",
-                                    MaterialSize = "15 cm x 15 cm",
-                                    MaterialPrice = 90.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 55,
-                                    LabourDescription = "Designer",
-                                    LabourPrice = 65.00m
-                                }
-                            }
-                        }, 
-                        new Bid
-                        {
-                            BidName = "Landscaping Bid",
-                            BidStart = new DateTime(2024, 08, 01),
-                            BidEnd = new DateTime(2024, 08, 15),
-                            ProjectID = 8,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "Plants",
-                                    MaterialQuantity = 100,
-                                    MaterialDescription = "Assorted Flowers and Shrubs",
-                                    MaterialSize = "Various",
-                                    MaterialPrice = 30.00m
-                                },
-                                new Material
-                                {
-                                    MaterialType = "Mulch",
-                                    MaterialQuantity = 10,
-                                    MaterialDescription = "Wood Chips",
-                                    MaterialSize = "N/A",
-                                    MaterialPrice = 20.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 40,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
-                        },
-                        new Bid
-                        {
-                            BidName = "HVAC System Bid",
-                            BidStart = new DateTime(2024, 07, 01),
-                            BidEnd = new DateTime(2024, 07, 15),
-                            ProjectID = 7,
-                            Materials = new List<Material>
-                            {
-                                new Material
-                                {
-                                    MaterialType = "HVAC Components",
-                                    MaterialQuantity = 20,
-                                    MaterialDescription = "Air Conditioning Units and Ducts",
-                                    MaterialSize = "Various",
-                                    MaterialPrice = 200.00m
-                                }
-                            },
-                            Labours = new List<Labour>
-                            {
-                                new Labour
-                                {
-                                    LabourHours = 60,
-                                    LabourDescription = "Production Worker",
-                                    LabourPrice = 30.00m
-                                }
-                            }
+                            MaterialType = "Plants",
+                            MaterialQuantity = 100,
+                            MaterialDescription = "Rose",
+                            MaterialSize = "5 gal",
+                            MaterialPrice = 5.00m
                         }
-                    );             
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 40,
+                            LabourDescription = "Production Worker",
+                            LabourPrice = 30.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Tulip Arrangement Project",
+                        BidStart = new DateTime(2024, 02, 01),
+                        BidEnd = new DateTime(2024, 02, 15),
+                        ProjectID = 2,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Plants",
+                            MaterialQuantity = 150,
+                            MaterialDescription = "Tulip",
+                            MaterialSize = "3 gal",
+                            MaterialPrice = 3.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 60,
+                            LabourDescription = "Designer",
+                            LabourPrice = 65.00m
+                        }
+                    }   
+                    },
+                    new Bid
+                    {
+                        BidName = "Lavender Field Development",
+                        BidStart = new DateTime(2024, 03, 01),
+                        BidEnd = new DateTime(2024, 03, 15),
+                        ProjectID = 3,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Plants",
+                            MaterialQuantity = 200,
+                            MaterialDescription = "Lavender",
+                            MaterialSize = "4 gal",
+                            MaterialPrice = 4.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 80,
+                            LabourDescription = "Equipment Operator",
+                            LabourPrice = 55.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Orchid Greenhouse Setup",
+                        BidStart = new DateTime(2024, 04, 01),
+                        BidEnd = new DateTime(2024, 04, 15),
+                        ProjectID = 4,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Plants",
+                            MaterialQuantity = 75,
+                            MaterialDescription = "Orchid",
+                            MaterialSize = "6 gal",
+                            MaterialPrice = 7.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 50,
+                            LabourDescription = "Production Worker",
+                            LabourPrice = 30.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Sunflower Cultivation Bid",
+                        BidStart = new DateTime(2024, 05, 01),
+                        BidEnd = new DateTime(2024, 05, 15),
+                        ProjectID = 5,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Plants",
+                            MaterialQuantity = 300,
+                            MaterialDescription = "Sunflower",
+                            MaterialSize = "2 gal",
+                            MaterialPrice = 2.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 45,
+                            LabourDescription = "Designer",
+                            LabourPrice = 65.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Granite Fountain Installation",
+                        BidStart = new DateTime(2024, 06, 01),
+                        BidEnd = new DateTime(2024, 06, 15),
+                        ProjectID = 6,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Pottery",
+                            MaterialQuantity = 5,
+                            MaterialDescription = "Granite Fountain",
+                            MaterialSize = "36 in",
+                            MaterialPrice = 200.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 55,
+                            LabourDescription = "Production Worker",
+                            LabourPrice = 30.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Clay Vase Crafting Bid",
+                        BidStart = new DateTime(2024, 07, 01),
+                        BidEnd = new DateTime(2024, 07, 15),
+                        ProjectID = 7,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Pottery",
+                            MaterialQuantity = 40,
+                            MaterialDescription = "Clay Vase",
+                            MaterialSize = "12 in",
+                            MaterialPrice = 20.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 60,
+                            LabourDescription = "Production Worker",
+                            LabourPrice = 30.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Porcelain Bowl Manufacturing Bid",
+                        BidStart = new DateTime(2024, 08, 01),
+                        BidEnd = new DateTime(2024, 08, 15),
+                        ProjectID = 8,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Pottery",
+                            MaterialQuantity = 25,
+                            MaterialDescription = "Porcelain Bowl",
+                            MaterialSize = "12 in",
+                            MaterialPrice = 30.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 40,
+                            LabourDescription = "Botanist",
+                            LabourPrice = 75.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Terracotta Planter Sale Bid",
+                        BidStart = new DateTime(2024, 09, 01),
+                        BidEnd = new DateTime(2024, 09, 15),
+                        ProjectID = 9,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Pottery",
+                            MaterialQuantity = 50,
+                            MaterialDescription = "Terracotta Planter",
+                            MaterialSize = "6 in",
+                            MaterialPrice = 25.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 45,
+                            LabourDescription = "Designer",
+                            LabourPrice = 65.00m
+                        }
+                    }
+                    },
+                    new Bid
+                    {
+                        BidName = "Decorative Stone Landscaping Bid",
+                        BidStart = new DateTime(2024, 10, 01),
+                        BidEnd = new DateTime(2024, 10, 15),
+                        ProjectID = 10,
+                        Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            MaterialType = "Materials",
+                            MaterialQuantity = 50,
+                            MaterialDescription = "River Stones",
+                            MaterialSize = "26 yd",
+                            MaterialPrice = 20.00m
+                        }
+                    },
+                    Labours = new List<Labour>
+                    {
+                        new Labour
+                        {
+                            LabourHours = 55,
+                            LabourDescription = "Equipment Operator",
+                            LabourPrice = 55.00m
+                        }
+                    }
+                    }
+                    // End of bids
+                    );
                     context.SaveChanges();
                 }
+
 
                 if (!context.StaffBids.Any())
                 {
@@ -654,52 +648,52 @@ namespace NBD6.Data
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "John").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Glass Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Landscaping with Roses Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Jane").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Steel Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Tulip Arrangement Project").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Michael").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Concrete Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Lavender Field Development").BidID
                         },                      
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Emily").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Electrical Work Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Orchid Greenhouse Setup").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "David").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Plumbing Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Sunflower Cultivation Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Alice").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Roofing Material Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Granite Fountain Installation").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Robert").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Painting Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Clay Vase Crafting Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sarah").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Flooring Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Porcelain Bowl Manufacturing Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Daniel").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Landscaping Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Terracotta Planter Sale Bid").BidID
                         },
                         new StaffBid
                         {
                             StaffID = context.Staffs.FirstOrDefault(s => s.FirstName == "Sophia").StaffID,
-                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "HVAC System Bid").BidID
+                            BidID = context.Bids.FirstOrDefault(b => b.BidName == "Decorative Stone Landscaping Bid").BidID
                         }
                     );
                     context.SaveChanges();

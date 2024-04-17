@@ -59,7 +59,6 @@
                         <th>Labour Hours<span class="text-danger">*</span></th>
                         <th>Labour Description<span class="text-danger">*</span></th>
                         <th>Labour Price<span class="text-danger">*</span></th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="labour-group">
@@ -81,14 +80,10 @@
                             <td>
                                 <input asp-for="@labour.LabourPrice" class="form-control labour-price" placeholder="Price" required readonly />
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-danger" onclick="removeLabourRow(this)">Remove</button>
-                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success" onclick="addLabour()">Add Another Labour</button>
         </div>
 
         <div style="height: 20px;"></div>
@@ -104,7 +99,6 @@
                         <th>Material Quantity<span class="text-danger">*</span></th>
                         <th>Material Size<span class="text-danger">*</span></th>
                         <th>Material Price<span class="text-danger">*</span></th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="material-group">
@@ -139,14 +133,10 @@
                             <td>
                                 <input asp-for="@material.MaterialPrice" class="form-control material-price" placeholder="Price" required readonly />
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-danger" onclick="removeTableRow(this)">Remove</button>
-                            </td>
                         </tr>
                     }
                 </tbody>
-            </table>
-            <button type="button" class="btn btn-success" onclick="addMaterial()">Add Another Material</button>
+            </table>          
         </div>
     </div>
 
@@ -162,15 +152,11 @@
                             <label asp-for="@staff.StaffID" class="control-label">Staff<span class="text-danger">*</span></label>
                             <select asp-for="@staff.StaffID" class="form-control" asp-items="ViewBag.StaffID" name="StaffIDList">
                                 <option value="">Select Staff</option>
-                            </select>
-                            <button type="button" class="btn btn-danger" onclick="removeElement(this)">Remove</button>
+                            </select>                            
                         </div>
                     }
                 </div>
-            </div>
-            <div class="col-md-3">
-                <button type="button" id="addStaffBtn" class="btn btn-primary" style="margin-top: 20px; padding: 6px 12px; font-size: 14px; line-height: 1.5;">Add More Staff</button>
-            </div>
+            </div>       
         </div>
     </div>
 
@@ -253,6 +239,7 @@
                 switch (materialType) {
                     case "Plants":
                         options = [
+                            { text: "Please select a Plant", value: "", price: "0" },
                             { text: "Rose", value: "Rose", price: "5" },
                             { text: "Tulip", value: "Tulip", price: "3" },
                             { text: "Lavender", value: "Lavender", price: "4" },
@@ -262,6 +249,7 @@
                         break;
                     case "Pottery":
                         options = [
+                            { text: "Please select a Pottery", value: "", price: "0" },
                             { text: "Granite Fountain", value: "Granite Fountain", price: "200" },
                             { text: "Granite Pots", value: "Granite Pots", price: "50" },
                             { text: "Clay Vase", value: "Clay Vase", price: "20" },
@@ -271,6 +259,7 @@
                         break;
                     case "Materials":
                         options = [
+                            { text: "Please select a Material", value: "", price: "0" },
                             { text: "Decorative Cedar Bark", value: "Decorative Cedar Bark", price: "15" },
                             { text: "Top Soil", value: "Top Soil", price: "10" },
                             { text: "Mulch", value: "Mulch", price: "8" },
