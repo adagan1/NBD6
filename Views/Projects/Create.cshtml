@@ -155,6 +155,15 @@
             $("#ClientSummary").select2();
 
             $('#autofillProjectData').click(function () {
+                // List of major Canadian cities
+                const canadianCities = [
+                    "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton",
+                    "Ottawa", "Winnipeg", "Quebec City", "Hamilton", "Kitchener"
+                ];
+
+                // Selecting a random city from the list
+                const city = canadianCities[Math.floor(Math.random() * canadianCities.length)];
+
                 // Project names for variety
                 const projectNames = [
                     "Nexus Redevelopment Initiative",
@@ -186,7 +195,6 @@
                 $('#ProjectEndDate').val(projectEndDate);
                 $('#ProjectSite').val("Project Site " + Math.floor(Math.random() * 100));
 
-
                 // Address fields
                 if ($('#Address_Country option').length > 1) {
                     $('#Address_Country').val($('#Address_Country option').eq(1).val()).trigger('change');
@@ -196,6 +204,9 @@
                     const randomProvinceIndex = Math.floor(Math.random() * ($('#Address_Province option').length - 1)) + 1;
                     $('#Address_Province').val($('#Address_Province option').eq(randomProvinceIndex).val()).trigger('change');
                 }
+
+                // Setting the city
+                $('#Address_City').val(city);
 
                 // Generating a more realistic postal code and street address
                 const postalCode = "A" + Math.floor(Math.random() * 9) + "B " + Math.floor(Math.random() * 9) + "C" + Math.floor(Math.random() * 9);
@@ -212,5 +223,6 @@
                 $('#BidAmount').val(bidAmount);
             });
         });
+
     </script>
 }
