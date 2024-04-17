@@ -114,14 +114,20 @@
                             <td>
                                 <select asp-for="@material.MaterialType" class="form-control material-type" onchange="updateMaterialDescriptionOptions(this)" required>
                                     <option value="">Select Material Type</option>
-                                    <option value="Plants">Plants</option>
-                                    <option value="Pottery">Pottery</option>
-                                    <option value="Materials">Materials</option>
+                                    <option value="Plants" selected="@((string)material.MaterialType == "Plants")">Plants</option>
+                                    <option value="Pottery" selected="@((string)material.MaterialType == "Pottery")">Pottery</option>
+                                    <option value="Materials" selected="@((string)material.MaterialType == "Materials")">Materials</option>
                                 </select>
                             </td>
                             <td>
                                 <select asp-for="@material.MaterialDescription" class="form-control material-description" onchange="setMaterialPrice(this)" required>
-                                    <option value="">Please select Material Type first</option>
+                                    @if (ViewBag.MaterialOptions != null)
+                                    {
+                                        foreach (var option in ViewBag.MaterialOptions)
+                                        {
+                                            <option value="@option.Value" selected="@((string)option.Value == (material.MaterialDescription?.ToString()))">@option.Text</option>
+                                        }
+                                    }
                                 </select>
                             </td>
                             <td>

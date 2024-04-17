@@ -311,8 +311,7 @@ namespace NBD6.Controllers
             return View(bid);
         }
 
-        // GET: Bids/Edit/5
-        [Authorize(Roles = "Admin, Management, Designer")]
+        // GET: Bids/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Bids == null)
@@ -331,6 +330,32 @@ namespace NBD6.Controllers
             {
                 return NotFound();
             }
+
+            // Populate ViewBag.MaterialTypes with Material Types
+            ViewBag.MaterialTypes = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Plants", Text = "Plants" },
+                new SelectListItem { Value = "Pottery", Text = "Pottery" },
+                new SelectListItem { Value = "Tools", Text = "Tools" },
+                new SelectListItem { Value = "Materials", Text = "Materials" }
+            };
+
+            // Populate ViewBag.LabourDescriptions with Labour Descriptions
+            ViewBag.LabourDescriptions = new List<string>
+            {
+                "Production Worker",
+                "Designer",
+                "Equipment Operator",
+                "Botanist"
+            };
+
+            // Populate ViewBag.MaterialDescriptions with Material Descriptions
+            ViewBag.MaterialDescriptions = new SelectList(_context.Materials
+                .Where(m => m.BidID == id)
+                .Select(m => m.MaterialDescription)
+                .Distinct()
+                .ToList());
+
             ViewData["ProjectID"] = new SelectList(_context.Projects, "ProjectID", "ProjectName", bid.ProjectID);
             ViewData["StaffID"] = new SelectList(_context.Staffs, "StaffID", "StaffSummary", bid.StaffBids);
 
